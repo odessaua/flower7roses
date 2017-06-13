@@ -1,0 +1,81 @@
+-- 2017-03-13:
+ALTER TABLE `citySeo` ADD `seo_title` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `seo_description`;
+-- ==============
+
+-- 2017-03-09:
+ALTER TABLE `StoreProduct` ADD `img_alt` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `main_page`;
+ALTER TABLE `StoreProduct` ADD `img_title` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `img_alt`;
+--
+ALTER TABLE `cityTranslate` ADD `firm_name` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `language_id`;
+ALTER TABLE `cityTranslate` ADD `firm_address` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `firm_name`;
+ALTER TABLE `cityTranslate` ADD `firm_phone` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `firm_address`;
+ALTER TABLE `cityTranslate` ADD `firm_show` TINYINT(1)  NULL  DEFAULT '1'  AFTER `firm_phone`;
+--
+ALTER TABLE `cityTranslate` ADD `h1_header` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `firm_show`;
+-- ==============
+
+-- 2017-02-14:
+CREATE TABLE `WfpOrder` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL,
+  `orderReference` varchar(20) DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `reasonCode` int(11) DEFAULT NULL,
+  `amount` double(10,2) DEFAULT NULL,
+  `currency` varchar(10) DEFAULT NULL,
+  `createdDate` timestamp NULL DEFAULT NULL,
+  `processingDate` timestamp NULL DEFAULT NULL,
+  `cardPan` varchar(255) DEFAULT NULL,
+  `cardType` varchar(20) DEFAULT NULL,
+  `issuerBankCountry` varchar(255) DEFAULT NULL,
+  `issuerBankName` varchar(255) DEFAULT NULL,
+  `transactionStatus` varchar(255) DEFAULT NULL,
+  `authCode` varchar(255) DEFAULT NULL,
+  `refundAmount` double(10,2) DEFAULT NULL,
+  `settlementDate` varchar(50) DEFAULT NULL,
+  `settlementAmount` double(10,2) DEFAULT NULL,
+  `fee` double(10,2) DEFAULT NULL,
+  `merchantSignature` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  KEY `reason_code` (`reasonCode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ===============
+
+-- 2017-02-09:
+CREATE TABLE `image` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `size` int(11) DEFAULT NULL,
+  `mime` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `source` varchar(255) DEFAULT NULL,
+  `source_filename` varchar(255) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ===============
+-- 2017-02-01:
+CREATE TABLE `regionTranslate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `object_id` (`object_id`),
+  KEY `language_id` (`language_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `citySeo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `city_id` int(11) DEFAULT NULL,
+  `lang_id` int(11) DEFAULT NULL,
+  `seo_text` text,
+  `seo_keywords` text,
+  `seo_description` text,
+  PRIMARY KEY (`id`),
+  KEY `city_id` (`city_id`),
+  KEY `lang_id` (`lang_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- =================
+

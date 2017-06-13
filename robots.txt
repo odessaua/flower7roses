@@ -1,0 +1,19 @@
+User-agent: *
+Disallow: /.git/
+Disallow: /framework/
+Disallow: /nbproject/
+Disallow: */cart
+Disallow: *?q=*
+Disallow: */sort/*
+Disallow: *min_price*
+Disallow: /users/remind
+Disallow: /users/register
+Disallow: *check=*
+Disallow: */per_page/*
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.png
+
+Host: 7roses.com
+Sitemap: http://7roses.com/sitemap.xml
