@@ -103,9 +103,9 @@ return array(
             ),
 		),
 		 'db'=>array(
-		 	'connectionString'=>'mysql:host=localhost;dbname=ukraccom_7rosesn',
-		 	'username'=>'ukraccom_andrey',
-		 	'password'=>'natasha1954',
+		 	'connectionString'=>'mysql:host=localhost;dbname=7rosesn',
+		 	'username'=>'root',
+		 	'password'=>'',
 		 	'enableProfiling'       => YII_DEBUG, // Disable in production
 		 	'enableParamLogging'    => YII_DEBUG, // Disable in production
 		 	'emulatePrepare'        => true,
