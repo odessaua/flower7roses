@@ -5,7 +5,12 @@ class LanguageSelector extends CWidget
     {
         $currentLang = Yii::app()->language;
         $languages = Yii::app()->params->languages;
-        $this->render('languageSelector', array('currentLang' => $currentLang, 'languages'=>$languages));
+        $defaultLanguage = Yii::app()->params->defaultLanguage;
+        $this->render('languageSelector', array(
+            'currentLang' => $currentLang,
+            'languages'=>$languages,
+            'defaultLanguage' => $defaultLanguage)
+        );
     }
 }
 ?>

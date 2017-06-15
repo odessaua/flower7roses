@@ -4,11 +4,14 @@
        
         $lastElement = end($languages);
         foreach($languages as $key=>$lang) {
-            if($key != $currentLang) {
-                echo CHtml::link(
-                     $lang, 
-                     $this->getOwner()->createMultilanguageReturnUrl($key));
-            } else echo '<a class="currLang">'.$lang.'</a>';
+            if($key != $currentLang && $key != $defaultLanguage) {
+                echo CHtml::link($lang, '/' . $key);
+            }
+            elseif($key != $currentLang && $key == $defaultLanguage){
+                echo CHtml::link($lang, '/');
+            }
+            else
+                echo '<a class="currLang">'.$lang.'</a>';
             if($lang != $lastElement) echo ' | ';
         }
         
@@ -18,7 +21,7 @@
         echo CHtml::form();
         foreach($languages as $key=>$lang) {
             echo CHtml::hiddenField(
-                $key, 
+                $key,
                 $this->getOwner()->createMultilanguageReturnUrl($key));
         }
         echo CHtml::dropDownList('language', $currentLang, $languages,

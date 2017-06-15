@@ -41,7 +41,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
         <div class="wrap g-clearfix">
             <div class="lang">
             	<?php 
-                    //$this->widget('application.components.widgets.LanguageSelector');
+                    $this->widget('application.components.widgets.LanguageSelector');
                 ?>
                 
             </div> 
