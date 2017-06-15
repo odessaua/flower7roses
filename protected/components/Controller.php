@@ -84,17 +84,17 @@ class Controller extends RController
             $this->redirect($MultilangReturnUrl);
         }
         // Set the application language if provided by GET, session or cookie
-        if(isset($_GET['language'])) {
-            Yii::app()->language = $_GET['language'];
-            Yii::app()->user->setState('language', $_GET['language']);
-            $cookie = new CHttpCookie('language', $_GET['language']);
-            $cookie->expire = time() + (60*60*24*365); // (1 year)
-            Yii::app()->request->cookies['language'] = $cookie;
-        }
-        else if (Yii::app()->user->hasState('language'))
-            Yii::app()->language = Yii::app()->user->getState('language');
-        else if(isset(Yii::app()->request->cookies['language']))
-            Yii::app()->language = Yii::app()->request->cookies['language']->value;
+//        if(isset($_GET['language'])) {
+//            Yii::app()->language = $_GET['language'];
+//            Yii::app()->user->setState('language', $_GET['language']);
+//            $cookie = new CHttpCookie('language', $_GET['language']);
+//            $cookie->expire = time() + (60*60*24*365); // (1 year)
+//            Yii::app()->request->cookies['language'] = $cookie;
+//        }
+//        else if (Yii::app()->user->hasState('language'))
+//            Yii::app()->language = Yii::app()->user->getState('language');
+//        else if(isset(Yii::app()->request->cookies['language']))
+//            Yii::app()->language = Yii::app()->request->cookies['language']->value;
 
         // get current language info
         $this->getCurrentLangInfo();

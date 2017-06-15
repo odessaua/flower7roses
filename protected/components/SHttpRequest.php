@@ -40,7 +40,11 @@ class SHttpRequest extends CHttpRequest
 
 				unset($parts[0]);
 				$pathInfo = implode($parts, '/');
+                MLhelper::setLang($langCode);
 			}
+			else{
+                MLhelper::setLang(Yii::app()->params['defaultLanguage']); // язык по-умолчанию
+            }
 
 			$this->_pathInfo = $pathInfo;
 

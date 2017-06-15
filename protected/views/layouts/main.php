@@ -92,17 +92,17 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 </div>
                 
                 <?php else:?>
-                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='/users/profile/orders'"><span><?=Yii::t('main',"My orders")?></span></span>
-                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='/users/profile'"><span><?=Yii::t('main',"My Account")?></span></span>
-                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='/users/logout'"><span><?=Yii::t('main',"Exit")?></span></span>
+                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='<?=Yii::app()->createUrl('/users/profile/orders'); ?>'"><span><?=Yii::t('main',"My orders")?></span></span>
+                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='<?=Yii::app()->createUrl('/users/profile'); ?>'"><span><?=Yii::t('main',"My Account")?></span></span>
+                	<span class="drop-link link-cabinet-enter profileLink" onclick="location.href='<?=Yii::app()->createUrl('/users/logout'); ?>'"><span><?=Yii::t('main',"Exit")?></span></span>
                 <?php endif;?>
                 
             </div>
             <ul class="menu">
-				<li><a title="Payment Methods" href="/page/payment.html"><?=Yii::t('main',"Payment")?></a></li>
-                <li><a title="About Delivery" href="/page/about-delivery.html"><?=Yii::t('main',"About Delivery")?></a></li>
-                <li><a title="Terms and Conditions" href="/page/terms-conditions.html"><?=Yii::t('main',"Terms&Conditions")?></a></li>
-                <li><a title="Contacts" href="/feedback"><?=Yii::t("main", "Contacts")?></a></li>
+				<li><a title="Payment Methods" href="<?=Yii::app()->createUrl('/page/payment.html'); ?>"><?=Yii::t('main',"Payment")?></a></li>
+                <li><a title="About Delivery" href="<?=Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main',"About Delivery")?></a></li>
+                <li><a title="Terms and Conditions" href="<?=Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main',"Terms&Conditions")?></a></li>
+                <li><a title="Contacts" href="<?=Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t("main", "Contacts")?></a></li>
 				<li><a title="Old website version" href="http://old.7roses.com"><span style="color:red; font-weight:bold;"><?=Yii::t("main", "View old version")?></span></a></li>
             </ul>
             
@@ -113,14 +113,14 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <!-- header (begin) -->
     <div class="header ">
         <div class="wrap">
-            <a href="/cart" title="" class="b-cart" id="cart">
+            <a href="<?=Yii::app()->createUrl('/cart'); ?>" title="" class="b-cart" id="cart">
             	<?php $this->renderFile(Yii::getPathOfAlias('orders.views.cart._small_cart').'.php'); ?> 
             </a>
             <span class="btn-search"><span><?=Yii::t('main','Search')?></span></span>
             
             <ul>
                 <li>
-                    <a href='/' class="logo" title="7roses">
+                    <a href="<?= Yii::app()->createUrl('/'); ?>" class="logo" title="7roses">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/logo_<?=Yii::app()->language?>.png" alt="7roses" />
                     </a>
                 </li>
@@ -175,7 +175,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(230);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'230', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav01.png" alt=""/>
                     </div>
@@ -189,7 +189,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -197,7 +197,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(234);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'234', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav02.png" alt=""/>
                     </div>
@@ -211,7 +211,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -219,7 +219,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(232);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'232', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav03.png" alt=""/>
                     </div>
@@ -234,7 +234,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
 
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -242,7 +242,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(235);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'235', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav04.png" alt=""/>
                     </div>
@@ -256,7 +256,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -264,7 +264,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(276);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'276', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav07.png" alt=""/>
                     </div>
@@ -278,7 +278,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul> 
             </li>
@@ -286,7 +286,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(236);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'236', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav05.png" alt=""/>
                     </div>
@@ -300,7 +300,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -308,7 +308,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <?php $product = StoreCategory::model()->findByPk(237);
                        $tansProduct = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>'237', 'language_id'=>$langArray->id));
                 ?>
-                <a title="" href="/<?=$product['url']?>">
+                <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
                         <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav06.png" alt=""/>
                     </div>
@@ -322,7 +322,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                      foreach($items['items'] as $item):
                         $tansItem = StoreCategoryTranslate::model()->findByAttributes(array('object_id'=>$item['url']['id'], 'language_id'=>$langArray->id));
               ?>
-                 <li><a href="/<?=$item['url']['url']?>"><?=$tansItem->name;?></a></li>
+                 <li><a href="<?= Yii::app()->createUrl('/' . $item['url']['url']); ?>"><?=$tansItem->name;?></a></li>
                  <?php endforeach;?>
                 </ul>  
             </li>
@@ -402,22 +402,22 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 		<ul class="menu-bottom">
             <li>
                 <ul>
-                    <li><a title="Flowers" href="/flowers"><?=Yii::t('main','')?></a></li>
-                    <li><a title="Flower arrangements" href="/arrangements"><?=Yii::t('main','Arragements')?></a></li>
-                    <li><a title="Gifts and soft toys" href="/gifts"><?=Yii::t('main','Gifts')?></a></li>
-                    <li><a title="Sweets and chocolate" href="/sweets"><?=Yii::t('main','Sweets')?></a></li>
-					<li><a title="Gourmet Basket" href="/gourmet"><?=Yii::t('main','Gourmet')?></a></li>
-                    <li><a title="Occasion" href="/reason"><?=Yii::t('main','Occasion')?></a></li>
+                    <li><a title="Flowers" href="<?=Yii::app()->createUrl('/flowers'); ?>"><?=Yii::t('main','')?></a></li>
+                    <li><a title="Flower arrangements" href="<?=Yii::app()->createUrl('/arrangements'); ?>"><?=Yii::t('main','Arragements')?></a></li>
+                    <li><a title="Gifts and soft toys" href="<?=Yii::app()->createUrl('/gifts'); ?>"><?=Yii::t('main','Gifts')?></a></li>
+                    <li><a title="Sweets and chocolate" href="<?=Yii::app()->createUrl('/sweets'); ?>"><?=Yii::t('main','Sweets')?></a></li>
+					<li><a title="Gourmet Basket" href="<?=Yii::app()->createUrl('/gourmet'); ?>"><?=Yii::t('main','Gourmet')?></a></li>
+                    <li><a title="Occasion" href="<?=Yii::app()->createUrl('/reason'); ?>"><?=Yii::t('main','Occasion')?></a></li>
                 </ul>
             </li>
             <li>
                 <ul>
-					<li><a title="payment" href="/page/payment.html"><?=Yii::t('main','Payment')?></a></li>
-                    <li><a title="about delivery" href="/page/about-delivery.html"><?=Yii::t('main','About Delivery')?></a></li>
-                    <li><a title="terms and conditions" href="/page/terms-conditions.html"><?=Yii::t('main','Terms&Conditions
+					<li><a title="payment" href="<?= Yii::app()->createUrl('/page/payment.html'); ?>"><?=Yii::t('main','Payment')?></a></li>
+                    <li><a title="about delivery" href="<?= Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main','About Delivery')?></a></li>
+                    <li><a title="terms and conditions" href="<?= Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main','Terms&Conditions
 							')?></a></li>
-					<li><a title="frequently asked questions" href="/page/faq.html"><?=Yii::t('main','FAQ')?></a></li>
-                    <li><a title="Contacts" href="/feedback"><?=Yii::t('main','Contacts')?></a></li>
+					<li><a title="frequently asked questions" href="<?= Yii::app()->createUrl('/page/faq.html'); ?>"><?=Yii::t('main','FAQ')?></a></li>
+                    <li><a title="Contacts" href="<?= Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t('main','Contacts')?></a></li>
                 </ul>
             </li>
         </ul>
@@ -445,7 +445,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 		    </div>
 		</div>
 		<span class="btn-purple arcticmodal-close"><?=Yii::t('main','Continue shopping')?></span>
-		<a class="btn-green" href="/cart"><?=Yii::t('main','Checkout')?></a>
+		<a class="btn-green" href="<?=Yii::app()->createUrl('/cart'); ?>"><?=Yii::t('main','Checkout')?></a>
 	</div>
 	<!-- modal (end) -->
 	

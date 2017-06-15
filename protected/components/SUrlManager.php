@@ -36,6 +36,8 @@ class SUrlManager extends CUrlManager
 				$result = '/'.$langPrefix.$result;
 		}
 
+        // добавление языковой версии в URL
+        $result = MLhelper::addLangToUrl($result);
 		return $result;
 	}
 

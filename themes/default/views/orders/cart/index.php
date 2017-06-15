@@ -15,7 +15,7 @@ $this->pageTitle = Yii::t('OrdersModule.core', 'Checkout');
 if(empty($items))
 {
 echo '<ul class="breadcrumbs">
-        <li><a href="/"/>'.Yii::t('main','Home page').'</a></li>
+        <li><a href="' . Yii::app()->createUrl('/') . '">'.Yii::t('main','Home page').'</a></li>
     </ul>';
     echo CHtml::openTag('h1');
         echo Yii::t('OrdersModule.core', 'Your shopping cart is currently empty.');
@@ -44,7 +44,7 @@ echo '<ul class="breadcrumbs">
 <div id="step1">
     <!-- breadcrumbs (begin) -->
     <ul class="breadcrumbs">
-        <li><a href="/" title=""><?=Yii::t('OrdersModule.core','Home')?></a></li>
+        <li><a href="<?=Yii::app()->createUrl('/'); ?>" title=""><?=Yii::t('OrdersModule.core','Home')?></a></li>
         <li>&nbsp;/&nbsp;</li>
         <li><?=Yii::t('OrdersModule.core','Cart')?></li>
     </ul>

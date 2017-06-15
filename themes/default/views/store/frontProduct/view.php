@@ -47,7 +47,7 @@ $parent_command = Yii::app()->db->createCommand($parent_sql);
 $parent = $parent_command->queryRow();
 
 if(!in_array('/' . $parent['full_path'], $this->breadcrumbs)){
-    $this->breadcrumbs[$parent['name']] = '/' . $parent['full_path'];
+    $this->breadcrumbs[$parent['name']] = Yii::app()->createUrl('/' . $parent['full_path']);
 }
 
 $this->breadcrumbs[] = $model->name;

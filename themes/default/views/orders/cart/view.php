@@ -7,7 +7,7 @@
 <div>
 <!-- breadcrumbs (begin) -->
     <ul class="breadcrumbs">
-        <li><a href="/" title=""><?=Yii::t('OrdersModule.core','Home')?></a></li>
+        <li><a href="<?= Yii::app()->createUrl('/'); ?>" title=""><?=Yii::t('OrdersModule.core','Home')?></a></li>
         <li>&nbsp;/&nbsp;</li>
         <li><?=Yii::t('OrdersModule.core','Cart')?></li>
     </ul>
@@ -101,7 +101,7 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                         $pro_model = StoreProduct::model()->findByPk($product->product_id);
 						//var_dump ($product);
                         ?>
-                        <a href="/product/<?=$pro_model->url?>.html" title="">
+                        <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
                             <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>"/>
                         </a>
                     </div></td><td>
@@ -191,7 +191,7 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                         <?php
                         $pro_model = StoreProduct::model()->findByPk($product->product_id);
                         ?>
-                        <a href="/product/<?=$pro_model->url?>.html" title="">
+                        <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
                             <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>"/>
                         </a>
                     </div>

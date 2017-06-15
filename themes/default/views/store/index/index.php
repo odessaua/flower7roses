@@ -24,8 +24,8 @@ else{
 	            <ul>
                         <?php foreach ($slider as $one) { ?>
                             <li>
-                                <a href="<?=$one['url']?>" title="<?=$one['url']?>">
-                                    <img width="812" height="282" src="<?= 'uploads/slider/'.$one['photo'] ?>" alt=""/>
+                                <a href="<?= Yii::app()->createUrl($one['url']); ?>" title="<?=$one['name']?>">
+                                    <img width="812" height="282" src="<?= '/uploads/slider/'.$one['photo'] ?>" alt=""/>
                                 </a>
                             </li>
                         <?php } ?>
@@ -76,8 +76,8 @@ else{
         <?php $baner=  SSystemBaner::model()->findAll();?>
 	<div class="col-22">
 	    <div class="action">
-	        <a href="<?= $baner[2]['url']; ?>" title="">
-	            <img width="218" heigth="282" src="<?='uploads/baners/'.$baner[2]['photo']?>" alt="Banner" />
+	        <a href="<?= Yii::app()->createUrl($baner[2]['url']); ?>" title="">
+	            <img width="218" heigth="282" src="<?='/uploads/baners/'.$baner[2]['photo']?>" alt="Banner" />
 	        </a>
 	    </div>
 

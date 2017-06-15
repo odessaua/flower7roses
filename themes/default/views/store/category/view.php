@@ -66,9 +66,9 @@ $this->breadcrumbs[] = $this->model->name;
                 <div class="sort-popup hidden">
 				<ul class="sort-dropdown inpage">
                     
-                        <li><a href="/<?=$this->model->full_path.'/sort/created' ?>" title="Last added"><?echo Yii::t('StoreModule.core', 'Last added')?></a></li>
-                        <li><a href="/<?=$this->model->full_path.'/sort/price' ?>" title="Cheap first"><?echo Yii::t('StoreModule.core', 'Cheap first')?></a></li>
-                        <li><a href="/<?=$this->model->full_path.'/sort/price.desc' ?>" title="Highest first"><?echo Yii::t('StoreModule.core', 'Highest first')?></a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/created'); ?>" title="Last added"><?echo Yii::t('StoreModule.core', 'Last added')?></a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price'); ?>" title="Cheap first"><?echo Yii::t('StoreModule.core', 'Cheap first')?></a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price.desc'); ?>" title="Highest first"><?echo Yii::t('StoreModule.core', 'Highest first')?></a></li>
                 </ul>
                 </div>
             </div>
@@ -102,7 +102,7 @@ $this->breadcrumbs[] = $this->model->name;
                 
                 foreach($filterPrices as $key => $filter):
                 ?>
-                <a <?=($min_price == $filter['min'] && $max_price == $filter['max']) ? "class='active'" : ""?> title="<?=$filter['min']?>-100 $" href="/<?=$this->model->full_path?>/min_price/<?=$filter['min']?>/max_price/<?=$filter['max']?>">
+                <a <?=($min_price == $filter['min'] && $max_price == $filter['max']) ? "class='active'" : ""?> title="<?=$filter['min']?>-100 $" href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/min_price/' . $filter['min'] . '/max_price/' . $filter['max']); ?>">
                     <?php if($key == 0):?>
                         <?=Yii::t('StoreModule.core', 'under')?> <?=$filter['max'];?>
                     <?php elseif(($key+1) == $countFilters):?>
@@ -142,9 +142,9 @@ $this->breadcrumbs[] = $this->model->name;
             <div class="sort-popup hidden">
                 <ul class="sort-dropdown inpage">
                     
-                        <li><a href="/<?=$this->model->full_path.'/per_page/24' ?>" title="">24</a></li>
-                        <li><a href="/<?=$this->model->full_path.'/per_page/48' ?>" title="">48</a></li>
-                        <li><a href="/<?=$this->model->full_path.'/per_page/96' ?>" title="">96</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/24'); ?>" title="">24</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/48'); ?>" title="">48</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/96'); ?>" title="">96</a></li>
                 </ul>
             </div>
         </div>

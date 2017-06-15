@@ -12,7 +12,7 @@ class SStoreCategoryUrlRule extends CBaseUrlRule
 		if($route==='store/category/view')
 		{
 			$url=trim($params['url'],'/');
-			unset($params['url']);
+			unset($params['url'], $params['language']);
 
 			$parts=array();
 			if(!empty($params))

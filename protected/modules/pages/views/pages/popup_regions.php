@@ -116,7 +116,7 @@ if(!$popup)
                             foreach ($city_chunk as $city) {
                             ?>
                             <li>
-                                <?= CHtml::link($city['name'], '/' . strtolower($city['eng_name'])); ?>
+                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower($city['eng_name']))); ?>
                             </li>
                             <?php
                             }
@@ -149,5 +149,5 @@ if(!$popup)
         </div>
     </div>
 	<br>
-	<?= CHtml::link(Yii::t('main','Didn\'t find city? Click here!'), '/all-cities', array('class' => 'all-cities')); ?>
+	<?= CHtml::link(Yii::t('main','Didn\'t find city? Click here!'), Yii::app()->createUrl('/all-cities'), array('class' => 'all-cities')); ?>
 </div>
