@@ -43,6 +43,16 @@ class CategoryController extends Controller
 	 */
 	public $provider;
 
+    /**
+     * Дополнительные элементы для маркировки страниц Категорий (SEO)
+     * @var array
+     */
+	public $pageMetaSeo = array(
+	    'divider' => '',
+	    'title' => '',
+	    'num' => '',
+    );
+
 	/**
 	 * @var string
 	 */
@@ -165,12 +175,68 @@ class CategoryController extends Controller
 		));
 
 		$this->provider->sort = StoreProduct::getCSort();
+        $this->setRels($this->provider->totalItemCount, $per_page);
 
 		$this->render($view, array(
 			'provider'=>$this->provider,
 			'itemView'=>(isset($_GET['view']) && $_GET['view']==='wide') ? '_product_wide' : '_product',
             'city_seo' => $this->getCitySeo(),
+            'displayDescription' => $this->displayCategoryDescription(),
+            'pageMetaSeo' => implode(' ', $this->pageMetaSeo),
 		));
+	}
+
+    /**
+     * Отображать или нет описание Категории
+     * Описание отображается только на начальной странице Категории
+     * На последующих страницах, где в URL присутствует элемент page - описание не отображается
+     * + формируются мета-данные для страницы $this->pageMetaSeo (например - Страница 2), соответственно языковой версии
+     * @return bool
+     */
+    public function displayCategoryDescription()
+    {
+        $uri = explode('/', trim(Yii::app()->request->requestUri, '/'));
+        if(!empty($uri) && in_array('page', $uri)){
+            // мета-данные
+            $this->pageMetaSeo['divider'] = ' -';
+            $this->pageMetaSeo['num'] = (int)end($uri);
+            $this->pageMetaSeo['title'] = Yii::t('main', 'Page');
+
+            return false;
+        }
+        return true;
+	}
+
+    /**
+     * Формируем (или нет) rel-элементы prev и next для навигации (SEO)
+     * @param int $total - общее кол-во элементов
+     * @param int $perPage - кол-во элементов на странице
+     */
+    public function setRels($total, $perPage)
+    {
+        $uri = explode('/', trim(Yii::app()->request->requestUri, '/'));
+        if(!empty($uri)){
+            $page = (in_array('page', $uri)) ? (int)end($uri) : 0;
+            // если кол-во записей больше, чем кол-во элементов на странице
+            // формируем rel-ссылки для SEO
+            if($total > $perPage){
+                $totalPages = ceil($total / $perPage); // общее кол-во страниц
+                $newUri = (in_array('page', $uri))
+                    ? '/' . implode('/', array_slice($uri, 0, -2))
+                    : '/' . implode('/', $uri); // URL для rel-ссылок вида /flowers/roses
+                // если общее кол-во страниц больше, чем номер текущей страницы - формируем next
+                if($totalPages > $page){
+                    $next = 'http://' . $_SERVER['HTTP_HOST'] . $newUri . '/page/' . (($page == 0) ? ($page + 2) : ($page + 1));
+                    $this->rels['next'] = '<link rel="next" href="' . $next . '">';
+                }
+                // если номер текущей страницы больше 1 - формируем prev
+                if($page > 1){
+                    // ссылка на первую страницу - без указания /page/1
+                    $prev = 'http://' . $_SERVER['HTTP_HOST'] . $newUri . (($page > 2) ? '/page/' . ($page - 1) : '');
+                    $this->rels['prev'] = '<link rel="prev" href="' . $prev . '">';
+                }
+            }
+        }
 	}
 
 	/**

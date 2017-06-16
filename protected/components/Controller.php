@@ -41,6 +41,17 @@ class Controller extends RController
      */
     public $language_info;
 
+    /**
+     * Дополнительные SEO-элементы для страниц Категорий
+     * rel="prev"
+     * rel="next"
+     * @var array
+     */
+    public $rels = array(
+        'prev' => '',
+        'next' => '',
+    );
+
     /*
      *
      */
@@ -143,9 +154,15 @@ class Controller extends RController
 
 	public function getPageTitle()
 	{
-		$title=Yii::app()->settings->get('core', 'siteName');
-		if(!empty($this->_pageTitle))
-			$title=$this->_pageTitle.=' / '.$title;
+		$title = Yii::app()->settings->get('core', 'siteName');
+		if(!empty($this->_pageTitle)){
+		    if(mb_strpos($this->_pageTitle, ' / ' . $title) === false){
+			    $title=$this->_pageTitle .= ' / ' . $title;
+            }
+            else{
+		        $title = $this->_pageTitle;
+            }
+        }
 		return $title;
 	}
 

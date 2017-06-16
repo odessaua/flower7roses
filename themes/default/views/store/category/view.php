@@ -7,12 +7,14 @@ $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
  * @var $model StoreCategory
  * @var $provider CActiveDataProvider
  * @var $categoryAttributes
+ * @var $displayDescription
+ * @var $pageMetaSeo
  */
 
 // Set meta tags
-$this->pageTitle = ($this->model->meta_title) ? $this->model->meta_title : $this->model->name;
-$this->pageKeywords = $this->model->meta_keywords . ', ' . $city_seo['keywords'];
-$this->pageDescription = $this->model->meta_description . ' ' . $city_seo['description'];
+$this->pageTitle = (($this->model->meta_title) ? $this->model->meta_title : $this->model->name) . $pageMetaSeo;
+$this->pageKeywords = ($this->model->meta_keywords . ', ' . $city_seo['keywords']) . $pageMetaSeo;
+$this->pageDescription = ($this->model->meta_description . ' ' . $city_seo['description']) . $pageMetaSeo;
 $lang= Yii::app()->language;
 if($lang == 'ua')
     $lang = 'uk';
@@ -142,15 +144,16 @@ $this->breadcrumbs[] = $this->model->name;
             <div class="sort-popup hidden">
                 <ul class="sort-dropdown inpage">
                     
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/24'); ?>" title="">24</a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/48'); ?>" title="">48</a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/96'); ?>" title="">96</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/25'); ?>" title="">25</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/50'); ?>" title="">50</a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/100'); ?>" title="">100</a></li>
                 </ul>
             </div>
         </div>
         <!-- sorts (end) -->
         
         <!-- b-page-text (begin) -->
+        <?php if(!empty($displayDescription)): ?>
         <div class="b-page-text text ">
         <?php if(!empty($this->model->description)): ?>
             <h2 class="title"><?php echo CHtml::encode($this->model->name); ?></h2>
@@ -158,6 +161,7 @@ $this->breadcrumbs[] = $this->model->name;
         <?php endif ?>
             <?= '<br>' . $city_seo['text']; ?>
         </div>
+        <?php endif; ?>
         <!-- b-page-text (end) -->
     </div>
     <!-- products (end) -->
