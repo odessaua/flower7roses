@@ -30,7 +30,8 @@ if(!empty($regions)){
             <h3 class="ac-region-title"><?= $region['name']; ?></h3>
         <?php
         foreach($cities[$r_id] as $city){
-            echo CHtml::link($city['name'], strtolower($city['eng_name']), array('class' => 'ncity-link'));
+            // замена пробелов на _ в названиях городов (krivoy rog --> krivoy_rog)
+            echo CHtml::link($city['name'], strtolower(str_replace(' ', '_', $city['eng_name'])), array('class' => 'ncity-link'));
         }
         ?>
         </div>

@@ -116,7 +116,8 @@ if(!$popup)
                             foreach ($city_chunk as $city) {
                             ?>
                             <li>
-                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower($city['eng_name']))); ?>
+                                <?php // замена пробелов на _ в названиях городов (krivoy rog --> krivoy_rog) ?>
+                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower(str_replace(' ', '_', $city['eng_name'])))); ?>
                             </li>
                             <?php
                             }

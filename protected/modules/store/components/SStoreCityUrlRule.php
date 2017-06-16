@@ -30,6 +30,10 @@ class SStoreCityUrlRule extends CBaseUrlRule
 			return false;
 		if($this->urlSuffix)
 			$pathInfo = strtr($pathInfo, array($this->urlSuffix=>''));
+
+        // обратная замена _ на пробелы в названиях городов в URL для
+        // сравнения с оригиналами (krivoy_rog --> krivoy rog)
+		$pathInfo = str_replace('_', ' ', $pathInfo);
 		foreach($this->getAllPaths() as $city_id => $path)
 		{
 			if(($path !== '') && (strlen($path) == strlen($pathInfo)) && (strpos($path, $pathInfo) !== false))
@@ -56,6 +60,7 @@ class SStoreCityUrlRule extends CBaseUrlRule
 				->queryAll();
 			if(!empty($cities)){
                 foreach ($cities as $city) {
+
                     $allPaths[$city['object_id']] = strtolower($city['name']);
                 }
             }
