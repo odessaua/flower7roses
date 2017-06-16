@@ -113,15 +113,15 @@ return array(
 		 	'charset'               => 'utf8',
 		 ),/*
 		'db'=>array(
-			'connectionString'=>'mysql:host=a7roses.mysql.ukraine.com.ua;dbname=a7roses_2014',
-			'username'=>'a7roses_2014',
-			'password'=>'8cZy34xT',
-			'enableProfiling'       => YII_DEBUG, // Disable in production
-			'enableParamLogging'    => YII_DEBUG, // Disable in production
-			'emulatePrepare'        => true,
-			'schemaCachingDuration' => YII_DEBUG ? 0 : 3600,
-			'charset'               => 'utf8',
-		),*/
+		 	'connectionString'=>'mysql:host=localhost;dbname=ukraccom_7rosesn',
+		 	'username'=>'ukraccom_andrey',
+		 	'password'=>'natasha1954',
+		 	'enableProfiling'       => YII_DEBUG, // Disable in production
+		 	'enableParamLogging'    => YII_DEBUG, // Disable in production
+		 	'emulatePrepare'        => true,
+		 	'schemaCachingDuration' => YII_DEBUG ? 0 : 3600,
+		 	'charset'               => 'utf8',
+		 ),*/
 		'request'=>array(
 			'class'=>'SHttpRequest',
 			'enableCsrfValidation'=>true,
