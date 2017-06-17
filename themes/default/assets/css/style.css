@@ -834,8 +834,8 @@ padding:20px 20px 0 0;
   margin: 60px 20px 20px 0;
 }
 .content-text {
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 15px;
+  line-height: 20px;
 }
 .content-text p {
   margin: 20px 0;
@@ -879,6 +879,9 @@ padding:20px 20px 0 0;
 .content-text ol li img {
   display: inline;
   vertical-align: middle;
+}
+.content-text a:link {
+	text-decoration:none;
 }
 /* left-col (begin) */
 .sidebar .title {
