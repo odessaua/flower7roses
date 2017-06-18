@@ -157,11 +157,14 @@ $this->breadcrumbs[] = $this->model->name;
         <div class="b-page-text text ">
         <?php if(!empty($this->model->description)): ?>
             <h2 class="title"><?php echo CHtml::encode($this->model->name); ?></h2>
+			<div class="content-text">
             <?php echo $this->model->description ?>
         <?php endif ?>
             <?= '<br>' . $city_seo['text']; ?>
+			</div>
         </div>
         <?php endif; ?>
+		
         <!-- b-page-text (end) -->
     </div>
     <!-- products (end) -->
