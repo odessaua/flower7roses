@@ -7,21 +7,28 @@ $this->widget(
 	
 <label>Выберите регион доставки</label>
 <?php 
-$cities = City::model()->findAll();
-$cities = CHtml::listData($cities, 'id', 'name');
+$allcities = City::model()->findAll();
+$cities = CHtml::listData($allcities, 'id', 'name');
 
 $select = array();
 
-if($model->isNewRecord)
-	$productCities = StoreProductCityRef::model()->findAll();
-else
+if($model->isNewRecord){
+
+	foreach($allcities as $city)
+		{
+			$select[] = $city->id;
+		}
+	
+}
+else {
 	$productCities = StoreProductCityRef::model()->findAll(array('condition'=>'product_id='.$model->id));
 
-foreach($productCities as $city)
-{
-	$select[] = $city->city_id;
-}
 
+		foreach($productCities as $city)
+		{
+			$select[] = $city->city_id;
+		}
+}
 echo CHtml::dropDownList('cities', $select, $cities,
 	array(
 		'multiple' => 'multiple',
