@@ -33,6 +33,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
+	<link rel="alternate" type="text/html" hreflang="en" href="http://7roses.com/" title="English"/>
+	<link rel="alternate" type="text/html" hreflang="ru" href="http://7roses.com/ru" title="Русский"/>
+	<link rel="alternate" type="text/html" hreflang="uk" href="http://7roses.com/uk" title="Українська"/>
 </head>
 <body>
 
