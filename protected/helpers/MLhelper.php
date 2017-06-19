@@ -111,4 +111,44 @@ class MLhelper
 
         return $url;
     }
+
+    /**
+     * Добавление указанного языка в URL
+     * @param string $url - полный URL (Yii::app()->request->uri)
+     * @param string $lang - язык, который требуется указать в URL
+     * @return string - полный URL с требуемым языком в начале
+     */
+    public static function addSpecifiedLangToUrl($url, $lang = 'en')
+    {
+        if (self::enabled())
+        {
+            // разбор URL по параметрам
+            $domains = explode('/', ltrim($url, '/'));
+            // указан ли какой-либо язык в URL
+            $isHasLang = in_array($domains[0], array_keys(Yii::app()->params['translatedLanguages']));
+            // является ли требуемый язык языком по-умолчанию (он не добавляется в URL)
+            $isDefaultLang = $lang == Yii::app()->params['defaultLanguage'];
+
+            // язык указан – и это не требуемый язык
+            // заменяем старый язык на требуемый
+            if($isHasLang && ($lang !== $domains[0])){
+                $domains[0] = $lang;
+            }
+
+            // какой-то язык указан в URL - и требуемый язык является языком по-умолчанию
+            // удаляем язык из URL
+            if ($isHasLang && $isDefaultLang)
+                array_shift($domains);
+
+            // язык не указан в URL – и требуемый язык не является языком по-умолчанию
+            // добавляем требуемый язык в URL
+            if (!$isHasLang && !$isDefaultLang)
+                array_unshift($domains, $lang);
+
+            // формируем новый URL
+            $url = '/' . implode('/', $domains);
+        }
+
+        return $url;
+    }
 }

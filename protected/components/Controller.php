@@ -202,4 +202,10 @@ class Controller extends RController
         $this->language_info = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
     }
 
+    public function createNewLanguageUrl($key = 'en')
+    {
+        $uri = Yii::app()->request->url;
+        return MLhelper::addSpecifiedLangToUrl($uri, $key);
+    }
+
 }

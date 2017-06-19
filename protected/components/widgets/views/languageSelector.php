@@ -4,11 +4,8 @@
        
         $lastElement = end($languages);
         foreach($languages as $key=>$lang) {
-            if($key != $currentLang && $key != $defaultLanguage) {
-                echo CHtml::link($lang, '/' . $key);
-            }
-            elseif($key != $currentLang && $key == $defaultLanguage){
-                echo CHtml::link($lang, '/');
+            if($key != $currentLang){
+                echo CHtml::link($lang, $this->getOwner()->createNewLanguageUrl($key));
             }
             else
                 echo '<a class="currLang">'.$lang.'</a>';
