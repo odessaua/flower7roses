@@ -37,12 +37,59 @@ class DeliveryRegionsController extends SAdminController {
 		if (!$model)
 			throw new CHttpException(404, Yii::t('StoreModule.admin', 'Регион доставки не найден.'));
 
+		// получаем псевдонимы
+        $getLang = (!empty($_GET['lang_id'])) ? (int)$_GET['lang_id'] : 9; // english by default
+        $aliases = CityAlias::model()->findAll(
+            'language_id = :langID and object_id = :objectID',
+            array(
+                ':langID' => $getLang,
+                ':objectID' => $_GET['id'],
+            )
+        );
+        if(!empty($aliases)){
+            $als = array();
+            foreach ($aliases as $alias) {
+                $als[] = $alias->name;
+            }
+            $model->alias = implode(', ', $als);
+        }
+        else{
+            $model->alias = '';
+        }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		$form = new STabbedForm('application.modules.store.views.admin.deliveryRegions._form', $model);
 		if(isset($_POST['City']))
 		{
+		    // сохраняем алиасы города на текущем языке
+		    if(!empty($_POST['City']['alias'])){
+		        // разделитель - запятая
+                $new_aliases = explode(',', $_POST['City']['alias']);
+                if(!empty($new_aliases)){
+                    // удаляем все старые алиасы города на текущем языке
+                    CityAlias::model()->deleteAll(
+                        'language_id = :langID and object_id = :objectID',
+                        array(
+                            ':langID' => $getLang,
+                            ':objectID' => $_GET['id'],
+                        )
+                    );
+                    // сохраняем новые
+                    foreach ($new_aliases as $new_alias) {
+                        $new_alias = trim($new_alias);
+                        if(!empty($new_alias)){
+                            $amodel = new CityAlias();
+                            $amodel->object_id = $_GET['id'];
+                            $amodel->language_id = $getLang;
+                            $amodel->name = $new_alias;
+                            $amodel->save();
+                        }
+                    }
+                }
+		        unset($_POST['City']['alias']);
+            }
+
 			$model->attributes=$_POST['City'];
 			if($model->validate())
 			{

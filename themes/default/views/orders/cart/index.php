@@ -233,14 +233,16 @@ echo '<ul class="breadcrumbs">
                                 $lang="";
                             else if(Yii::app()->language=='ua')
                                 $lang="uk";
-                          
+
                     Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
                         $this->widget('CJuiDateTimePicker',array(
                             'model'=>$this->form, 
                             'attribute'=>'datetime_delivery', 
-                            'mode'=>'datetime',
+                            'mode'=>'date',
                             'language' => $lang, 
-                            'options'=>array(),
+                            'options'=>array(
+                                    'minDate' => ((int)date('G') < 14) ? '0' : '1',
+                            ),
                             'htmlOptions' => array(
                                 'class' => 'datepicker'
                             ), 

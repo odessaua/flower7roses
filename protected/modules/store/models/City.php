@@ -24,6 +24,7 @@ class City extends CActiveRecord
 	public $translateModelName = 'CityTranslate';
 	public $name;
     public $regions;
+    public $alias; // псевдонимы городов
 
     /**
      * Translate-able
@@ -48,6 +49,7 @@ class City extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
+			array('alias', 'safe'),
 			array('delivery,show_in_popup,region_id, firm_show', 'numerical'),
 			array('name', 'length', 'max'=>50),
             array('firm_name, firm_phone, firm_address, h1_header', 'length', 'max'=>255),
@@ -78,6 +80,7 @@ class City extends CActiveRecord
 			'id' => 'ID',
 			'region_id' => 'Область',
 			'name' => 'Название региона',
+			'alias' => 'Псевдонимы региона',
 			'phone_code' => 'Phone Code',
 			'delivery' => 'Стоимость доставки ($)',
             'show_in_popup' => 'Показать во всплывающем окне',

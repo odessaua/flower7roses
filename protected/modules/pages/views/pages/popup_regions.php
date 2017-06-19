@@ -51,12 +51,12 @@ if(!$popup)
 				$.ajax({
 					type: "GET",
 					url: "/site/changeCity",
-					data: {city : city},
+					data: {city : city, lang : "' . Yii::app()->language .'"},
 					dataType: "text",
 					success: function(data){
 					    var city = data.split("_");
 					    if(city.length == 2){
-					        document.location.href="/"+city[1];
+					        document.location.href=city[1];
 					    }
 					    $(".cityName").text(city[0]);
 						$(".sort-popup").addClass("hidden");

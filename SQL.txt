@@ -1,3 +1,15 @@
+-- 2017-06-20:
+CREATE TABLE `cityAlias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `object_id` (`object_id`),
+  KEY `language_id` (`language_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ==============
+
 -- 2017-03-13:
 ALTER TABLE `citySeo` ADD `seo_title` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `seo_description`;
 -- ==============

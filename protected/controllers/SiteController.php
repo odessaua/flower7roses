@@ -22,16 +22,17 @@ class SiteController extends Controller
 	{	
 		$res =array();
 		$lang= Yii::app()->language;
+        $langs = array(
+            'ru' => 1,
+            'en' => 9,
+            'ua' => 10,
+            'uk' => 10,
+        );
 		if (isset($_GET['term'])) {
 			$qtxt="";
-			if($lang=="ru")
-				$qtxt ="SELECT object_id, name FROM cityTranslate WHERE name LIKE :name AND language_id=1";
-			elseif($lang=="en") {
-				$qtxt ="SELECT object_id, name FROM cityTranslate WHERE name LIKE :name AND language_id=9";
-			}
-			elseif($lang=="ua") {
-				$qtxt ="SELECT object_id, name FROM cityTranslate WHERE name LIKE :name AND language_id=10";
-			}
+			if(in_array($lang, array_keys($langs))){
+                $qtxt ="SELECT object_id, name FROM cityTranslate WHERE name LIKE :name AND language_id=" . (int)$langs[$lang];
+            }
 			else
 				$qtxt ="SELECT id as object_id, name FROM city WHERE name LIKE :name";
 			// echo $lang;
@@ -39,13 +40,19 @@ class SiteController extends Controller
 			$command->bindValue(":name", '%'.$_GET['term'].'%', PDO::PARAM_STR);
 			//$res =$command->queryColumn();
 			$results =$command->queryAll();
+
+			// поиск по алиасам
+            if(empty($results) && in_array($lang, array_keys($langs))){
+                $qs = "SELECT ca.object_id, ct.name 
+                        FROM cityAlias ca 
+                        JOIN cityTranslate ct ON ct.object_id = ca.object_id AND ct.language_id = " . (int)$langs[$lang] . "
+                        WHERE ca.name LIKE :name AND ca.language_id=" . (int)$langs[$lang];
+                $command =Yii::app()->db->createCommand($qs);
+                $command->bindValue(":name", '%'.$_GET['term'].'%', PDO::PARAM_STR);
+                $results = $command->queryAll();
+            }
 		}
         if(!empty($results)){
-            $langs = array(
-                'ru' => 1,
-                'en' => 9,
-                'ua' => 10,
-            );
             $ids = array();
             foreach ($results as $row) {
                 $ids[] = $row['object_id'];
@@ -73,7 +80,7 @@ class SiteController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionChangeCity($city)
+	public function actionChangeCity($city, $lang = 'en')
 	{
 		$app = Yii::app();
 		
@@ -94,8 +101,9 @@ class SiteController extends Controller
 		}else{
 			$app->session['_city'] =  'Киев';
 		}
-		
-		echo $app->session['_city'] . ((!empty($city_url)) ? '_' . $city_url : '');
+
+		$url_lang = ($lang !== $app->params['defaultLanguage']) ? $lang . '/' : '';
+		echo $app->session['_city'] . ((!empty($city_url)) ? '_/' . $url_lang . $city_url : '');
 		//Yii::app()->controller->refresh();
 	}
 	

@@ -12,6 +12,10 @@ return array(
 				'name'=>array(
 					'type'=>'text',
 				),
+                'alias'=>array(
+                    'type'=>'text',
+                    'placeholder' => 'Разделитель - запятая'
+                ),
                 'region_id' => array(
                     'type' => 'dropdownlist',
                     'items' => Region::model()->language(1)->getRegionList(true),
