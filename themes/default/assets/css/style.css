@@ -1838,7 +1838,7 @@ margin-top: 10px;
 
 }
 .pp-right {
-  width: 320px;
+  width: 50%;
   float: left;
 }
 .pp-right .btn-purple,
@@ -1866,6 +1866,7 @@ margin-top: 10px;
 .article {
   font-size: 12px;
   margin: 10px 0 0;
+  float:right;
 }
 .article span {
   color: #7a1c4a;
@@ -1943,6 +1944,7 @@ margin-top: 10px;
   font-size: 30px;
 }
 .pp-reg {
+  width:200px;
   margin: 0 0 20px;
   padding: 10px 20px 10px 75px;
   background: #f5f5f5 url(../img/bg-del.png) no-repeat 20px 12px;

@@ -127,8 +127,25 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	            </div>
 	            <div class="pp-right">
 	                <?php echo CHtml::form(array('/orders/cart/add'))?>
+					<div class="article"><?=Yii::t('StoreModule.core','Vendor code:')?> <span><?=$model->id?></span></div>
 	                    <h1 class="page-title"><?php echo CHtml::encode($model->name); ?></h1>
-	                    <div class="article"><?=Yii::t('StoreModule.core','Vendor code:')?> <span><?=$model->id?></span></div>
+	                    <div class="pp-price">
+	                        <div class="currency">
+	                            <?=Yii::t('StoreModule.core','')?>
+	                            <select name="currency" id="selectCurrencyProduct">
+	                            	<?php foreach(Yii::app()->currency->currencies as $currency):?>
+									<option value="<?=$currency->id?>" <?=(Yii::app()->currency->active->id===$currency->id) ? "selected='selected'" : ""?>><?=$currency->iso?></option>		
+									<?php endforeach;?>
+	                            </select>
+	                        </div>
+	                        
+	                        <div class="price">
+								<span id="productPrice"><?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?></span>
+								<?php echo Yii::app()->currency->active->symbol; ?>
+							</div>
+	                        
+	                    </div>
+	                   
 	                    
 	                    <?php
 	                    if($model->getEavAttributes())
@@ -148,22 +165,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
                         <?php $this->renderPartial('_variants', array('model'=>$model, 'variants'=>$variants)); ?>
                     <?php endif;?>
 	                    
-	                    <div class="pp-price">
-	                        <div class="currency">
-	                            <?=Yii::t('StoreModule.core','Show prices in')?>
-	                            <select name="currency" id="selectCurrencyProduct">
-	                            	<?php foreach(Yii::app()->currency->currencies as $currency):?>
-									<option value="<?=$currency->id?>" <?=(Yii::app()->currency->active->id===$currency->id) ? "selected='selected'" : ""?>><?=$currency->symbol?></option>		
-									<?php endforeach;?>
-	                            </select>
-	                        </div>
-	                        
-	                        <div class="price">
-								<span id="productPrice"><?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?></span>
-								<?php echo Yii::app()->currency->active->symbol; ?>
-							</div>
-	                        
-	                    </div>
+
 	                    <div class="pp-reg">
 	                        <div class="sort sort-reg">
 	                            
