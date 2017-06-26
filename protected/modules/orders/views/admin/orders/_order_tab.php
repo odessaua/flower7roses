@@ -140,11 +140,32 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 						<?php echo CHtml::activeTextField($model,'user_address'); ?>
 					</div>
 					
-					
+					<div class="row">
+							<?php echo CHtml::activeLabel($model,'phone1'); ?>
+							<?php echo CHtml::activeTextField($model,'phone1'); ?>
+					</div>
+						
+					<div class="row">
+							<?php echo CHtml::activeLabel($model,'phone2'); ?>
+							<?php echo CHtml::activeTextField($model,'phone2'); ?>
+					</div>
 					
 					<div class="row">
 						<?php echo CHtml::activeLabel($model,'datetime_del'); ?>
 						<?php echo CHtml::activeTextField($model,'datetime_del'); ?>
+					</div>
+					<div class="row">
+						<?php echo CHtml::activeLabel($model,'doPhoto'); ?>
+						<?php echo CHtml::activeCheckBox($model, 'doPhoto',array('checked'=>$model->doPhoto?"1":"0")); ?>
+					</div>
+					<div class="row">
+						<?php echo CHtml::activeLabel($model,'do_card'); ?>
+						<?php echo CHtml::activeCheckBox($model, 'do_card',array('checked'=>$model->do_card?"1":"0")); ?>
+					</div>
+					<?php if(!$model->isNewRecord): ?>
+					<div class="row">
+							<?php echo CHtml::activeLabel($model,'not_disturb'); ?>
+							<?php echo CHtml::activeCheckBox($model, 'not_disturb',array('checked'=>$model->not_disturb?"1":"0")); ?>
 					</div>
 					
 					<div class="row">
@@ -157,28 +178,8 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 						<?php echo CHtml::activeTextArea($model,'card_text'); ?>
 					</div>
 					
-					<div class="row">
-						<?php echo CHtml::activeLabel($model,'doPhoto'); ?>
-						<?php echo CHtml::activeCheckBox($model, 'doPhoto',array('checked'=>$model->doPhoto?"1":"0")); ?>
-					</div>
-					<div class="row">
-						<?php echo CHtml::activeLabel($model,'do_card'); ?>
-						<?php echo CHtml::activeCheckBox($model, 'do_card',array('checked'=>$model->do_card?"1":"0")); ?>
-					</div>
-					<?php if(!$model->isNewRecord): ?>
-						<div class="row">
-							<?php echo CHtml::activeLabel($model,'not_disturb'); ?>
-							<?php echo CHtml::activeCheckBox($model, 'not_disturb',array('checked'=>$model->not_disturb?"1":"0")); ?>
-						</div>
-						<div class="row">
-							<?php echo CHtml::activeLabel($model,'phone1'); ?>
-							<?php echo CHtml::activeTextField($model,'phone1'); ?>
-						</div>
-						
-						<div class="row">
-							<?php echo CHtml::activeLabel($model,'phone2'); ?>
-							<?php echo CHtml::activeTextField($model,'phone2'); ?>
-						</div>
+
+
 						<div class="row">
 							<?php echo CHtml::activeLabel($model,'admin_comment'); ?>
 							<?php echo CHtml::activeTextArea($model,'admin_comment'); ?>

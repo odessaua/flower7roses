@@ -138,6 +138,7 @@ class Order extends BaseModel
 			'not_disturb'	 => Yii::t('OrdersModule.core','Do not disturb'),
 			'country'		 => Yii::t('OrdersModule.core','Sender Country'),
 			'city'			 => Yii::t('OrdersModule.core','Sender City'),
+			'do_card'		 => Yii::t('OrdersModule.core','Card'),
 			
 		);
 	}

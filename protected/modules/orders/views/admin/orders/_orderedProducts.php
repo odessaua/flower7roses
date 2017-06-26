@@ -10,7 +10,8 @@ Yii::app()->clientScript->registerScript('qustioni18n', '
 	var deleteQuestion = "'.Yii::t('OrdersModule.admin', 'Вы действительно удалить запись?').'";
 	var productSuccessAddedToOrder = "'.Yii::t('OrdersModule.admin', 'Продукт успешно добавлен к заказу.').'";
 ', CClientScript::POS_BEGIN);
-
+$thumb373 = '/productThumbs/373x373/';
+$thumb50 = '/productThumbs/50x50/';
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'               => 'orderedProducts',
 	'enableSorting'    => false,
@@ -35,9 +36,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'value'=>'StoreProduct::formatPrice($data->price)'
 		),
 		array(
-			'name'=>'Изображение',
+			'name'=>'photo',
 			'type'   => 'html',
-			'value'=>'html_entity_decode(CHtml::image(Yii::app()->assetManager->baseUrl."/productThumbs/50x50/".OrderProduct::getOrderProductsImage($data->product_id)))'
+			'value'=>'CHtml::link(CHtml::image(Yii::app()->assetManager->baseUrl."/productThumbs/50x50/".OrderProduct::getOrderProductsImage($data->product_id), "image", array ("title"=> "Click to enlarge")), array(Yii::app()->assetManager->baseUrl."/productThumbs/373x373/".OrderProduct::getOrderProductsImage($data->product_id)), array("class"=>"highslide"))'
 		),
 		array(
 			'type'=>'raw',
@@ -112,10 +113,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			</tr>
 		</thead>
 		<tbody>
-			<tr align="right" style="font-size: 14px;">
-				<td><b><?php echo Yii::t('OrdersModule.admin','Сумма заказа') ?>:</b></td>
-				<td><span id="orderTotalPrice"><?php echo StoreProduct::formatPrice($model->total_price) ?></span><?php echo Yii::app()->currency->main->symbol ?></td>
-			</tr>
 			<tr align="right">
 				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость открытки') ?>:</b></td>
 				<td><span id="orderCardPrice"><?php echo StoreProduct::formatPrice($model->card_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
@@ -124,8 +121,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость фото') ?>:</b></td>
 				<td><span id="orderPhotoPrice"><?php echo StoreProduct::formatPrice($model->photo_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
 			</tr>
+			<!--<tr align="right" style="font-size: 14px;">
+				<td><b><?php  //echo Yii::t('OrdersModule.admin','Сумма товаров без учета доставки') ?>:</b></td>
+				<td><span id="orderTotalPrice"><?php //echo StoreProduct::formatPrice($model->total_price) ?></span><?php //echo Yii::app()->currency->main->symbol ?></td>
+			</tr>
 			
-			<!--<tr align="right">
+			<tr align="right">
 				<td><b><?php//echo Yii::t('OrdersModule.admin','Сумма скидки') ?>:</b></td>
 				<td><span id="orderTotalPrice"><?php// echo StoreProduct::formatPrice($model->discount_price) ?></span><?php// echo Yii::app()->currency->main->symbol ?></td>
 			</tr>
