@@ -1,5 +1,6 @@
 -- 2017-06-26:
 ALTER TABLE `StoreAttributeTranslate` ADD `header` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `title`;
+ALTER TABLE `StoreProductVariant` ADD `default` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `sku`;
 -- ==============
 
 -- 2017-06-20:
