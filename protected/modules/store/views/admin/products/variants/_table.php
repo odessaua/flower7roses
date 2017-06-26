@@ -89,7 +89,7 @@
 				<input type="text" name="variants[<?php echo $attribute->id ?>][sku][]" value="<?php echo $o->sku ?>">
 			</td>
 			<td> 
-				<input type="radio" class="default" name="default" value="<?=$o->option->id?>" style="margin-left: 40px;" />
+				<input type="radio" class="default" name="default" value="<?=$o->option->id?>" style="margin-left: 40px;" <?= ($o->default > 0) ? 'checked="checked"' : ''; ?> />
 			</td>
 			<td>
 				<a href="#" onclick="return deleteVariantRow($(this));">Удалить</a>

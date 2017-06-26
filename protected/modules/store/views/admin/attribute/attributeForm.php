@@ -8,16 +8,19 @@ return array(
 			'type'=>'form',
 			'title'=>Yii::t('StoreModule.admin', 'Параметры'),
 			'elements'=>array(
-				'title'=>array(
-					'type'=>'text',
-				),
-				'name'=>array(
-					'type'=>'text',
-					'hint'=>Yii::t('StoreModule.admin', 'Укажите уникальный идентификатор')
-				),
-					'required'=>array(
-						'type'=>'checkbox',
-					),
+                'name'=>array(
+                    'type'=>'text',
+                    'hint'=>Yii::t('StoreModule.admin', 'Укажите уникальный идентификатор')
+                ),
+                'header'=>array(
+                    'type'=>'text',
+                ),
+                'title'=>array(
+                    'type'=>'text',
+                ),
+                'required'=>array(
+                    'type'=>'checkbox',
+                ),
 				'type'=>array(
 					'type'=>'dropdownlist',
 					'items'=>StoreAttribute::getTypesList()

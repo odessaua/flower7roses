@@ -193,7 +193,12 @@ echo '<ul class="breadcrumbs">
     <h1 class="page-title"><?php echo Yii::t('OrdersModule.core','Your order')?></h1>
 
     <div class="cart2 g-clearfix">
-        
+        <style>
+            .req{
+                color: red;
+                margin-right: 3px;
+            }
+        </style>
         
             <?php echo CHtml::errorSummary($this->form); ?>
             
@@ -201,22 +206,23 @@ echo '<ul class="breadcrumbs">
             <div class="data-form">
                 <b class="title"><?=Yii::t('OrdersModule.core','Recipient details:')?></b>
                 <div class="s2">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Recipient name:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Recipient name:')?></span>
                     <?php echo CHtml::activeTextField($this->form,'receiver_name'); ?>
                     <?php echo CHtml::error($this->form,'receiver_name'); ?>
                 </div>
                 <div class="s1">
-                    <div class="sort sort-reg">           
+                    <?php /*div class="sort sort-reg">
                         <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php'); ?>
-                    </div>
+                    </div*/?>
+                    <?php $this->renderPartial('_cities'); ?>
                 </div>
                 <div class="s2">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Delivery to address:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Delivery to address:')?></span>
                     <?php echo CHtml::activeTextArea($this->form,'address'); ?>
                     <?php echo CHtml::error($this->form,'address'); ?>
                 </div>
                 <div class="s1">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Phone &#8470;1:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Phone &#8470;1:')?></span>
                     <?php echo CHtml::activeTextField($this->form,'phone1'); ?>
                     <?php echo CHtml::error($this->form,'phone1'); ?>
                 </div>
@@ -226,7 +232,7 @@ echo '<ul class="breadcrumbs">
                     <?php echo CHtml::error($this->form,'phone2'); ?>
                 </div>
                 <div class="s1">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Delivery Date:')?> </span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Delivery Date:')?> </span>
                     
                     <?php $lang="ru";
                             if(Yii::app()->language=='en')
@@ -282,27 +288,27 @@ echo '<ul class="breadcrumbs">
             <div class="data-form">
                 <b class="title"><?=Yii::t('OrdersModule.core','Your contact information:')?></b>
                 <div class="s2">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Your full name:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Your full name:')?></span>
                     <?php echo CHtml::activeTextField($this->form,'name'); ?>
                     <?php echo CHtml::error($this->form,'name'); ?>
                 </div>
                 <div class="s1">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Country:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Country:')?></span>
                     <?php echo CHtml::activeTextField($this->form,'country'); ?>
                     <?php echo CHtml::error($this->form,'country'); ?>
                 </div>
                 <div class="s1">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','City:')?></span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','City:')?></span>
                     <?php echo CHtml::activeTextField($this->form,'city'); ?>
                     <?php echo CHtml::error($this->form,'city'); ?>
                 </div>
                 <div class="s2">
-                    <span class="input-title">*E-mail:</span>
+                    <span class="input-title"><span class="req">*</span>E-mail:</span>
                     <?php echo CHtml::activeTextField($this->form,'email'); ?>
                     <?php echo CHtml::error($this->form,'email'); ?>
                 </div>
                 <div class="s2">
-                    <span class="input-title">*<?=Yii::t('OrdersModule.core','Phone')?>:</span>
+                    <span class="input-title"><span class="req">*</span><?=Yii::t('OrdersModule.core','Phone')?>:</span>
                     <?php echo CHtml::activeTextField($this->form,'phone'); ?>
                     <?php echo CHtml::error($this->form,'phone'); ?>
                 </div>

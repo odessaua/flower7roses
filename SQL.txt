@@ -1,3 +1,7 @@
+-- 2017-06-26:
+ALTER TABLE `StoreAttributeTranslate` ADD `header` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `title`;
+-- ==============
+
 -- 2017-06-20:
 CREATE TABLE `cityAlias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

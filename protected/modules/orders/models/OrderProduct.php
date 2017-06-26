@@ -176,7 +176,7 @@ public static function getProducts($prod, $lang = 0){
 		if(!empty($variants))
 		{
 			foreach($variants as $key=>$value)
-				$result .= "<br/>{$value}";
+				$result .= "<p>{$value} {$key}</p>";
 		}
 
 		return $result;

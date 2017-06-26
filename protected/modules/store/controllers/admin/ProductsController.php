@@ -365,6 +365,17 @@ class ProductsController extends SAdminController
 					if(!$variant)
 						$variant = new StoreProductVariant;
 
+					// default - если Админ не указал дефолтный вариант – устанавливаем первый вариант в качестве дефолтного
+                    $default = (empty($_POST['default']) && ($i == 0)) ? $option_id : $_POST['default'];
+                    // изменяем стоимость товара согласно дефолтному варианту – если у этого варианта указана цена
+                    if(($default == $option_id) && !empty($values['price'][$i])){
+                        // если цена дефолтного варианта отличается от цены товара
+                        // тогда меняем цену товара на цену дефолтного варианта
+                        if($values['price'][$i] != $model->price){
+                            $model->price = $values['price'][$i];
+                        }
+                    }
+
 					$variant->setAttributes(array(
 						'attribute_id' => $attribute_id,
 						'option_id'    => $option_id,
@@ -372,6 +383,7 @@ class ProductsController extends SAdminController
 						'price'        => $values['price'][$i],
 						'price_type'   => $values['price_type'][$i],
 						'sku'          => $values['sku'][$i],
+                        'default'      => ($default == $option_id) ? 1 : 0,
 					), false);
 
 					$variant->save(false);

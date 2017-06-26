@@ -68,7 +68,17 @@ class FrontProductController extends Controller
 					'limit' => 3
 				)
 			);
+		// дополнительные изображения товара
         $additional_images = Image::model()->findAllByAttributes(array('product_id' => $model->id));
+        // варианты товара
+        $variants = Yii::app()->db->createCommand()
+            ->select('spv.id AS variant_id, spv.attribute_id, spv.option_id, spv.price AS spv_price, spv.default, sat.title AS attr_title, sat.header AS attr_header, saot.value AS opt_value')
+            ->from('StoreProductVariant spv')
+            ->join('StoreAttributeTranslate sat', 'sat.object_id = spv.attribute_id AND sat.language_id = ' . (int)$langArray->id)
+            ->join('StoreAttributeOptionTranslate saot', 'saot.object_id = spv.option_id AND saot.language_id = ' . (int)$langArray->id)
+            ->where('spv.product_id = :pid', array(':pid' => $model->id))
+            ->queryAll();
+
 		$this->render($view, array(
 			'model' => $model,
 			'photos' =>$photos,
@@ -79,6 +89,7 @@ class FrontProductController extends Controller
     		),
             'langArray' => $langArray,
             'additional_images' => $additional_images,
+            'variants' => $variants,
 		));
 	}
 

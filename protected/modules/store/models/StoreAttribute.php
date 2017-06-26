@@ -9,6 +9,7 @@ Yii::import('application.modules.store.models.StoreAttributeTranslate');
  * @property integer $id
  * @property string $name
  * @property string $title
+ * @property string $header
  * @property integer $type
  * @property boolean $display_on_front
  * @property integer $position
@@ -34,6 +35,11 @@ class StoreAttribute extends BaseModel
 	 * @var string attr name
 	 */
 	public $title;
+
+    /**
+     * @var string attr header
+     */
+    public $header;
 
 	/**
 	 * @var string
@@ -64,7 +70,7 @@ class StoreAttribute extends BaseModel
 	public function rules()
 	{
 		return array(
-			array('name, title', 'required'),
+			array('name, header', 'required'),
 			array('required', 'boolean'),
 			array('name', 'unique'),
 			array('use_in_compare, use_in_filter, select_many, display_on_front, use_in_variants', 'boolean'),
@@ -73,7 +79,7 @@ class StoreAttribute extends BaseModel
 				'message'=>Yii::t('StoreModule.core', 'Название может содержать только буквы, цифры и подчеркивания.')
 			),
 			array('type, position', 'numerical', 'integerOnly'=>true),
-			array('name, title', 'length', 'max'=>255),
+			array('name, title, header', 'length', 'max'=>255),
 			array('id, name, title, type', 'safe', 'on'=>'search'),
 		);
 	}
@@ -113,7 +119,8 @@ class StoreAttribute extends BaseModel
 				'class'=>'ext.behaviors.STranslateBehavior',
 				'relationName'=>'attr_translate',
 				'translateAttributes'=>array(
-					'title'
+					'title',
+                    'header'
 				),
 			));
 	}
@@ -139,7 +146,8 @@ class StoreAttribute extends BaseModel
 		return array(
 			'id'               => 'ID',
 			'name'             => Yii::t('StoreModule.core', 'Идентификатор'),
-			'title'            => Yii::t('StoreModule.core', 'Название'),
+			'title'            => Yii::t('StoreModule.core', 'Единица товара'),
+			'header'           => Yii::t('StoreModule.core', 'Заголовок на странице товара'),
 			'type'             => Yii::t('StoreModule.core', 'Тип'),
 			'display_on_front' => Yii::t('StoreModule.core', 'Отображать на странице продукта'),
 			'position'         => Yii::t('StoreModule.core', 'Позиция'),

@@ -4,6 +4,7 @@
  * @var StoreProduct $model
  * @var $this Controller
  * @var $additional_images
+ * @var $variants
  */
 // error_reporting(E_ALL);
 // ini_set('display_errors', '1');
@@ -142,11 +143,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 						}
 						
 	                    ?>
-	                    
-	                    <?php if($model->type_id == 1):?>
-	                    	<?php $this->renderPartial('_configurations', array('model'=>$model)); ?>
-	                    <?php endif;?>
-	                    
+
+                    <?php if(!empty($variants)): // новые варианты товаров ?>
+                        <?php $this->renderPartial('_variants', array('model'=>$model, 'variants'=>$variants)); ?>
+                    <?php endif;?>
 	                    
 	                    <div class="pp-price">
 	                        <div class="currency">
