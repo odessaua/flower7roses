@@ -60,7 +60,7 @@
 			<input type="text" name="variants[<?php echo $attribute->id ?>][sku][]">
 		</td>
 		<td> 
-			<input type="checkbox" name="default" value="" />
+			<input type="radio" class="default" name="default" value="" />
 		</td>
 		<td>
 			<a href="#" onclick="return deleteVariantRow($(this));">Удалить</a>
