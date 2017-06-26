@@ -53,17 +53,17 @@ if(!empty($variants)):
             border:1px solid darkgray;
             border-radius:50%;
             outline:none;
-            box-shadow:0 0 5px 0px gray inset;
+            box-shadow:0 0 3px 0px gray inset;
         }
         input[type='radio'].product-radio:hover {
-            box-shadow:0 0 5px 0px orange inset;
+            box-shadow:0 0 5px 0px white inset;
         }
         input[type='radio'].product-radio:before {
             content:'';
             display:block;
-            width:60%;
-            height:60%;
-            margin: 20% auto;
+            width:50%;
+            height:50%;
+            margin: 25% auto;
             border-radius:50%;
         }
         input[type='radio'].product-radio:checked:before {
@@ -112,10 +112,10 @@ if(!empty($variants)):
     <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/select2.min.js"></script>
     <style>
         .select2-container--default .select2-selection--single {
-            border-color: #af3583;
+            border-color: #dcb2c7;
         }
         .select2-container--default .select2-selection--single .select2-selection__arrow b {
-            border-color: #af3583 transparent transparent transparent;
+            border-color: #000 transparent transparent transparent;
         }
     </style>
     <script type="text/javascript">
