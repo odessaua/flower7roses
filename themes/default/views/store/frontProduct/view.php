@@ -86,7 +86,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	        <div class="g-clearfix">
 <!-- Additional images -->
             <?php if(!empty($additional_images)): ?>
-            <div style="width: 100px; float: left;">
+            <div style="width: 60px; float: left;">
                 <?php
                 $hide_add_images = ' style="display: none;"';
                 $add_images_limit = 3; // 4 real
@@ -127,7 +127,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	            </div>
 	            <div class="pp-right">
 	                <?php echo CHtml::form(array('/orders/cart/add'))?>
-					<div class="article"><?=Yii::t('StoreModule.core','Vendor code:')?> <span><?=$model->id?></span></div>
+					<div class="article"><?=Yii::t('StoreModule.core','Product code:')?> <span><?=$model->id?></span></div>
 	                    <h1 class="page-title"><?php echo CHtml::encode($model->name); ?></h1>
 	                    <div class="pp-price">
 	                        <div class="currency">

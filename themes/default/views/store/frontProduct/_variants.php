@@ -30,6 +30,7 @@ if(!empty($variants)):
 
     <style>
         .pvb-radio-item{
+			width:50%;
             margin-bottom: 5px;
             clear: both;
         }

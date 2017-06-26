@@ -25,7 +25,7 @@
         'No results'=>'Немає результатів',
         'The last photo of the bouquet deliveries'=>'Последнее фото доставок этого букета',
         'All photos'=>"Усі фото",
-        'Vendor code:'=>'Артикул:',
+        'Product code:'=>'Артикул:',
         'Show prices in'=>'Показувати ціни в',
         'Assortment depends on the city'=>'Асортимент залежить від міста',
         'Report appearance'=>'Повідомити про появу',
