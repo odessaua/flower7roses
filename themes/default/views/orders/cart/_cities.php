@@ -15,7 +15,7 @@ $citiesList = Yii::app()->db->createCommand()
     ->order('name ASC')
     ->queryAll();
 // текущий город из сессиии
-$currentCity = Yii::app()->session['_city'];
+$currentCity = (!empty(Yii::app()->session['_city'])) ? Yii::app()->session['_city'] : Yii::t('main','Kyiv');
 
 if(!empty($citiesList)):
 ?>
