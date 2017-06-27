@@ -3074,3 +3074,6 @@ span.support-hover::before {
 	100% { opacity:100%; }
 }
 
+*:focus {
+  outline: none;
+}
