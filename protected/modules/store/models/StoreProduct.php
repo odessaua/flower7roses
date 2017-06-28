@@ -291,7 +291,7 @@ class StoreProduct extends BaseModel
 			'id'                     => 'ID',
 			'manufacturer_id'        => Yii::t('StoreModule.core', 'Производитель'),
 			'type_id'                => Yii::t('StoreModule.core', 'Тип'),
-			'sort'					 => Yii::t('StoreModule.core','Порядок отображения'),
+			'sort'					 => Yii::t('StoreModule.core', 'Порядок отображения'),
 			'use_configurations'     => Yii::t('StoreModule.core', 'Использовать конфигурации'),
 			'name'                   => Yii::t('StoreModule.core', 'Название'),
 			'url'                    => Yii::t('StoreModule.core', 'URL'),
@@ -792,9 +792,9 @@ class StoreProduct extends BaseModel
 		$symbol    = Yii::app()->currency->active->symbol;
 
 		if($this->use_configurations && $max_price > 0)
-			return self::formatPrice($price).' '.$symbol.' - '.self::formatPrice($max_price).' '.$symbol;
+			return $symbol.self::formatPrice($price).' - '.$symbol.self::formatPrice($max_price);
 
-		return self::formatPrice($price).' '.$symbol;
+		return $symbol.self::formatPrice($price);
 	}
 
 	/**

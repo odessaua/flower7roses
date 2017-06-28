@@ -34,10 +34,10 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
     	<?php
         if($data->mainImage) {
             $imgSource = $data->mainImage->getUrl('135x19950');
-            if(!file_exists('./' . $imgSource)) $imgSource = 'http://placehold.it/135x199/ffffff?text=7Roses';
+            if(!file_exists('./' . $imgSource)) $imgSource = 'https://placehold.it/135x199/ffffff?text=7Roses';
         }
         else
-            $imgSource = 'http://placehold.it/135x199/ffffff?text=7Roses';
+            $imgSource = 'https://placehold.it/135x199/ffffff?text=7Roses';
 		echo CHtml::link(CHtml::image($imgSource, $img_alt, array('title' => $img_title)), $product_url, array('rel'=>'nofollow'));
 		?>
     </div>

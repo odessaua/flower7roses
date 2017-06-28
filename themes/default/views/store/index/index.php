@@ -25,7 +25,7 @@ else{
                         <?php foreach ($slider as $one) { ?>
                             <li>
                                 <a href="<?= Yii::app()->createUrl($one['url']); ?>" title="<?=$one['name']?>">
-                                    <img width="812" height="282" src="<?= '/uploads/slider/'.$one['photo'] ?>" alt=""/>
+                                    <img width="812" height="282" src="<?= '/uploads/slider/'.$one['photo'] ?>" alt="<?=$one['name']?>"/>
                                 </a>
                             </li>
                         <?php } ?>
@@ -76,8 +76,8 @@ else{
         <?php $baner=  SSystemBaner::model()->findAll();?>
 	<div class="col-22">
 	    <div class="action">
-	        <a href="<?= Yii::app()->createUrl($baner[2]['url']); ?>" title="">
-	            <img width="218" heigth="282" src="<?='/uploads/baners/'.$baner[2]['photo']?>" alt="Banner" />
+	        <a href="<?= Yii::app()->createUrl($baner[2]['url']); ?>" title="<?=$baner[2]['name']?>">
+	            <img width="218" heigth="282" src="<?='/uploads/baners/'.$baner[2]['photo']?>" alt="<?=$baner[2]['url']?> Banner" />
 	        </a>
 	    </div>
 
@@ -89,7 +89,7 @@ else{
 	            <li>
 	            	
 	                <div class="visual">
-	                    <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/avatar01.jpg" alt=""/>
+	                    <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/avatar01.jpg" alt="Reviews"/>
 	                </div>
 	                <div class="info">
 	                    <div class="name"><?=$value['name']?></div>
@@ -108,9 +108,9 @@ else{
 	    <div class="b-socials">
 	        <h3 class="title"><?=Yii::t('main','We are in social networks')?></h3>
 	        <div>
-	            <a class="fb" href="#" title="Facebook"></a>
-	            <a class="go" href="https://plus.google.com/u/1/109628640430677109024" title="Google+"></a>
-	            <a class="ok" href="#" title="Одноклассники"></a>
+			<a class="go" href="https://plus.google.com/u/1/109628640430677109024" title="Google+"></a>
+	             <!--<a class="fb" href="#" title="Facebook"></a>	            
+	            <a class="ok" href="#" title="Одноклассники"></a>-->
 	        </div>
 	    </div>
 	    <!-- b-socials (end) -->

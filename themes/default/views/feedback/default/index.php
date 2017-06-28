@@ -67,8 +67,8 @@ $this->pageTitle = Yii::t('FeedbackModule.core', 'Feedback');
     </div>
 </div>
 <div class="contacts" style="float: right;">
-    <h3><?=Yii::t('FeedbackModule.core','Office opening hours')?>:</h3><br><table cellpadding=5><tr><td><?=Yii::t('FeedbackModule.core','<b>Mon</b> - <b>Sat</b>')?></td><td> 08:00-18:00 (UTC+2)</td></tr>
-    <tr><td><?=Yii::t('FeedbackModule.core','<b>Sunday</b>')?></td><td> 09:00-17:00 (UTC+2)</td></tr></table>
+    <h3><?=Yii::t('FeedbackModule.core','Office opening hours')?>:</h3><br><table cellpadding=5><tr><td><?=Yii::t('FeedbackModule.core','<strong>Mon</strong> - <strong>Sat</strong>')?></td><td> 08:00-18:00 (UTC+2)</td></tr>
+    <tr><td><?=Yii::t('FeedbackModule.core','<strongstrong>Sunday</strong>')?></td><td> 09:00-17:00 (UTC+2)</td></tr></table>
     <script type="text/javascript">
 
     //var currenttime = '<!--#config timefmt="%B %d, %Y %H:%M:%S"--><!--#echo var="DATE_LOCAL" -->' //SSI method of getting server date

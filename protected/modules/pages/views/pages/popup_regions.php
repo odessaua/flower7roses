@@ -69,6 +69,7 @@ if(!$popup)
 		),
 		'htmlOptions' => array(
 			'placeholder'=>Yii::t('main','Enter the city of delivery'),
+			'title' => Yii::t('main','Recipient City'),
 		),
 	));
 	?>

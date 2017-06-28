@@ -88,7 +88,7 @@ if(!empty($variants)):
                 <?= $variant['opt_value']; ?> <?= $variant['attr_title']; ?>
             </span>
             <span class="pvb-radio-item-price">
-                <?= $variantPrice . ' ' . Yii::app()->currency->active->symbol; ?>
+                <?= Yii::app()->currency->active->symbol.$variantPrice; ?>
             </span>
         </label>
     </div>
@@ -142,7 +142,7 @@ if(!empty($variants)):
         }
         $variantPrice = StoreProduct::formatPrice(Yii::app()->currency->convert($variant['spv_price']));
         ?>
-        <option value="<?= $variant['variant_id']; ?>" <?=$checked; ?>><?= $variant['opt_value'] . ' ' . $variant['attr_title'] . str_repeat('&nbsp;', 10) . $variantPrice . ' ' . Yii::app()->currency->active->symbol; ?></option>
+        <option value="<?= $variant['variant_id']; ?>" <?=$checked; ?>><?= $variant['opt_value'] . ' ' . $variant['attr_title'] . str_repeat('&nbsp;', 10) .Yii::app()->currency->active->symbol. $variantPrice; ?></option>
     <?php endforeach; ?>
     </select>
 

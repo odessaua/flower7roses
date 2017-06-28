@@ -89,7 +89,7 @@ echo '<ul class="breadcrumbs">
                 <tr>
                     <td colspan="6">
                         <div class="total"><?php echo Yii::t('OrdersModule.core','Total')?> 
-                            <span class="price" id="total"><?php echo StoreProduct::formatPrice($totalPrice) ?> <?php echo Yii::app()->currency->active->symbol ?></span>
+                            <span class="price" id="total"><?php echo Yii::app()->currency->active->symbol ?><?php echo StoreProduct::formatPrice($totalPrice) ?> </span>
                         </div>
                         <button class="btn-green btn-to-buy recount" name="recount" type="submit" value="1"><?php echo Yii::t('OrdersModule.core','Recalculate')?></button>
                         <input class="btn-green btn-to-buy btntostep2" type="submit" id="goStep2" value="<?php echo Yii::t('OrdersModule.core','Order')?>"/>
@@ -127,8 +127,9 @@ echo '<ul class="breadcrumbs">
                         ?>
                         <div class="price">
                             <?php $price = StoreProduct::calculatePrices($product['model'], $product['variant_models'], $product['configurable_id']);
+							echo Yii::app()->currency->active->symbol;
                             echo StoreProduct::formatPrice(Yii::app()->currency->convert($price));
-                            echo ' '.Yii::app()->currency->active->symbol;
+                            
                             ?>
                         </div>
                     </td>
@@ -138,8 +139,9 @@ echo '<ul class="breadcrumbs">
                     <td>
                         <div class="price">
                         <?php
+						echo Yii::app()->currency->active->symbol;
                         echo StoreProduct::formatPrice(Yii::app()->currency->convert($price * $product['quantity']));
-                        echo ' '.Yii::app()->currency->active->symbol;
+                        
                         ?>
                         </div>
                     </td>

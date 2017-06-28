@@ -253,7 +253,7 @@ funds to a TransferWise account first and then they send the payment to Varetska
 <form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="M5BMF2Y4XWPBC">
-<input type="image" src="http://7roses.com.ua/uploads/payment-paypal.jpg" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<input type="image" src="/uploads/payment-paypal.jpg" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 <form class="portmone" action="https://www.portmone.com.ua/gateway/" method="post" name="paymentform">
@@ -261,8 +261,8 @@ funds to a TransferWise account first and then they send the payment to Varetska
     <input type="hidden" name="shop_order_number" value="<?=$model->id?>">
     <input type="hidden" name="bill_amount" value="<?=$model->full_price*$rate?>">
     <input type="hidden" name="description" value="ATTENTION! Amount above is given in Ukraine currency calculated automatically according to the current rate of the Ukraine National Bank">
-    <input type="hidden" name="success_url" value="http://7roses.com/cart/view/<?=$model->secret_key?>/success/">
-    <input type="hidden" name="failure_url" value="http://www.7roses.com/">
+    <input type="hidden" name="success_url" value="https://7roses.com/cart/view/<?=$model->secret_key?>/success/">
+    <input type="hidden" name="failure_url" value="https://7roses.com/">
     <INPUT TYPE="hidden" NAME="lang" VALUE="<?=Yii::app()->language?>">
     <input type="hidden" name="encoding" value="UTF-8" /> 
     <image width="282" height="100" src='/uploads/image.jpg' />
@@ -312,11 +312,11 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
                 clientEmail : "<?=$model->user_email;?>",
                 clientPhone: "<?=(!empty($model->user_phone)) ? $model->user_phone : '380631234567';?>",
                 language: "<?=strtoupper(Yii::app()->language);?>",
-                returnUrl: "http://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/"
+                returnUrl: "https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/"
             },
             function (response) {
                 // on approved
-                document.location.href = "http://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/";
+                document.location.href = "https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/";
                 //console.log('Approved: '+response);
             },
             function (response) {
@@ -365,8 +365,8 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
         <input type="hidden" name="clientLastName" value=".">
         <input type="hidden" name="clientPhone" value="<?=(!empty($model->user_phone)) ? $model->user_phone : '380631234567';?>">
         <input type="hidden" name="clientEmail" value="<?=$model->user_email;?>">
-        <input type="hidden" name="returnUrl" value="http://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/">
-        <input type="hidden" name="serviceUrl" value="http://<?=$_SERVER['HTTP_HOST'];?>/site/wfpresponse">
+        <input type="hidden" name="returnUrl" value="https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/">
+        <input type="hidden" name="serviceUrl" value="https://<?=$_SERVER['HTTP_HOST'];?>/site/wfpresponse">
         <input type="hidden" name="language" value="<?=strtoupper(Yii::app()->language);?>">
         <button type="submit" style="visibility: hidden;" class="btn btn-special btn-color">Оплатить</button>
     </form>

@@ -33,9 +33,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
-	<link rel="alternate" type="text/html" hreflang="en" href="http://7roses.com/" title="English"/>
-	<link rel="alternate" type="text/html" hreflang="ru" href="http://7roses.com/ru" title="Русский"/>
-	<link rel="alternate" type="text/html" hreflang="uk" href="http://7roses.com/uk" title="Українська"/>
+	<link rel="alternate" type="text/html" hreflang="en" href="https://7roses.com/" title="English"/>
+	<link rel="alternate" type="text/html" hreflang="ru" href="https://7roses.com/ru" title="Русский"/>
+	<link rel="alternate" type="text/html" hreflang="uk" href="https://7roses.com/uk" title="Українська"/>
 </head>
 <body>
 
@@ -80,11 +80,11 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 					     ),
 					)); ?>
                         <div class="userdata">
-                        	<?php echo $form->textField($model,'username', array('placeholder'=>Yii::t('main',"Login"))); ?>
+                        	<?php echo $form->textField($model,'username', array('placeholder'=>Yii::t('main',"Login"),'title'=>Yii::t('main',"Login"))); ?>
                         	<?php echo $form->error($model,'username'); ?>
                         </div>
                         <div class="userdata">
-                            <?php echo $form->passwordField($model,'password',array('placeholder'=>Yii::t('main',"Password"))); ?>
+                            <?php echo $form->passwordField($model,'password',array('placeholder'=>Yii::t('main',"Password"),'title'=>Yii::t('main',"Password"))); ?>
                             <?php echo $form->error($model,'password'); ?>
                         </div>
                         <div class="permanent">
@@ -92,7 +92,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                             <?php echo CHtml::activeCheckBox($model,'rememberMe', array('id'=>'to-remember')); ?>
                             <label for="to-remember"><?=Yii::t('main',"Remember me")?></label>
                         </div>
-                        <input class="btn-purple enter-btn" type="submit" value="Войти" />
+                        <input class="btn-purple enter-btn" type="submit" value="Enter" />
                     <?php $this->endWidget(); ?>
                 </div>
                 
@@ -108,7 +108,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <li><a title="About Delivery" href="<?=Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main',"About Delivery")?></a></li>
                 <li><a title="Terms and Conditions" href="<?=Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main',"Terms&Conditions")?></a></li>
                 <li><a title="Contacts" href="<?=Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t("main", "Contacts")?></a></li>
-				<li><a title="Old website version" href="http://old.7roses.com"><span style="color:red; font-weight:bold;"><?=Yii::t("main", "View old version")?></span></a></li>
+				<li><a title="Old website version" href="http://old.7roses.com"><span style="color:#e72574; font-weight:bold;"><?=Yii::t("main", "View old version")?></span></a></li>
             </ul>
             
         </div>
@@ -155,7 +155,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
             <div class="search-form">
                 <span><?=Yii::t('main','Site search')?></span>
                 <?php echo CHtml::form($this->createUrl('/store/category/search')) ?>
-	                <input class="search-field" type="text" placeholder="<?=Yii::t('main','Use keywords to find')?>" name="q" id="searchQuery">
+	                <input class="search-field" type="text" placeholder="<?=Yii::t('main','Use keywords to find')?>" name="q" id="searchQuery" title="Site search">
 	                <input class="btn-purple" type="submit" value="<?=Yii::t('main','Search')?>">
                 <?php echo CHtml::endForm() ?>
             </div>
@@ -441,7 +441,6 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 	   	</div>
 	    
 	    <div class="reg">
-		    <div class="reg-title"><?=Yii::t('main','Delivery')?>:</div>
 		    <div class="reg-sorts">
 		        <div class="sort sort-reg">
 		            <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php', array('popup'=>'city-popup')); ?>
