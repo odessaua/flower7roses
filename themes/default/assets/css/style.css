@@ -1,4 +1,5 @@
 	/* reset css (begin) */
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic);
 html,
 body,
 ol,
@@ -124,7 +125,7 @@ dd {
 }
 .text {
   line-height: 20px;
-  font-size:16px;
+  font-size:14px;
   font-family: "PT Sans", sans-serif;
   text-indent: 0.6em; /* Отступ первой строки */
   text-align: justify; /* Выравнивание по ширине */
