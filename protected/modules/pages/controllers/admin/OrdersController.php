@@ -131,6 +131,7 @@ class OrdersController extends SAdminController {
 		$total=0;
 		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
 		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$card_transl=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
 		$citys=City::model()->findAll();
 		$photos=array();
 		if(isset($getPhotos)){
@@ -145,6 +146,7 @@ class OrdersController extends SAdminController {
 			// var_dump( $_POST['Order']);die;
 			$model->total_price+=isset($model->photo_price)?$model->photo_price:0;
 			$model->total_price+=isset($model->card_price)?$model->card_price:0;
+			$model->total_price+=isset($model->card_price)?$model->card_transl:0;
 			$city=Yii::app()->db->createCommand()
 				->select("*")
 				->from("city")

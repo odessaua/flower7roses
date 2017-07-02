@@ -164,8 +164,8 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 					</div>
 					<?php if(!$model->isNewRecord): ?>
 					<div class="row">
-							<?php echo CHtml::activeLabel($model,'not_disturb'); ?>
-							<?php echo CHtml::activeCheckBox($model, 'not_disturb',array('checked'=>$model->not_disturb?"1":"0")); ?>
+							<?php echo CHtml::activeLabel($model,'card_transl'); ?>
+							<?php echo CHtml::activeCheckBox($model, 'card_transl',array('checked'=>$model->card_transl?"1":"0")); ?>
 					</div>
 					
 					<div class="row">

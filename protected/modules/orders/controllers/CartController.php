@@ -4,7 +4,7 @@ Yii::import('orders.models.*');
 Yii::import('store.models.*');
  // ini_set('display_errors', 1);
  // ini_set('display_startup_errors', 1);
- // error_reporting(E_ALL);
+  error_reporting(E_ALL);
 /**
  * Cart controller
  * Display user cart and create new orders
@@ -12,6 +12,9 @@ Yii::import('store.models.*');
 class CartController extends Controller
 {
 
+		public $photoPrice; 
+		public $cardPrice;
+		public $translPrice;
 	/**
 	 * @var OrderCreateForm
 	 */
@@ -36,6 +39,7 @@ class CartController extends Controller
 		$symbol=Yii::app()->currency->active['symbol'];
 		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
 		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
 		
 
 
@@ -72,14 +76,15 @@ class CartController extends Controller
         }
 		$this->render('index', array(
 			'items'           => $items,
-			'delivery_price'=>$deliveryPrice['delivery'],
+			'delivery_price'  => Yii::app()->session['_delivery_price'],
 			'totalPrice'      => Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice()),
 			'deliveryMethods' => $deliveryMethods,
-			'photoPrice'=>$photoPrice,
-			'cardPrice'=>$cardPrice,
-			'rate'=>$rate,
-			'symbol'=>$symbol,
-            'popular' => $this->getMainPage(),
+			'photoPrice'	=> $photoPrice,
+			'cardPrice'		=> $cardPrice,
+			'translPrice'	=> $translPrice,
+			'rate'			=> $rate,
+			'symbol'		=> $symbol,
+            'popular' 		=> $this->getMainPage(),
 		));
 	}
 
@@ -103,8 +108,8 @@ class CartController extends Controller
 	{
 		$secret_key = Yii::app()->request->getParam('secret_key');
 		$model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
-		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
-		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+//	echo"<pre>"; print_r($model);
+
 		/*$deliveryPrice=Yii::app()->db->createCommand()
 							     ->select("c.delivery")
 							     ->from("city c")
@@ -127,10 +132,16 @@ class CartController extends Controller
 		if(!$model)
 			throw new CHttpException(404, Yii::t('OrdersModule.core', 'Error. Order not found'));
 		
+		// $photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
+		// $cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		// $translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
+		
+		// if(!empty($model->doPhoto)){$model->photo_price=$photoPrice;}
+		// if(!empty($model->do_card)){$model->card_price=$cardPrice;}
+		// if(!empty($model->card_transl)){$model->transl_price=$translPrice;}
+		$model->update();
 		$this->render('view', array(
 			'model'=>$model,
-			'photoPrice'=>$photoPrice,
-			'cardPrice'=>$cardPrice,
 			'rate'=>$rate,
 			'symbol'=>$symbol
 		));
@@ -139,16 +150,11 @@ class CartController extends Controller
 
 		$secret_key = Yii::app()->request->getParam('secret_key');
 		$model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
-		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
-		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
 		$deliveryPrice=Yii::app()->db->createCommand()
 							     ->select("c.delivery")
 							     ->from("city c")
 							     ->join('cityTranslate ct','ct.object_id=c.id')
 							     ->queryRow();
-		if(!empty($model->doPhoto)){$model->photo_price=$photoPrice;}
-		if(!empty($model->do_card)){$model->card_price=$cardPrice;}
-		$model->delivery_price=$deliveryPrice['delivery'];
 		$model->status_id=6;
 		$model->update();
 		$rate=Yii::app()->db->createCommand()
@@ -164,6 +170,7 @@ class CartController extends Controller
 				'model'=>$model,
 				'photoPrice'=>$photoPrice,
 				'cardPrice'=>$cardPrice,
+				'card_transl'=>$card_transl,
 				'rate'=>$rate,
 				'symbol'=>$symbol
 			));
@@ -187,11 +194,12 @@ class CartController extends Controller
 		
 		//if product isset in Region
 		$city = 908;
-		$cityName = "Киев";
+		$cityName = "Kyiv";
 		
 		if(isset(Yii::app()->session['_city']))
 		{
-			$cityName = Yii::app()->session['_city'];
+			$cityName 		= Yii::app()->session['_city'];
+			$deliveryPrice  = Yii::app()->session['_delivery_price'];
 			
 			$sql = "SELECT id FROM city WHERE name = :name";
 			$command =Yii::app()->db->createCommand($sql);
@@ -299,11 +307,19 @@ class CartController extends Controller
 
 		$order = new Order;
 		
-		if(isset(Yii::app()->session['_city']))
+		if(isset(Yii::app()->session['_city'])) 
+		{
 			$receiver_city = Yii::app()->session['_city'];
-		else
-			$receiver_city = "Киев";
-
+			$deliveryPrice  = Yii::app()->session['_delivery_price'];
+		}
+		else {
+				$receiver_city = "Kyiv";
+				$deliveryPrice = 10;  // стоимость доставки по умолчанию
+			 }
+		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
+		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
+		
 		// Set main data
 		$order->user_id      = Yii::app()->user->isGuest ? null : Yii::app()->user->id;
 		$order->user_name    = $this->form->name;
@@ -312,8 +328,7 @@ class CartController extends Controller
 		$order->user_email   = $this->form->email;
 		$order->user_phone   = $this->form->phone;
 		$order->user_address = $this->form->address;
-		$order->user_comment = $this->form->comment;
-		
+		$order->user_comment = $this->form->comment;		
 		$order->receiver_name = $this->form->receiver_name;
 		$order->receiver_city = $receiver_city;
 		$order->phone1 = $this->form->phone1;
@@ -322,17 +337,22 @@ class CartController extends Controller
 		$order->doPhoto = $this->form->doPhoto;
 		$order->do_card = $this->form->do_card;
 		$order->card_text = $this->form->card_text;
-		$order->not_disturb = $this->form->not_disturb;
+		$order->card_transl = $this->form->card_transl;
+		
+		if(!empty($order->doPhoto)){$order->photo_price=$photoPrice;}
+		if(!empty($order->do_card)){$order->card_price=$cardPrice;}
+		if(!empty($order->card_transl)){$order->transl_price=$translPrice;}
+
+		
 				
-		$deliveryPrice=Yii::app()->db->createCommand()
-							     ->select("c.delivery")
-							     ->from("city c")
-							     ->join('cityTranslate ct','ct.object_id=c.id')
-							     ->where('ct.name=:name', array(':name'=>$order->receiver_city))
-							     // ->where('ct.name=:name',':name'=>)_
-							     ->queryRow();								
-		if (empty($deliveryPrice)) $deliveryPrice['delivery'] = 10; // стоимость доставки по умолчанию
-		$order->delivery_price = $deliveryPrice['delivery'];
+		// $deliveryPrice=Yii::app()->db->createCommand()
+							     // ->select("c.delivery")
+							     // ->from("city c")
+							     // ->join('cityTranslate ct','ct.object_id=c.id')
+							     // ->where('ct.name=:name', array(':name'=>$order->receiver_city))
+							     // ->queryRow();								
+		//if (empty($deliveryPrice)) $deliveryPrice = 10; // стоимость доставки по умолчанию
+		$order->delivery_price = $deliveryPrice;
 
 		if($order->validate())
 			$order->save();
@@ -503,8 +523,8 @@ class CartController extends Controller
 		// $mailer->AddAddress('7roses.office@gmail.com');
 		$mailer->AddReplyTo($order->user_email);
 		//$mailer->AddReplyTo=Yii::app()->params['adminEmail']);
-		$mailer->isHtml(false);
-		$mailer->SetMessageType = 'plain';
+		$mailer->isHtml(true);
+		$mailer->SetMessageType = 'html';
 		$mailer->Send();
 		$mailer->ClearAddresses();
 		$mailer->ClearReplyTos();

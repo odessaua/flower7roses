@@ -3,6 +3,7 @@
  * Display cart
  * @var CartController $model
  */
+ $rate =Yii::app()->currency->active->rate;
 ?>
 <div>
 <!-- breadcrumbs (begin) -->
@@ -46,15 +47,15 @@
                <div class="paybutton"> <li>
                     <input type="radio" name="payment" id="payment4" checked />
                     <label for="payment4">
-                        <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment"  style="margin-right: 30px;"/></label>
-                        <span class="sort"><? echo StoreProduct::formatPrice($model->full_price*$rate); echo yii::t('OrdersModule.core',' &#8372;');?></span>
+                        <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" /></label>
+                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
                    <div class="help-tip"><p><strong>WayForPay</strong>: online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
                 </li>
 				<li>
                     <input type="radio" name="payment" id="payment1"/>
                     <label for="payment1">
-                        <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" style="margin-right: 30px;"/></label>
-                        <span class="sort"><? echo StoreProduct::formatPrice($model->full_price*$rate); echo yii::t('OrdersModule.core',' &#8372;');?></span> 
+                        <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment"  /></label>
+                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span> 
 </span>
                     <div class="help-tip"><p><strong>Portmone</strong></strong>:  online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
                 </li></div><br>
@@ -69,8 +70,8 @@
                 <div class="paybutton"><li>
                     <input type="radio" name="payment" id="payment3"/>
                     <label for="payment3">
-                        <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="" /></label>
-                        <span class="price"><?="&#36;". StoreProduct::formatPrice($model->full_price)?></span>
+                        <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="Transferwise money transfer" /></label>
+                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
 <div class="help-tip"><p><strong>TransferWise</strong></strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD<br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a></p></div>
                 </li></div>
                 
@@ -84,9 +85,9 @@
 $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForPay
 ?>
 		<div class="cart-table-result">
-		<table  cellpadding=5 border=1>
+		<table  cellpadding=8 border=1>
 		<tr>
-		<th colspan="3" bgcolor="#eaeae8"><div class="sub-title"><?=Yii::t('OrdersModule.core','Your order set:')?></div></th></tr>
+		<th colspan="3" bgcolor="#eaeae8"><div class="sub-title"><? echo Yii::t('OrdersModule.core','Your order number is: 	&#8470;').$model->id; ?></div></th></tr>
      
             <?php foreach($model->getOrderedProducts()->getData() as $product): ?>
                 <?php
@@ -95,42 +96,49 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                 $wfp_p_qtys[$product->product_id] = $product->quantity;
                 $wfp_p_prices[$product->product_id] = $product->price*$rate;
                 ?>
-                <tr><td width="85px">
+                <tr><td width="85px" align="center">
                     <div class="visual">
                         <?php
                         $pro_model = StoreProduct::model()->findByPk($product->product_id);
 						//var_dump ($product);
                         ?>
                         <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
-                            <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>"/>
+                            <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>" alt="<?=$product->getRenderFullName(false)?>"  title="<?=$product->getRenderFullName(false)?>"/>
                         </a>
                     </div></td><td>
-                    <div class="text">
+                    <div class="carttext">
                         <div class="name"><?php echo $product->getRenderFullName(false); ?></div>
                     </div>
-                </td><td width="35%"><span class="price"><?="&#36;".$product->price?></span></td></tr>
+                </td><td width="30%"><span class="price"><?=$symbol.StoreProduct::formatPrice($product->price*$rate)?></span></td></tr>
             <?php endforeach ?>
 			           			
             <?php if(!empty($model->do_card)) { ?>
-			<tr><td width="85px"><img src="/uploads/greeting-card.png" alt="Greeting Card" title="Greeting card" width=85 height=85 /></td>
-			<td><? echo Yii::t('OrdersModule.core','Greeting card')?></td>
-			<td width="25%"><span class="price"><?="&#36;".$cardPrice."</span></td></tr>"; }?>
+			<tr><td width="40px" align="center"><img src="/uploads/mark.png" alt="Greeting Card" title="Greeting card" width=24 height=24 /></td>
+			<?php if(!empty($model->card_transl)) 
+				{ 
+					$cardPrice = $model->card_price+$model->transl_price;
+					$translation = Yii::t('OrdersModule.core',' with translation'); 
+				} else { $cardPrice = $model->card_price; }
+				
+					?>		
 			
+			<td><div class="carttext"><? echo Yii::t('OrdersModule.core','Greeting card')?><? if(isset($translation)) echo $translation;?></div></td>
+			<td width="25%"><span class="price"><?=$symbol.StoreProduct::formatPrice($cardPrice*$rate)."</span></td></tr>"; }?>			
 			
             <?php if(!empty($model->doPhoto)){ ?>
-			<tr><td width="85px"><img src="/uploads/photo.png" alt="Photo delivery" title="Photo of the delivery" width=85 height=85 /></td>
-			<td><? echo Yii::t('OrdersModule.core','Photo of delivery')?></td>
-			<td width="25%"><span class="price"><?=" &#36;".$photoPrice."</span></td></tr>"; }?>	
+			<tr><td width="40px" align="center"><img src="/uploads/mark.png" alt="Photo of delivery" title="Photo of delivery" width=24 height=24 /></td>
+			<td><div class="carttext"><? echo Yii::t('OrdersModule.core','Photo of delivery')?></div></td>
+			<td width="25%"><span class="price"><?=$symbol.StoreProduct::formatPrice($model->photo_price*$rate)."</span></td></tr>"; }?>	
 			
             <tr>
-			<td width="85px"><img src="/uploads/delivery.png" alt="Delivery" title="Cost of the delivery" width=80 height=80 /></td>
-			<td><?echo Yii::t('OrdersModule.core','Delivery fee');?>	</td>		
-			<td width="25%"><span class="price"><?php $delivery=$model->delivery_price; if ($delivery=='0') echo "FREE"; else echo " &#36;" .StoreProduct::formatPrice($delivery)."</span></td></tr>";?>
+			<tr><td width="40px" align="center"><img src="/uploads/mark.png" alt="Delivery feeDelivery fee" title="Delivery fee" width=24 height=24 /></td>
+			<td><div class="carttext"><?echo Yii::t('OrdersModule.core','Delivery fee');?>	</div></td>		
+			<td width="25%"><span class="price"><?php $delivery=$model->delivery_price; if ($delivery=='0') echo "FREE"; else echo $symbol.StoreProduct::formatPrice($delivery*$rate)."</span></td></tr>";?>
 			
 			<tr>
-			<td width="85px"><img src="/uploads/sum.png" alt="Total sum" title="Total sum" width=80 height=80 /></td>
-			<td><?php echo Yii::t('OrdersModule.core','Total order sum');?></td>
-			<td width="25%"><div class="sum"><span class="price"><?echo "&#36;".StoreProduct::formatPrice($model->full_price)."</span>" ;?></div><span class="sort">(<? echo StoreProduct::formatPrice($model->full_price*$rate)." &#8372;"?>)</span>			
+			<td width="40px" align="center"><img src="/uploads/sum.png" alt="Total sum" title="Total sum" width=24 height=24 /></td>
+			<td><span class="total"><?php echo Yii::t('OrdersModule.core','Order Total');?></span></td>
+			<td width="25%"><div class="sum"><span class="price"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?></div>
 
 			</td></tr>
 			</table>

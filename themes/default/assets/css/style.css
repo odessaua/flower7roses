@@ -1573,7 +1573,7 @@ width: 15%;
 .s1 textarea,
 .s2 textarea,
 .s3 textarea {
-  height: 65px;
+  height: 80px;
 }
 .s1 textarea.big,
 .s2 textarea.big,
@@ -1624,7 +1624,7 @@ width: 15%;
 .s2 input[type="email"],
 .s2 textarea,
 .s2 select {
-  width: 445px;
+  width: 435px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -2045,6 +2045,10 @@ margin-top: 10px;
 }
 .payment-modal .content-text p {
   margin: 10px 0;
+}
+.carttext {
+	font-size: 14px;
+	
 }
 .cart-modal {
   width: 450px;
@@ -2535,9 +2539,11 @@ body:after {
   background: url(../img/delete.png) no-repeat 50% 50%;
 }
 .cart-table-result table {
-width: 480px;
+  width: 480px;
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
+  font-size:18px;
+  
 
 }
 .related-products {
@@ -2944,7 +2950,7 @@ div.flash_messages button.close:hover {
     font-size: 16px;
     text-align: center;
 }
-.all-cities{
+.all-cities {
 	color:#fe0208; 
 	font-weight:bold;
     font-size: 18px;

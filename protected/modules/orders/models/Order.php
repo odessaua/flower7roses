@@ -58,7 +58,7 @@ class Order extends BaseModel
 			array('user_name, user_email, discount', 'length', 'max'=>100),
 			array('user_phone', 'length', 'max'=>30),
 			array('user_email', 'email'),
-			array('payment_id, doPhoto,do_card, not_disturb', 'numerical', 'integerOnly'=>true),
+			array('payment_id, doPhoto,do_card, card_transl', 'numerical', 'integerOnly'=>true),
 			array('user_comment, admin_comment', 'length', 'max'=>500),
 			array('card_text', 'length', 'max'=>1500),
 			array('user_address, city, country, receiver_name, receiver_city, phone1, phone2, datetime_del', 'length', 'max'=>255),
@@ -134,11 +134,11 @@ class Order extends BaseModel
 			'phone2'		 => Yii::t('OrdersModule.core','Receiver Phone #2'),
 			'datetime_del'	 => Yii::t('OrdersModule.core','Delivery Date'),
 			'card_text'		 => Yii::t('OrdersModule.core','Card text'),
-			'doPhoto'		 => Yii::t('OrdersModule.core','Photo delivery'),
-			'not_disturb'	 => Yii::t('OrdersModule.core','Do not disturb'),
+			'doPhoto'		 => Yii::t('OrdersModule.core','Photo of the delivery'),
+			'card_transl'	 => Yii::t('OrdersModule.core','Card translation'),
 			'country'		 => Yii::t('OrdersModule.core','Sender Country'),
 			'city'			 => Yii::t('OrdersModule.core','Sender City'),
-			'do_card'		 => Yii::t('OrdersModule.core','Card'),
+			'do_card'		 => Yii::t('OrdersModule.core','Greeting Card'),
 			
 		);
 	}
@@ -220,9 +220,11 @@ class Order extends BaseModel
 			$this->total_price += $p->price * $p->quantity;
 		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
 		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$card_transl=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
 			
 		if($this->doPhoto==1){$this->total_price+=$photoPrice;}
 		if($this->do_card==1){$this->total_price+=$cardPrice;}
+		if($this->card_transl==1){$this->total_price+=$card_transl;}
 		$this->save(false);
 	}
 
@@ -261,6 +263,7 @@ class Order extends BaseModel
 			$result = $this->total_price;
 			$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
 			$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+			$card_transl=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
 			
 			// if($this->doPhoto==1){$this->total_price+=$photoPrice;}
 			// if($this->do_card==1){$this->total_price+=$cardPrice;}

@@ -142,7 +142,7 @@ class IndexController extends Controller
                 $lang = 'uk';
             $langArray = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
             $city_translations = CityTranslate::model()->findAllByAttributes(array('object_id' => $_GET['city_id']));
-            $city_name = '';
+            //$city_name = '';
             // название города с переводом
             if(!empty($city_translations)){
                 foreach ($city_translations as $city_t) {
@@ -155,15 +155,14 @@ class IndexController extends Controller
                 }
             }
             // название города без перевода
-            if(empty($city_name)){
+			
                 $city = City::model()->findByPk($_GET['city_id']);
-                if(!empty($city->name)){
-                    $city_name = $city->name;
-                }
-            }
+			
+			 //var_dump($_GET);
             // сохраняем в сессию
             if(!empty($city_name)){
                 Yii::app()->session['_city'] = $city_name;
+				Yii::app()->session['_delivery_price'] = $city->delivery;
             }
             $this->index_data['city_seo'] = $this->layout_params['city_address'] = 1;
         }

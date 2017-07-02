@@ -23,7 +23,7 @@ class OrderCreateForm extends CFormModel
 	public $doPhoto;
 	public $card_text;
 	public $phone1;
-	public $not_disturb;
+	public $card_transl;
 
 	public function init()
 	{
@@ -60,7 +60,7 @@ class OrderCreateForm extends CFormModel
 			array('address, city, receiver_city, datetime_delivery, country', 'length', 'max'=>'255'),
 			array('email', 'length', 'max'=>'100'),
 			array('phone, phone1, phone2', 'length', 'max'=>'30'),
-			array('doPhoto,do_card, not_disturb', 'numerical', 'integerOnly'=>true),
+			array('doPhoto,do_card, card_transl', 'numerical', 'integerOnly'=>true),
 		);
 	}
 

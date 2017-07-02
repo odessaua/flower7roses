@@ -6,7 +6,7 @@
   <p>Your order number is #<?=$order->id?>.</p>
 
   <p>
-    Please, check the details of your order here::<br>
+    You can check the status and details of your order here::<br>
    <a href="<?= $this->createAbsoluteUrl('view', array('secret_key'=>$order->secret_key)) ?>">
      <?= $this->createAbsoluteUrl('view', array('secret_key'=>$order->secret_key)) ?>
    </a>
@@ -20,8 +20,8 @@
     </ul>
     
     <p>
-      <b>Total to pay:</b>
-      <?=StoreProduct::formatPrice($order->total_price + $order->delivery_price)?> <?=Yii::app()->currency->main->symbol?>
+      <b>Total:</b>
+      <?=Yii::app()->currency->main->symbol?><?=StoreProduct::formatPrice($order->total_price + $order->delivery_price)?> <?=Yii::app()->currency->main->iso?>
     </p>
 
     <p>

@@ -258,32 +258,38 @@ echo '<ul class="breadcrumbs">
                     ?>
                     <?php echo CHtml::error($this->form,'datetime_delivery'); ?>
                 </div>
+				<div class="s2">
+                    <?php echo CHtml::activeCheckBox($this->form,'doPhoto'); ?>
+                    <label for="photo"><?=Yii::t('OrdersModule.core','Photo of the recipient:')." <span class='price'>".$symbol.StoreProduct::formatPrice($photoPrice*$rate)?></span></label>
+                </div>
+                 <div class="s2">
+                    <?php echo CHtml::activeCheckBox($this->form,'do_card'); ?>
+                    <label for="photo"><?=Yii::t('OrdersModule.core','Greeting card:')." <span class='price'>".$symbol.StoreProduct::formatPrice($cardPrice*$rate)?></span></label>
+                </div>
+				  <div class="s2">
+                    <span class="input-title"><?=Yii::t('OrdersModule.core','Greeting card text:')?></span>
+                    <?php echo CHtml::activeTextArea($this->form,'card_text'); ?>
+                    <?php echo CHtml::error($this->form,'card_text'); ?>
+                    <div class="tooltip" title="Greeting card text">
+                        <div class="tip-info"><?=Yii::t('OrdersModule.core','Please enter the message for you greeting card')?></div>
+                    </div>
+                </div>
+				<div class="s2">
+                    <?php echo CHtml::activeCheckBox($this->form,'card_transl'); ?>
+                    <label for="note"><?=Yii::t('OrdersModule.core','Please translate this message from English to Russian:')." <span class='price'>".$symbol.StoreProduct::formatPrice($translPrice*$rate)?></span></label>
+                </div>
 
                 <div class="s2">
                     <span class="input-title"><?=Yii::t('OrdersModule.core','Additional Information:')?></span>
                     <?php echo CHtml::activeTextArea($this->form,'comment'); ?>
                     <?php echo CHtml::error($this->form,'comment'); ?>
-                    <div class="tooltip" title="">
-                        <div class="tip-info"><?=Yii::t('OrdersModule.core','Additional Information:')?></div>
+                    <div class="tooltip" title="Additional info">
+                        <div class="tip-info"><?=Yii::t('OrdersModule.core','Please add information in case you have it')?></div>
                     </div>
                 </div>
-                 <div class="s2">
-                    <?php echo CHtml::activeCheckBox($this->form,'doPhoto'); ?>
-                    <label for="photo"><?=Yii::t('OrdersModule.core','Photo of the recipient:')." <span class='price'>".$photoPrice*$rate.$symbol?></span></label>
-                </div>
-                 <div class="s2">
-                    <?php echo CHtml::activeCheckBox($this->form,'do_card'); ?>
-                    <label for="photo"><?=Yii::t('OrdersModule.core','Greeting card:')." <span class='price'>".$cardPrice*$rate.$symbol?></span></label>
-                </div>
+                 
 
-                <div class="s2">
-                    <span class="input-title"><?=Yii::t('OrdersModule.core','Greeting card text:')?></span>
-                    <?php echo CHtml::activeTextArea($this->form,'card_text'); ?>
-                    <?php echo CHtml::error($this->form,'card_text'); ?>
-                    <div class="tooltip" title="">
-                        <div class="tip-info"><?=Yii::t('OrdersModule.core','Greeting card text:')?></div>
-                    </div>
-                </div>
+              
             </div>
             <!-- data-form (end) -->
             <!-- data-form (begin) -->
@@ -314,10 +320,7 @@ echo '<ul class="breadcrumbs">
                     <?php echo CHtml::activeTextField($this->form,'phone'); ?>
                     <?php echo CHtml::error($this->form,'phone'); ?>
                 </div>
-                <div class="s2">
-                    <?php echo CHtml::activeCheckBox($this->form,'not_disturb'); ?>
-                    <label for="note"><?=Yii::t('OrdersModule.core','Do not disturb')?></label>
-                </div>
+                
                 
                 
                 
