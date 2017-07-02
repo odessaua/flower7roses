@@ -44,21 +44,25 @@
             <b class="title"><?=yii::t('OrdersModule.core','Select a Payment Method:')?></b>
             <ul class="payment-list"> 
 					 <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span> 
-               <div class="paybutton"> <li>
-                    <input type="radio" name="payment" id="payment4" checked />
-                    <label for="payment4">
-                        <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" /></label>
-                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-                   <div class="help-tip"><p><strong>WayForPay</strong>: online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
-                </li>
-				<li>
+               <div class="paybutton"> 
+			   <li>
                     <input type="radio" name="payment" id="payment1"/>
                     <label for="payment1">
-                        <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment"  /></label>
+                      <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
+					</label>
                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span> 
-</span>
                     <div class="help-tip"><p><strong>Portmone</strong></strong>:  online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
-                </li></div><br>
+                </li>
+			   <li>
+                    <input type="radio" name="payment" id="payment4" checked />
+                    <label for="payment4">
+                        <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
+					</label>
+                     <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                   <div class="help-tip"><p><strong>WayForPay</strong>: online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
+                </li>
+				
+				</div><br>
                <!-- <li>     // временно отключили принятие платежей по paypal
                     <input type="radio" name="payment" id="payment2"/>
                     <label for="payment2">

@@ -3,7 +3,7 @@ header("Content-type: text/html");
 echo "<html><body>";
 	echo "<h2>New Order #: ".$order->id." to ".$order->receiver_city."</h2>";
     echo "<p>Delivery Date: ".$order->datetime_del."<br>";
-	echo "Delivery Fee: ".$model->delivery_price." USD</p>";
+	echo "Delivery Fee: ".$model->delivery_price." USD</p><br>";
 	echo "<h3>Recipient info</h3>";
     echo "Recipient name: ".$order->receiver_name."<br>";
     echo "Address: ".$order->user_address."<br>";
