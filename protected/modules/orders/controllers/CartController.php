@@ -4,7 +4,7 @@ Yii::import('orders.models.*');
 Yii::import('store.models.*');
  // ini_set('display_errors', 1);
  // ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
+  //error_reporting(E_ALL);
 /**
  * Cart controller
  * Display user cart and create new orders
@@ -108,7 +108,7 @@ class CartController extends Controller
 	{
 		$secret_key = Yii::app()->request->getParam('secret_key');
 		$model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
-//	echo"<pre>"; print_r($model);
+	echo"<pre>"; print_r($model);
 
 		/*$deliveryPrice=Yii::app()->db->createCommand()
 							     ->select("c.delivery")
@@ -147,6 +147,9 @@ class CartController extends Controller
 		));
 	}
 	public function actionSuccess(){
+		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
+		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
 
 		$secret_key = Yii::app()->request->getParam('secret_key');
 		$model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
@@ -170,7 +173,7 @@ class CartController extends Controller
 				'model'=>$model,
 				'photoPrice'=>$photoPrice,
 				'cardPrice'=>$cardPrice,
-				'card_transl'=>$card_transl,
+				'translPrice'=>$translPrice,
 				'rate'=>$rate,
 				'symbol'=>$symbol
 			));
@@ -338,7 +341,7 @@ class CartController extends Controller
 		$order->do_card = $this->form->do_card;
 		$order->card_text = $this->form->card_text;
 		$order->card_transl = $this->form->card_transl;
-		
+		$order->delivery_price = $deliveryPrice;
 		if(!empty($order->doPhoto)){$order->photo_price=$photoPrice;}
 		if(!empty($order->do_card)){$order->card_price=$cardPrice;}
 		if(!empty($order->card_transl)){$order->transl_price=$translPrice;}
@@ -352,7 +355,7 @@ class CartController extends Controller
 							     // ->where('ct.name=:name', array(':name'=>$order->receiver_city))
 							     // ->queryRow();								
 		//if (empty($deliveryPrice)) $deliveryPrice = 10; // стоимость доставки по умолчанию
-		$order->delivery_price = $deliveryPrice;
+		
 
 		if($order->validate())
 			$order->save();
