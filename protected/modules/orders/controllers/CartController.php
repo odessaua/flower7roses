@@ -108,7 +108,7 @@ class CartController extends Controller
 	{
 		$secret_key = Yii::app()->request->getParam('secret_key');
 		$model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
-	echo"<pre>"; print_r($model);
+	
 
 		/*$deliveryPrice=Yii::app()->db->createCommand()
 							     ->select("c.delivery")
