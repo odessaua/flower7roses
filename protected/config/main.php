@@ -100,6 +100,7 @@ return array(
 				'gii/<controller:\w+>'=>'gii/<controller>',
 				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
                 'site/wfpstatus/<order_ref:\w+>' => 'site/wfpstatus',
+                'reviews' => 'site/reviews',
             ),
 		),
 		 'db'=>array(

@@ -1,6 +1,20 @@
 <?php
+Yii::import('application.modules.comments.models.Comment');
+
 class SiteController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return array(
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+            ),
+        );
+    }
+
 	public function actionIndex()
 	{
 	}
@@ -118,11 +132,51 @@ class SiteController extends Controller
 		$command->bindValue(":order_id", $order_id, PDO::PARAM_INT);
 		$command->query();
 	}
-	
+
+    /**
+     * страница отзывов
+     */
 	public function actionReviews()
 	{
-		$this->render('reviews');
+        $comment = new Comment;
+        if(Yii::app()->request->isPostRequest)
+        {
+            $comment->attributes = Yii::app()->request->getPost('Comment');
+
+            if(!Yii::app()->user->isGuest)
+            {
+                $comment->name = Yii::app()->user->name;
+                $comment->email = Yii::app()->user->email;
+            }
+
+            if($comment->validate())
+            {
+                $comment->class_name = 'application.modules.store.models.StoreProduct';
+                $comment->object_pk = 1;
+                $comment->user_id = Yii::app()->user->isGuest ? 0 : Yii::app()->user->id;
+                $comment->save();
+
+                $url = Yii::app()->getRequest()->getUrl();
+
+                if($comment->status==Comment::STATUS_WAITING)
+                {
+                    $url.='#';
+                    Yii::app()->user->setFlash('messages', Yii::t('CommentsModule.core', 'Ваш комментарий успешно добавлен. Он будет опубликован после проверки администратором.'));
+                }
+                elseif($comment->status==Comment::STATUS_APPROVED)
+                    $url.='#comment_'.$comment->id;
+
+                // Refresh page
+                Yii::app()->request->redirect($url, true);
+            }
+        }
+        $reviews = Comment::model()->approved()->orderByCreatedDesc()->findAll();
+		$this->render('reviews', array(
+		    'comment' => $comment,
+            'reviews' => $reviews,
+        ));
 	}
+
     // serviceUrl: 'http://flowers3.loc/site/wfpresponse'
     public function actionWfpResponse()
     {
