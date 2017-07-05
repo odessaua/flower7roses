@@ -47,6 +47,12 @@
 				'type'=>'raw',
 				'value'=>'CHtml::image("/uploads/slider/".$data->photo,"", array("width"=>"290px" ,"height"=>"100px"))',
 			),
+            'position',
+            array(
+                'name' => 'active',
+                'filter' => array(1 => 'Да', 0 => 'Нет'),
+                'value' => '$data->active > 0 ? "Да" : "Нет"',
+            ),
 
 		),
 	));

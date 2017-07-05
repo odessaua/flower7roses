@@ -1,4 +1,4 @@
-<?php $slider=SSystemSlider::model()->findAll();
+<?php $slider=SSystemSlider::model()->active()->orderByPosition()->findAll();
 
 if(!empty($data['city_seo'])){
     $this->pageKeywords = (!empty($city_seo['keywords'])) ? $city_seo['keywords'] : '';
@@ -32,6 +32,13 @@ else{
 	            </ul>
 	        </div>
 	    </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $("#slider").easySlider({
+                    auto: <?= (Yii::app()->settings->get('core', 'sliderAutoRotate') > 0) ? 'true' : 'false';?>
+                });
+            });
+        </script>
         <?php else: ?>
         <h1 style="margin: 20px 0 30px;"><?= $data['h1_header']; ?></h1>
         <?php endif; ?>
@@ -73,13 +80,20 @@ else{
 	<!-- col-1 (end) -->
 	
 	<!-- col-22 (begin) -->
-        <?php $baner=  SSystemBaner::model()->findAll();?>
 	<div class="col-22">
+        <?php
+        // поле `name` является идентификатором, по которому выводится баннер на данную позицию
+        // в этом случае идентификатором является значение 'SPA', в другом – может быть такое же, а может быть другое
+        // выбирается одна запись, у которой `active` = 1 AND `name` = 'SPA'
+        $banner =  SSystemBaner::model()->active()->find("name = :name", array(':name' => 'SPA'));
+        if(!empty($banner)):
+        ?>
 	    <div class="action">
-	        <a href="<?= Yii::app()->createUrl($baner[2]['url']); ?>" title="<?=$baner[2]['name']?>">
-	            <img width="218" heigth="282" src="<?='/uploads/baners/'.$baner[2]['photo']?>" alt="<?=$baner[2]['url']?> Banner" />
+	        <a href="<?= Yii::app()->createUrl($banner->url); ?>" title="<?= $banner->name; ?>">
+	            <img width="218" heigth="282" src="<?= '/uploads/baners/'.$banner->photo; ?>" alt="<?= $banner->url; ?> Banner" />
 	        </a>
 	    </div>
+        <?php endif; ?>
 
 	    <!-- b-comments (begin) -->
 	    <div class="b-comments">

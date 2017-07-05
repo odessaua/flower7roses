@@ -1,3 +1,10 @@
+-- 2017-07-05:
+ALTER TABLE `SystemSlider` ADD `position` TINYINT(4)  NULL  DEFAULT NULL  AFTER `url`;
+ALTER TABLE `SystemSlider` ADD `active` TINYINT(1)  NULL  DEFAULT NULL  AFTER `position`;
+INSERT INTO `SystemSettings` (`id`, `category`, `key`, `value`) VALUES (NULL, 'core', 'sliderAutoRotate', '0');
+ALTER TABLE `SystemBaner` ADD `active` TINYINT(1)  NOT NULL  AFTER `url`;
+-- ==============
+
 -- 2017-06-26:
 ALTER TABLE `StoreAttributeTranslate` ADD `header` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `title`;
 ALTER TABLE `StoreProductVariant` ADD `default` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `sku`;

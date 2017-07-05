@@ -1,15 +1,14 @@
 <?php
 
 /**
- * This is the model class for table "SystemLanguage".
+ * This is the model class for table "SystemBaner".
  *
- * The followings are the available columns in table 'SystemLanguage':
+ * The followings are the available columns in table 'SystemBaner':
  * @property integer $id
- * @property string $name Language name
- * @property string $code Url prefix
- * @property string $locale Language locale
- * @property boolean $default Is lang default
- * @property boolean $flag_name Flag image name
+ * @property string $name
+ * @property string $photo
+ * @property string $url
+ * @property boolean $active
  */
 class SSystemBaner extends BaseModel
 {
@@ -34,17 +33,27 @@ class SSystemBaner extends BaseModel
     }
 
     /**
+     * @return array
+     */
+    public function scopes()
+    {
+        $alias = $this->getTableAlias();
+        return array(
+            'active' => array('condition'=>$alias.'.active=1'),
+        );
+    }
+
+    /**
      * @return array validation rules for model attributes.
      */
     public function rules()
     {
         return array(
             array('name', 'required'),
-            array('name, url,photo', 'length', 'max'=>255),
-            
-          
-            
-            array('id, name', 'safe', 'on'=>'search'),
+            array('name, url, photo', 'length', 'max'=>255),
+            array('active', 'numerical', 'integerOnly'=>true),
+            // search
+            array('id, name, active', 'safe', 'on'=>'search'),
         );
     }
 
@@ -58,7 +67,8 @@ class SSystemBaner extends BaseModel
             'name'      => Yii::t('CoreModule.core', 'Название'),
             'photo'      => Yii::t('CoreModule.core', 'Фото'),
             'url'      => Yii::t('CoreModule.core', 'Ссылка'),
-            
+            'active'      => Yii::t('CoreModule.core', 'Активен'),
+
         );
     }
 
@@ -72,49 +82,29 @@ class SSystemBaner extends BaseModel
 
         $criteria->compare('id',$this->id);
         $criteria->compare('name',$this->name,true);
-        // $criteria->compare('url',$this->url,true);
-        // $criteria->compare('locale',$this->locale,true);
-        // $criteria->compare('`default`',$this->default);
+        $criteria->compare('active',$this->active,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
     }
 
-    public function afterSave()
+    /**
+     * Before save event
+     */
+    public function beforeSave()
     {
-        // Leave only one default language
-        // if ($this->default)
-        // {
-        //     self::model()->updateAll(array(
-        //         'default'=>0,
-        //     ), 'id != '.$this->id);
-        // }
-        // return parent::afterSave();
-    }
-
-    public function beforeDelete()
-    {
-        // if($this->default)
-        //     return false;
-        return parent::beforeDelete();
-    }
-
-    public static function getFlagImagesList()
-    {
-        Yii::import('system.utils.CFileHelper');
-        $flagsPath = 'application.modules.admin.assets.images.flags.png';
-
-        $result = array();
-        $flags  = CFileHelper::findFiles(Yii::getPathOfAlias($flagsPath));
-
-        foreach($flags as $f)
+        if(!empty($this->active))
         {
-            $parts             = explode(DIRECTORY_SEPARATOR, $f);
-            $fileName          = end($parts);
-            $result[$fileName] = $fileName;
+            // запись отмечена активной
+            // делаем неактивными все записи с таким же именем
+            $this->updateAll(
+                array('active' => 0),
+                "name = :name",
+                array(':name' => $this->name)
+            );
         }
-
-        return $result;
+        return parent::beforeSave();
     }
+
 }

@@ -10,26 +10,22 @@ return array(
 	'elements'=>array(
 		'name'=>array(
             'type'=>'text',
+            'hint'=>Yii::t('StoreModule.admin', 'Название является идентификатором для установки баннеров на определённые позиции в коде.<br>Может быть несколько баннеров с одинаковым Названием – но активным будет только один из них!')
         ),
 		'url'=>array(
             'type'=>'text',
             ),
-    'photo'=>array(
+        'photo'=>array(
             'type'=>'file',
         ),
-		// 'locale'=>array(
-  //           'type'=>'text',
-  //           'hint'=>Yii::t('CoreModule.core', 'Например: en, en_us'),
-  //       ),
-  //       'flag_name'=>array(
-  //           'type'=>'dropdownlist',
-  //           'items'=>SSystemLanguage::getFlagImagesList(),
-  //           'empty'=>'---',
-  //           //'encode'=>false,
-  //       ),        
-		// 'default'=>array(
-  //           'type'=>'checkbox',
-  //       )
+        'active'=>array(
+            'type'=>'dropdownlist',
+            'items'=>array(
+                1=>'Да',
+                0=>'Нет'
+            ),
+            'hint'=>Yii::t('StoreModule.admin', '«Да» – автоматически снимает активность со всех других баннеров с таким же Названием!<br>Выбирая «Нет» – не забудьте активировать другой баннер с таким же названием, иначе на месте баннера будет пустота.')
+        ),
 	),
 );
 

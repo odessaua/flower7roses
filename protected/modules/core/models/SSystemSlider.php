@@ -1,15 +1,15 @@
 <?php
 
 /**
- * This is the model class for table "SystemLanguage".
+ * This is the model class for table "SystemSlider".
  *
- * The followings are the available columns in table 'SystemLanguage':
+ * The followings are the available columns in table 'SystemSlider':
  * @property integer $id
- * @property string $name Language name
- * @property string $code Url prefix
- * @property string $locale Language locale
- * @property boolean $default Is lang default
- * @property boolean $flag_name Flag image name
+ * @property string $name
+ * @property string $photo
+ * @property string $url
+ * @property int $position
+ * @property int $active
  */
 class SSystemSlider extends BaseModel
 {
@@ -18,7 +18,7 @@ class SSystemSlider extends BaseModel
 
     /**
      * Returns the static model of the specified AR class.
-     * @return SSystemLanguage the static model class
+     * @return SystemSlider the static model class
      */
     public static function model($className=__CLASS__)
     {
@@ -34,16 +34,29 @@ class SSystemSlider extends BaseModel
     }
 
     /**
+     * @return array
+     */
+    public function scopes()
+    {
+        $alias = $this->getTableAlias();
+        return array(
+            'active'              => array('condition'=>$alias.'.active=1'),
+            'orderByPosition'     => array('order'=>$alias.'.position ASC'),
+            'orderByPositionDesc' => array('order'=>$alias.'.position DESC'),
+        );
+    }
+
+
+    /**
      * @return array validation rules for model attributes.
      */
     public function rules()
     {
         return array(
             array('name', 'required'),
-            array('name, url,photo', 'length', 'max'=>255),
-            
-          
-            
+            array('position, active', 'numerical', 'integerOnly'=>true),
+            array('name, url, photo', 'length', 'max'=>255),
+            // search attributes
             array('id, name', 'safe', 'on'=>'search'),
         );
     }
@@ -58,7 +71,9 @@ class SSystemSlider extends BaseModel
             'name'      => Yii::t('CoreModule.core', 'Название'),
             'photo'      => Yii::t('CoreModule.core', 'Фото'),
             'url'      => Yii::t('CoreModule.core', 'Ссылка'),
-            
+            'position'      => Yii::t('CoreModule.core', 'Позиция'),
+            'active'      => Yii::t('CoreModule.core', 'Активен'),
+
         );
     }
 
@@ -72,49 +87,54 @@ class SSystemSlider extends BaseModel
 
         $criteria->compare('id',$this->id);
         $criteria->compare('name',$this->name,true);
-        // $criteria->compare('url',$this->url,true);
-        // $criteria->compare('locale',$this->locale,true);
-        // $criteria->compare('`default`',$this->default);
+        $criteria->compare('active',$this->active,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
     }
 
-    public function afterSave()
+    /**
+     * Before save event
+     */
+    public function beforeSave()
     {
-        // Leave only one default language
-        // if ($this->default)
-        // {
-        //     self::model()->updateAll(array(
-        //         'default'=>0,
-        //     ), 'id != '.$this->id);
-        // }
-        // return parent::afterSave();
-    }
-
-    public function beforeDelete()
-    {
-        // if($this->default)
-        //     return false;
-        return parent::beforeDelete();
-    }
-
-    public static function getFlagImagesList()
-    {
-        Yii::import('system.utils.CFileHelper');
-        $flagsPath = 'application.modules.admin.assets.images.flags.png';
-
-        $result = array();
-        $flags  = CFileHelper::findFiles(Yii::getPathOfAlias($flagsPath));
-
-        foreach($flags as $f)
+        if($this->position == '')
         {
-            $parts             = explode(DIRECTORY_SEPARATOR, $f);
-            $fileName          = end($parts);
-            $result[$fileName] = $fileName;
+            // позиция не указана
+            // находим максимальное значение позиции
+            // присваиваем текущей записи значение max + 1
+            $max = SSystemSlider::model()->orderByPositionDesc()->find();
+            if($max)
+                $this->position = (int)$max->position + 1;
+            else
+                $this->position = 0;
         }
-
-        return $result;
+        else{
+            if($this->getIsNewRecord()) {
+                // указана новая позиция для новой записи
+                // увеличиваем значение всех записей, у которых position >= указанной позиции
+                // это позволит вставить новую запись «между» другими позициями в списке
+                $this->updateCounters(
+                    array('position' => 1),
+                    'position >= :pos',
+                    array(':pos' => $this->position)
+                );
+            }
+            else{
+                // запись обновляется
+                // проверяем старую позицию записи
+                $row = SSystemSlider::model()->findByPk($this->id);
+                if($row->position != $this->position){
+                    // позиция изменилась – обновляем записи по принципу, описанному выше
+                    $this->updateCounters(
+                        array('position' => 1),
+                        'position >= :pos',
+                        array(':pos' => $this->position)
+                    );
+                }
+            }
+        }
+        return parent::beforeSave();
     }
 }

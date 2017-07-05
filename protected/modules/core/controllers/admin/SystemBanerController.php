@@ -55,7 +55,10 @@ class SystemBanerController extends SAdminController
 					$model->photo=$rand.$model->photo;
 				}
 				else $model->photo = $photo;
-				$model->update();
+			    if($new === false)
+				    $model->update();
+			    else
+			        $model->save();
 				$this->setFlashMessage(Yii::t('CoreModule.core', 'Изменения успешно сохранены'));
 
 				if (isset($_POST['REDIRECT']))

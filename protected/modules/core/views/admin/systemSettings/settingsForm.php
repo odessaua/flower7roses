@@ -32,6 +32,7 @@ return array(
 					'type'=>'dropdownlist',
 					'items'=>$themes
 				),
+				'core_sliderAutoRotate'=>array('type'=>'checkbox'),
 				titleRow('Настройки WYSIWYG редактора'),
 				'core_editorTheme'=>array(
 					'type'=>'dropdownlist',

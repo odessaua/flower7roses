@@ -48,5 +48,10 @@
 				'type'=>'raw',
 				'value'=>'CHtml::image("/uploads/baners/".$data->photo,"", array("width"=>"75px" ,"height"=>"100px"))',
 			),
+            array(
+                'name' => 'active',
+                'filter' => array(1 => 'Да', 0 => 'Нет'),
+                'value' => '$data->active > 0 ? "Да" : "Нет"',
+            ),
 		),
 	));
