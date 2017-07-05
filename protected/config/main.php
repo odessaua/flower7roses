@@ -25,6 +25,8 @@ return array(
 		'application.modules.rights.components.*',
         // helpers
         'application.helpers.*',
+        // comments module - для страницы отзывов
+        'application.modules.comments.*',
 	),
 
     'aliases' => array(
