@@ -56,13 +56,13 @@ class StorePaymentMethod extends BaseModel
 	public function rules()
 	{
 		return array(
-			array('name, currency_id', 'required'),
+			array('name', 'required'),
 			array('active, position', 'numerical', 'integerOnly'=>true),
-			array('name, img', 'length', 'max'=>255),
+			array('name', 'length', 'max'=>255),
 			array('description', 'safe'),
-			array('payment_system', 'safe'),
+//			array('payment_system', 'safe'),
 			// Search
-			array('id, name, img, description, active', 'safe', 'on'=>'search'),
+			array('id, name, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -132,9 +132,9 @@ class StorePaymentMethod extends BaseModel
 			'description'    => Yii::t('StoreModule.admin', 'Описание'),
 			'active'         => Yii::t('StoreModule.admin', 'Активен'),
 			'position'       => Yii::t('StoreModule.admin', 'Позиция'),
-			'payment_system' => Yii::t('StoreModule.admin', 'Система оплаты'),
-			'currency_id'    => Yii::t('StoreModule.admin', 'Валюта'),
-			'img' => 'Иконка'
+//			'payment_system' => Yii::t('StoreModule.admin', 'Система оплаты'),
+//			'currency_id'    => Yii::t('StoreModule.admin', 'Валюта'),
+//			'img' => 'Иконка'
 		);
 	}
 
@@ -186,9 +186,9 @@ class StorePaymentMethod extends BaseModel
 		$criteria->with=array('pm_translate');
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('img',$this->img,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('pm_translate.name',$this->name,true);
+//		$criteria->compare('img',$this->img,true);
+//		$criteria->compare('description',$this->description,true);
 		$criteria->compare('active',$this->active);
 
 		$sort=new CSort;

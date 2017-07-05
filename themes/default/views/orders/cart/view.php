@@ -38,6 +38,12 @@
 
     <h1 class="page-title"><?php echo Yii::t('OrdersModule.core','Your order')?></h1>
 <?php if($model->status_id != 6): ?>
+    <?php
+    $payments = StorePaymentMethod::model()->findAll(array(
+        'condition' => 'active = 1',
+    ));
+    $payments = (!empty($payments)) ? CArray::toolIndexArrayBy($payments, 'name') : array();
+    ?>
     <div class="cart3 g-clearfix">
        
         <div class="data-form data-form-big">
@@ -52,7 +58,17 @@
                       <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
 					</label>
                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span> 
-                    <div class="help-tip"><p><strong>Portmone</strong></strong>:  online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
+                    <div class="help-tip">
+                        <?php if(!empty($payments['Portmone'])): ?>
+                        <p>
+                            <strong>Portmone</strong>: <?= strip_tags($payments['Portmone']->description); ?>
+                            <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
+                        <?php else: ?>
+                        <p>
+                            <strong>Portmone</strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
+                            <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
+                        <?php endif; ?>
+                    </div>
                 </li>
 			   <li >
                     <input type="radio" name="payment" id="payment4" />
@@ -60,7 +76,17 @@
                         <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
 					</label>
                      <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-                   <div class="help-tip"><p><strong>WayForPay</strong>: online credit card processing. All credir card transactions are encrypted. Accept Visa and MasterCard.</p></div>
+                   <div class="help-tip">
+                   <?php if(!empty($payments['WayForPay'])): ?>
+                       <p>
+                           <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
+                           <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                   <?php else: ?>
+                       <p>
+                           <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
+                           <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                   <?php endif; ?>
+                   </div>
                 </li>
 				
 				</div><br>
@@ -72,13 +98,28 @@
                     </label>
                 </li> -->
 				<span style="font-weight:bold;">Bank transfer</span>
-                <div class="paybutton"><li>
-                    <input type="radio" name="payment" id="payment3"/>
-                    <label for="payment3">
-                        <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="Transferwise money transfer" /></label>
-                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-<div class="help-tip"><p><strong>TransferWise</strong></strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD<br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a></p></div>
-                </li></div>
+                <div class="paybutton">
+                    <li>
+                        <input type="radio" name="payment" id="payment3"/>
+                        <label for="payment3">
+                            <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="Transferwise money transfer" />
+                        </label>
+                            <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                        <div class="help-tip">
+                        <?php if(!empty($payments['TransferWise'])): ?>
+                            <p>
+                                <strong>TransferWise</strong>: <?= strip_tags($payments['TransferWise']->description); ?>
+                                <br><a href="https://transferwise.com/" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php else: ?>
+                            <p>
+                                <strong>TransferWise</strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD
+                                <br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php endif; ?>
+                        </div>
+                    </li>
+                </div>
                 
             </ul>
             <div class="links">

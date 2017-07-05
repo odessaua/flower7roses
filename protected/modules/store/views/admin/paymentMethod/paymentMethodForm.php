@@ -23,17 +23,17 @@ return array(
 				'description'=>array(
 					'type'=>'SRichTextarea',
 				),
-				'currency_id'=>array(
-					'type'=>'dropdownlist',
-					'items'=>CHtml::listData(StoreCurrency::model()->findAll(),'id','name'),
-				),
-				'payment_system'=>array(
-					'type'=>'dropdownlist',
-					'empty'=>'---',
-					'items'=>$this->model->getPaymentSystemsArray(),
-					'rel'=>$this->model->id,
-				),
-				'<div id="payment_configuration"></div>',
+//				'currency_id'=>array(
+//					'type'=>'dropdownlist',
+//					'items'=>CHtml::listData(StoreCurrency::model()->findAll(),'id','name'),
+//				),
+//				'payment_system'=>array(
+//					'type'=>'dropdownlist',
+//					'empty'=>'---',
+//					'items'=>$this->model->getPaymentSystemsArray(),
+//					'rel'=>$this->model->id,
+//				),
+//				'<div id="payment_configuration"></div>',
 				'position'=>array(
 					'type'=>'text',
 					'hint'=>Yii::t('StoreModule.admin', 'Оставьте пустым для установки максимального значения')

@@ -264,7 +264,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
     <!-- modal (end) -->
     <!-- modal (begin) -->
     <div id="payment-modal" class="box-modal payment-modal">
-        <?=Yii::t('StoreModule.core',"<div class = 'title'> Payment methods </div>
+        <?php
+        $this->renderPartial('_payments')// var_dump($this->language_info['id']);
+        ?>
+        <?php /*=Yii::t('StoreModule.core',"<div class = 'title'> Payment methods </div>
         <div class = 'content-text'>
             <p>
                 <strong> cash </strong>
@@ -288,7 +291,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
             <p>
                 Rortmone.com the first company in Ukraine, which has successfully passed an international safety audit for compliance with the standard Payment Card Industry Data Security Standard (PCI DSS), and has received the certificate №499938160100203, issued by the German company SRC (Security Research and Consulting GmbH). SRC - an independent auditing company conducting the certification for compliance with all safety requirements (MasterCard Site Data Protection and VISA Account Information Security), established by the major payment systems VISA and MasterCard.
             </p>
-        </div>")?>
+        </div>")*/?>
     </div>
     <!-- modal (end) -->
     

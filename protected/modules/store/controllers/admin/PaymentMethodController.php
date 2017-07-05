@@ -12,7 +12,7 @@ class PaymentMethodController extends SAdminController {
 	{
 		$model = new StorePaymentMethod('search');
 
-		if (!empty($_GET['StoreDeliveryMethod']))
+		if (!empty($_GET['StorePaymentMethod']))
 			$model->attributes = $_GET['StorePaymentMethod'];
 
 		$dataProvider = $model->search();
@@ -59,12 +59,12 @@ class PaymentMethodController extends SAdminController {
 			{
 				$model->save();
 
-				if($model->payment_system)
-				{
-					$manager=new SPaymentSystemManager;
-					$system = $manager->getSystemClass($model->payment_system);
-					$system->saveAdminSettings($model->id, $_POST);
-				}
+//				if($model->payment_system)
+//				{
+//					$manager=new SPaymentSystemManager;
+//					$system = $manager->getSystemClass($model->payment_system);
+//					$system->saveAdminSettings($model->id, $_POST);
+//				}
 
 				$this->setFlashMessage(Yii::t('StoreModule.admin', 'Изменения успешно сохранены'));
 
