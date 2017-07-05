@@ -28,8 +28,18 @@ class CartController extends Controller
 	/**
 	 * Display list of product added to cart
 	 */
+	public function setDeliveryPrices(){
+		
+		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
+		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
+		$translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];
+	}		
+	 
+	 
 	public function actionIndex()
 	{
+		$this->setDeliveryPrices();
+
 		// Recount
 		if(Yii::app()->request->isPostRequest && Yii::app()->request->getPost('recount') && !empty($_POST['quantities']))
 			$this->processRecount();
@@ -534,7 +544,7 @@ class CartController extends Controller
 	}
 	public function actionPhone()
 	{
-		 $theme=Yii::t('OrdersModule', 'Заказ на обратный звонок');
+		 $theme=Yii::t('OrdersModule', 'Order for CallBack');
 
 		$lang=Yii::app()->language;
 		$emailBodyFile=Yii::getPathOfAlias("application.emails.$lang").DIRECTORY_SEPARATOR.'new_order_admin.php';
@@ -547,15 +557,17 @@ class CartController extends Controller
 			'id'=>$_POST['id'],'quantity'=>$_POST['quantity']
 			), true);
 		$mailer           = Yii::app()->mail;
-		$mailer->From     = Yii::app()->params['adminEmail'];
-		$mailer->FromName = Yii::app()->settings->get('core', 'siteName');
+		$mailer->From     = $_POST['email'];
+		$mailer->FromName = $_POST['username'];
 		$mailer->Subject  = $theme;
 		$mailer->Body     = $body;
-		$mailer->AddAddress($_POST['email']);
-		$mailer->AddReplyTo(Yii::app()->params['adminEmail']);
+		$mailer->AddAddress(Yii::app()->params['adminEmail']);
+		$mailer->AddReplyTo($_POST['email']);
 		$mailer->isHtml(true);
+		$mailer->SetMessageType = 'html';
 		$mailer->Send();
 		$mailer->ClearAddresses();
+		$mailer->ClearReplyTos();
 	}
 
     public function translateProductInfo($product_id)
