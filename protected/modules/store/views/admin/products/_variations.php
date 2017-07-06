@@ -73,7 +73,7 @@ Yii::app()->getClientScript()->registerScriptFile($this->module->assetsUrl.'/adm
 			if($model->type)
 			{
 				$attributes = $model->type->storeConfigurableAttributes;
-				echo CHtml::dropDownList('variantAttribute', null, CHtml::listData($attributes, 'id', 'title'));
+				echo CHtml::dropDownList('variantAttribute', null, CHtml::listData($attributes, 'id', 'name'));
 			}
 		?>
 		<a href="#" id="addAttribute">Добавить</a>

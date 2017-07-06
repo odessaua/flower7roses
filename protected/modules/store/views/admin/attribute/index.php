@@ -38,21 +38,19 @@ $this->widget('ext.sgridview.SGridView', array(
 			'name'=>'id'
 		),
 		array(
-		'name'=>'name',
-		'htmlOptions' => array(
-                'style' => 'width: 110px;',
+            'name'=>'name',
+            'htmlOptions' => array(
+                    'style' => 'width: 110px;',
             ),
+            'type' => 'raw',
+            'value'=>'CHtml::link(CHtml::encode($data->name), array("/store/admin/attribute/update", "id"=>$data->id))',
 		),
         array(
             'name'=>'header',
-            'type'=>'raw',
-            'value'=>'CHtml::link(CHtml::encode($data->header), array("/store/admin/attribute/update", "id"=>$data->id))',
             'header'=>'Заголовок на странице товара (en)',
         ),
 		array(
 			'name'=>'title',
-			'type'=>'raw',
-			'value'=>'CHtml::link(CHtml::encode($data->title), array("/store/admin/attribute/update", "id"=>$data->id))',
             'header'=>'Единица товара (en)',
 		),
 		// Buttons

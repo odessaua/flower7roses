@@ -18,7 +18,7 @@
 				<?php
 				echo CHtml::dropDownList('attributes[]',
 					null,
-					CHtml::listData($model->storeAttributes, 'id', 'title'),
+					CHtml::listData($model->storeAttributes, 'id', 'name'),
 					array('multiple'=>true, 'class'=>'attributesList')
 				);
 				?>
@@ -27,7 +27,7 @@
 				<?php
 				echo CHtml::dropDownList('allAttributes',
 					null,
-					CHtml::listData($attributes, 'id', 'title'),
+					CHtml::listData($attributes, 'id', 'name'),
 					array('multiple'=>true, 'class'=>'attributesList')
 				);
 				?>
