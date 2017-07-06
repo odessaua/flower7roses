@@ -4,7 +4,8 @@
  * @var CartController $model
  */
 
- $rate =Yii::app()->currency->active->rate;
+$rate =Yii::app()->currency->active->rate; // курс текущей валюты к USD
+$uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // полная стоимость заказа (товары + доставка) в UAH для платёжных систем Украины
 ?>
 <div>
 <!-- breadcrumbs (begin) -->
@@ -313,7 +314,7 @@ funds to a TransferWise account first and then they send the payment to Varetska
 <form class="portmone" action="https://www.portmone.com.ua/gateway/" method="post" name="paymentform">
     <input type="hidden" name="payee_id" value="2046">
     <input type="hidden" name="shop_order_number" value="<?=$model->id?>">
-    <input type="hidden" name="bill_amount" value="<?=$model->full_price*26?>">
+    <input type="hidden" name="bill_amount" value="<?= $uah_full_price; ?>">
     <input type="hidden" name="description" value="ATTENTION! Amount above is given in Ukraine currency calculated automatically according to the current rate of the Ukraine National Bank">
     <input type="hidden" name="success_url" value="https://7roses.com/cart/view/<?=$model->secret_key?>/success/">
     <input type="hidden" name="failure_url" value="https://7roses.com/">
@@ -333,7 +334,7 @@ $wfp_type = 'form'; // form or widget
 $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5); // length = 5
 $orderReference = $randomString . "_" . $model->id; // рандомный префикс
 $orderDate = strtotime($model->created);
-$orderFullPrice = $model->full_price*26;
+$orderFullPrice = $uah_full_price;
 //$orderFullPrice = "1"; // temp
 $orderCurrency = "UAH";
 $string = Yii::app()->params['merchantAccount'] . ";" . $merchantDomainName . ";" . $orderReference . ";" . $orderDate . ";" . $orderFullPrice . ";" . $orderCurrency;
