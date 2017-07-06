@@ -407,7 +407,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 		<ul class="menu-bottom">
             <li>
                 <ul>
-                    <li><a title="Flowers" href="<?=Yii::app()->createUrl('/flowers'); ?>"><?=Yii::t('main','')?></a></li>
+                    <li><a title="Flowers" href="<?=Yii::app()->createUrl('/flowers'); ?>"><?=Yii::t('main','Flowers')?></a></li>
                     <li><a title="Flower arrangements" href="<?=Yii::app()->createUrl('/arrangements'); ?>"><?=Yii::t('main','Arrangements')?></a></li>
                     <li><a title="Gifts and soft toys" href="<?=Yii::app()->createUrl('/gifts'); ?>"><?=Yii::t('main','Gifts')?></a></li>
                     <li><a title="Sweets and chocolate" href="<?=Yii::app()->createUrl('/sweets'); ?>"><?=Yii::t('main','Sweets')?></a></li>
@@ -421,6 +421,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                     <li><a title="about delivery" href="<?= Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main','About Delivery')?></a></li>
                     <li><a title="terms and conditions" href="<?= Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main','Terms&Conditions')?></a></li>
 					<li><a title="frequently asked questions" href="<?= Yii::app()->createUrl('/page/faq.html'); ?>"><?=Yii::t('main','FAQ')?></a></li>
+                    <li><a title="Customer reviews" href="<?= Yii::app()->createUrl('/reviews'); ?>"><?=Yii::t('main','Customer reviews')?></a></li>
                     <li><a title="Contacts" href="<?= Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t('main','Contacts')?></a></li>
                 </ul>
             </li>

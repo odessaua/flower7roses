@@ -97,7 +97,11 @@ else{
 
 	    <!-- b-comments (begin) -->
 	    <div class="b-comments">
-	        <h3 class="title"><?=Yii::t('main','Customer Reviews')?></h3>
+	        <h3 class="title">
+                <a href="<?=Yii::app()->createUrl('/reviews'); ?>">
+                    <?=Yii::t('main','Customer Reviews')?>
+                </a>
+            </h3>
 	        <ul>
 	        	<?php foreach ($comments as $key => $value): ?>
 	            <li>

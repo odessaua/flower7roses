@@ -1,5 +1,5 @@
 <?php
-Yii::import('application.modules.comments.models.Comment');
+//Yii::import('application.modules.comments.models.Comment');
 
 class SiteController extends Controller
 {

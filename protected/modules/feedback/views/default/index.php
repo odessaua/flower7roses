@@ -18,7 +18,7 @@ $this->pageTitle = Yii::t('main', 'Feedback');
 		<?php echo $form->errorSummary($model); ?>
 
 		<div class="row">
-			<?php echo CHtml::activeLabel($model,Yii::t('Name') array('required'=>true)); ?>
+			<?php echo CHtml::activeLabel($model,Yii::t('Name'), array('required'=>true)); ?>
 			<?php echo CHtml::activeTextField($model,'name'); ?>
 		</div>
 
