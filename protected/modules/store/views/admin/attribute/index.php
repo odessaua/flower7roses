@@ -37,6 +37,12 @@ $this->widget('ext.sgridview.SGridView', array(
 			'class'=>'SGridIdColumn',
 			'name'=>'id'
 		),
+		array(
+		'name'=>'name',
+		'htmlOptions' => array(
+                'style' => 'width: 110px;',
+            ),
+		),
         array(
             'name'=>'header',
             'type'=>'raw',
@@ -49,7 +55,6 @@ $this->widget('ext.sgridview.SGridView', array(
 			'value'=>'CHtml::link(CHtml::encode($data->title), array("/store/admin/attribute/update", "id"=>$data->id))',
             'header'=>'Единица товара (en)',
 		),
-		'name',
 		// Buttons
 		array(
 			'class'=>'CButtonColumn',
@@ -58,9 +63,9 @@ $this->widget('ext.sgridview.SGridView', array(
                 'en' => array(
                     'url' => 'Yii::app()->urlManager->createUrl("/store/admin/attribute/update", array("id"=>$data->id, "lang_id"=>9))',
                     'imageUrl' => $flagUrl . 'us.png',
-                    'options' => array(
-                        'style' => 'margin-right: 10px;',
-                    ),
+						'options' => array(
+							'style' => 'margin-right: 10px;',
+						),
                 ),
                 'ru' => array(
                     'url' => 'Yii::app()->urlManager->createUrl("/store/admin/attribute/update", array("id"=>$data->id, "lang_id"=>1))',
