@@ -178,10 +178,9 @@ class Controller extends RController
         if($lang == 'ua')
             $lang = 'uk';
         $langArray = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
-        $city_name = Yii::app()->session['_city'];
-        $city_t_info = CityTranslate::model()->findByAttributes(array('name' => $city_name));
-        if(!empty($city_t_info->object_id)){
-            $city_seo = CitySeo::model()->findByAttributes(array('city_id' => $city_t_info->object_id, 'lang_id' => $langArray->id));
+        $city_id = Yii::app()->session['_city'];
+        if(!empty($city_id)){
+            $city_seo = CitySeo::model()->findByAttributes(array('city_id' => $city_id, 'lang_id' => $langArray->id));
             if(!empty($city_seo)){
                 $return = array(
                     'description' => $city_seo->seo_description,
@@ -206,6 +205,51 @@ class Controller extends RController
     {
         $uri = Yii::app()->request->url;
         return MLhelper::addSpecifiedLangToUrl($uri, $key);
+    }
+
+    /**
+     * информация о городе по ID
+     * @param int $city_id
+     * @param bool $translate - с переводом названия или без
+     * @param string $lang - язык перевода названия (если не указан – то берём текущий)
+     * @return object CActiveRecord
+     */
+    public function getCityInfo($city_id, $translate = false, $lang = '')
+    {
+        $language = (empty($lang))
+            ? $this->language_info // текущий язык
+            : SSystemLanguage::model()->findByAttributes(array('code'=>$lang)); // язык по коду из аргумента
+        if(!empty($translate)){
+            $city = City::model()->language($language->id)->findByPk($city_id); // с переводом
+        }
+        else{
+            $city = City::model()->language(0)->findByPk($city_id); // без перевода
+        }
+        return $city;
+    }
+
+    /**
+     * информация о текущем городе, сохранённом в сессии
+     * @param bool $translate - с переводом названия или без
+     * @param string $lang - язык перевода названия (если не указан – то берём текущий)
+     * @return object CActiveRecord
+     */
+    public function getCurrentCityInfo($translate = false, $lang = '')
+    {
+        return (!empty(Yii::app()->session['_city']))
+            ? $this->getCityInfo(Yii::app()->session['_city'], $translate, $lang) // город из сессии
+            : $this->getDefaultCityInfo($translate, $lang); // город по умолчанию (Киев)
+    }
+
+    /**
+     * город по умолчанию – Киев, ID = 908
+     * @param bool $translate - с переводом названия или без
+     * @param string $lang - язык перевода названия (если не указан – то берём текущий)
+     * @return object CActiveRecord
+     */
+    public function getDefaultCityInfo($translate = false, $lang = '')
+    {
+        return $this->getCityInfo(908, $translate, $lang); // Киев, ID = 908
     }
 
 }

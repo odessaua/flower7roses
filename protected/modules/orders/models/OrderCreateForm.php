@@ -38,9 +38,9 @@ class OrderCreateForm extends CFormModel
 		
 		$this->receiver_city = "Киев";
 		
-		if(isset(Yii::app()->session['_city']))
+		if(isset(Yii::app()->session['_cityName']))
 		{
-			$this->receiver_city = Yii::app()->session['_city'];
+			$this->receiver_city = Yii::app()->session['_cityName'];
 		}
 			
 	}

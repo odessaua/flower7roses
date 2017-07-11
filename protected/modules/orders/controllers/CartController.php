@@ -206,22 +206,9 @@ class CartController extends Controller
 			$this->_addError(Yii::t('OrdersModule.core', 'Error. Product not found'), true);
 		
 		//if product isset in Region
-		$city = 908;
-		$cityName = "Kyiv";
-		
-		if(isset(Yii::app()->session['_city']))
-		{
-			$cityName 		= Yii::app()->session['_city'];
-			$deliveryPrice  = Yii::app()->session['_delivery_price'];
-			
-			$sql = "SELECT id FROM city WHERE name = :name";
-			$command =Yii::app()->db->createCommand($sql);
-			$command->bindValue(":name", $cityName, PDO::PARAM_STR);
-			$res =$command->queryRow();
-			
-			if($res['id'])
-				$city = $res['id'];	
-		}
+        $cityInfo = $this->getCurrentCityInfo(true);
+        $city = $cityInfo->id;
+        $cityName = $cityInfo->name;
 		
 		Yii::import('application.modules.store.models.StoreProductCityRef');
 		$productInCity = StoreProductCityRef::model()->find(array('condition'=>'product_id='.$model->id.' AND city_id='.$city));
@@ -319,16 +306,11 @@ class CartController extends Controller
 			return false;
 
 		$order = new Order;
-		
-		if(isset(Yii::app()->session['_city'])) 
-		{
-			$receiver_city = Yii::app()->session['_city'];
-			$deliveryPrice  = Yii::app()->session['_delivery_price'];
-		}
-		else {
-				$receiver_city = "Kyiv";
-				$deliveryPrice = 10;  // стоимость доставки по умолчанию
-			 }
+
+        $cityInfo = $this->getCurrentCityInfo(true);
+        $receiver_city = $cityInfo->name;
+        $deliveryPrice  = $cityInfo->delivery;
+
 		$photoPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>17))['price'];
 		$cardPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>18))['price'];
 		$translPrice=StoreDeliveryMethod::model()->findByAttributes(array('id'=>19))['price'];

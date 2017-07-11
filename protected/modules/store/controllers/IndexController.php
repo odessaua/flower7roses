@@ -137,36 +137,17 @@ class IndexController extends Controller
     public function actionCity()
     {
         if(!empty($_GET['city_id'])){
-            $lang= Yii::app()->language;
-            if($lang == 'ua')
-                $lang = 'uk';
-            $langArray = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
-            $city_translations = CityTranslate::model()->findAllByAttributes(array('object_id' => $_GET['city_id']));
-            //$city_name = '';
-            // название города с переводом
-            if(!empty($city_translations)){
-                foreach ($city_translations as $city_t) {
-                    if($city_t->language_id == $langArray->id){
-                        $city_name = $city_t->name;
-                        $this->index_data = array('h1_header' => $city_t->h1_header);
-                        $this->layout_params['city_id'] = $city_t->object_id;
-                        break;
-                    }
-                }
+            $cityInfo = $this->getCityInfo($_GET['city_id'], true);
+            if(empty($cityInfo)){
+                $cityInfo = $this->getDefaultCityInfo(true); // город по умолчанию
             }
-            // название города без перевода
-			
-                $city = City::model()->findByPk($_GET['city_id']);
-			
-			 //var_dump($_GET);
-            // сохраняем в сессию
-            if(!empty($city_name)){
-                Yii::app()->session['_city'] = $city_name;
-				Yii::app()->session['_delivery_price'] = $city->delivery;
-            }
+            Yii::app()->session['_city'] = $cityInfo->id;
+            Yii::app()->session['_cityName'] = $cityInfo->name;
+            Yii::app()->session['_delivery_price'] = $cityInfo->delivery;
+            $this->index_data = array('h1_header' => $cityInfo->h1_header);
+            $this->layout_params['city_id'] = $cityInfo->id;
             $this->index_data['city_seo'] = $this->layout_params['city_address'] = 1;
         }
-//        var_dump('actionCity', $_GET, Yii::app()->session['_city'], $city_name);
         $this->actionIndex();
     }
 }

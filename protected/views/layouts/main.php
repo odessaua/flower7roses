@@ -457,11 +457,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 	<!-- modal (begin) -->
 	<div id="notavailable-modal" class="box-modal cart-modal">
 		<?php
-		$cityName = Yii::t('main','Kyiv');
-		if(isset(Yii::app()->session['_city']))
-			$cityName = Yii::app()->session['_city'];
+        $cityMainInfo = $this->getCurrentCityInfo(true);
 		?>
-		<span style="font-size:18px; font-weight:bold; display: block; padding:10px; text-align:center;"><?=Yii::t('main','This product is not available for the region')?>:<?=$cityName?></span><br/>
+		<span style="font-size:18px; font-weight:bold; display: block; padding:10px; text-align:center;"><?=Yii::t('main','This product is not available for the region')?>:<?= $cityMainInfo->name; ?></span><br/>
 		
 		<span class="btn-purple arcticmodal-close"><?=Yii::t('main','Continue shopping')?></span>
 	</div>

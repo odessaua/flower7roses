@@ -101,7 +101,6 @@ class SiteController extends Controller
 		if(!empty($city))
 		{
             $city_ex = explode(' (', $city); // for entries like Ужгород (Zakarpattia Region)
-			$app->session['_city'] =  $city_ex[0];
             // получаем object_id города
             $trans_sql = "SELECT `object_id` FROM `cityTranslate` WHERE `name` = :name";
             $trans_command =Yii::app()->db->createCommand($trans_sql);
@@ -112,12 +111,31 @@ class SiteController extends Controller
             $city_command = Yii::app()->db->createCommand($city_sql);
             $city_res = $city_command->queryScalar();
             $city_url = strtolower($city_res);
+            $delivery_sql = "SELECT `delivery` FROM `city` WHERE `id` = " . (int)$trans_res;
+            $delivery_command = Yii::app()->db->createCommand($delivery_sql);
+            $delivery_res = $delivery_command->queryScalar();
+            if(!empty($trans_res) && ($delivery_res !== false)){
+                $app->session['_city'] = $trans_res; // теперь храним ID города
+                $app->session['_cityName'] = $city_ex[0]; // название города
+                $app->session['_delivery_price'] = $delivery_res; // стоимость доставки в этот город
+            }
+            else{
+                // город по умолчанию
+                $cityInfo = $this->getDefaultCityInfo(true);
+                $app->session['_city'] =  $cityInfo->id; // теперь храним ID города
+                $app->session['_cityName'] = $cityInfo->name; // название города
+                $app->session['_delivery_price'] = $cityInfo->delivery; // стоимость доставки в этот город
+            }
 		}else{
-			$app->session['_city'] =  'Киев';
+            // город по умолчанию
+		    $cityInfo = $this->getDefaultCityInfo(true);
+			$app->session['_city'] =  $cityInfo->id; // теперь храним ID города
+            $app->session['_cityName'] = $cityInfo->name; // название города
+            $app->session['_delivery_price'] = $cityInfo->delivery; // стоимость доставки в этот город
 		}
 
 		$url_lang = ($lang !== $app->params['defaultLanguage']) ? $lang . '/' : '';
-		echo $app->session['_city'] . ((!empty($city_url)) ? '_/' . $url_lang . $city_url : '');
+		echo $app->session['_cityName'] . ((!empty($city_url)) ? '_/' . $url_lang . $city_url : '');
 		//Yii::app()->controller->refresh();
 	}
 	

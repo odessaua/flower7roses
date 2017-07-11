@@ -2,20 +2,16 @@
 /**
  * Select2 для выбора городов
  */
-// информация о текущей языковой версиии
-$lang= Yii::app()->language;
-if($lang == 'ua')
-    $lang = 'uk';
-$langArray = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
 // список названий городов
 $citiesList = Yii::app()->db->createCommand()
     ->select('object_id, name')
     ->from('cityTranslate')
-    ->where('language_id = :lid', array(':lid' => $langArray->id))
+    ->where('language_id = :lid', array(':lid' => $this->language_info->id))
     ->order('name ASC')
     ->queryAll();
 // текущий город из сессиии
-$currentCity = (!empty(Yii::app()->session['_city'])) ? Yii::app()->session['_city'] : Yii::t('main','Kyiv');
+$currentCityInfo = $this->getCurrentCityInfo(true);
+$currentCity = $currentCityInfo->name;
 
 if(!empty($citiesList)):
 ?>
