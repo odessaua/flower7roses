@@ -12,6 +12,7 @@ return array(
 	'cart/renderPopupCart'=>'orders/cart/renderPopupCart',
 	'cart/view/<secret_key>'=>'orders/cart/view',
 	'cart/view/<secret_key>/success/'=>'orders/cart/success',
+	'cart/view/<secret_key>/status/'=>'orders/cart/status',
 	'processPayment/*'=>'orders/payment/process',
 	// 'orders/cart/endEmailAdmin'=>'orders/cart/admin'
 	// 'orders/cart'=>'site/error',

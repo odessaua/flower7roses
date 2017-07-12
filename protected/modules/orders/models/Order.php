@@ -26,9 +26,18 @@ Yii::import('application.modules.orders.OrdersModule');
  * @property float $photo_price
  * @property string $discount
  * @property string $discount_price
+ * @property string $payment_id
+ * @property string $payment_status
  */
 class Order extends BaseModel
 {
+    public $payment_statuses = array(
+        'new' => 'новый',
+        'pending' => 'неопределенный',
+        'paid' => 'оплачен',
+        'rejected' => 'не оплачен',
+    );
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -55,7 +64,7 @@ class Order extends BaseModel
 	{
 		return array(
 			array('user_name, user_email, city, receiver_name', 'required'),
-			array('user_name, user_email, discount', 'length', 'max'=>100),
+			array('user_name, user_email, discount, payment_status', 'length', 'max'=>100),
 			array('user_phone', 'length', 'max'=>30),
 			array('user_email', 'email'),
 			array('payment_id, doPhoto,do_card, card_transl', 'numerical', 'integerOnly'=>true),
@@ -66,7 +75,7 @@ class Order extends BaseModel
 			array('paid', 'boolean'),
 			array('image', 'file', 'types'=>'png, jpg, jpeg, gif', 'allowEmpty' => true),
 			// Search
-			array('id, user_id, payment_id, delivery_price, total_price, status_id, paid, user_name, user_email, user_address, user_phone, user_comment, ip_address, created, updated', 'safe', 'on'=>'search'),
+			array('id, user_id, payment_id, payment_status, delivery_price, total_price, status_id, paid, user_name, user_email, user_address, user_phone, user_comment, ip_address, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -127,7 +136,8 @@ class Order extends BaseModel
 			'created'        => Yii::t('OrdersModule.core','Created'),
 			'updated'        => Yii::t('OrdersModule.core','Updated'),
 			'discount'       => Yii::t('OrdersModule.core','Discount'),
-			'payment_id'     => Yii::t('OrdersModule.core','Payment id'),
+			'payment_id'     => Yii::t('OrdersModule.core','Payment type'),
+			'payment_status' => Yii::t('OrdersModule.core','Payment status'),
 			'receiver_name'  => Yii::t('OrdersModule.core','Receiver Name'),
 			'receiver_city'  => Yii::t('OrdersModule.core','Order to'),
 			'phone1'		 => Yii::t('OrdersModule.core','Receiver Phone #1'),
@@ -419,6 +429,7 @@ class Order extends BaseModel
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('payment_id',$this->payment_id);
+		$criteria->compare('payment_status',$this->payment_status);
 		$criteria->compare('delivery_price',$this->delivery_price);
 		$criteria->compare('total_price',$this->total_price);
 		$criteria->compare('status_id',$this->status_id);

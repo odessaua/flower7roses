@@ -18,6 +18,12 @@ function replaceStatus($id)
     );
     return (!empty($statuses[$id])) ? $statuses[$id] : 'Not Defined';
 }
+$payment_statuses = array(
+    'new' => 'new',
+    'pending' => 'pending',
+    'paid' => 'paid',
+    'rejected' => 'rejected',
+);
 ?>
     <style>
         .blue-row{
@@ -84,10 +90,23 @@ function replaceStatus($id)
         ),
         array(
             'name'=>'status_id',
+            'header' => Yii::t('main', 'Order status'),
             'filter'=>CHtml::listData(OrderStatus::model()->orderByPosition()->findAll(), 'id', 'name'),
 //            'value'=>'$data->status_name',
             'value'=>function($data){
                 return Yii::t('main', replaceStatus($data->status_id));
+            },
+            'htmlOptions' => array('style' => 'width: 80px;'),
+        ),
+        array(
+            'name' => 'payment_status',
+            'filter' =>$payment_statuses,
+            'type' => 'raw',
+            'value'=>function($data){
+                if($data->payment_status == 'paid')
+                    return Yii::t('main', $data->payment_status);
+                else
+                    return CHtml::link($data->payment_status, array("/orders/cart/view", "secret_key"=>$data->secret_key));
             },
             'htmlOptions' => array('style' => 'width: 80px;'),
         ),

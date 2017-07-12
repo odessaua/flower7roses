@@ -33,7 +33,7 @@ $this->breadcrumbs = array(
 );
 
 $this->widget('admin.widgets.schosen.SChosen', array(
-	'elements'=>array('Order_delivery_id', 'Order_status_id')
+	'elements'=>array('Order_delivery_id', 'Order_status_id', 'Order_payment_status', 'Order_payment_id')
 ));
 
 // register all delivery methods to recalculate prices
@@ -47,13 +47,13 @@ Yii::app()->clientScript->registerScript('deliveryMetohds', strtr('
 $tabs = array(
 	Yii::t('OrdersModule.admin', 'Заказ') => $this->renderPartial('_order_tab', array(
 		'model'           => $model,
-		'photos'		  =>$photos,
+		'photos'		  => $photos,
 		'orderPhoto'      => $orderPhoto,
 		'statuses'        => $statuses,
 		'deliveryMethods' => $deliveryMethods,
 		'geoinfo'	      => $geoinfo,
-		'citys'=>$citys,
-        'wfp_order' => $wfp_order,
+		'citys'           => $citys,
+        'wfp_order'       => $wfp_order,
 	), true),
 );
 

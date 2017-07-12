@@ -1,3 +1,7 @@
+-- 2017-07-12:
+ALTER TABLE `Order` ADD `payment_status` ENUM('new','paid','pending','rejected')  NOT NULL  DEFAULT 'new'  AFTER `payment_id`;
+-- ==============
+
 -- 2017-07-05:
 ALTER TABLE `SystemSlider` ADD `position` TINYINT(4)  NULL  DEFAULT NULL  AFTER `url`;
 ALTER TABLE `SystemSlider` ADD `active` TINYINT(1)  NULL  DEFAULT NULL  AFTER `position`;

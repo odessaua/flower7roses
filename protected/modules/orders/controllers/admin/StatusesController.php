@@ -18,11 +18,11 @@ class StatusesController extends SAdminController
 
 		$dataProvider = $model->search();
 		$dataProvider->pagination->pageSize = Yii::app()->settings->get('core', 'productsPerPageAdmin');
-		$geo=$this->getGeoIpInfo($model->ip_address);
+//		$geo=$this->getGeoIpInfo($model->ip_address);
 		$this->render('index', array(
 			'model'=>$model,
 			'dataProvider'=>$dataProvider,
-			'geoinfo' => array('domain'=>$geo->domain,'country'=>$geo->country,'state'=>$geo->state,'town'=>$geo->town)
+//			'geoinfo' => array('domain'=>$geo->domain,'country'=>$geo->country,'state'=>$geo->state,'town'=>$geo->town)
 
 		));
 	}
@@ -53,7 +53,7 @@ class StatusesController extends SAdminController
 			throw new CHttpException(404, Yii::t('OrdersModule.admin', 'Статус не найден.'));
 
 		$form = new SAdminForm('application.modules.orders.views.admin.statuses.statusForm', $model);
-		$geo=$this->getGeoIpInfo($model->ip_address);
+//		$geo=$this->getGeoIpInfo($model->ip_address);
 		if (Yii::app()->request->isPostRequest)
 		{
 			$model->attributes = $_POST['OrderStatus'];
@@ -73,7 +73,7 @@ class StatusesController extends SAdminController
 		$this->render('update', array(
 			'model'=>$model,
 			'form'=>$form,
-			'geoinfo' => array('domain'=>$geo->domain,'country'=>$geo->country,'state'=>$geo->state,'town'=>$geo->town)
+//			'geoinfo' => array('domain'=>$geo->domain,'country'=>$geo->country,'state'=>$geo->state,'town'=>$geo->town)
 			
 		));
 	}

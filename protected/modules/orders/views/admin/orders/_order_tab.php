@@ -17,6 +17,9 @@
 	#orderSummaryTable tr td {
 		padding: 3px;
 	}
+    div.userData div.row{
+        margin-bottom: 10px;
+    }
 </style>
 
 <div class="form wide padding-all">
@@ -69,11 +72,6 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 					</div>
 
 					<div class="row">
-						<?php echo CHtml::activeLabel($model,'paid'); ?>
-						<?php echo CHtml::activeCheckBox($model, 'paid'); ?>
-					</div>
-
-					<div class="row">
 						<?php echo CHtml::activeLabel($model,'user_name', array('required'=>true)); ?>
 						<?php echo CHtml::activeTextField($model,'user_name'); ?>
 						<?php if($model->user_id): ?>
@@ -101,6 +99,25 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 						<?php echo CHtml::activeLabel($model,'user_email', array('required'=>true)); ?>
 						<?php echo CHtml::activeTextField($model,'user_email'); ?>
 					</div>
+
+                    <?php
+                    $payments_methods = CHtml::listData(StorePaymentMethod::model()->active()->orderByPosition()->findAll(), 'id', 'name');
+                    $payments_methods[0] = '–';
+                    ?>
+                    <div class="row">
+                        <?php echo CHtml::activeLabel($model,'payment_id', array()); ?>
+                        <?php echo CHtml::activeDropDownList($model, 'payment_id', $payments_methods); ?>
+                    </div>
+
+                    <div class="row">
+                        <?php echo CHtml::activeLabel($model,'payment_status', array()); ?>
+                        <?php echo CHtml::activeDropDownList($model, 'payment_status', $model->payment_statuses); ?>
+                    </div>
+
+                    <div class="row">
+                        <?php echo CHtml::activeLabel($model,'paid'); ?>
+                        <?php echo CHtml::activeCheckBox($model, 'paid'); ?>
+                    </div>
 
 					<div class="row">
 						<?php echo CHtml::activeLabel($model,'user_phone'); ?>

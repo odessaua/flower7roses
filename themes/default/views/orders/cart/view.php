@@ -45,6 +45,26 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
     ));
     $payments = (!empty($payments)) ? CArray::toolIndexArrayBy($payments, 'name') : array();
     ?>
+
+    <?php if(($error_messages = Yii::app()->user->getFlash('error_messages'))): ?>
+        <style>
+            div.error-flash {
+                color: red;
+                background-color: #ffe6e6;
+                border-color: red;
+            }
+        </style>
+        <div class="flash_messages error-flash">
+            <button class="close">×</button>
+            <?php
+            if(is_array($error_messages))
+                echo implode('<br>', $error_messages);
+            else
+                echo $error_messages;
+            ?>
+        </div>
+    <?php endif; ?>
+
     <div class="cart3 g-clearfix">
        
         <div class="data-form data-form-big">
@@ -54,7 +74,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
 					 <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span> 
                <div class="paybutton"> 
 			   <li class="selected">
-                    <input type="radio" name="payment" id="payment1" checked />
+                    <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked />
                     <label for="payment1">
                       <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
 					</label>
@@ -72,7 +92,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                     </div>
                 </li>
 			   <li >
-                    <input type="radio" name="payment" id="payment4" />
+                    <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
                     <label for="payment4">
                         <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
 					</label>
@@ -101,7 +121,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
 				<span style="font-weight:bold;">Bank transfer</span>
                 <div class="paybutton">
                     <li>
-                        <input type="radio" name="payment" id="payment3"/>
+                        <input type="radio" name="payment" id="payment3" value="<?= (!empty($payments['TransferWise']->id)) ? $payments['TransferWise']->id : 0; ?>" />
                         <label for="payment3">
                             <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="Transferwise money transfer" />
                         </label>
@@ -304,6 +324,7 @@ funds to a TransferWise account first and then they send the payment to Varetska
 
 </div>
 
+<?php $formUrl = 'http' . ((strpos($_SERVER['HTTP_HOST'], '.loc') !== false) ? '' : 's') . '://' . $_SERVER['HTTP_HOST']; ?>
 
 <form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -316,8 +337,8 @@ funds to a TransferWise account first and then they send the payment to Varetska
     <input type="hidden" name="shop_order_number" value="<?=$model->id?>">
     <input type="hidden" name="bill_amount" value="<?= $uah_full_price; ?>">
     <input type="hidden" name="description" value="ATTENTION! Amount above is given in Ukraine currency calculated automatically according to the current rate of the Ukraine National Bank">
-    <input type="hidden" name="success_url" value="https://7roses.com/cart/view/<?=$model->secret_key?>/success/">
-    <input type="hidden" name="failure_url" value="https://7roses.com/">
+    <input type="hidden" name="success_url" value="<?= $formUrl; ?>/view/<?=$model->secret_key?>/status/">
+    <input type="hidden" name="failure_url" value="<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/">
     <INPUT TYPE="hidden" NAME="lang" VALUE="<?=Yii::app()->language?>">
     <input type="hidden" name="encoding" value="UTF-8" /> 
     <image width="282" height="100" src='/uploads/image.jpg' />
@@ -367,11 +388,11 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
                 clientEmail : "<?=$model->user_email;?>",
                 clientPhone: "<?=(!empty($model->user_phone)) ? $model->user_phone : '380631234567';?>",
                 language: "<?=strtoupper(Yii::app()->language);?>",
-                returnUrl: "https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/"
+                returnUrl: "<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/"
             },
             function (response) {
                 // on approved
-                document.location.href = "https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/";
+                document.location.href = "<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/";
                 //console.log('Approved: '+response);
             },
             function (response) {
@@ -420,8 +441,8 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
         <input type="hidden" name="clientLastName" value=".">
         <input type="hidden" name="clientPhone" value="<?=(!empty($model->user_phone)) ? $model->user_phone : '380631234567';?>">
         <input type="hidden" name="clientEmail" value="<?=$model->user_email;?>">
-        <input type="hidden" name="returnUrl" value="https://<?=$_SERVER['HTTP_HOST'];?>/cart/view/<?=$model->secret_key?>/success/">
-        <input type="hidden" name="serviceUrl" value="https://<?=$_SERVER['HTTP_HOST'];?>/site/wfpresponse">
+        <input type="hidden" name="returnUrl" value="<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/">
+        <input type="hidden" name="serviceUrl" value="<?= $formUrl; ?>/site/wfpresponse">
         <input type="hidden" name="language" value="<?=strtoupper(Yii::app()->language);?>">
         <button type="submit" style="visibility: hidden;" class="btn btn-special btn-color">Оплатить</button>
     </form>
@@ -429,49 +450,53 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
 
 <script type="text/javascript">
 $(document).ready(function(){
-$('.portmone').css('display','none');
-<?php if($model->status_id != 6): ?>
-    $('.cart4').css('display','none');
-<?php elseif($model->status_id == 6): ?>
-    $('.cart3').css('display','none');
-    $('.cart4').css('display','block');
-<?php endif; ?>
-$('.paypal').css('display','none');
-$('.payment-list li').click(function() {
-    $('.payment-list li').removeClass('selected'); // removes the "selected" class from all tabs
-    $(this).addClass('selected');
-});
-$(".radio_payment").click(function(){
-var payment_id = $(this).val();	
-var order_id = <?=$model->id?>;
-$(".link-next").show();
+    // управление отображением элементов страницы
+    $('.portmone').css('display','none');
+    <?php if($model->status_id != 6): ?>
+        $('.cart4').css('display','none');
+    <?php elseif($model->status_id == 6): ?>
+        $('.cart3').css('display','none');
+        $('.cart4').css('display','block');
+    <?php endif; ?>
+    $('.paypal').css('display','none');
 
-$.ajax({
-type: "GET",
-url: "/site/setPaymentId",
-data: {payment_id : payment_id, order_id : order_id}
-});
-});
+    // выбор способа оплаты
+    $('.payment-list li').click(function() {
+        $('.payment-list li').removeClass('selected'); // removes the "selected" class from all tabs
+        $(this).addClass('selected');
+    });
 
-$(".link-next").click(function(){
-if($($('.selected').children()[0]).attr('id')=="payment1")
-        $('.portmone').submit();
-else if($($('.selected').children()[0]).attr('id')=="payment2")
-        $('.paypal').submit();
-else if($($('.selected').children()[0]).attr('id')=="payment3"){
-	 $('.cart3').css('display','none');
-	 $('.cart4').css('display','block');
-     $('.cart5').css('display','block'); 
-}
-else if($($('.selected').children()[0]).attr('id')=="payment4") {
-    // сохраняем $orderReference и ID заказа в БД
-    $.post(
-        '/site/wfporder',
-        { orderReference : '<?=$orderReference;?>' }
-    );
-    // вызываем виджет – или отправляем форму
-    <?=($wfp_type == 'widget') ? 'wfpay();' . "\n" : '$(\'.wayforpay\').submit();' . "\n";?>
-}
-})
+    // отправка соответствующей формы для выбранной платёжной системы
+    $(".link-next").click(function(){
+        // фиксируем для заказа выбранный способ оплаты
+        var spayment_id = $($('.selected').children()[0]).val(); // ID способа оплаты
+        var sorder_id = <?=$model->id?>; // ID заказа
+        $.ajax({
+            type: "GET",
+            url: "/site/setPaymentId",
+            data: { payment_id : spayment_id, order_id : sorder_id }
+        });
+
+        // отправляем форму
+        if($($('.selected').children()[0]).attr('id')=="payment1")
+            $('.portmone').submit(); // Portmone
+        else if($($('.selected').children()[0]).attr('id')=="payment2")
+            $('.paypal').submit(); // PayPal
+        else if($($('.selected').children()[0]).attr('id')=="payment3"){
+            $('.cart3').css('display','none'); // TransferWise
+            $('.cart4').css('display','block');
+            $('.cart5').css('display','block');
+        }
+        else if($($('.selected').children()[0]).attr('id')=="payment4") {
+            // WayForPay
+            // сохраняем $orderReference и ID заказа в БД
+            $.post(
+                '/site/wfporder',
+                { orderReference : '<?=$orderReference;?>' }
+            );
+            // вызываем виджет – или отправляем форму
+            <?=($wfp_type == 'widget') ? 'wfpay();' . "\n" : '$(\'.wayforpay\').submit();' . "\n";?>
+        }
+    });
 });
 </script>

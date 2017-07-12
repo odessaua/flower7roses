@@ -26,6 +26,9 @@ $this->topButtons = $this->widget('admin.widgets.SAdminTopButtons', array(
 	),
 ));
 
+$payments_methods = CHtml::listData(StorePaymentMethod::model()->active()->orderByPosition()->findAll(), 'id', 'name');
+$payments_methods[0] = '–';
+
 $this->widget('ext.sgridview.SGridView', array(
 	'dataProvider'=>$dataProvider,
 	'id'=>'ordersListGrid',
@@ -46,6 +49,17 @@ $this->widget('ext.sgridview.SGridView', array(
 		'receiver_city',
 		'datetime_del',
 		'user_email',
+        array(
+            'name' => 'payment_id',
+            'filter' => $payments_methods,
+            'value' => function($data) use ($payments_methods){
+                return $payments_methods[$data->payment_id];
+            },
+        ),
+		array(
+		    'name' => 'payment_status',
+		    'filter' => $model->payment_statuses,
+        ),
 		array(
 			'name'=>'status_id',
 			'filter'=>CHtml::listData(OrderStatus::model()->orderByPosition()->findAll(), 'id', 'name'),
