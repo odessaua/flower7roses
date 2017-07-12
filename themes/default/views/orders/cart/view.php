@@ -52,6 +52,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                 color: red;
                 background-color: #ffe6e6;
                 border-color: red;
+                clear: both;
             }
         </style>
         <div class="flash_messages error-flash">
