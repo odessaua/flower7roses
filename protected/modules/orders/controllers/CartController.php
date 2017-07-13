@@ -610,13 +610,14 @@ class CartController extends Controller
      */
     public function wfpProceed($model)
     {
-//        $page_content = 'unknown';
+        // дефолтные параметры
         $transactionStatus = 'Unknown';
         $trans = array(
             'en' => 'The status of payment is uncertain, probably the payment was not accepted',
             'ru' => 'Статус платежа неопределён, вероятно платёж не был принят',
             'uk' => 'Статус платежу невизначений, ймовірно платіж не був прийнятий',
         );
+        $status_message = $trans[Yii::app()->language];
         // получаем orderReference для этого заказа
         $order_ref_command = Yii::app()->db
             ->createCommand("SELECT `orderReference` FROM `WfpOrder` WHERE `order_id` = " . (int)$model->id);
@@ -627,14 +628,21 @@ class CartController extends Controller
             if(!empty($transactionStatus)){
                 // формируем переменные для отображения страницы
                 $payment_statuses = $this->paymentResponseStatus('wayforpay');
-                if(!empty($payment_statuses[$transactionStatus])){
-//                    $page_content = $payment_statuses[$transactionStatus]['page']; // здесь запрос контента для страницы
-                    $trans = $payment_statuses[$transactionStatus]['trans'];
+                if(!empty($payment_statuses[$transactionStatus]['status'])){
+                    // получаем информацию по статусу
+                    $status = $this->getPaymentStatus($payment_statuses[$transactionStatus]['status']);
+                    $status_message = (!empty($status->message)) ? $status->message : '';
                     // обновляем статус платежа в самом заказе
                     // не обновляем – если у заказа уже стоит статус paid
                     if($model->payment_status != 'paid'){
+                        $from_status = $model->payment_status; // старый статус
                         $model->payment_status = $payment_statuses[$transactionStatus]['status'];
                         $model->save();
+                        // письмо клиенту – если статус заказа изменился на paid
+                        if($model->payment_status == 'paid'){
+                            // email клиенту о смене статуса на paid
+                            $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
+                        }
                     }
                     if($payment_statuses[$transactionStatus]['status'] == 'paid'){
                         $model->status_id = 6; // обновляем статус самого заказа
@@ -645,17 +653,12 @@ class CartController extends Controller
                 }
             }
         }
+        // flash-сообщение для клиента
         $msg = Yii::t('main', 'Status of your payment') . ': '
-            . Yii::t('main', $transactionStatus) . ' ('
-            . Yii::t('main', $trans[Yii::app()->language]) . '). '
+            . strtoupper(Yii::t('main', $transactionStatus)) . ' ('
+            . $status_message . '). '
             . Yii::t('main', 'You can choose other payment methods below:');
         $this->addErrorFlashMessage($msg);
-//        $this->render('status', array(
-//            'content' => $page_content,
-//            'status' => $transactionStatus,
-//            'trans' => $trans,
-//            'secret_key' => $model->secret_key,
-//        ));
     }
 
     /**
@@ -664,25 +667,33 @@ class CartController extends Controller
      */
     public function portmoneProceed($model)
     {
-//        $page_content = 'unknown';
+        // дефолтные параметры
         $trans = array(
             'en' => 'The status of payment is uncertain, probably the payment was not accepted',
             'ru' => 'Статус платежа неопределён, вероятно платёж не был принят',
             'uk' => 'Статус платежу невизначений, ймовірно платіж не був прийнятий',
         );
+        $status_message = $trans[Yii::app()->language];
         // запрашиваем и обновляем статус платежа по этому заказу
         $transactionStatus = $this->portmonePayment($model->id);
         if(!empty($transactionStatus)){
             // формируем переменные для отображения страницы
             $payment_statuses = $this->paymentResponseStatus('portmone');
-            if(!empty($payment_statuses[$transactionStatus])){
-//                $page_content = $payment_statuses[$transactionStatus]['page']; // здесь запрос контента для страницы
-                $trans = $payment_statuses[$transactionStatus]['trans'];
+            if(!empty($payment_statuses[$transactionStatus]['status'])){
+                // получаем информацию по статусу
+                $status = $this->getPaymentStatus($payment_statuses[$transactionStatus]['status']);
+                $status_message = (!empty($status->message)) ? $status->message : '';
                 // обновляем статус платежа в самом заказе
                 // не обновляем – если у заказа уже стоит статус paid
                 if($model->payment_status != 'paid'){
+                    $from_status = $model->payment_status; // старый статус
                     $model->payment_status = $payment_statuses[$transactionStatus]['status'];
                     $model->save();
+                    // письмо клиенту – если статус заказа изменился на paid
+                    if($model->payment_status == 'paid'){
+                        // email клиенту о смене статуса на paid
+                        $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
+                    }
                 }
                 if($payment_statuses[$transactionStatus]['status'] == 'paid'){
                     // при успешной оплате – переадрессация на /success
@@ -695,18 +706,12 @@ class CartController extends Controller
         else{
             $transactionStatus = 'Unknown';
         }
+        // flash-сообщение для клиента
         $msg = Yii::t('main', 'Status of your payment') . ': '
-            . Yii::t('main', $transactionStatus) . ' ('
-            . Yii::t('main', $trans[Yii::app()->language]) . '). '
+            . strtoupper(Yii::t('main', $transactionStatus)) . ' ('
+            . $status_message . '). '
             . Yii::t('main', 'You can choose other payment methods below:');
         $this->addErrorFlashMessage($msg);
-        // показываем страницу
-//        $this->render('status', array(
-//            'content' => $page_content,
-//            'status' => $transactionStatus,
-//            'trans' => $trans,
-//            'secret_key' => $model->secret_key,
-//        ));
     }
 
     /**
@@ -742,11 +747,11 @@ class CartController extends Controller
                     $response['createdDate'] = (!empty($response['createdDate'])) ? date('Y-m-d H:i:s', $response['createdDate']) : '0000-00-00 00:00:00';
                     $response['processingDate'] = (!empty($response['processingDate'])) ? date('Y-m-d H:i:s', $response['processingDate']) : '0000-00-00 00:00:00';
                     WfpOrder::model()->updateByPk($wfp_order->id, $response);
-                    return (!empty($response['transactionStatus'])) ? $response['transactionStatus'] : false;
+                    return (!empty($response['transactionStatus'])) ? $response['transactionStatus'] : '';
                 }
             }
         }
-        return false;
+        return '';
     }
 
     /**
@@ -805,7 +810,7 @@ class CartController extends Controller
     }
 
     /**
-     * статусы платежей для платёжных систем
+     * статусы платежей для платёжных систем - ассоциации со статусами в БД
      * @param $payment_system
      * @return array|mixed
      */
@@ -814,85 +819,29 @@ class CartController extends Controller
         $statuses = array(
             'wayforpay' => array(
                 'InProcessing' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Is in the process of processing',
-                        'ru' => 'Находится в процессе обработки',
-                        'uk' => 'Знаходиться в процесі обробки',
-                    ),
-                    'page' => 'processing',
                     'status' => 'pending',
                 ),
                 'Approved' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Successfully paid by the client, funds are written off from the card',
-                        'ru' => 'Успешно оплачен клиентом, средства списаны с карты',
-                        'uk' => 'Успішно оплачений клієнтом, кошти списані з карти',
-                    ),
-                    'page' => 'approved',
                     'status' => 'paid',
                 ),
                 'Pending' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'On Verification',
-                        'ru' => 'На проверке',
-                        'uk' => 'На перевірці',
-                    ),
-                    'page' => 'pending',
                     'status' => 'pending',
                 ),
                 'Expired' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Payment period has expired',
-                        'ru' => 'Истек срок оплаты',
-                        'uk' => 'Закінчився термін оплати',
-                    ),
-                    'page' => 'expired',
                     'status' => 'rejected',
                 ),
                 'Declined' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Unable to perform an operation',
-                        'ru' => 'Невозможно провести операцию',
-                        'uk' => 'Неможливо провести операцію',
-                    ),
-                    'page' => 'declined',
                     'status' => 'rejected',
                 ),
             ),
             'portmone' => array(
                 'PAYED' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Successfully paid by the client, funds are written off from the card',
-                        'ru' => 'Успешно оплачен клиентом, средства списаны с карты',
-                        'uk' => 'Успішно оплачений клієнтом, кошти списані з карти',
-                    ),
-                    'page' => 'approved',
                     'status' => 'paid',
                 ),
                 'CREATED' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Is in the process of processing',
-                        'ru' => 'Находится в процессе обработки',
-                        'uk' => 'Знаходиться в процесі обробки',
-                    ),
-                    'page' => 'processing',
                     'status' => 'pending',
                 ),
                 'REJECTED' => array(
-                    'title' => '',
-                    'trans' => array(
-                        'en' => 'Unable to perform an operation',
-                        'ru' => 'Невозможно провести операцию',
-                        'uk' => 'Неможливо провести операцію',
-                    ),
-                    'page' => 'declined',
                     'status' => 'rejected',
                 ),
             ),
@@ -909,5 +858,52 @@ class CartController extends Controller
             $currentMessages = array();
 
         Yii::app()->user->setFlash('error_messages', CMap::mergeArray($currentMessages, array($message)));
+    }
+
+    /**
+     * получаем информацию по статусу
+     * @param string $key
+     */
+    public function getPaymentStatus($key)
+    {
+        return OrderPaymentStatus::model()
+            ->language($this->language_info->id)
+            ->active()
+            ->find('`key` = :key', array(':key' => $key));
+    }
+
+    /**
+     * письмо клиенту после смены статуса платежа
+     *
+     * @param $address
+     * @param $order_id
+     * @param $from_status
+     * @param $to_status
+     */
+    private function sendPaymentEmail($address, $order_id, $from_status, $to_status)
+    {
+        $theme = Yii::t('OrdersModule.core', 'Your payment status by order #').$order_id;
+
+        $message = Yii::t('OrdersModule.core',
+            'Your payment status by order #{order_id} was changed from «{from_status}» to «{to_status}».',
+            array(
+                '{order_id}' => $order_id,
+                '{from_status}' => $from_status,
+                '{to_status}' => $to_status,
+            )
+        );
+
+        $mailer           = Yii::app()->mail;
+        // $mailer->IsSMTP();
+        $mailer->From     = Yii::app()->params['adminEmail'];
+        $mailer->FromName = Yii::app()->settings->get('core', 'siteName');
+        $mailer->Subject  = $theme;
+        $mailer->Body     = $message;
+        $mailer->AddAddress($address);
+        $mailer->AddReplyTo(Yii::app()->params['adminEmail']);
+        $mailer->isHtml(true);
+        $mailer->Send();
+        $mailer->ClearAddresses();
+        $mailer->ClearReplyTos();
     }
 }

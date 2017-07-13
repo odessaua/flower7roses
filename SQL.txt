@@ -1,3 +1,47 @@
+-- 2017-07-13:
+CREATE TABLE `OrderPaymentStatus` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `key` (`key`),
+  KEY `active` (`active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `OrderPaymentStatusTranslate` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) DEFAULT NULL,
+  `language_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `message` text,
+  PRIMARY KEY (`id`),
+  KEY `object_id` (`object_id`),
+  KEY `language_id` (`language_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `OrderPaymentStatus` (`id`, `key`, `active`)
+VALUES
+	(1, 'new', 1),
+	(2, 'paid', 1),
+	(3, 'rejected', 1),
+	(4, 'pending', 1);
+
+INSERT INTO `OrderPaymentStatusTranslate` (`id`, `object_id`, `language_id`, `name`, `message`)
+VALUES
+	(1, 1, 1, 'новый', ''),
+	(2, 1, 9, 'new', ''),
+	(3, 1, 10, 'новий', ''),
+	(4, 2, 1, 'оплачен', 'Успешно оплачен клиентом, средства списаны с карты'),
+	(5, 2, 9, 'paid', 'Successfully paid by the client, funds are written off from the card'),
+	(6, 2, 10, 'сплачений', 'Успішно оплачений клієнтом, кошти списані з карти'),
+	(7, 3, 1, 'отклонён', 'Невозможно провести операцию'),
+	(8, 3, 9, 'rejected', 'Unable to perform an operation'),
+	(9, 3, 10, 'відхилений', 'Неможливо провести операцію'),
+	(10, 4, 1, 'не определен', 'Находится в процессе обработки'),
+	(11, 4, 9, 'pending', 'Is in the process of processing'),
+	(12, 4, 10, 'невизначений', 'Знаходиться в процесі обробки');
+-- ==============
+
 -- 2017-07-12:
 ALTER TABLE `Order` ADD `payment_status` ENUM('new','paid','pending','rejected')  DEFAULT NULL  AFTER `payment_id`;
 -- ==============

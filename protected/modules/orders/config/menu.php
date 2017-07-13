@@ -25,10 +25,15 @@ return array(
 				'position' => 2
 			),
 			array(
-				'label'    => Yii::t('OrdersModule.admin', 'Статусы'),
+				'label'    => Yii::t('OrdersModule.admin', 'Статусы заказов'),
 				'url'      => array('/orders/admin/statuses'),
 				'position' => 3
-			)
+			),
+            array(
+                'label'    => Yii::t('OrdersModule.admin', 'Статусы платежей'),
+                'url'      => array('/orders/admin/orderPaymentStatus'),
+                'position' => 4
+            )
 		),
 	),
 );

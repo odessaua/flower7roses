@@ -16,6 +16,9 @@ class OrdersController extends SAdminController {
 	 */
 	public function actionIndex()
 	{
+	    // обновляем статусы платежей по заказам
+        $this->checkPaymentStatuses();
+
 		$model = new Order('search');
 
 		if (!empty($_GET['Order']))
@@ -139,6 +142,9 @@ class OrdersController extends SAdminController {
 				$photos[$key]="/uploads/".$value['photo'];
 			}
 		}
+
+		$from_status = $model->payment_status;
+
 		if(Yii::app()->request->isPostRequest)
 		{
 
@@ -206,6 +212,12 @@ class OrdersController extends SAdminController {
 				$model->updateTotalPrice();
 
 				$this->setFlashMessage(Yii::t('OrdersModule.admin', 'Изменения успешно сохранены'));
+
+				// письмо клиенту – если статус заказа изменился на paid
+				if(($from_status !== $model->payment_status) && ($model->payment_status == 'paid')){
+                    // email клиенту о смене статуса на paid
+                    $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
+                }
 
 				if(isset($_POST['REDIRECT']))
 					$this->smartRedirect($model);
@@ -414,4 +426,281 @@ class OrdersController extends SAdminController {
 	{
 		throw new CHttpException(404, Yii::t('OrdersModule.admin', 'Заказ не найден.'));
 	}
+
+    /**
+     * письмо клиенту после смены статуса платежа
+     *
+     * @param $address
+     * @param $order_id
+     * @param $from_status
+     * @param $to_status
+     */
+    private function sendPaymentEmail($address, $order_id, $from_status, $to_status)
+    {
+        $theme = Yii::t('OrdersModule.core', 'Payment status by your order #').$order_id;
+
+        $message = Yii::t('OrdersModule.core',
+            'Payment status by your order #{order_id} was changed from «{from_status}» to «{to_status}».',
+            array(
+                '{order_id}' => $order_id,
+                '{from_status}' => $from_status,
+                '{to_status}' => $to_status,
+            )
+        );
+
+        $mailer           = Yii::app()->mail;
+        // $mailer->IsSMTP();
+        $mailer->From     = Yii::app()->params['adminEmail'];
+        $mailer->FromName = Yii::app()->settings->get('core', 'siteName');
+        $mailer->Subject  = $theme;
+        $mailer->Body     = $message;
+        $mailer->AddAddress($address);
+        $mailer->AddReplyTo(Yii::app()->params['adminEmail']);
+        $mailer->isHtml(true);
+        $mailer->Send();
+        $mailer->ClearAddresses();
+        $mailer->ClearReplyTos();
+    }
+
+    /**
+     * проверка и обновление статусов у заказов, у которых:
+     * `payment_id` > 0            - указан способ оплаты
+     * `status_id` = 1             - статус заказа «Новый»
+     * `payment_status` != 'paid'  - статус платежа НЕ «оплачен»
+     */
+    public function checkPaymentStatuses()
+    {
+        // получаем заказы, у которых указан метод оплаты > 0 и статус заказа = 1 и статус платежа != paid
+        $orders = Order::model()->findAll('`payment_id` > 0 AND `status_id` = 1 AND `payment_status` != :ps',
+            array(
+                ':ps' => 'paid',
+            )
+        );
+        if(!empty($orders)){
+            // способы оплаты
+            $payment_methods = StorePaymentMethod::model()->active()->findAll();
+            $payment_methods = (!empty($payment_methods)) ? CArray::toolIndexArrayBy($payment_methods, 'id') : array();
+            // обрабатываем найденные заказы
+            foreach ($orders as $order){
+                // WayForPay
+                if(!empty($payment_methods[$order->payment_id])
+                    && (strtolower($payment_methods[$order->payment_id]->name) === 'wayforpay'))
+                {
+                    $this->wfpProceed($order);
+                }
+                // Portmone
+                if(!empty($payment_methods[$order->payment_id])
+                    && (strtolower($payment_methods[$order->payment_id]->name) === 'portmone'))
+                {
+                    $this->portmoneProceed($order);
+                }
+            }
+        }
+    }
+
+    /**
+     * работаем с WayForPay
+     * @param object $model - модель заказа
+     */
+    public function wfpProceed($model)
+    {
+        // получаем orderReference для этого заказа
+        $order_ref_command = Yii::app()->db
+            ->createCommand("SELECT `orderReference` FROM `WfpOrder` WHERE `order_id` = " . (int)$model->id);
+        $order_ref = $order_ref_command->queryScalar();
+        if(!empty($order_ref)){
+            // запрашиваем и обновляем статус платежа по этому заказу
+            $transactionStatus = $this->getWfpStatus($order_ref);
+            if(!empty($transactionStatus)){
+                // формируем переменные для отображения страницы
+                $payment_statuses = $this->paymentResponseStatus('wayforpay');
+                if(!empty($payment_statuses[$transactionStatus]['status'])){
+                    // обновляем статус платежа в самом заказе
+                    // не обновляем – если у заказа уже стоит статус paid
+                    if(($model->payment_status != 'paid') && ($model->payment_status != $payment_statuses[$transactionStatus]['status'])){
+                        $from_status = $model->payment_status; // старый статус
+                        $model->payment_status = $payment_statuses[$transactionStatus]['status'];
+                        $model->save();
+                        // письмо клиенту – если статус заказа изменился на paid
+                        if($model->payment_status == 'paid'){
+                            // email клиенту о смене статуса на paid
+                            $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
+                        }
+                    }
+                    if($payment_statuses[$transactionStatus]['status'] == 'paid'){
+                        $model->status_id = 6; // обновляем статус самого заказа
+                        $model->update();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * работаем с Portmone
+     * @param object $model - модель заказа
+     */
+    public function portmoneProceed($model)
+    {
+        // запрашиваем и обновляем статус платежа по этому заказу
+        $transactionStatus = $this->portmonePayment($model->id);
+        if(!empty($transactionStatus)){
+            // формируем переменные для отображения страницы
+            $payment_statuses = $this->paymentResponseStatus('portmone');
+            if(!empty($payment_statuses[$transactionStatus]['status'])){
+                // обновляем статус платежа в самом заказе
+                // не обновляем – если у заказа уже стоит статус paid
+                if(($model->payment_status != 'paid') && ($model->payment_status != $payment_statuses[$transactionStatus]['status'])){
+                    $from_status = $model->payment_status; // старый статус
+                    $model->payment_status = $payment_statuses[$transactionStatus]['status'];
+                    $model->save();
+                    // письмо клиенту – если статус заказа изменился на paid
+                    if($model->payment_status == 'paid'){
+                        // email клиенту о смене статуса на paid
+                        $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
+                    }
+                }
+                if($payment_statuses[$transactionStatus]['status'] == 'paid'){
+                    $model->status_id = 6; // обновляем статус самого заказа
+                    $model->update();
+                }
+            }
+        }
+    }
+
+    /**
+     * Получаем и обновляем статус заказа в системе WayForPay
+     * @param $order_ref orderReference заказа в системе WayForPay
+     * @return bool|string
+     */
+    public function getWfpStatus($order_ref)
+    {
+        $string = Yii::app()->params['merchantAccount'] . ";" . $order_ref;
+        $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecretKey']);
+        $data = array(
+            'transactionType' => 'CHECK_STATUS',
+            'merchantAccount' => Yii::app()->params['merchantAccount'],
+            'orderReference' => $order_ref,
+            'merchantSignature' => $merchantSignature,
+            'apiVersion' => 1,
+        );
+        $order_ex = explode('_', $order_ref);
+        $order_id = end($order_ex);
+        if( $curl = curl_init() ) {
+            curl_setopt($curl, CURLOPT_URL, 'https://api.wayforpay.com/api');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            $out = curl_exec($curl);
+            curl_close($curl);
+            if(CJsn::isJson($out)){
+                $response = json_decode($out, true);
+                $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => $order_id));
+                if(!empty($wfp_order) && !empty($response['orderReference'])){
+                    unset($response['orderReference'], $response['merchantAccount']);
+                    $response['createdDate'] = (!empty($response['createdDate'])) ? date('Y-m-d H:i:s', $response['createdDate']) : '0000-00-00 00:00:00';
+                    $response['processingDate'] = (!empty($response['processingDate'])) ? date('Y-m-d H:i:s', $response['processingDate']) : '0000-00-00 00:00:00';
+                    WfpOrder::model()->updateByPk($wfp_order->id, $response);
+                    return (!empty($response['transactionStatus'])) ? $response['transactionStatus'] : '';
+                }
+            }
+        }
+        return '';
+    }
+
+    /**
+     * получаем информацию о платеже, возвращаем статус платежа
+     * @param $order_id
+     * @return mixed|string
+     */
+    public function portmonePayment($order_id)
+    {
+        $data = array(
+            "method"            => "result",
+            "payee_id"          => 2046,
+            "login"             => 'SHP_7ROSES',
+            "password"          => '7ro1310',
+            "shop_order_number" => $order_id,
+        );
+
+        $result_portmone = $this->curlRequest('https://www.portmone.com.ua/gateway/', $data);
+        $parseXml = $this->parseXml($result_portmone);
+        $order_data = (array)$parseXml->orders->order; // $order_data['status'] - статус платежа
+        return (!empty($order_data['status'])) ? $order_data['status'] : '';
+    }
+
+    /**
+     * A request to verify the validity of payment in Portmone
+     **/
+    private function curlRequest($url, $data) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        $response = curl_exec($ch);
+        $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if (200 !== intval($httpCode)) {
+            return false;
+        }
+        return $response;
+    }
+
+    /**
+     * Parsing XML response from Portmone
+     **/
+    private function parseXml($string) {
+        libxml_use_internal_errors(true);
+        $xml = simplexml_load_string($string, 'SimpleXMLElement', LIBXML_NOCDATA);
+        if (false !== $xml) {
+            return $xml;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * статусы платежей для платёжных систем - ассоциации со статусами в БД
+     * @param $payment_system
+     * @return array|mixed
+     */
+    public function paymentResponseStatus($payment_system)
+    {
+        $statuses = array(
+            'wayforpay' => array(
+                'InProcessing' => array(
+                    'status' => 'pending',
+                ),
+                'Approved' => array(
+                    'status' => 'paid',
+                ),
+                'Pending' => array(
+                    'status' => 'pending',
+                ),
+                'Expired' => array(
+                    'status' => 'rejected',
+                ),
+                'Declined' => array(
+                    'status' => 'rejected',
+                ),
+            ),
+            'portmone' => array(
+                'PAYED' => array(
+                    'status' => 'paid',
+                ),
+                'CREATED' => array(
+                    'status' => 'pending',
+                ),
+                'REJECTED' => array(
+                    'status' => 'rejected',
+                ),
+            ),
+        );
+
+        return (!empty($statuses[$payment_system])) ? $statuses[$payment_system] : array();
+    }
 }
