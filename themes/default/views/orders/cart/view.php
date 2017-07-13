@@ -40,9 +40,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
     <h1 class="page-title"><?php echo Yii::t('OrdersModule.core','Your order')?></h1>
 <?php if($model->status_id != 6): ?>
     <?php
-    $payments = StorePaymentMethod::model()->findAll(array(
-        'condition' => 'active = 1',
-    ));
+    $payments = StorePaymentMethod::model()->active()->findAll();
     $payments = (!empty($payments)) ? CArray::toolIndexArrayBy($payments, 'name') : array();
     ?>
 
@@ -71,54 +69,68 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
         <div class="data-form data-form-big">
             <table cellpadding="10px" border=0><tr><td valign=top>
             <b class="title"><?=yii::t('OrdersModule.core','Select a Payment Method:')?></b>
-            <ul class="payment-list"> 
-					 <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span> 
-               <div class="paybutton"> 
-			   <li class="selected">
-                    <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked />
-                    <label for="payment1">
-                      <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
-					</label>
-                        <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span> 
-                    <div class="help-tip">
-                        <?php if(!empty($payments['Portmone'])): ?>
-                        <p>
-                            <strong>Portmone</strong>: <?= strip_tags($payments['Portmone']->description); ?>
-                            <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
-                        <?php else: ?>
-                        <p>
-                            <strong>Portmone</strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
-                            <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
-                        <?php endif; ?>
-                    </div>
-                </li>
-			   <li >
-                    <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
-                    <label for="payment4">
-                        <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
-					</label>
-                     <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-                   <div class="help-tip">
+            <ul class="payment-list">
+
+                <?php if(!empty($payments['Portmone']) || !empty($payments['WayForPay'])): ?>
+                    <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span>
+                   <div class="paybutton">
+                   <?php if(!empty($payments['Portmone'])): ?>
+                   <li class="selected">
+                        <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked />
+                        <label for="payment1">
+                          <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
+                        </label>
+                            <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                        <div class="help-tip">
+                            <?php if(!empty($payments['Portmone'])): ?>
+                            <p>
+                                <strong>Portmone</strong>: <?= strip_tags($payments['Portmone']->description); ?>
+                                <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
+                            <?php else: ?>
+                            <p>
+                                <strong>Portmone</strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
+                                <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
+                            <?php endif; ?>
+                        </div>
+                    </li>
+                   <?php endif; // Portmone ?>
+
                    <?php if(!empty($payments['WayForPay'])): ?>
-                       <p>
-                           <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
-                           <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                   <?php else: ?>
-                       <p>
-                           <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
-                           <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                   <?php endif; ?>
-                   </div>
-                </li>
-				
-				</div><br>
-               <!-- <li>     // временно отключили принятие платежей по paypal
-                    <input type="radio" name="payment" id="payment2"/>
-                    <label for="payment2">
-                        <img src="/uploads/payment-paypal.jpg" alt="Paypal" title="Paypal"/>
-                        <span>PayPal - <?//echo StoreProduct::formatPrice($model->full_price); echo yii::t('OrdersModule.core',' USD');?></span>
-                    </label>
-                </li> -->
+                   <li >
+                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
+                        <label for="payment4">
+                            <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
+                        </label>
+                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                       <div class="help-tip">
+                       <?php if(!empty($payments['WayForPay'])): ?>
+                           <p>
+                               <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
+                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                       <?php else: ?>
+                           <p>
+                               <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
+                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                       <?php endif; ?>
+                       </div>
+                    </li>
+                    <?php endif; // WayForPay ?>
+                    </div><br>
+                <?php endif; // Portmone || WayForPay ?>
+
+                <?php if(!empty($payments['Paypal'])): ?>
+                <div class="paybutton">
+                   <li>
+                        <input type="radio" name="payment" id="payment2"/>
+                        <label for="payment2">
+                            <img src="/uploads/payment-paypal.jpg" alt="Paypal" title="Paypal"/>
+                            <span>PayPal - <span class="price"><?= StoreProduct::formatPrice($model->full_price) . Yii::t('OrdersModule.core',' USD');?></span></span>
+                        </label>
+                    </li>
+                </div><br>
+                <?php endif; // Paypal ?>
+
+                <?php if(!empty($payments['TransferWise'])): ?>
 				<span style="font-weight:bold;">Bank transfer</span>
                 <div class="paybutton">
                     <li>
@@ -142,7 +154,8 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                         </div>
                     </li>
                 </div>
-                
+                <?php endif; // TransferWise ?>
+
             </ul>
             <div class="links">
                 <a class="link-next" href="#" title=""><?=yii::t('OrdersModule.core','Pay')?></a>
@@ -328,10 +341,10 @@ funds to a TransferWise account first and then they send the payment to Varetska
 <?php $formUrl = 'http' . ((strpos($_SERVER['HTTP_HOST'], '.loc') !== false) ? '' : 's') . '://' . $_SERVER['HTTP_HOST']; ?>
 
 <form class="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="M5BMF2Y4XWPBC">
-<input type="image" src="/uploads/payment-paypal.jpg" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="M5BMF2Y4XWPBC">
+    <input type="image" src="/uploads/payment-paypal.jpg" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 <form class="portmone" action="https://www.portmone.com.ua/gateway/" method="post" name="paymentform">
     <input type="hidden" name="payee_id" value="2046">
@@ -451,6 +464,11 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
 
 <script type="text/javascript">
 $(document).ready(function(){
+    // первый способ оплаты – активен (?)
+//    $('.payment-list li').removeClass('selected'); // removes the "selected" class from all tabs
+//    $('ul.payment-list li').first().addClass('selected');
+//    $('ul.payment-list li').first().find('input[type=radio]').attr('checked', 'checked');
+
     // управление отображением элементов страницы
     $('.portmone').css('display','none');
     <?php if($model->status_id != 6): ?>
@@ -482,7 +500,7 @@ $(document).ready(function(){
         if($($('.selected').children()[0]).attr('id')=="payment1")
             $('.portmone').submit(); // Portmone
         else if($($('.selected').children()[0]).attr('id')=="payment2")
-            $('.paypal').submit(); // PayPal
+            $('.paypal').submit(); // Paypal
         else if($($('.selected').children()[0]).attr('id')=="payment3"){
             $('.cart3').css('display','none'); // TransferWise
             $('.cart4').css('display','block');
