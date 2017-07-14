@@ -33,7 +33,12 @@ return array(
                 'label'    => Yii::t('OrdersModule.admin', 'Статусы платежей'),
                 'url'      => array('/orders/admin/orderPaymentStatus'),
                 'position' => 4
-            )
+            ),
+            array(
+                'label'    => Yii::t('OrdersModule.admin', 'Логи статусов'),
+                'url'      => array('/orders/admin/orderPaymentStatusLog'),
+                'position' => 5
+            ),
 		),
 	),
 );

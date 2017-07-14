@@ -1,3 +1,20 @@
+-- 2017-07-14:
+CREATE TABLE `OrderPaymentStatusLog` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL,
+  `payment_type` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `response_orig` text,
+  `response_used` text,
+  `response_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  KEY `payment_type` (`payment_type`),
+  KEY `status` (`status`),
+  KEY `response_date` (`response_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ===========
+
 -- 2017-07-13:
 CREATE TABLE `OrderPaymentStatus` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

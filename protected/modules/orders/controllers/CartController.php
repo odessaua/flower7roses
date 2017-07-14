@@ -624,7 +624,7 @@ class CartController extends Controller
         $order_ref = $order_ref_command->queryScalar();
         if(!empty($order_ref)){
             // запрашиваем и обновляем статус платежа по этому заказу
-            $transactionStatus = $this->wfpStatus($order_ref);
+            $transactionStatus = $this->wfpStatus($order_ref, $model->id);
             if(!empty($transactionStatus)){
                 // формируем переменные для отображения страницы
                 $payment_statuses = $this->paymentResponseStatus('wayforpay');
@@ -717,9 +717,10 @@ class CartController extends Controller
     /**
      * Получаем и обновляем статус заказа в системе WayForPay
      * @param $order_ref orderReference заказа в системе WayForPay
+     * @param $order_id
      * @return bool|string
      */
-    public function wfpStatus($order_ref)
+    public function wfpStatus($order_ref, $order_id)
     {
         $string = Yii::app()->params['merchantAccount'] . ";" . $order_ref;
         $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecretKey']);
@@ -730,6 +731,7 @@ class CartController extends Controller
             'merchantSignature' => $merchantSignature,
             'apiVersion' => 1,
         );
+        $status = '';
         $order_ex = explode('_', $order_ref);
         $order_id = end($order_ex);
         if( $curl = curl_init() ) {
@@ -747,11 +749,12 @@ class CartController extends Controller
                     $response['createdDate'] = (!empty($response['createdDate'])) ? date('Y-m-d H:i:s', $response['createdDate']) : '0000-00-00 00:00:00';
                     $response['processingDate'] = (!empty($response['processingDate'])) ? date('Y-m-d H:i:s', $response['processingDate']) : '0000-00-00 00:00:00';
                     WfpOrder::model()->updateByPk($wfp_order->id, $response);
-                    return (!empty($response['transactionStatus'])) ? $response['transactionStatus'] : '';
+                    $status = (!empty($response['transactionStatus'])) ? $response['transactionStatus'] : '';
                 }
+                $this->savePaymentStatusLog($order_id, 'wayforpay', (!empty($status) ? $status : 'Unknown'), (string)$out, serialize($response));
             }
         }
-        return '';
+        return $status;
     }
 
     /**
@@ -772,7 +775,9 @@ class CartController extends Controller
         $result_portmone = $this->curlRequest('https://www.portmone.com.ua/gateway/', $data);
         $parseXml = $this->parseXml($result_portmone);
         $order_data = (array)$parseXml->orders->order; // $order_data['status'] - статус платежа
-        return (!empty($order_data['status'])) ? $order_data['status'] : '';
+        $status = (!empty($order_data['status'])) ? $order_data['status'] : '';
+        $this->savePaymentStatusLog($order_id, 'portmone', (!empty($status) ? $status : 'Unknown'), (string)$parseXml, serialize($order_data));
+        return $status;
     }
 
     /**
@@ -905,5 +910,25 @@ class CartController extends Controller
         $mailer->Send();
         $mailer->ClearAddresses();
         $mailer->ClearReplyTos();
+    }
+
+    /**
+     * сохраняем логи статусов платежей, полученные от платёжных агрегаторов
+     * @param $order_id
+     * @param $payment_type
+     * @param $status
+     * @param $original
+     * @param $used
+     */
+    public function savePaymentStatusLog($order_id, $payment_type, $status, $original, $used)
+    {
+        $log = new OrderPaymentStatusLog();
+        $log->order_id = $order_id;
+        $log->payment_type = $payment_type;
+        $log->status = $status;
+        $log->response_orig = $original;
+        $log->response_used = $used;
+        $log->response_date = date('Y-m-d H:i:s');
+        $log->save();
     }
 }
