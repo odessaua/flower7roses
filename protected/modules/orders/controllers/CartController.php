@@ -652,6 +652,9 @@ class CartController extends Controller
                     }
                 }
             }
+            else{
+                $transactionStatus = 'Unknown';
+            }
         }
         // flash-сообщение для клиента
         $msg = Yii::t('main', 'Status of your payment') . ': '
