@@ -776,7 +776,17 @@ class CartController extends Controller
         $parseXml = $this->parseXml($result_portmone);
         $order_data = (array)$parseXml->orders->order; // $order_data['status'] - статус платежа
         $status = (!empty($order_data['status'])) ? $order_data['status'] : '';
-        $this->savePaymentStatusLog($order_id, 'portmone', (!empty($status) ? $status : 'Unknown'), '', serialize($order_data));
+        $saved = array(
+            'shop_bill_id' => (!empty($order_data['shop_bill_id'])) ? $order_data['shop_bill_id'] : '',
+            'shop_order_number' => (!empty($order_data['shop_order_number'])) ? $order_data['shop_order_number'] : '',
+            'bill_date' => (!empty($order_data['bill_date'])) ? $order_data['bill_date'] : '',
+            'pay_date' => (!empty($order_data['pay_date'])) ? $order_data['pay_date'] : '',
+            'bill_amount' => (!empty($order_data['bill_amount'])) ? $order_data['bill_amount'] : '',
+            'status' => (!empty($order_data['status'])) ? $order_data['status'] : '',
+            'error_code' => (!empty($order_data['error_code'])) ? $order_data['error_code'] : '',
+            'error_message' => (!empty($order_data['error_message'])) ? $order_data['error_message'] : '',
+        );
+        $this->savePaymentStatusLog($order_id, 'portmone', (!empty($status) ? $status : 'Unknown'), (string)$result_portmone, serialize($saved));
         return $status;
     }
 
