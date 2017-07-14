@@ -27,7 +27,13 @@ $this->widget('zii.widgets.CDetailView', array(
 		'order_id',
 		'payment_type',
 		'status',
-		'response_orig',
+        array(
+            'name' => 'response_orig' ,
+            'type' => 'raw',
+            'value' => function($data){
+                return '<pre>' . $data->response_orig . '</pre>';
+            },
+        ),
 		array(
 		    'name' => 'response_used' ,
             'type' => 'raw',
@@ -35,7 +41,6 @@ $this->widget('zii.widgets.CDetailView', array(
 		        return '<pre>' . var_export(unserialize($data->response_used), true) . '</pre>';
             },
         ),
-		'response_used',
 		'response_date',
 	),
 )); ?>
