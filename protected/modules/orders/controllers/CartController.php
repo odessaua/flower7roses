@@ -776,7 +776,7 @@ class CartController extends Controller
         $parseXml = $this->parseXml($result_portmone);
         $order_data = (array)$parseXml->orders->order; // $order_data['status'] - статус платежа
         $status = (!empty($order_data['status'])) ? $order_data['status'] : '';
-        $this->savePaymentStatusLog($order_id, 'portmone', (!empty($status) ? $status : 'Unknown'), (string)$parseXml, serialize($order_data));
+        $this->savePaymentStatusLog($order_id, 'portmone', (!empty($status) ? $status : 'Unknown'), '', serialize($order_data));
         return $status;
     }
 
