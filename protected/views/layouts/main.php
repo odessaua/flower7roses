@@ -444,7 +444,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 	    <div class="reg">
 		    <div class="reg-sorts">
 		        <div class="sort sort-reg">
-		            <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php', array('popup'=>'city-popup')); ?>
+		            <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php', array('popup'=>'city-popup', 'no_redirect' => true)); ?>
 		        </div>
 		    </div>
 		</div>

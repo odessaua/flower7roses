@@ -182,9 +182,15 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                         <?php
                         $pro_model = StoreProduct::model()->findByPk($product->product_id);
 						//var_dump ($product);
+                        if($pro_model->mainImage) {
+                            $imgSource = $pro_model->mainImage->getUrl('85x85', 'resize');
+                            if(!file_exists('./' . $imgSource)) $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
+                        }
+                        else
+                            $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
                         ?>
                         <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
-                            <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>" alt="<?=$product->getRenderFullName(false)?>"  title="<?=$product->getRenderFullName(false)?>"/>
+                            <img src="<?= $imgSource; ?>" alt="<?=$product->getRenderFullName(false)?>"  title="<?=$product->getRenderFullName(false)?>"/>
                         </a>
                     </div></td><td>
                     <div class="carttext">
@@ -279,9 +285,15 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                     <div class="visual">
                         <?php
                         $pro_model = StoreProduct::model()->findByPk($product->product_id);
+                        if($pro_model->mainImage) {
+                            $imgSource = $pro_model->mainImage->getUrl('85x85', 'resize');
+                            if(!file_exists('./' . $imgSource)) $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
+                        }
+                        else
+                            $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
                         ?>
                         <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
-                            <img src="<?=$pro_model->mainImage->getUrl('85x85', 'resize')?>"/>
+                            <img src="<?= $imgSource; ?>"/>
                         </a>
                     </div>
                     <div class="text">

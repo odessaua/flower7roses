@@ -611,7 +611,6 @@ class CartController extends Controller
     public function wfpProceed($model)
     {
         // дефолтные параметры
-        $transactionStatus = 'Unknown';
         $trans = array(
             'en' => 'The status of payment is uncertain, probably the payment was not accepted',
             'ru' => 'Статус платежа неопределён, вероятно платёж не был принят',
@@ -652,16 +651,9 @@ class CartController extends Controller
                     }
                 }
             }
-            else{
-                $transactionStatus = 'Unknown';
-            }
         }
         // flash-сообщение для клиента
-        $msg = Yii::t('main', 'Status of your payment') . ': '
-            . strtoupper(Yii::t('main', $transactionStatus)) . ' ('
-            . $status_message . '). '
-            . Yii::t('main', 'You can choose other payment methods below:');
-        $this->addErrorFlashMessage($msg);
+        $this->addErrorFlashMessage($status_message);
     }
 
     /**
@@ -706,15 +698,8 @@ class CartController extends Controller
                 }
             }
         }
-        else{
-            $transactionStatus = 'Unknown';
-        }
         // flash-сообщение для клиента
-        $msg = Yii::t('main', 'Status of your payment') . ': '
-            . strtoupper(Yii::t('main', $transactionStatus)) . ' ('
-            . $status_message . '). '
-            . Yii::t('main', 'You can choose other payment methods below:');
-        $this->addErrorFlashMessage($msg);
+        $this->addErrorFlashMessage($status_message);
     }
 
     /**

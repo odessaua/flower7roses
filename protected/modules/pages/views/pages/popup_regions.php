@@ -36,9 +36,11 @@ if(!$popup)
 					dataType: "text",
 					success: function(data){
 					    var city = data.split("_");
+					    ' . (empty($no_redirect) ? '
 					    if(city.length == 2){
 					        document.location.href=city[1];
 					    }
+					    ' : '') . '
 					    $(".cityName").text(city[0]);
 						$(".sort-popup").addClass("hidden");
 					}
@@ -73,6 +75,7 @@ if(!$popup)
 					->order('ct.name, id desc')
 				    ->queryAll();
                 if(!empty($cities)){
+                    $city_link_class = (!empty($no_redirect)) ? 'no-redirect-link' : '';
                     $parts = 3;
                     if(sizeof($cities) >= $parts){
                         $part_size = ceil((sizeof($cities) / $parts));
@@ -90,7 +93,7 @@ if(!$popup)
                             ?>
                             <li>
                                 <?php // замена пробелов на _ в названиях городов (krivoy rog --> krivoy_rog) ?>
-                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower(str_replace(' ', '_', $city['eng_name'])))); ?>
+                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower(str_replace(' ', '_', $city['eng_name']))), array('class' => $city_link_class)); ?>
                             </li>
                             <?php
                             }
@@ -106,3 +109,24 @@ if(!$popup)
 	<br>
 	<?= CHtml::link(Yii::t('main','Didn\'t find city? Click here!'), Yii::app()->createUrl('/all-cities'), array('class' => 'all-cities')); ?>
 </div>
+<?php if(!empty($no_redirect)): ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.no-redirect-link').click(function (e) {
+                e.preventDefault();
+                var city = $(this).html();
+                $.ajax({
+                    type: "GET",
+                    url: "/site/changeCity",
+                    data: {city : city, lang : "<?= Yii::app()->language; ?>"},
+                    dataType: "text",
+                    success: function(data){
+                        var city = data.split("_");
+                        $(".cityName").text(city[0]);
+                        $(".sort-popup").addClass("hidden");
+                    }
+                });
+            });
+        });
+    </script>
+<?php endif; ?>

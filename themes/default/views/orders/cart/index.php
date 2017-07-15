@@ -105,7 +105,7 @@ echo '<ul class="breadcrumbs">
                                 if($product['model']->mainImage)
                                     $imgSource = $product['model']->mainImage->getUrl('69x69');
                                 else
-                                    $imgSource = 'http://placehold.it/69x69';
+                                    $imgSource = 'http://placehold.it/69x69/ffffff?text=7Roses';
                                 echo CHtml::image($imgSource, '');
                             ?>
                         </a>
