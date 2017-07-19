@@ -74,6 +74,27 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                 <?php if(!empty($payments['Portmone']) || !empty($payments['WayForPay'])): ?>
                     <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span>
                    <div class="paybutton">
+				   
+				 <?php if(!empty($payments['WayForPay'])): ?>
+                   <li >
+                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
+                        <label for="payment4">
+                            <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
+                        </label>
+                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                       <div class="help-tip">
+                       <?php if(!empty($payments['WayForPay'])): ?>
+                           <p>
+                               <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
+                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                       <?php else: ?>
+                           <p>
+                               <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
+                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
+                       <?php endif; ?>
+                       </div>
+                    </li>
+                    <?php endif; // WayForPay ?>
                    <?php if(!empty($payments['Portmone'])): ?>
                    <li class="selected">
                         <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked />
@@ -95,26 +116,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                     </li>
                    <?php endif; // Portmone ?>
 
-                   <?php if(!empty($payments['WayForPay'])): ?>
-                   <li >
-                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
-                        <label for="payment4">
-                            <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
-                        </label>
-                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-                       <div class="help-tip">
-                       <?php if(!empty($payments['WayForPay'])): ?>
-                           <p>
-                               <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
-                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                       <?php else: ?>
-                           <p>
-                               <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
-                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                       <?php endif; ?>
-                       </div>
-                    </li>
-                    <?php endif; // WayForPay ?>
+
                     </div><br>
                 <?php endif; // Portmone || WayForPay ?>
 
