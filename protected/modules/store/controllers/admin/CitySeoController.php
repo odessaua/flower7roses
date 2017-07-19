@@ -18,6 +18,12 @@ class CitySeoController extends SAdminController
      */
     public function actionUpdate($new = false, $city_id = 0, $lang_id = 0)
     {
+        // проверка, есть ли уже запись с такими параметрами (комбинация $city_id и $lang_id) в БД
+        $check = CitySeo::model()->findByAttributes(array('city_id' => $_GET['city_id'], 'lang_id' => $_GET['lang_id']));
+        if(!$check){
+            $new = true; // такой записи нет – создаём новую
+        }
+
         if ($new === true)
         {
             $model=new CitySeo;
