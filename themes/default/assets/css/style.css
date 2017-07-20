@@ -832,7 +832,7 @@ padding:20px 20px 0 0;
 }
 .content-img {
   float: left;
-  margin: 60px 20px 20px 0;
+  margin: 20px 20px 20px 0;
 }
 .content-text {
   font-size: 15px;
@@ -2046,6 +2046,21 @@ margin-top: 10px;
 .payment-modal .content-text p {
   margin: 10px 0;
 }
+.payment-row-name{
+        text-transform: uppercase;
+        color: #7a1c4a;
+        font-size: 18px;
+        margin: 25px 0 20px;
+        font-weight: bold;
+    }
+.payment-row-description {
+	margin-left:40px;
+}
+.payment-row-description h2,
+.payment-row-description h3{
+        font-size: 16px;
+        color: #29a943;
+    }
 .carttext {
 	font-size: 14px;
 	

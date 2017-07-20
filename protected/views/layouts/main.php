@@ -66,7 +66,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <span class="drop-link link-cabinet-enter"><span><?=Yii::t('main',"My Account")?></span></span>
                 
                 <div class="sort-popup auth hidden">
-                    <a href="/users/register"><?= Yii::t('main','Not registered')?>?</a>
+                    <a href=<?=Yii::app()->createUrl('/users/register'); ?>><?= Yii::t('main','Not registered')?>?</a>
                     <?=Yii::t('main','Auth')?>
                     
                     <?php 
@@ -76,7 +76,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 						'action'=>'/users/login',
 						'enableAjaxValidation'=>true,
 						'clientOptions'=>array(
-					      'validateOnSubmit'=>true,
+					    'validateOnSubmit'=>true,
 					     ),
 					)); ?>
                         <div class="userdata">
@@ -88,11 +88,11 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                             <?php echo $form->error($model,'password'); ?>
                         </div>
                         <div class="permanent">
-                            <a href="/users/remind"><?= Yii::t('main','Send password')?></a>
+                            <a href=<?=Yii::app()->createUrl('/users/remind'); ?>><?= Yii::t('main','Send password')?></a>
                             <?php echo CHtml::activeCheckBox($model,'rememberMe', array('id'=>'to-remember')); ?>
                             <label for="to-remember"><?=Yii::t('main',"Remember me")?></label>
                         </div>
-                        <input class="btn-purple enter-btn" type="submit" value="Enter" />
+                        <input class="btn-purple enter-btn" type="submit" value="<?=Yii::t('main',"Enter")?>" />
                     <?php $this->endWidget(); ?>
                 </div>
                 

@@ -99,7 +99,7 @@ else{
 	    <div class="b-comments">
 	        <h3 class="title">
                 <a href="<?=Yii::app()->createUrl('/reviews'); ?>">
-                    <?=Yii::t('main','Customer Reviews')?>
+                    <?=Yii::t('main','Customer reviews')?>
                 </a>
             </h3>
 	        <ul>

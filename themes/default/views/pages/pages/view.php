@@ -21,10 +21,10 @@ $this->pageDescription = $model->meta_description;
     <!-- breadcrumbs (end) -->
 
 
-    <h1 class="page-title"><?php echo $model->title; ?></h1>
+    <h1><?php echo $model->title; ?></h1>
 
     <div class="g-clearfix">
-        <div class="content-text delivery-content-text">
+        <div class="content-text">
             
             <?php echo $model->full_description; ?>
                 

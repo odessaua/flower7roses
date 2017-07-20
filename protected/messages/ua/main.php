@@ -20,10 +20,13 @@
         'Site search'=>'Пошук на сайті',
         'items:'=>'товарів:',
         'Show comments'=>"Показати коментарі",
+		'Customer reviews'
+		'Old version'=>'Перша версія',
         'Add'=>'Додати',
         'We are in social networks'=>'Ми в соціальних мережах',
         'Add a little something extra:'=>'Не забудь додати до замовлення:',
 		'Shopping cart'=>'У вашому кошику',
+		'Didn\'t find city? Click here!'=> 'Повний список міст доставки!', 
 		'items'=>'товарів',
 		'for the amount'=>'на суму',
         'My Account'=>'Особовий кабiнет',
