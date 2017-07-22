@@ -7,6 +7,42 @@
 $rate =Yii::app()->currency->active->rate; // курс текущей валюты к USD
 $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // полная стоимость заказа (товары + доставка) в UAH для платёжных систем Украины
 ?>
+<style>
+
+input[type=button], input[type=submit], input[type=reset], button, .button {
+	padding: 10px 20px 5px 20px;
+	margin: 3px 4px;
+	display: inline-block;
+	color: #6F6D6D;
+	font-size: 25px;
+	cursor: pointer;
+	background: #F3F5F8;
+	background: linear-gradient(top, #F3F5F8 0%, #dadcdf 100%);
+	background: -moz-linear-gradient(top, #F3F5F8 0%, #dadcdf 100%);
+	background: -webkit-linear-gradient(top, #F3F5F8 0%, #dadcdf 100%);
+	background: -o-linear-gradient(top, #F3F5F8 0%, #dadcdf 100%);
+	border: 1px solid #DDDDE0;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	box-shadow:0px 0px 2px 1px rgba(141, 139, 139, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-moz-box-shadow:0px 0px 2px 1px rgba(141, 139, 139, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-webkit-box-shadow:0px 0px 2px 1px rgba(141, 139, 139, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	-o-box-shadow:0px 0px 2px 1px rgba(141, 139, 139, 0.25), inset 1px 1px 0px 0px rgba(255, 255, 255, 0.25);
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.50);
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button:hover {
+	background: linear-gradient(top, #ffffff 0%, #F3F5F8 100%);
+	background: -moz-linear-gradient(top, #ffffff 0%, #F3F5F8 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%, #F3F5F8 100%);
+	background: -o-linear-gradient(top, #ffffff 0%, #F3F5F8 100%);
+}
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button:active{
+	opacity:0.8;
+}
+
+</style>
 <div>
 <!-- breadcrumbs (begin) -->
     <ul class="breadcrumbs">
@@ -67,21 +103,14 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
     <div class="cart3 g-clearfix">
        
         <div class="data-form data-form-big">
-            <table cellpadding="10px" border=0><tr><td valign=top>
-            <b class="title"><?=yii::t('OrdersModule.core','Select a Payment Method:')?></b>
-            <ul class="payment-list">
-
-                <?php if(!empty($payments['Portmone']) || !empty($payments['WayForPay'])): ?>
-                    <span style="font-weight:bold; color:#224097;">VISA</span> & <span style="font-weight:bold; color:#dd0101;">Master</span><span style="font-weight:bold; color:#ba8108">Card</span>
-                   <div class="paybutton">
-				   
-				 <?php if(!empty($payments['WayForPay'])): ?>
+            <table cellpadding="5px" border=0><tr><td valign=top colspan=3>
+            <p class="title"><?=yii::t('OrdersModule.core','Select Payment Method:')?></p>
+			<tr><td valign=top>
+<ul class="payment-list">
+ <?php if(!empty($payments['WayForPay'])): ?>
                    <li class="selected">
-                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" checked />
-                        <label for="payment4">
-                            <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
-                        </label>
-                         <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" checked /><label for="payment4">
+<div class="button"><img src="\uploads\visa_wayforpay75-150.png"></div></label>
                        <div class="help-tip">
                        <?php if(!empty($payments['WayForPay'])): ?>
                            <p>
@@ -93,15 +122,15 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                                <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
                        <?php endif; ?>
                        </div>
-                    </li>
-                    <?php endif; // WayForPay ?>
-                   <?php if(!empty($payments['Portmone'])): ?>
+					   <span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+					</li>
+					
+<hr width=100%>
+<?php endif; ?>
+<?php if(!empty($payments['Portmone'])): ?>
                    <li>
-                        <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>"  />
-                        <label for="payment1">
-                          <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
-                        </label>
-                            <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
+                        <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>"  /><label for="payment1">					   
+<div class="button"><img src="\uploads\visa_portmone75-150.png"></div></label>
                         <div class="help-tip">
                             <?php if(!empty($payments['Portmone'])): ?>
                             <p>
@@ -113,35 +142,15 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                                 <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
                             <?php endif; ?>
                         </div>
-                    </li>
-                   <?php endif; // Portmone ?>
-
-
-                    </div><br>
-                <?php endif; // Portmone || WayForPay ?>
-
-                <?php if(!empty($payments['Paypal'])): ?>
-                <div class="paybutton">
-                   <li>
-                        <input type="radio" name="payment" id="payment2"/>
-                        <label for="payment2">
-                            <img src="/uploads/payment-paypal.jpg" alt="Paypal" title="Paypal"/>
-                            <span>PayPal - <span class="price"><?= StoreProduct::formatPrice($model->full_price) . Yii::t('OrdersModule.core',' USD');?></span></span>
-                        </label>
-                    </li>
-                </div><br>
-                <?php endif; // Paypal ?>
-
-                <?php if(!empty($payments['TransferWise'])): ?>
-				<span style="font-weight:bold;">Bank transfer</span>
-                <div class="paybutton">
-                    <li>
-                        <input type="radio" name="payment" id="payment3" value="<?= (!empty($payments['TransferWise']->id)) ? $payments['TransferWise']->id : 0; ?>" />
-                        <label for="payment3">
-                            <img src="/uploads/transferwise200-40.png" width="200" height="40"  title="Transferwise money transfer" />
-                        </label>
-                            <span class="price"><?=$symbol.StoreProduct::formatPrice($model->full_price*$rate)?></span>
-                        <div class="help-tip">
+						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+					</li>
+<hr width=100%>
+<?php endif; ?>
+<?php if(!empty($payments['TransferWise'])): ?>
+					<li>
+					<input type="radio" name="payment" id="payment3" value="<?= (!empty($payments['TransferWise']->id)) ? $payments['TransferWise']->id : 0; ?>" /><label for="payment3">
+<div class="button"><img src="\uploads\money_transferwise75-150.png"></div></label>
+                       <div class="help-tip">
                         <?php if(!empty($payments['TransferWise'])): ?>
                             <p>
                                 <strong>TransferWise</strong>: <?= strip_tags($payments['TransferWise']->description); ?>
@@ -154,16 +163,57 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                             </p>
                         <?php endif; ?>
                         </div>
-                    </li>
-                </div>
-                <?php endif; // TransferWise ?>
-
-            </ul>
+						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						</li>
+<hr width=100%>
+<?php endif; ?>
+<?php if(!empty($payments['Paypal'])): ?>
+					<li>
+					<input type="radio" name="payment" id="payment2" value="<?= (!empty($payments['Paypal']->id)) ? $payments['Paypal']->id : 0; ?>" /><label for="payment2">
+<div class="button"><img src="\uploads\paypal75-150.png"></div></label>
+                       <div class="help-tip">
+                        <?php if(!empty($payments['paypal'])): ?>
+                            <p>
+                                <strong>Paypal</strong>: <?= strip_tags($payments['TransferWise']->description); ?>
+                                <br><a href="https://transferwise.com/" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php else: ?>
+                            <p>
+                                <strong>Paypal</strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD
+                                <br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php endif; ?>
+                        </div>
+						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						</li>
+<hr width=100%>
+<?php endif; ?>
+<?php if(!empty($payments['WesternUnion'])): ?>
+					<li>
+					<input type="radio" name="payment" id="payment5" value="<?= (!empty($payments['WesternUnion']->id)) ? $payments['WesternUnion']->id : 0; ?>" />	<label for="payment5">
+<div class="button"><img src="\uploads\western_union75-150.png"></div></label>
+                       <div class="help-tip">
+                        <?php if(!empty($payments['WesternUnion'])): ?>
+                            <p>
+                                <strong>Western Union</strong>: <?= strip_tags($payments['TransferWise']->description); ?>
+                                <br><a href="https://westernunion.com/" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php else: ?>
+                            <p>
+                                <strong>Western Union</strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD
+                                <br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a>
+                            </p>
+                        <?php endif; ?>
+                        </div>
+						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						</li>
+<?php endif; ?>
+</ul>
             <div class="links">
                 <a class="link-next" href="#" title=""><?=yii::t('OrdersModule.core','Pay')?></a>
             </div>
-        </td><td><td><div></div></td>
-		<td>
+        </td><td><div style="padding:20px;"></div></td>
+		<td valign=top>
 <?php
 $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForPay
 ?>

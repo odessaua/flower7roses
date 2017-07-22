@@ -958,6 +958,10 @@ padding:20px 20px 0 0;
   color: #29a943;
   font-weight: bold;
 }
+.sum {
+	font-size:18px;
+	margin-left:20px;
+}
 .b-product {
   float: left;
   width: 194px;
@@ -2649,7 +2653,7 @@ body:after {
   margin-left: -10px;
 }
 .payment-list {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .payment-list li {
   margin: 13px 0;
@@ -2662,10 +2666,10 @@ body:after {
   vertical-align: middle;
 }
 .payment-list img {
-  height: 34px;
+
   display: inline-block;
   vertical-align: middle;
-  margin-right: 40px;
+
 }
 .cart4 {
   margin: 35px 0 0;
@@ -3018,6 +3022,7 @@ span.support-hover::before {
 .help-tip{
 	display: inline-block;
 	position: relative;
+	margin-left:20px;
 	text-align: center;
 	background-color: #d7d7d7;
 	border-radius: 50%;
@@ -3048,36 +3053,16 @@ span.support-hover::before {
 	text-align: left;
 	background-color: #eaeae8;
 	padding: 20px;
-	width: 300px;
+	width: 400px;
 	position: absolute;
 	border-radius: 3px;
 	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 	z-index: 9998;
-  	top: -50;
-  	left: 100%;
+  	top: -50px;
+  	left: 40px;
 	color: #454646;
 	font-size: 14px;
 	line-height: 1.4;
-}
-
-.help-tip p:before{
-	position: absolute;
-	content: '';
-	width:0;
-	height: 0;
-	border:6px solid transparent;
-	border-bottom-color:#1E2021;
-	right:500px;
-	top:-12px;
-}
-
-.help-tip p:after{
-	width:100%;
-	height:40px;
-	content:'';
-	position: absolute;
-	top:-40px;
-	left:0;
 }
 
 @-webkit-keyframes fadeIn {
