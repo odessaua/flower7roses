@@ -76,7 +76,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                    <div class="paybutton">
 				   
 				 <?php if(!empty($payments['WayForPay'])): ?>
-                   <li >
+                   <li class="selected">
                         <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" />
                         <label for="payment4">
                             <img src="/uploads/wayforpay200-40.png" width="200" height="40" title="Secure VISA and MASTERCARD online payment" />
@@ -96,7 +96,7 @@ $uah_full_price = Yii::app()->currency->convert($model->full_price, 2); // по�
                     </li>
                     <?php endif; // WayForPay ?>
                    <?php if(!empty($payments['Portmone'])): ?>
-                   <li class="selected">
+                   <li>
                         <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked />
                         <label for="payment1">
                           <img src="/uploads/portmone200-40.png" width="200" height="40" title="VISA and MASTERCARD online payment" />
