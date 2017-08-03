@@ -1,3 +1,7 @@
+-- 2017-08-03 (доп. поле для представителей в городах):
+ALTER TABLE `cityTranslate` ADD `firm_comment` TEXT  NULL  AFTER `h1_header`;
+-- ==========
+
 -- 2017-07-14:
 CREATE TABLE `OrderPaymentStatusLog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

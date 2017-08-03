@@ -345,6 +345,7 @@ echo '<ul class="breadcrumbs">
                 <?php
                 $products = StoreProduct::model()
                 ->applyCategories(270)
+                ->active()
                 ->findAll();
                 
                 foreach($products as $data): ?>

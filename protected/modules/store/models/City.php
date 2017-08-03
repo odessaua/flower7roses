@@ -14,6 +14,7 @@
  * @property string $firm_phone
  * @property integer $firm_show
  * @property string $h1_header
+ * @property integer $firm_show
  */
 Yii::import('application.modules.store.models.*');
 class City extends CActiveRecord
@@ -34,6 +35,7 @@ class City extends CActiveRecord
     public $firm_phone;
     public $firm_show;
     public $h1_header;
+    public $firm_comment;
 
     public function tableName()
 	{
@@ -49,7 +51,7 @@ class City extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('alias', 'safe'),
+			array('alias, firm_comment', 'safe'),
 			array('delivery,show_in_popup,region_id, firm_show', 'numerical'),
 			array('name', 'length', 'max'=>50),
             array('firm_name, firm_phone, firm_address, h1_header', 'length', 'max'=>255),
@@ -89,6 +91,7 @@ class City extends CActiveRecord
             'firm_phone' => 'Телефоны компании-представителя',
             'firm_show' => 'Показывать контакты компании-представителя на сайте',
             'h1_header' => 'Заголовок h1',
+            'firm_comment' => 'Комментарий',
 		);
 	}
 	public function behaviors()
@@ -108,6 +111,7 @@ class City extends CActiveRecord
                     'firm_phone',
                     'firm_show',
                     'h1_header',
+                    'firm_comment',
 				),
 			),
 		);
@@ -144,6 +148,7 @@ class City extends CActiveRecord
         $criteria->compare('translate.firm_address',$this->firm_address,true);
         $criteria->compare('translate.firm_phone',$this->firm_phone,true);
         $criteria->compare('translate.firm_show',$this->firm_show,true);
+        $criteria->compare('translate.firm_comment',$this->firm_show,true);
         $criteria->compare('translate.h1_header',$this->firm_show,true);
 
 		return new CActiveDataProvider($this, array(

@@ -38,6 +38,9 @@ return array(
                 'firm_phone'=>array(
                     'type'=>'text',
                 ),
+                'firm_comment'=>array(
+                    'type'=>'textarea',
+                ),
                 'firm_show'=>array(
                     'type'=>'checkbox',
                 ),

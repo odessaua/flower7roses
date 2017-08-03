@@ -20,7 +20,7 @@
         'Site search'=>'Пошук на сайті',
         'items:'=>'товарів:',
         'Show comments'=>"Показати коментарі",
-		'Customer reviews'
+		'Customer reviews' => 'Відгуки клієнтів',
 		'Old version'=>'Перша версія',
         'Add'=>'Додати',
         'We are in social networks'=>'Ми в соціальних мережах',

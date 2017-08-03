@@ -128,6 +128,14 @@ class IndexController extends Controller
             ->where('language_id=:lang', array(':lang' => $langArray->id))
             ->order('name asc')
             ->queryAll();
+        // SEO info for page
+        $page = Page::model()->find('url = :url', array(':url' => 'all-cities'));
+        if(!empty($page)){
+            $this->pageTitle = $page->meta_title;
+            $this->pageKeywords = $page->meta_keywords;
+            $this->pageDescription = $page->meta_description;
+        }
+
         $regions = (!empty($regions)) ? CArray::toolIndexArrayBy($regions, 'object_id') : array();
         $this->render('all_cities', array('cities' => $cities, 'regions' => $regions));
     }

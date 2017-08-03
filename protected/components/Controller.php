@@ -57,6 +57,18 @@ class Controller extends RController
      */
     public $layout_params = array();
 
+    /**
+     * тег canonical
+     * @var
+     */
+    public $canonical = '';
+
+    /**
+     * теги hreflang
+     * @var
+     */
+    public $hreflang = '';
+
 	/**
 	 * Set layout and view
 	 * @param mixed $model
@@ -109,6 +121,58 @@ class Controller extends RController
 
         // get current language info
         $this->getCurrentLangInfo();
+
+        // set canonical and hreflang tags
+        $this->setCanonical();
+        $this->setHreflang();
+
+        // set city firm info in layout_params
+        $this->setCityFirmLayout();
+    }
+
+    public function setCityFirmLayout()
+    {
+        $cityInfo = $this->getCurrentCityInfo(true);
+        if(!empty($cityInfo) && !empty($cityInfo->firm_show)){
+            $this->layout_params['firm'] = array(
+                'firm_city' => $cityInfo->name,
+                'firm_name' => $cityInfo->firm_name,
+                'firm_address' => $cityInfo->firm_address,
+                'firm_phone' => $cityInfo->firm_phone,
+            );
+        }
+        else{
+            $this->layout_params['firm'] = array(
+                'firm_city' => Yii::t('main','Odessa'),
+                'firm_name' => '7Roses',
+                'firm_address' => Yii::t('main','Deribasovskaya 12'),
+                'firm_phone' => '+38 048 716 54 65',
+            );
+        }
+    }
+
+    public function setCanonical()
+    {
+        $this->canonical .= '<link rel="canonical" href="'
+            . Yii::app()->request->hostInfo
+            . Yii::app()->request->url
+            . '">' . "\n";
+    }
+
+    public function setHreflang()
+    {
+        $this->hreflang .= '<link rel="alternate" type="text/html" hreflang="en" href="'
+            . Yii::app()->request->hostInfo
+            . $this->createNewLanguageUrl()
+            . '" title="English"/>' . "\n";
+        $this->hreflang .= '<link rel="alternate" type="text/html" hreflang="ru" href="'
+            . Yii::app()->request->hostInfo
+            . $this->createNewLanguageUrl('ru')
+            . '" title="Русский"/>' . "\n";
+        $this->hreflang .= '<link rel="alternate" type="text/html" hreflang="uk" href="'
+            . Yii::app()->request->hostInfo
+            . $this->createNewLanguageUrl('uk')
+            . '" title="Українська"/>' . "\n";
     }
 
 	public function createMultilanguageReturnUrl($lang='en'){

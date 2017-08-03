@@ -33,9 +33,8 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
-	<link rel="alternate" type="text/html" hreflang="en" href="https://7roses.com/" title="English"/>
-	<link rel="alternate" type="text/html" hreflang="ru" href="https://7roses.com/ru" title="Русский"/>
-	<link rel="alternate" type="text/html" hreflang="uk" href="https://7roses.com/uk" title="Українська"/>
+	<?= $this->canonical; // rel="canonical" ?>
+	<?= $this->hreflang; // rel="alternate" ... hreflang= ?>
 </head>
 <body>
 
@@ -377,28 +376,11 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 }
             </style>
             <div class="oocab-column">
-                <?php
-                if(!empty($this->layout_params['city_address']) && !empty($this->layout_params['city_id'])){
-                    Yii::import('application.modules.store.models.CityTranslate');
-                    $cr = new CDbCriteria();
-                    $cr->condition = "`language_id` = " . (int)$this->language_info->id . "
-                    AND `object_id` = " . (int)$this->layout_params['city_id'] . "
-                    AND (`firm_name` != '' AND `firm_name` IS NOT NULL)";
-                    $ca_item = CityTranslate::model()->find($cr);
-                }
-                if(empty($ca_item)){
-                    $ca_item = new stdClass();
-                    $ca_item->name = Yii::t('main','Odessa');
-                    $ca_item->firm_name = '7Roses';
-                    $ca_item->firm_address = Yii::t('main','Deribasovskaya 12');
-                    $ca_item->firm_phone = '+38 048 716 54 65';
-                }
-                ?>
                 <div class="oocab-column-item">
-                    <div class="ocabci-row"><?= $ca_item->name; ?>, <?= Yii::t('main','Ukraine'); ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $ca_item->firm_name; ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Address'); ?>: <?= $ca_item->firm_address; ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Phone'); ?>: <?= $ca_item->firm_phone; ?></div>
+                    <div class="ocabci-row"><?= $this->layout_params['firm']['firm_city']; ?>, <?= Yii::t('main','Ukraine'); ?></div>
+                    <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $this->layout_params['firm']['firm_name']; ?></div>
+                    <div class="ocabci-row"><?= Yii::t('main','Address'); ?>: <?= $this->layout_params['firm']['firm_address']; ?></div>
+                    <div class="ocabci-row"><?= Yii::t('main','Phone'); ?>: <?= $this->layout_params['firm']['firm_phone']; ?></div>
                 </div>
             </div>
         </div>
