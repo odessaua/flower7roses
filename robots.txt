@@ -14,6 +14,33 @@ Allow: *.css
 Allow: *.js
 Allow: *.jpg
 Allow: *.png
+Disallow: *sort*
+Disallow: *page*
+Disallow: /tulips/flowers-carmen.html
+Disallow: /page/garanty.html
+Disallow: /extra-gifts/gift-martini-bianco.html
 
-Host: 7roses.com
-Sitemap: http://7roses.com/sitemap.xml
+User-agent: Yandex
+Disallow: /.git/
+Disallow: /framework/
+Disallow: /nbproject/
+Disallow: */cart
+Disallow: *?q=*
+Disallow: */sort/*
+Disallow: *min_price*
+Disallow: /users/remind
+Disallow: /users/register
+Disallow: *check=*
+Disallow: */per_page/*
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.png
+Disallow: *sort*
+Disallow: *page*
+Disallow: /tulips/flowers-carmen.html
+Disallow: /page/garanty.html
+Disallow: /extra-gifts/gift-martini-bianco.html
+
+Host: https://7roses.com/
+Sitemap: https://7roses.com/sitemap.xml
