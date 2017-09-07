@@ -249,9 +249,10 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                         </a>
                     </div></td><td>
                     <div class="carttext">
-                        <div class="name"><?php echo $product->getRenderFullName(false); ?></div>
+                        <div class="name"><?php echo $product->getRenderFullName(false); 
+											if ($product->quantity>1) { echo "<p><strong>(Qty : ".$product->quantity.")</strong></p>";}?></div>
                     </div>
-                </td><td width="30%"><span class="price"><?=$symbol.StoreProduct::formatPrice($product->price*$rate)?></span></td></tr>
+                </td><td width="30%"><span class="price"><?=$symbol.StoreProduct::formatPrice($product->price*$rate*$product->quantity)?></span></td></tr>
             <?php endforeach ?>
 			           			
             <?php if(!empty($model->do_card)) { ?>
