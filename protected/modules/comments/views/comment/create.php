@@ -1,4 +1,4 @@
-<input type="button" id="show_comments" class="btn-purple"  onclick="shw_comments()">
+<h1>Customer Reviews</h1>
 <div class="comments_form">
 
                 <!-- col31 (begin) -->
@@ -85,7 +85,7 @@ $this->widget('CStarRating',array(
 		<tr><td>
 		<div class="s1">
 
-				<?php echo $form->labelEx($comment,'email'); ?></td><td>
+				<?php echo $form->labelEx($comment,'Your email'); ?></td><td>
 				<?php echo $form->textField($comment,'email'); ?>
 				<?php echo $form->error($comment,'email'); ?>
 		</div>
@@ -95,14 +95,15 @@ $this->widget('CStarRating',array(
 		<tr><td>
 		<div class="s1">
 			
-				<?php echo $form->labelEx($comment,'city'); ?></td><td>
+				<?php echo $form->labelEx($comment,'Recipient\'s City'); ?></td><td>
 				<?php echo $form->textField($comment,'city'); ?>
 				<?php echo $form->error($comment,'city'); ?>
 
 		</div>
 				</td></tr>
-		<tr><td></td><td>
+		<tr><td>
 		<div class="s1">
+		<?php echo $form->labelEx($comment,'Rating'); ?></td><td>
 		<?php echo $form->labelEx($comment,'rating'); ?>
 		<br>
         <?php     
@@ -146,21 +147,3 @@ $this->widget('CStarRating',array(
 </div>
 </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.comments_form').css('display','none');
-	$('#show_comments').attr('value', '<?=Yii::t("StoreModule.core","Show comments")?>');
-});
-function shw_comments(){
-	if($('.comments_form').css('display')=="none"){
-			$('.comments_form').css('display','block');
-			$('#show_comments').attr('value', '<?=Yii::t("StoreModule.core","Hide comments")?>');
-	}
-	else if($('.comments_form').css('display')=="block"){
-		$('.comments_form').css('display','none');
-		$('#show_comments').attr('value', '<?=Yii::t("StoreModule.core","Show comments")?>');
-	}
-
-
-}
-</script>
