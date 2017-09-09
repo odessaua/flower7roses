@@ -54,7 +54,7 @@ class CommentsModule extends BaseModule
 					$url.='#comment_'.$comment->id;
 
 				// Refresh page
-				Yii::app()->request->redirect($url, true);
+				//Yii::app()->request->redirect($url, true);
 			}
 		}
 		return $comment;
