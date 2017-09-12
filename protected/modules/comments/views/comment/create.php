@@ -16,7 +16,8 @@ $comment = $module->processRequest($model);
 // Load model comments
 $comments = Comment::getObjectComments($model);
 
-$currentUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+//$currentUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$currentUrl = ((!empty($_SERVER[‘HTTPS'])) ? ‘https’ : 'http’) . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -132,7 +133,7 @@ $this->widget('CStarRating',array(
 		
 </td></tr>
 <tr><td>	<div class="s3">	
-			<label><?php $this->widget('CCaptcha', array('clickableImage'=>true,'showRefreshButton'=>false)) ?></label></td><td>
+			<label><?php $this->widget('CCaptcha', array('clickableImage'=>true,'showRefreshButton'=>true)) ?></label></td><td>
 			<?php echo $form->textField($comment,'verifyCode', array('required'=>true, 'placeholder'=>''.Yii::t('CommentsModule.core', 'Enter secret code').'')); ?>
 		</div>
 		
