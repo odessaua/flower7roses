@@ -15,7 +15,8 @@
       'Changes saved successfully'=>'Изменения успешно сохранены',
       'Error checking the status.'=>'Ошибка проверки статуса.',
 	  'Thank you! Your comment was succesfull received. You will receive an email once your review is approved and online.' => 'Ваш комментарий успешно добавлен. Он будет опубликован после проверки администратором.',
-      'Status changed successfully'=>'Статус успешно изменен'
+      'Status changed successfully'=>'Статус успешно изменен',
+	  'Customer Reviews'=>'Отзывы клиентов'
 
 
   );

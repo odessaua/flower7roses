@@ -12,5 +12,6 @@
       'Changes saved successfully'=>'Зміни успішно збережені',
       'Error checking the status.'=>'Помилка перевірки статусу.',
       'Status changed successfully'=>'Статус успішно змінений',
+	  'Customer Reviews'=>'Відгуки клієнтів'
 
   );

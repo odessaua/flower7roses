@@ -1,4 +1,4 @@
-<h1>Customer Reviews</h1>
+<h1><?=Yii::t('CommentsModule.core','Customer Reviews')?></h1>
 <div class="comments_form">
 
                 <!-- col31 (begin) -->
