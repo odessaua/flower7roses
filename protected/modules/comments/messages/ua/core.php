@@ -12,6 +12,11 @@
       'Changes saved successfully'=>'Зміни успішно збережені',
       'Error checking the status.'=>'Помилка перевірки статусу.',
       'Status changed successfully'=>'Статус успішно змінений',
-	  'Customer Reviews'=>'Відгуки клієнтів'
+	  'Customer Reviews'=>'Відгуки клієнтів',
+	  'Your name' => "Ваше Ім'я",
+	  'Your email'=> 'Ваш email',
+	  'Recipient\'s City'=>'Місто одержувача',
+	  'Rating'=>'Відмітка'
+
 
   );

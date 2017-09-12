@@ -78,7 +78,7 @@ $this->widget('CStarRating',array(
 	<table cellpadding="5" border="0"><tr><td>
 	<?php if(Yii::app()->user->isGuest): ?>
         <div class="s1">
-				<?php echo $form->labelEx($comment,'your name'); ?></td><td>
+				<?php echo $form->labelEx($comment, Yii::t('CommentsModule.core','Your name')); ?></td><td>
 				<?php echo $form->textField($comment,'name');?>
 				<?php echo $form->error($comment,'name'); ?>
 		</div>
@@ -86,7 +86,7 @@ $this->widget('CStarRating',array(
 		<tr><td>
 		<div class="s1">
 
-				<?php echo $form->labelEx($comment,'Your email'); ?></td><td>
+				<?php echo $form->labelEx($comment, Yii::t('CommentsModule.core','Your email')); ?></td><td>
 				<?php echo $form->textField($comment,'email'); ?>
 				<?php echo $form->error($comment,'email'); ?>
 		</div>
@@ -96,7 +96,7 @@ $this->widget('CStarRating',array(
 		<tr><td>
 		<div class="s1">
 			
-				<?php echo $form->labelEx($comment,'Recipient\'s City'); ?></td><td>
+				<?php echo $form->labelEx($comment, Yii::t('CommentsModule.core','Recipient\'s City')); ?></td><td>
 				<?php echo $form->textField($comment,'city'); ?>
 				<?php echo $form->error($comment,'city'); ?>
 
@@ -104,7 +104,7 @@ $this->widget('CStarRating',array(
 				</td></tr>
 		<tr><td>
 		<div class="s1">
-		<?php echo $form->labelEx($comment,'Rating'); ?></td><td>
+		<?php echo $form->labelEx($comment, Yii::t('CommentsModule.core','Rating')); ?></td><td>
 		<?php echo $form->labelEx($comment,'rating'); ?>
 		<br>
         <?php     

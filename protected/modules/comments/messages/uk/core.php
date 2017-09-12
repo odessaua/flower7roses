@@ -15,5 +15,9 @@
       'Leave your review of 7Roses' => 'Залиште ваш коментар про наш сервіс',
       'Share your experiences with other people'=> 'Поділіться своїми враженнями про якість нашої роботи',
       'Enter secret code' => 'Введіть секретний код',
-      'Submit'=>'Відправити',
+	  'Customer Reviews'=>'Відгуки клієнтів',
+	  'Your name' => "Ваше Ім'я",
+	  'Your email'=> 'Ваш email',
+	  'Recipient\'s City'=>'Місто одержувача',
+	  'Rating'=>'Відмітка'
   );

@@ -77,7 +77,7 @@ if(!empty($comments))
 		<?php endif ?>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton(Yii::t('CommentsModule.core', 'Отправить'),array('class'=>'btn-purple')); ?>
+			<?php echo CHtml::submitButton(Yii::t('CommentsModule.core', 'Submit'),array('class'=>'btn-purple')); ?>
 		</div>
 
 	<?php $this->endWidget(); ?><!-- /form -->
