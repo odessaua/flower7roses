@@ -3,7 +3,7 @@
  * @var $variants
  * @var StoreProduct $model
  */
-$variantLimit = 3;
+$variantLimit = 12;
 ?>
 <?php
 if(!empty($variants)):
@@ -12,7 +12,7 @@ if(!empty($variants)):
 <style>
     .product-variants-block{
         width: 100%;
-        margin-top: 20px;
+        margin-top: 0px;
         margin-bottom: 20px;
     }
     .pvb-header{
@@ -30,7 +30,7 @@ if(!empty($variants)):
 
     <style>
         .pvb-radio-item{
-			width:50%;
+			width:80%;
             margin-bottom: 5px;
             clear: both;
         }
@@ -44,6 +44,7 @@ if(!empty($variants)):
         .pvb-radio-item-price{
             display: block;
             float: right;
+			color:#29a943;			
         }
         /* Radio buttons */
         input[type='radio'].product-radio {

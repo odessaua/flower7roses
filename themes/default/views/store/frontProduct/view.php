@@ -126,6 +126,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
                     <?php endif;?>
 	            </div>
 	            <div class="pp-right">
+					
 	                <?php echo CHtml::form(array('/orders/cart/add'))?>
 					<div class="article"><?=Yii::t('StoreModule.core','Product code:')?> <span><?=$model->id?></span></div>
 	                    <h1 class="page-title"><?php echo CHtml::encode($model->name); ?></h1>
@@ -145,7 +146,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 							</div>
 	                        
 	                    </div>
-	                   
+	                   <div class="pp-right-left">
 	                    
 	                    <?php
 	                    if($model->getEavAttributes())
@@ -165,7 +166,9 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
                         <?php $this->renderPartial('_variants', array('model'=>$model, 'variants'=>$variants)); ?>
                     <?php endif;?>
 	                    
-
+						</div>
+					<div class="pp-right-right">	
+						
 	                    <div class="pp-reg">
 	                        <div class="sort sort-reg">
 	                            
@@ -206,6 +209,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 
 	               <?php echo CHtml::endForm();?>
 	            </div>
+				</div>
 	        </div>
 	        <!-- b-page-text (begin) -->
 	        <div class="b-page-text text ">
