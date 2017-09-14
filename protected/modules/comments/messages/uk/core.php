@@ -19,5 +19,6 @@
 	  'Your name' => "Ваше Ім'я",
 	  'Your email'=> 'Ваш email',
 	  'Recipient\'s City'=>'Місто одержувача',
-	  'Rating'=>'Відмітка'
+	  'Rating'=>'Відмітка',
+	  'Thank you for reviewing our website.'=>'Ваш коментар успішно доданий. Він буде опублікований після перевірки адміністратором.'
   );

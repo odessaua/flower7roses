@@ -179,7 +179,7 @@ class SiteController extends Controller
                 if($comment->status==Comment::STATUS_WAITING)
                 {
                     $url.='#';
-                    Yii::app()->user->setFlash('messages', Yii::t('CommentsModule.core', 'Ваш комментарий успешно добавлен. Он будет опубликован после проверки администратором.'));
+                    Yii::app()->user->setFlash('messages', Yii::t('CommentsModule.core', 'Thank you for reviewing our website.'));
                 }
                 elseif($comment->status==Comment::STATUS_APPROVED)
                     $url.='#comment_'.$comment->id;
@@ -188,7 +188,7 @@ class SiteController extends Controller
                 Yii::app()->request->redirect($url, true);
             }
         }
-        $reviews = Comment::model()->approved()->orderByCreatedDesc()->findAll();
+          = Comment::model()->approved()->orderByCreatedDesc()->findAll();
 		$this->render('reviews', array(
 		    'comment' => $comment,
             'reviews' => $reviews,
