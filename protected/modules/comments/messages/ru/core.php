@@ -20,8 +20,7 @@
 	  'Your name' => 'Ваше имя',
 	  'Your email'=> 'Ваш email',
 	  'Recipient\'s City'=>'Город получателя',
-	  'Rating'=>'Оценка',
-	  'Thank you for reviewing our website.'=>'Ваш комментарий успешно добавлен. Он будет опубликован после проверки администратором.'
+	  'Rating'=>'Оценка'
 
 
   );
