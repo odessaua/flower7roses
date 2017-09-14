@@ -47,7 +47,7 @@ class CommentsModule extends BaseModule
 				if($comment->status==Comment::STATUS_WAITING)
 				{
 					$url.='#';
-					$comment_msg = "Dear ".$comment->name."! Thank you for reviewing our website.";
+					$comment_msg = "Thank you for reviewing our website.";
 					Yii::app()->user->setFlash('messages', Yii::t('CommentsModule.core', $comment_msg));
 				}
 				elseif($comment->status==Comment::STATUS_APPROVED)
