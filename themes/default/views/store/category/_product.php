@@ -46,9 +46,9 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
         <?php echo CHtml::link(CHtml::encode($trans['name']), $product_url) ?>
     </div>
     
-    <span class="price">
+    <div class="price">
     	<?php echo $data->priceRange() ?>
-    </span>
+    </div>
     
     <div class="form">
     	<?php /*

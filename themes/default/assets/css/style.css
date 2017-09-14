@@ -188,13 +188,13 @@ padding:20px 20px 0 0;
   text-align: center;
   color: #fff;
   font: bold 12px/20px "Verdana", serif;
-  width: 75px;
+  width: 120px;
   height: 26px;
   background-color: #af3583;
   border-radius: 5px;
   cursor: pointer;
 }
-.btn-purple:hover {
+.btn-purplebtn-purple:hover {
   background-color: #de2670;
 }
 .btn-green {
@@ -979,17 +979,17 @@ padding:20px 20px 0 0;
    
 }
 
-.b-product:hover {
+.b-product:hover   {
 	float: left;
 	width: 194px;
 	height: 332px;
 	padding: 15px 15px 0px;
 	margin: -1px 0 0 -1px;
-	border: 2px solid #f4f3f3;
+	border: 2px solid #f4f3f3;	 
 	-moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  position: relative;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
 	box-shadow: 0 0 20px rgba(0,0,0,0.5); 
 	webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
 	moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -1017,19 +1017,25 @@ padding:20px 20px 0 0;
 .b-product .title {
   height: 36px;
   overflow: hidden;
-  padding-bottom: 7px;
+  padding-bottom: 3px;
   text-align: center;
+  font-style:oblique;
+  font-size:15px;
 }
+
 .b-product .title a {
   color: #606060;
+  text-decoration: none;
 }
 .b-product .form {
-  float: right;
+  float: none;
+  text-align:center;
 
 }
 .b-product .price {
   font-size: 16px;
   line-height: 25px;
+  text-align:center;
 }
 .pagination {
   margin: 0 0 40px;

@@ -44,7 +44,7 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
     <div class="title">
         <?php echo CHtml::link(CHtml::encode($trans['name']), $product_url) ?>
     </div>
-    <span class="price"><?php echo $data->priceRange() ?></span>
+    <div class="price"><?php echo $data->priceRange() ?></div>
     <div class="form">
         <?php
         echo CHtml::button(Yii::t('StoreModule.core','Order'), array(
