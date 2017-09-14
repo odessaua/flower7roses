@@ -962,6 +962,9 @@ padding:20px 20px 0 0;
 	font-size:18px;
 	margin-left:20px;
 }
+
+
+
 .b-product {
   float: left;
   width: 194px;
@@ -973,7 +976,26 @@ padding:20px 20px 0 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
+   
 }
+
+.b-product:hover {
+	float: left;
+	width: 194px;
+	height: 332px;
+	padding: 15px 15px 0px;
+	margin: -1px 0 0 -1px;
+	border: 2px solid #f4f3f3;
+	-moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+	box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+	webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	
+}
+
 .b-product .i-top,
 .b-product .i-special,
 .b-product .i-new {
