@@ -562,7 +562,7 @@ $(document).ready(function(){
         var sorder_id = <?=$model->id?>; // ID заказа
         $.ajax({
             type: "GET",
-            url: "/site/setPaymentId",
+            url: "/site/setPaymentId/",
             data: { payment_id : spayment_id, order_id : sorder_id }
         });
 
@@ -580,7 +580,7 @@ $(document).ready(function(){
             // WayForPay
             // сохраняем $orderReference и ID заказа в БД
             $.post(
-                '/site/wfporder',
+                '/site/wfporder/',
                 { orderReference : '<?=$orderReference;?>' }
             );
             // вызываем виджет – или отправляем форму
