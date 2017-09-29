@@ -1,3 +1,7 @@
+-- 2017-09-30 (сортировка товаров в категориях):
+ALTER TABLE `StoreProductCategoryRef` ADD `order` INT(11)  NULL  DEFAULT NULL  AFTER `is_main`;
+-- =========
+
 -- 2017-09-29 (доп. поле position для баннеров):
 ALTER TABLE `SystemBaner` ADD `position` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `active`;
 ALTER TABLE `SystemBaner` ADD INDEX (`active`);

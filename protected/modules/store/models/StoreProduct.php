@@ -834,7 +834,7 @@ class StoreProduct extends BaseModel
 	public static function getCSort()
 	{
 		$sort = new CSort;
-		$sort->defaultOrder = 'sort';
+        $sort->defaultOrder = 'categorization.order, sort'; // sort
 		$sort->attributes=array(
 			'*',
 			'created'=>'t.created DESC',
