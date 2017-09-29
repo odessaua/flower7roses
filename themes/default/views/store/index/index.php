@@ -82,12 +82,8 @@ else{
 	<!-- col-22 (begin) -->
 	<div class="col-22">
         <?php
-        // поле `name` является идентификатором, по которому выводится баннер на данную позицию
-        // в этом случае идентификатором является значение 'SPA', в другом – может быть такое же, а может быть другое
-        // выбирается одна запись, у которой `active` = 1 AND `name` = 'SPA'
-		// запись с названием SPA не устраивает, т.к. название может измениться, поэтому делаю выборку только по `active`
-		// если две записи `active` - выводится только первая 
-        $banner =  SSystemBaner::model()->active()->find("active = :active", array(':active' => '1'));
+        // активный баннер с position = 'main_top_right'
+        $banner =  SSystemBaner::model()->active()->find("position = :position", array(':position' => 'main_top_right'));
         if(!empty($banner)):
         ?>
 	    <div class="action">

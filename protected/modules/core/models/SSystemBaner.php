@@ -9,6 +9,7 @@
  * @property string $photo
  * @property string $url
  * @property boolean $active
+ * @property string $position
  */
 class SSystemBaner extends BaseModel
 {
@@ -49,11 +50,11 @@ class SSystemBaner extends BaseModel
     public function rules()
     {
         return array(
-            array('name', 'required'),
-            array('name, url, photo', 'length', 'max'=>255),
+            array('name, position', 'required'),
+            array('name, url, photo, position', 'length', 'max'=>255),
             array('active', 'numerical', 'integerOnly'=>true),
             // search
-            array('id, name, active', 'safe', 'on'=>'search'),
+            array('id, name, active, position', 'safe', 'on'=>'search'),
         );
     }
 
@@ -68,7 +69,7 @@ class SSystemBaner extends BaseModel
             'photo'      => Yii::t('CoreModule.core', 'Фото'),
             'url'      => Yii::t('CoreModule.core', 'Ссылка'),
             'active'      => Yii::t('CoreModule.core', 'Активен'),
-
+            'position'    => Yii::t('CoreModule.core', 'Позиция'),
         );
     }
 
@@ -83,6 +84,7 @@ class SSystemBaner extends BaseModel
         $criteria->compare('id',$this->id);
         $criteria->compare('name',$this->name,true);
         $criteria->compare('active',$this->active,true);
+        $criteria->compare('position',$this->active, true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -97,11 +99,11 @@ class SSystemBaner extends BaseModel
         if(!empty($this->active))
         {
             // запись отмечена активной
-            // делаем неактивными все записи с таким же именем
+            // делаем неактивными все другие записи с такой же позицией
             $this->updateAll(
                 array('active' => 0),
-                "name = :name",
-                array(':name' => $this->name)
+                "position = :position",
+                array(':position' => $this->position)
             );
         }
         return parent::beforeSave();

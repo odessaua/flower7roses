@@ -1,3 +1,12 @@
+-- 2017-09-29 (доп. поле position для баннеров):
+ALTER TABLE `SystemBaner` ADD `position` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `active`;
+ALTER TABLE `SystemBaner` ADD INDEX (`active`);
+ALTER TABLE `SystemBaner` ADD INDEX (`position`);
+-- ==========
+
+
+
+
 -- 2017-08-03 (доп. поле для представителей в городах):
 ALTER TABLE `cityTranslate` ADD `firm_comment` TEXT  NULL  AFTER `h1_header`;
 -- ==========
