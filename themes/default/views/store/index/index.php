@@ -20,7 +20,7 @@ else{
 	<div class="col-1">
         <?php if(empty($data['h1_header'])): ?>
 	    <div class="slider">
-	        <div id="slider">
+	        <?php /*div id="slider">
 	            <ul>
                         <?php foreach ($slider as $one) { ?>
                             <li>
@@ -30,12 +30,31 @@ else{
                             </li>
                         <?php } ?>
 	            </ul>
-	        </div>
+	        </div*/?>
+            <?php if(!empty($slider)): ?>
+                <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.cycle.all.js"></script>
+                <div id="new_slider">
+                <?php foreach ($slider as $one) { ?>
+                    <a href="<?= Yii::app()->createUrl($one['url']); ?>" title="<?=$one['name']?>">
+                        <img width="812" height="282" src="<?= '/uploads/slider/'.$one['photo'] ?>" alt="<?=$one['name']?>"/>
+                    </a>
+                <?php } ?>
+                </div>
+                <span id="prevBtn"><a href="javascript:void(0);"></a></span>
+                <span id="nextBtn" style="right: -9px;"><a href="javascript:void(0);"></a></span>
+            <?php endif; ?>
 	    </div>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
-                $("#slider").easySlider({
-                    auto: <?= (Yii::app()->settings->get('core', 'sliderAutoRotate') > 0) ? 'true' : 'false';?>
+//                $("#slider").easySlider({
+//                    auto: <?//= (Yii::app()->settings->get('core', 'sliderAutoRotate') > 0) ? 'true' : 'false';?>
+//                });
+                // new slider
+                $('#new_slider').cycle({
+                    fx: 'fade',
+                    next: '#nextBtn',
+                    prev: '#prevBtn',
+                    timeout: <?= (int)Yii::app()->settings->get('core', 'sliderTimeout');?>
                 });
             });
         </script>

@@ -32,7 +32,13 @@ return array(
 					'type'=>'dropdownlist',
 					'items'=>$themes
 				),
-				'core_sliderAutoRotate'=>array('type'=>'checkbox'),
+//				'core_sliderAutoRotate'=>array('type'=>'checkbox'),
+				'core_sliderTimeout'=>array(
+				    'type' => 'text',
+                    'placeholder'=> '4000 стандартное значение',
+                    'hint' => Yii::t('CoreModule.admin', 'Скорость в миллисекундах: 4000 = 4с. При значении 0 = останавливается автопрокрутка слайдов.'),
+                ),
+				titleRow(''),
 				titleRow('Настройки WYSIWYG редактора'),
 				'core_editorTheme'=>array(
 					'type'=>'dropdownlist',

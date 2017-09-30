@@ -30,6 +30,7 @@ class SystemSettingsForm extends CFormModel
 	public $core_editorHeight;
 	public $core_editorAutoload;
 	public $core_sliderAutoRotate;
+	public $core_sliderTimeout;
 
 	/**
 	 * Image settings
@@ -80,6 +81,7 @@ class SystemSettingsForm extends CFormModel
 			array('images_watermark_position_horizontal', 'in', 'range'=>array_keys($this->getImageHorizontalPositions())),
 			array('images_watermark_opacity', 'numerical', 'min'=>0, 'max'=>100),
             array('core_sliderAutoRotate', 'safe'),
+            array('core_sliderTimeout', 'safe'),
 		);
 	}
 
@@ -94,6 +96,7 @@ class SystemSettingsForm extends CFormModel
 			'core_productsPerPageAdmin' => Yii::t('CoreModule.admin', 'Количество товаров в панели управления'),
 			'core_theme'                => Yii::t('CoreModule.admin', 'Тема'),
 			'core_sliderAutoRotate'     => Yii::t('CoreModule.admin', 'Автопрокрутка слайдера'),
+			'core_sliderTimeout'        => Yii::t('CoreModule.admin', 'Скорость прокрутки слайдера'),
 			// Editor
 			'core_editorTheme'          => Yii::t('CoreModule.admin', 'Тема'),
 			'core_editorHeight'         => Yii::t('CoreModule.admin', 'Высота'),
