@@ -15,13 +15,16 @@ return array(
 				'price'=>array(
 					'type'=>$this->model->use_configurations ? 'hidden' : 'text',
 				),
+				'old_price'=>array(
+				    'type'=>'text',
+                ),
 				'type_id'=>array(
 					'type'=>'dropdownlist',
 					'items'=>StoreProductType::model()->getTypeList(),
 				),
-				'sort'=>array(
-					'type'=>$this->model->use_configurations ? 'hidden' : 'text',
-				),
+//				'sort'=>array(
+//					'type'=>$this->model->use_configurations ? 'hidden' : 'text',
+//				),
 				'url'=>array(
 					'type'=>'text',
 				),

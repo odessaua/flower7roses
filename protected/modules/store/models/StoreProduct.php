@@ -19,6 +19,7 @@ Yii::import('application.modules.store.models.components.StoreProductImageSaver'
  * @property string $url
  * @property float $price Product price. For configurable product its min_price
  * @property float $max_price for configurable products. Used in StoreProduct::priceRange to display prices on category view
+ * @property float $old_price  «старая» цена товара – только для отображения на сайте
  * @property boolean $is_active
  * @property string $short_description
  * @property string $full_description
@@ -137,8 +138,8 @@ class StoreProduct extends BaseModel
 	public function rules()
 	{
 		return array(
-			array('price', 'commaToDot'),
-			array('price, type_id, manufacturer_id, main_category_id', 'numerical'),
+			array('price, old_price', 'commaToDot'),
+			array('price, old_price, type_id, manufacturer_id, main_category_id', 'numerical'),
 			array('is_active', 'boolean'),
 			array('use_configurations', 'boolean', 'on'=>'insert'),
 			array('quantity, availability, manufacturer_id, long_delivery,sort, main_page', 'numerical', 'integerOnly'=>true),
@@ -296,6 +297,7 @@ class StoreProduct extends BaseModel
 			'name'                   => Yii::t('StoreModule.core', 'Название'),
 			'url'                    => Yii::t('StoreModule.core', 'URL'),
 			'price'                  => Yii::t('StoreModule.core', 'Цена'),
+			'old_price'              => Yii::t('StoreModule.core', 'Старая цена'),
 			'is_active'              => Yii::t('StoreModule.core', 'Активен'),
 			'short_description'      => Yii::t('StoreModule.core', 'Состав и размер'),
 			'full_description'       => Yii::t('StoreModule.core', 'Полное описание'),

@@ -140,9 +140,15 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	                            </select>
 	                        </div>
 	                        
-	                        <div class="price"><?php echo Yii::app()->currency->active->symbol; ?>
+	                        <div class="price">
+                                <?php echo Yii::app()->currency->active->symbol; ?>
 								<span id="productPrice"><?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?></span>
-								
+                                <?php if(!empty($model->old_price)): ?>
+								<span class="product-old-price">
+                                    <?= Yii::app()->currency->active->symbol
+                                    . StoreProduct::formatPrice($model->toCurrentCurrency('old_price')); ?>
+                                </span>
+                                <?php endif; ?>
 							</div>
 	                        
 	                    </div>

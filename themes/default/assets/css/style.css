@@ -3126,3 +3126,17 @@ span.support-hover::before {
 span.required{
   color: red;
 }
+.product-old-price,
+.product-grid-old-price{
+    color: #b8b8b8;
+    text-decoration: line-through;
+    font-weight: 100;
+}
+.product-old-price{
+    margin-left: 20px;
+    font-size: 18px !important;
+}
+.product-grid-old-price{
+    margin-right: 10px;
+    font-size: 14px !important;
+}
