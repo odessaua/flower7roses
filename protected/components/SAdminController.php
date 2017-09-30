@@ -53,6 +53,12 @@ class SAdminController extends RController
 	 */
 	public function beforeAction($action)
 	{
+        // сохраняем в сессию полный URL индексной страницы
+        // $action->id, $this->id, $this->module->id
+        if($action->id == 'index'){
+            Yii::app()->session['indexUrl'] = Yii::app()->request->requestUri;
+        }
+
 		// Allow only authorized users access
 		if (Yii::app()->user->isGuest && get_class($this) !== 'AuthController')
 			Yii::app()->request->redirect($this->createUrl('/admin/auth'));

@@ -11,6 +11,7 @@ class SAdminTopButtons extends CWidget {
 	 * @var string
 	 */
 	public $listAction = 'index';
+	public $listActionBack = 'index';
 	public $createAction = 'create';
 	public $deleteAction = 'delete';
 	public $defaultUpdateAction = 'update';
@@ -82,6 +83,11 @@ class SAdminTopButtons extends CWidget {
 	public function run()
 	{
 		Yii::import('application.modules.admin.AdminModule');
+
+		// Set save action URL to go back
+        $this->listActionBack = (!empty(Yii::app()->session['indexUrl']))
+            ? Yii::app()->session['indexUrl']
+            : $this->listActionBack;
 
 		// Set update action from current url
 		if (!$this->updateAction)
@@ -174,7 +180,8 @@ class SAdminTopButtons extends CWidget {
 				)
 			),
 			'save'=>array(
-				'link'=>$this->listAction,
+//				'link'=>$this->listAction,
+				'link'=>$this->listActionBack,
 				'title'=>Yii::t('AdminModule.admin', 'Сохранить'),
 				'classes'=>array(),
 				'htmlOptions'=>array(
