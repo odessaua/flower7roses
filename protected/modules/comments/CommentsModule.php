@@ -55,6 +55,7 @@ class CommentsModule extends BaseModule
 
 				// Refresh page
 				//Yii::app()->request->redirect($url, true);
+                $comment = new Comment;
 			}
 		}
 		return $comment;

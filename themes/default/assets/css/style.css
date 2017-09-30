@@ -3122,3 +3122,7 @@ span.support-hover::before {
 *:focus {
   outline: none;
 }
+
+span.required{
+  color: red;
+}

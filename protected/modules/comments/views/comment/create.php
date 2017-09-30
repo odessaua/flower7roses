@@ -8,19 +8,17 @@
  * @var $this Controller
  * @var $form CActiveForm
  */
+if(empty($reviews)) {
+    // Load module
+    $module = Yii::app()->getModule('comments');
+    // Validate and save comment on post request
+    $comment = $module->processRequest($model);
+    // Load model comments
+    $comments = Comment::getObjectComments($model);
+}
 
-// Load module
-$module = Yii::app()->getModule('comments');
-// Validate and save comment on post request
-$comment = $module->processRequest($model);
-// Load model comments
-$comments = Comment::getObjectComments($model);
-
-//$currentUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $currentUrl = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+
 // Display comments
 if(!empty($comments))
 {

@@ -1,5 +1,5 @@
 <?php
-//Yii::import('application.modules.comments.models.Comment');
+Yii::import('application.modules.comments.models.Comment');
 
 class SiteController extends Controller
 {
@@ -170,7 +170,7 @@ class SiteController extends Controller
             if($comment->validate())
             {
                 $comment->class_name = 'application.modules.store.models.StoreProduct';
-                $comment->object_pk = 1;
+                $comment->object_pk = 0;
                 $comment->user_id = Yii::app()->user->isGuest ? 0 : Yii::app()->user->id;
                 $comment->save();
 
@@ -188,10 +188,13 @@ class SiteController extends Controller
                 Yii::app()->request->redirect($url, true);
             }
         }
-        $reviews = Comment::model()->approved()->orderByCreatedDesc()->findAll();
-		$this->render('reviews', array(
-		    'comment' => $comment,
-            'reviews' => $reviews,
+        $comments = Comment::model()->approved()->orderByCreatedDesc()->findAll();
+
+        $this->render('comments.views.comment.create', array(
+            'comment' => $comment,
+            'comments' => $comments,
+            'reviews' => true,
+            'model' => StoreProduct::model(),
         ));
 	}
 
