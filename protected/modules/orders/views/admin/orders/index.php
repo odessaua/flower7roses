@@ -29,10 +29,32 @@ $this->topButtons = $this->widget('admin.widgets.SAdminTopButtons', array(
 $payments_methods = CHtml::listData(StorePaymentMethod::model()->active()->orderByPosition()->findAll(), 'id', 'name');
 $payments_methods[0] = '–';
 
+// Register scripts
+Yii::app()->clientScript->registerScriptFile(
+    $this->module->assetsUrl.'/admin/orders.update.js',
+    CClientScript::POS_END
+);
+
 $this->widget('ext.sgridview.SGridView', array(
 	'dataProvider'=>$dataProvider,
 	'id'=>'ordersListGrid',
 	'filter'=>$model,
+	'customActions'=>array(
+        array(
+            'label'=>Yii::t('StoreModule.admin', 'Оплачен'),
+            'url'=>'#',
+            'linkOptions'=>array(
+                'onClick'=>"return setOrderStatus(6, '" . Yii::app()->request->csrfToken . "');",
+            ),
+        ),
+        array(
+            'label'=>Yii::t('StoreModule.admin', 'Доставлен'),
+            'url'=>'#',
+            'linkOptions'=>array(
+                'onClick'=>"return setOrderStatus(5, '" . Yii::app()->request->csrfToken . "');",
+            ),
+        ),
+    ),
 	'columns'=>array(
 		array(
 			'class'=>'CCheckBoxColumn',

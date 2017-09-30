@@ -125,3 +125,26 @@ function searchDeliveryMethodById(id)
 
     return result;
 }
+
+/**
+ * Change Order status
+ * @param status
+ * @param token
+ */
+function setOrderStatus(status, token)
+{
+    var ids = $.fn.yiiGridView.getSelection('ordersListGrid');
+    $.post(
+        '/admin/orders/orders/setStatus',
+        {
+            YII_CSRF_TOKEN: token,
+            ids: ids,
+            status: status
+        },
+        function (data) {
+            $.fn.yiiGridView.update('ordersListGrid');
+            $.jGrowl(data);
+        },
+        'text'
+    );
+}

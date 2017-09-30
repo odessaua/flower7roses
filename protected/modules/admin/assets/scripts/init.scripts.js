@@ -19,20 +19,38 @@ $(window).load(function (){
             fixed = false;
         }
     });
+
     jQuery(function($) {
-  function fixDiv() {
-    var $cache = $('#productsListGridActions');
-    if ($(window).scrollTop())
-      $cache.css({
-        'position': 'fixed',
-        'top': '35px'
-      });
-    else
-      $cache.css({
-        'position': 'relative',
-      });
-  }
-  $(window).scroll(fixDiv);
-  fixDiv();
-});
+        // активное меню таблицы Товаров
+        function fixDiv() {
+        var $cache = $('#productsListGridActions');
+        if ($(window).scrollTop())
+          $cache.css({
+            'position': 'fixed',
+            'top': '35px'
+          });
+        else
+          $cache.css({
+            'position': 'relative',
+          });
+        }
+        $(window).scroll(fixDiv);
+        fixDiv();
+
+        // активное меню таблицы Заказов
+        function fixDivOrders() {
+            var $cache = $('#ordersListGridActions');
+            if ($(window).scrollTop())
+                $cache.css({
+                    'position': 'fixed',
+                    'top': '35px'
+                });
+            else
+                $cache.css({
+                    'position': 'relative',
+                });
+        }
+        $(window).scroll(fixDivOrders);
+        fixDivOrders();
+    });
 });

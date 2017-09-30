@@ -703,4 +703,17 @@ class OrdersController extends SAdminController {
 
         return (!empty($statuses[$payment_system])) ? $statuses[$payment_system] : array();
     }
+
+    public function actionSetStatus()
+    {
+        $ids       = Yii::app()->request->getPost('ids');
+        $status    = (int)Yii::app()->request->getPost('status');
+        $models    = Order::model()->findAllByPk($ids);
+        foreach($models as $order)
+        {
+            $order->status_id = $status;
+            $order->save();
+        }
+        echo Yii::t('StoreModule.admin', 'Изменения успешно сохранены.');
+    }
 }
