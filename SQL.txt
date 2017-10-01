@@ -1,3 +1,12 @@
+-- 2017-10-01:
+-- (новый тип товаров «Акционные товары».)
+-- (этот тип товаров НЕ переименовывать – это имя используется в коде для поиска ID данного типа товаров!)
+-- (Выполнять запрос только если такой тип товаров ещё не был создан ранее!)
+INSERT INTO `StoreProductType` (`name`, `categories_preset`, `main_category`) VALUES ('Акционные товары', NULL, 0);
+-- а этот запрос выполнять обязательно (поле для сохранения ID акционного товара):
+ALTER TABLE `StoreProduct` ADD `sale_id` INT(11)  NULL  DEFAULT NULL  AFTER `img_title`;
+-- =========
+
 -- 2017-09-30-1 («старая» цена товаров):
 ALTER TABLE `StoreProduct` ADD `old_price` FLOAT(10,2)  NULL  DEFAULT NULL  AFTER `max_price`;
 -- =========

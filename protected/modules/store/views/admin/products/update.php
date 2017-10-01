@@ -26,7 +26,9 @@ if($model->type)
 $this->pageHeader = $title;
 
 $this->widget('application.modules.admin.widgets.schosen.SChosen', array(
-	'elements'=>array('StoreProduct_manufacturer_id','StoreProduct_is_active', 'StoreProduct_use_configurations', 'StoreProduct_main_category_id	')
+	'elements'=>array(
+        'StoreProduct_manufacturer_id', 'StoreProduct_is_active', 'StoreProduct_use_configurations',
+        'StoreProduct_main_category_id', 'StoreProduct_sale_id')
 ));
 
 ?>

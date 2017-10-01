@@ -2,6 +2,7 @@
 
 Yii::import('application.modules.store.StoreModule');
 Yii::import('application.modules.store.models.StoreProductTranslate');
+Yii::import('application.modules.store.models.StoreProductType');
 Yii::import('application.modules.store.models.StoreProductCategoryRef');
 Yii::import('application.modules.store.models.StoreProductImage');
 Yii::import('application.modules.store.models.components.StoreProductImageSaver');
@@ -42,6 +43,7 @@ Yii::import('application.modules.store.models.components.StoreProductImageSaver'
  * @property integer $main_page
  * @property string $img_alt
  * @property string $img_title
+ * @property integer $sale_id
  * @method StoreProduct active() Find Only active products
  * @method StoreProduct newest() Order products by creating date
  * @method StoreProduct byViews() Order by views count
@@ -139,7 +141,7 @@ class StoreProduct extends BaseModel
 	{
 		return array(
 			array('price, old_price', 'commaToDot'),
-			array('price, old_price, type_id, manufacturer_id, main_category_id', 'numerical'),
+			array('price, old_price, type_id, manufacturer_id, main_category_id, sale_id', 'numerical'),
 			array('is_active', 'boolean'),
 			array('use_configurations', 'boolean', 'on'=>'insert'),
 			array('quantity, availability, manufacturer_id, long_delivery,sort, main_page', 'numerical', 'integerOnly'=>true),
@@ -319,6 +321,7 @@ class StoreProduct extends BaseModel
 			'main_page'			     => 'Витрина',
             'img_alt'                => 'Alt для фото товара',
             'img_title'              => 'Title для фото товара',
+            'sale_id'                => 'Акционный товар'
 		);
 	}
 
@@ -972,6 +975,45 @@ class StoreProduct extends BaseModel
             //Clear the user's session
             Yii::app( )->user->setState( 'images', null );
         }
+    }
+
+    /**
+     * все активные акционные товары - для выпадающего списка (пары id => name)
+     * @return array
+     */
+    public static function getSales()
+    {
+        $return = array(0 => '---');
+        // получаем категорию акционных товаров - важно название категории!!!
+        $sale_type = StoreProductType::model()->findByAttributes(array('name' => 'Акционные товары'));
+        if(!empty($sale_type['id'])) {
+            // получаем ID и name
+            $sales = Yii::app()->db->createCommand()
+                ->select('p.id, pt.name')
+                ->from('StoreProduct p')
+                ->join('StoreProductTranslate pt', 'pt.object_id = p.id AND pt.language_id = 1')
+                ->where('type_id = :type_id AND is_active = 1', array(':type_id' => $sale_type['id']))
+                ->order('pt.name ASC')
+                ->queryAll();
+            if(!empty($sales)) {
+                // форматируем данные для выпадающего списка
+                foreach ($sales as $sale) {
+                    $return[$sale['id']] = $sale['name'];
+                }
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * один акционный товар с переводом и главным фото
+     * @param $pk ID акционного товара
+     * @return array|mixed|null
+     * $sale = StoreProduct::getSale(526); $sale->mainImage - главное фото товара
+     */
+    public static function getSale($pk)
+    {
+        return self::model()->with('translate', 'mainImage')->findByPk($pk);
     }
 
 }

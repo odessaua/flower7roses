@@ -41,6 +41,10 @@ return array(
 					),
 					'hint'=>Yii::t('StoreModule.admin', 'Отображать товар на сайте')
 				),
+                'sale_id'=>array(
+                    'type'=>'dropdownlist',
+                    'items'=>StoreProduct::getSales(),
+                ),
 				'long_delivery'=>array(
 					'type'=>'dropdownlist',
 					'items'=>array(
