@@ -3134,9 +3134,10 @@ span.required{
 }
 .product-old-price{
     margin-left: 20px;
-    font-size: 18px !important;
+    font-size: 26px !important;
 }
 .product-grid-old-price{
     margin-right: 10px;
-    font-size: 14px !important;
+    font-size: 16px !important;
+	font-weight: bold;
 }
