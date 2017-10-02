@@ -40,12 +40,31 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
             $imgSource = 'https://placehold.it/135x199/ffffff?text=7Roses';
 		echo CHtml::link(CHtml::image($imgSource, $img_alt, array('title' => $img_title)), $product_url, array('rel'=>'nofollow'));
 		?>
+        <?php
+        // Скины: акционный товар или старая цена, приоритет – у акционного товара
+        // для смены приоритета – поменять местами условия
+        $sale_img = $sale_alt = $sale_title = '';
+        if(!empty($data->sale_id)){
+            $sale_product = StoreProduct::getSale($data->sale_id);
+            $sale_img = $sale_product->mainImage->getUrl('100x100');
+            $sale_alt = $sale_title = $sale_product['name'];
+        }
+        elseif (!empty($data->old_price)){
+            $sale_img = Yii::app()->theme->baseUrl . '/assets/img/sale.png';
+            $sale_alt = $sale_title = Yii::t('StoreModule.core', 'Sale');
+        }
+        if(!empty($sale_img)):
+            ?>
+            <div class="sale-grid-skin">
+                <img src="<?= $sale_img; ?>" alt="<?= $sale_alt; ?>" title="<?= $sale_title; ?>"/>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="title">
         <?php echo CHtml::link(CHtml::encode($trans['name']), $product_url) ?>
     </div>
     <div class="price">
-	<?php if(!empty($data->old_price)): ?>
+	    <?php if(!empty($data->old_price)): ?>
         <span class="product-grid-old-price">
             <?= Yii::app()->currency->active->symbol
             . StoreProduct::formatPrice($data->toCurrentCurrency('old_price')); ?>

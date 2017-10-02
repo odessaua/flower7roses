@@ -134,7 +134,10 @@ echo '<ul class="breadcrumbs">
                         </div>
                     </td>
                     <td class="ctab-input">
-                        <?php echo CHtml::textField("quantities[$index]", $product['quantity'], array('class'=>'check-symbol')) ?>
+                        <?= ($product['is_sale'] == 0)
+                            ? CHtml::textField("quantities[$index]", $product['quantity'], array('class'=>'check-symbol'))
+                            : CHtml::hiddenField("quantities[$index]", $product['quantity']);
+                        ?>
                     </td>
                     <td>
                         <div class="price">
@@ -146,7 +149,10 @@ echo '<ul class="breadcrumbs">
                         </div>
                     </td>
                     <td class="ctab-delete">
-                        <?php echo CHtml::link('&nbsp;', array('/orders/cart/remove', 'index'=>$index)) ?>
+                        <?= ($product['is_sale'] == 0)
+                            ? CHtml::link('&nbsp;', array('/orders/cart/remove', 'index'=>$index))
+                            : '';
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach ?>

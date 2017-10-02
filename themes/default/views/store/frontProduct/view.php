@@ -114,6 +114,25 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 					else
                         echo CHtml::image('http://placehold.it/340x350/ffffff?text=7Roses', $img_alt);
 					?>
+                    <?php
+                    // Скины: акционный товар или старая цена, приоритет – у акционного товара
+                    // для смены приоритета – поменять местами условия
+                    $sale_img = $sale_alt = $sale_title = '';
+                    if(!empty($model->sale_id)){
+                        $sale_product = StoreProduct::getSale($model->sale_id);
+                        $sale_img = $sale_product->mainImage->getUrl('100x100');
+                        $sale_alt = $sale_title = $sale_product['name'];
+                    }
+                    elseif (!empty($model->old_price)){
+                        $sale_img = Yii::app()->theme->baseUrl . '/assets/img/sale.png';
+                        $sale_alt = $sale_title = Yii::t('StoreModule.core', 'Sale');
+                    }
+                    if(!empty($sale_img)):
+                        ?>
+                        <div class="sale-product-skin">
+                            <img src="<?= $sale_img; ?>" alt="<?= $sale_alt; ?>" title="<?= $sale_title; ?>"/>
+                        </div>
+                    <?php endif; ?>
                     <?php if($model->short_description): ?>
                     <div class="number g-clearfix">
                         <div class="sort sort-size" style="float: left; margin-left: 80px;">

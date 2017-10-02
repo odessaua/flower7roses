@@ -252,7 +252,30 @@ class CartController extends Controller
 			'configurable_id' => $configurable_id,
 			'quantity'        => (int) Yii::app()->request->getPost('quantity', 1),
 			'price'           => $model->price,
+            'sale_id'         => (!empty($model->sale_id)) ? $model->sale_id : 0,
+            'is_sale'         => 0,
 		));
+
+		// акционный товар
+        if(!empty($model->sale_id)){
+            $sale_product = StoreProduct::model()
+                ->active()
+                ->findByPk($model->sale_id);
+            if(!empty($sale_product)) {
+                // Update counter
+                $sale_product->added_to_cart_count += 1;
+                $sale_product->saveAttributes(array('added_to_cart_count'));
+                Yii::app()->cart->add(array(
+                    'product_id'      => $sale_product->id,
+                    'variants'        => array(),
+                    'configurable_id' => 0,
+                    'quantity'        => 1,
+                    'price'           => $sale_product->price,
+                    'sale_id'         => 0,
+                    'is_sale'         => 1,
+                ));
+            }
+        }
 
 		$this->_finish();
 	}
@@ -262,6 +285,17 @@ class CartController extends Controller
 	 */
 	public function actionRemove($index)
 	{
+	    // удаляем акционный продукт – если он идёт с данным товаром
+	    $cart_data = Yii::app()->cart->getData();
+	    if(!empty($cart_data[$index]['sale_id'])){
+	        foreach ($cart_data as $idx => $item){
+	            if($item['product_id'] == $cart_data[$index]['sale_id']){
+                    Yii::app()->cart->remove($idx);
+	                break;
+                }
+            }
+        }
+
 		Yii::app()->cart->remove($index);
 
 		if(!Yii::app()->request->isAjaxRequest)
