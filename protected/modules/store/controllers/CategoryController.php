@@ -134,10 +134,12 @@ class CategoryController extends Controller
 		$this->query->attachBehaviors($this->query->behaviors());
 		$this->query->applyAttributes($this->activeAttributes)
 			->active();
+		$sort_prefix = 'categorization.order, ';
 		if($data instanceof StoreCategory)
 			$this->query->applyCategories($this->model);
 		else
 		{
+		    $sort_prefix = '';
 			$cr=new CDbCriteria;
 //			$cr->with = array(
 //				'translate'=>array('together'=>true),
@@ -174,7 +176,7 @@ class CategoryController extends Controller
 			)
 		));
 
-		$this->provider->sort = StoreProduct::getCSort();
+		$this->provider->sort = StoreProduct::getCSort($sort_prefix);
         $this->setRels($this->provider->totalItemCount, $per_page);
 
 		$this->render($view, array(
