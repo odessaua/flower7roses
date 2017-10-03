@@ -210,10 +210,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 							echo CHtml::hiddenField('currency_rate', Yii::app()->currency->active->rate);
 							echo CHtml::hiddenField('configurable_id', 0);
 							echo CHtml::hiddenField('quantity', 1);
-			
+
 							if($model->isAvailable)
 							{
-								echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core','Order'), array('/orders/cart/add'), array(
+								echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core','Order'), Yii::app()->getBaseUrl(true) . '/orders/cart/add', array(
 									'dataType' => 'json',
 									'type'=>'post',
 									'success'  => 'js:function(data, textStatus, jqXHR){processCartResponse(data, textStatus, jqXHR)}',
