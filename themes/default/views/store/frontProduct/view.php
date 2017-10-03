@@ -213,7 +213,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 
 							if($model->isAvailable)
 							{
-								echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core','Order'), Yii::app()->getBaseUrl(true) . '/orders/cart/add', array(
+								echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core','Order'), Yii::app()->getBaseUrl(true) . '/cart/add', array(
 									'dataType' => 'json',
 									'type'=>'post',
 									'success'  => 'js:function(data, textStatus, jqXHR){processCartResponse(data, textStatus, jqXHR)}',
