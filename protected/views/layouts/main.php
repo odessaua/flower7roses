@@ -153,7 +153,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
             <span class="popup-close"></span>
             <div class="search-form">
                 <span><?=Yii::t('main','Site search')?></span>
-                <?php echo CHtml::form('/store/category/search/') ?>
+                <?php echo CHtml::form(MLhelper::addLangToUrl('/store/category/search/')) ?>
 	                <input class="search-field" type="text" placeholder="<?=Yii::t('main','Use keywords to find')?>" name="q" id="searchQuery" title="Site search">
 	                <input class="btn-purple" type="submit" value="<?=Yii::t('main','Search')?>">
                 <?php echo CHtml::endForm() ?>

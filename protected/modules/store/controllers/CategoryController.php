@@ -114,9 +114,10 @@ class CategoryController extends Controller
 	public function actionSearch()
 	{
 		if(Yii::app()->request->isPostRequest)
-			$this->redirect(Yii::app()->request->addUrlParam('/store/category/search', array('q'=>Yii::app()->request->getPost('q'))));
+			$this->redirect( Yii::app()->request->url . '?q=' . Yii::app()->request->getPost('q'));
+//			$this->redirect(Yii::app()->request->addUrlParam('/store/category/search', array('q'=>Yii::app()->request->getPost('q'))));
 		$q=Yii::app()->request->getQuery('q');
-		
+
 		if(!$q)
 			$this->render('search');
 		$this->doSearch($q, 'search');
