@@ -73,7 +73,7 @@ if ($model->images)
 				array(
 					'label'=>Yii::t('StoreModule.admin', 'Действия'),
 					'type'=>'raw',
-					'value'=>CHtml::ajaxLink(Yii::t('StoreModule.admin', 'Удалить'),$this->createUrl('deleteImage', array('id'=>$image->id)),
+					'value'=>CHtml::ajaxLink(Yii::t('StoreModule.admin', 'Удалить'),'/admin/store/products/deleteImage/?id='.$image->id,
 						array(
 							'type'=>'POST',
 							'data'=>array(Yii::app()->request->csrfTokenName => Yii::app()->request->csrfToken),

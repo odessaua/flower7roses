@@ -834,12 +834,13 @@ class StoreProduct extends BaseModel
 	}
 
 	/**
+     * @param string $prefix preferred sort condition, like 'categorization.order, '
 	 * @return CSort to use in gridview, listview, etc...
 	 */
-	public static function getCSort()
+	public static function getCSort($prefix = '')
 	{
 		$sort = new CSort;
-        $sort->defaultOrder = 'categorization.order, sort'; // sort
+        $sort->defaultOrder = $prefix . 'sort';
 		$sort->attributes=array(
 			'*',
 			'created'=>'t.created DESC',

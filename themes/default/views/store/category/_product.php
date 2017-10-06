@@ -16,16 +16,9 @@ $mainCat = Yii::app()->db->createCommand($mc_sql)->queryRow();
 $product_url = (!empty($mainCat['url']))
     ? Yii::app()->createUrl('/' . $mainCat['url'] . '/' . $data->url . '.html')
     : array('frontProduct/view', 'url'=>$data->url);
-// product name
-$trans=Yii::app()->db->createCommand()
-    ->select('name,')
-    ->from('StoreProductTranslate')
-    ->where('language_id=:lang_id',array('lang_id'=>$langArray->id))
-    ->andWhere('object_id=:prod_id',array('prod_id'=>$data->id))
-    ->queryRow();
 // images alt & title
-$img_alt = (!empty($data->img_alt)) ? $data->img_alt : $trans['name'];
-$img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
+$img_alt = (!empty($data->img_alt)) ? $data->img_alt : $data->name;
+$img_title = (!empty($data->img_title)) ? $data->img_title : $data->name;
 
 ?>
 
@@ -62,7 +55,7 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
     </div>
     
    <div class="title">
-        <?php echo CHtml::link(CHtml::encode($trans['name']), $product_url) ?>
+        <?php echo CHtml::link(CHtml::encode($data->name), $product_url) ?>
     </div>
     
     <div class="price">
