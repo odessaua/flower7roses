@@ -135,7 +135,7 @@ function setOrderStatus(status, token)
 {
     var ids = $.fn.yiiGridView.getSelection('ordersListGrid');
     $.post(
-        '/admin/orders/orders/setStatus',
+        '/admin/orders/orders/setStatus/',
         {
             YII_CSRF_TOKEN: token,
             ids: ids,
