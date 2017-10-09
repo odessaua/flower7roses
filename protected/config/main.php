@@ -39,6 +39,22 @@ return array(
         ),
     ),
 
+    'onException' => function($event) // скрываем ошибки и вылеты соединения с БД на боевом
+    {
+        if ($event->exception instanceof CDbException)
+        {
+            // true means, mark the event as handled so that no other handler will
+            // process the event (the Yii exception handler included).
+            $event->handled = true;
+            if(file_exists(DB_ERROR_FILE)){
+                @include DB_ERROR_FILE;
+            }
+            else{
+                echo 'Some DB error((';
+            }
+        }
+    },
+
 	'modules'=>array(
 		
 		'action_logger',
