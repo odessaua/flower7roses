@@ -29,7 +29,7 @@ $this->pageHeader = $title;
         margin-bottom: 20px;
         height: auto;
         float: left;
-        width: 100%;
+        width: 80%;
     }
     .thumb-img{
         width: 150px; /* размеры фото товара */
@@ -102,7 +102,7 @@ $this->pageHeader = $title;
     ?>
 </div>
 <div class="sorting-btn-wrap">
-    <?= CHtml::ajaxLink('Сохранить',
+    <?= CHtml::ajaxLink('Сохранить', Yii::app()->getBaseUrl(true) . 
         '/admin/store/productSorting/sorting',
         array(
             'type' => 'POST',
