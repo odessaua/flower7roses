@@ -103,7 +103,7 @@ $this->pageHeader = $title;
 </div>
 <div class="sorting-btn-wrap">
     <?= CHtml::ajaxLink('Сохранить', Yii::app()->getBaseUrl(true) . 
-        '/admin/store/productSorting/sorting',
+        '/admin/store/productSorting/sorting/',
         array(
             'type' => 'POST',
             'success' => 'function(data){ $.jGrowl("Последовательность товаров успешно сохранена.", {position:"bottom-right"}); }',
