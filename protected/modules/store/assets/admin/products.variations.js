@@ -5,7 +5,7 @@ $(document).ready(function(){
         if($('#variantAttribute'+$('#variantAttribute').val()).length == 0)
         {
             $.ajax({
-                url: "renderVariantTable/",
+                url: "/admin/store/products/renderVariantTable/",
                 cache: false,
                 data: {attr_id: $('#variantAttribute').val()},
                 dataType: "html",
