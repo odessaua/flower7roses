@@ -189,13 +189,21 @@ class SiteController extends Controller
             }
         }
         $comments = Comment::model()->approved()->orderByCreatedDesc()->findAll();
-
+		Yii::import('application.modules.pages.models.Page');
+		$page = Page::model()->find('url = :url', array(':url' => 'reviews'));
+        if(!empty($page)){
+            $this->pageTitle = $page->meta_title;
+            $this->pageKeywords = $page->meta_keywords;
+            $this->pageDescription = $page->meta_description;
+        }
         $this->render('comments.views.comment.create', array(
             'comment' => $comment,
             'comments' => $comments,
             'reviews' => true,
             'model' => StoreProduct::model(),
         ));
+		
+		
 	}
 
     // serviceUrl: 'http://flowers3.loc/site/wfpresponse'
