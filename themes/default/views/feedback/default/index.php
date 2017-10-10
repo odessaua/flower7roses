@@ -4,8 +4,6 @@
  * @var $this Controller
  */
 
-$this->pageTitle = Yii::t('FeedbackModule.core', 'Feedback');
-
 ?>
 <ul class="breadcrumbs">
         <li><a href="/"/><?=Yii::t('main','Home page')?></a></li>

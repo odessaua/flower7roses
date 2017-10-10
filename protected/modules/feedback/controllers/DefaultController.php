@@ -1,5 +1,6 @@
 <?php
-
+Yii::import('application.modules.pages.models.Page');
+		
 class DefaultController extends Controller
 {
 
@@ -32,7 +33,13 @@ class DefaultController extends Controller
 			$model->sendMessage();
 			// Yii::app()->request->redirect($this->createUrl('index'));
 		}
-
+		// seo for feedback page
+		$page = Page::model()->find('url = :url', array(':url' => 'feedback'));
+        if(!empty($page)){
+            $this->pageTitle = $page->meta_title;
+            $this->pageKeywords = $page->meta_keywords;
+            $this->pageDescription = $page->meta_description;
+        }
         // Other cities
         Yii::import('feedback.models.CityTranslate');
         $criteria = new CDbCriteria();
