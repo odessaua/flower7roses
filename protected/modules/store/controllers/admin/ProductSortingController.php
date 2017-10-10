@@ -19,7 +19,8 @@ class ProductSortingController extends SAdminController
                 ->select('spcr.id, spcr.product, spi.name')
                 ->from('StoreProductCategoryRef spcr')
                 ->join('StoreProductImage spi', 'spi.product_id = spcr.product AND spi.is_main = 1')
-                ->where('spcr.category=:category', array(':category' => $category_id))
+                ->join('StoreProduct sp', 'sp.id = spcr.product')
+                ->where('spcr.category=:category AND sp.is_active=1', array(':category' => $category_id))
                 ->order('spcr.order ASC, spcr.product DESC')
                 ->queryAll();
 

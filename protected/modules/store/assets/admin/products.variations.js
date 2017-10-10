@@ -5,7 +5,7 @@ $(document).ready(function(){
         if($('#variantAttribute'+$('#variantAttribute').val()).length == 0)
         {
             $.ajax({
-                url: "renderVariantTable",
+                url: "renderVariantTable/",
                 cache: false,
                 data: {attr_id: $('#variantAttribute').val()},
                 dataType: "html",
@@ -58,7 +58,7 @@ function addNewOption(link_clicked)
         $.ajax({
             type: 'get',
             dataType: 'html',
-            url: '/admin/store/products/addOptionToAttribute',
+            url: '/admin/store/products/addOptionToAttribute/',
             data: {
                 attr_id: attr_id,
                 value: name

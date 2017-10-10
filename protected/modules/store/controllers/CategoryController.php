@@ -134,7 +134,7 @@ class CategoryController extends Controller
 		$this->query->attachBehaviors($this->query->behaviors());
 		$this->query->applyAttributes($this->activeAttributes)
 			->active();
-		$sort_prefix = 'categorization.order, ';
+		$sort_prefix = '`categorization`.`order` ASC, ';
 		if($data instanceof StoreCategory)
 			$this->query->applyCategories($this->model);
 		else
