@@ -181,7 +181,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav01.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav01.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -203,7 +203,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav02.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav02.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -225,7 +225,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav03.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav03.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -248,7 +248,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav04.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav04.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -270,7 +270,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav07.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav07.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -292,7 +292,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav05.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav05.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>
@@ -314,7 +314,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 ?>
                 <a title="" href="<?= Yii::app()->createUrl('/' . $product['url']); ?>">
                     <div class="visual">
-                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav06.png" alt=""/>
+                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/nav06.png" alt="<?php echo $tansProduct->name; ?>"/>
                     </div>
                     <div class="title"><?php echo $tansProduct->name; ?></div>
                 </a>

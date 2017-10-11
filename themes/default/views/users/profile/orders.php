@@ -5,7 +5,9 @@
  * @var $orders
  */
 
-$this->pageTitle=Yii::t('OrdersModule.core', 'My orders');
+$this->pageTitle=Yii::t('main', 'My orders history | Ukraine Flower delivery');
+$this->pageDescription=Yii::t('main', 'My orders history. Check your orders status and payment');
+
 ?>
 <h1 class="has_background"><?php echo Yii::t('OrdersModule.core', 'My orders'); ?></h1>
 <?php
@@ -100,6 +102,7 @@ $payment_statuses = array(
         ),
         array(
             'name' => 'payment_status',
+			'header' => Yii::t('main', 'Payment status'),
             'filter' =>$payment_statuses,
             'type' => 'raw',
             'value'=>function($data){
@@ -112,7 +115,7 @@ $payment_statuses = array(
         ),
         array(
             'name'=>'paid',
-            'header' => Yii::t('main', 'Products in order'),
+            'header' => Yii::t('main', 'Ordered Products'),
             'value'=>'OrderProduct::getProducts($data->products, ' . $langArray->id . ')',
         )
     ),
