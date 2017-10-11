@@ -16,6 +16,7 @@ return array(
     'Phone'            => 'Номер телефону',
     'Delivery address' => 'Адреса доставки',
     'Register'         => 'Реєстрація',
+	'Registration'     => 'Реєстрація',
     'Forgot your password' => 'Нагадати пароль',
     'Auth'=>'Авторизуватися',
     'My account'=>'Особистий кабінет',

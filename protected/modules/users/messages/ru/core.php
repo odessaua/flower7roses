@@ -44,7 +44,7 @@ return array(
 			<li>Store your details for quicker ordering</li>
 			<li>Change your personal data</li>
 			<li>Receive special discounts and offers </li></ul>' => '<p><strong>После регистрации Вы сможете:</strong></p><br>
-			<ul class="yes"><li>Проверять стату ваших заказов и оплату</li>
+			<ul class="yes"><li>Проверять статус ваших заказов и оплату</li>
 			<li>Сохранять ваши данные для быстрого заказа</li>
 			<li>Редактировать свои персональные данные</li>
 			<li>Просматривать историю ваших заказов</li>
