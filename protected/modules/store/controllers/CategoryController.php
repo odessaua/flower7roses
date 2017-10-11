@@ -228,13 +228,13 @@ class CategoryController extends Controller
                     : '/' . implode('/', $uri); // URL для rel-ссылок вида /flowers/roses
                 // если общее кол-во страниц больше, чем номер текущей страницы - формируем next
                 if($totalPages > $page){
-                    $next = 'http://' . $_SERVER['HTTP_HOST'] . $newUri . '/page/' . (($page == 0) ? ($page + 2) : ($page + 1));
+                    $next = 'https://' . $_SERVER['HTTP_HOST'] . $newUri . '/page/' . (($page == 0) ? ($page + 2) : ($page + 1));
                     $this->rels['next'] = '<link rel="next" href="' . $next . '">';
                 }
                 // если номер текущей страницы больше 1 - формируем prev
                 if($page > 1){
                     // ссылка на первую страницу - без указания /page/1
-                    $prev = 'http://' . $_SERVER['HTTP_HOST'] . $newUri . (($page > 2) ? '/page/' . ($page - 1) : '');
+                    $prev = 'https://' . $_SERVER['HTTP_HOST'] . $newUri . (($page > 2) ? '/page/' . ($page - 1) : '');
                     $this->rels['prev'] = '<link rel="prev" href="' . $prev . '">';
                 }
             }

@@ -31,6 +31,7 @@ class FrontProductController extends Controller
 	 */
 	public function actionPhotos()
 	{
+		$this->pageTitle =  Yii::t('StoreModule.core', 'Flower delivery photos from recent flower deliveries');
 		$id=$_GET['id'];
 		$model= StoreProduct::model()->findByPk($id);
 		

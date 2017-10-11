@@ -49,7 +49,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 	        </div>
 	       
 	    <div class="b-last-photos">
-	        <h3 class="title"><?=Yii::t('StoreModule.core','The last photo of the bouquet deliveries')?></h3>
+	        <h3 class="title"><?=Yii::t('StoreModule.core','Flower delivery photos from recent flower deliveries')?></h3>
 	        <!-- <a href="#" title="">Все фото доставок</a> -->
 	        <div class="g-clearfix">
 	        	<?php if(isset($allPhotos)){?>

@@ -257,7 +257,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 		            <div class="b-photo">
 		                <div class="visual">
 		                    <div class="img">
-		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt="Photo delivery"/></a>
+		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt="<?=Yii::t('StoreModule.core','Delivery Photos')?>"/></a>
 		                    </div>
 		                </div>
 		                <!-- <div class="title">г. Одесса</div> -->

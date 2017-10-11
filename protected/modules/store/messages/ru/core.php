@@ -23,7 +23,6 @@
         'Product Compare'=>'Сравнение продуктов',
         'Not indicated'=>'Не указано',
         'No results'=>'Нет результатов',
-        'The last photo of the bouquet deliveries'=>'Последние фото доставок этого букета',
         'All photos'=>"Все фото",
         'Product code:'=>'Артикул:',
         'Show prices in'=>'Показывать цены в',
@@ -43,6 +42,7 @@
         'Phone'=>'Телефон',
         'Show comments'=>'Показать комментарии',
         'Hide comments'=>'Скрыть комментарии',
+		'Flower delivery photos from recent flower deliveries'=>'Последние фото доставок этого букета',
         "<div class = 'title'> Payment methods </div>
         <div class = 'content-text'>
             <p>

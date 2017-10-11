@@ -82,7 +82,7 @@ class OrdersController extends SAdminController {
 					}
 		if ($model->doPhoto==1)
 		echo "Photo of the delivery: paid \r\n";
-		echo "Order info: http://".$_SERVER['HTTP_HOST']."/cart/view/".$model->secret_key."\r\n\r\n";
+		echo "Order info: https://".$_SERVER['HTTP_HOST']."/cart/view/".$model->secret_key."\r\n\r\n";
    		echo "Creation date: ".$model->created."\r\n";
    		echo "Discount: ".$model->discount."\r\n";
 		echo "Payment id: ".$model->payment_id."\r\n";

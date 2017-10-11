@@ -206,7 +206,7 @@ class SiteController extends Controller
 		
 	}
 
-    // serviceUrl: 'http://flowers3.loc/site/wfpresponse'
+   
     public function actionWfpResponse()
     {
         $json = file_get_contents('php://input');

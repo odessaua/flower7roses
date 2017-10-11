@@ -131,7 +131,7 @@ $this->widget('CStarRating',array(
 		
 </td></tr>
 <tr><td>	<div class="s3">	
-			<label><?php $this->widget('CCaptcha', array('clickableImage'=>true,'showRefreshButton'=>true)) ?></label></td><td>
+			<label><?php $this->widget('CCaptcha', array('clickableImage'=>true,'showRefreshButton'=>true, 'imageOptions'=>array('alt'=>'Picture with validation code', 'title'=>'Click on image to reload'))) ?></label></td><td>
 			<?php echo $form->textField($comment,'verifyCode', array('required'=>true, 'placeholder'=>''.Yii::t('CommentsModule.core', 'Enter secret code').'')); ?>
 		</div>
 		

@@ -78,7 +78,7 @@ class OrdersController extends SAdminController {
 					}
 		if ($model->doPhoto==1)
 		echo "Сделать фото заказа\n";
-		echo "Состояние заказ можно посмотреть здесь: url:http://7roses.com/cart/view/".$model->secret_key."\n\n";
+		echo "Состояние заказ можно посмотреть здесь: url:https://7roses.com/cart/view/".$model->secret_key."\n\n";
    		echo "Создан :".$model->created."\n";
    		echo "Скидка :".$model->discount."\n";
 		echo "Payment id :".$model->payment_id."\n";
