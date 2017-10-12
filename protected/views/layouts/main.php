@@ -355,40 +355,44 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 </div>
 
 <!-- footer (begin) -->
+
 <div class="footer">
     <div class="wrap">
-        <div class="copyright">
-            <p>&copy; 7Roses 2014 - <?= date('Y')?></p>
-            <p><?=Yii::t('main','All rights reserved')?></p>
-        </div>
-        <div class="qmi">
-            <style>
+	 <!-- menu-bottom (begin) -->
+	  <style>
                 .oocab-column{
                     width: 300px;
                     height: auto;
                     float: left;
-                    margin-left: 30px;
+                    margin-left: 0px;
                 }
                 .oocab-column-item{
                     width: 100%;
                     height: auto;
                     padding: 0 0 15px;
-                }
-            </style>
-            <div class="oocab-column">
-                <div class="oocab-column-item">
-                    <div class="ocabci-row"><?= $this->layout_params['firm']['firm_city']; ?>, <?= Yii::t('main','Ukraine'); ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $this->layout_params['firm']['firm_name']; ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Address'); ?>: <?= $this->layout_params['firm']['firm_address']; ?></div>
-                    <div class="ocabci-row"><?= Yii::t('main','Phone'); ?>: <?= $this->layout_params['firm']['firm_phone']; ?></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- menu-bottom (begin) -->
-		<ul class="menu-bottom">
-            <li>
-                <ul>
+				}
+
+				.footer-col {
+					float: left;
+					font: 12px Arial,Helvetica,sans-serif;
+					color: #333;
+					margin: 5px;
+					text-align: left;
+					line-height: 20px;
+					height: 250px;
+					
+
+</style>
+	<div class="footer-col" style="width:170px;">
+        <div class="foot-title-big">COPYRIGHT</div>
+			<div class="copyright">
+            <p>&copy; 7Roses 2014 - <?= date('Y')?></p>
+            <p><?=Yii::t('main','All rights reserved')?></p>
+        </div>       
+    </div>
+	<div class="footer-col" style="width:230px;">
+	<div class="foot-title-big">FLOWER DELIVERY</div>
+	            <ul>
                     <li><a title="Flowers" href="<?=Yii::app()->createUrl('/flowers'); ?>"><?=Yii::t('main','Flowers')?></a></li>
                     <li><a title="Flower arrangements" href="<?=Yii::app()->createUrl('/arrangements'); ?>"><?=Yii::t('main','Arrangements')?></a></li>
                     <li><a title="Gifts and soft toys" href="<?=Yii::app()->createUrl('/gifts'); ?>"><?=Yii::t('main','Gifts')?></a></li>
@@ -396,18 +400,29 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 					<li><a title="Gourmet Basket" href="<?=Yii::app()->createUrl('/gourmet'); ?>"><?=Yii::t('main','Gourmet')?></a></li>
                     <li><a title="Occasion" href="<?=Yii::app()->createUrl('/reason'); ?>"><?=Yii::t('main','Occasion')?></a></li>
                 </ul>
-            </li>
-            <li>
-                <ul>
-					<li><a title="payment" href="<?= Yii::app()->createUrl('/page/payment.html'); ?>"><?=Yii::t('main','Payment')?></a></li>
-                    <li><a title="about delivery" href="<?= Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main','About Delivery')?></a></li>
-                    <li><a title="terms and conditions" href="<?= Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main','Terms&Conditions')?></a></li>
-					<li><a title="frequently asked questions" href="<?= Yii::app()->createUrl('/page/faq.html'); ?>"><?=Yii::t('main','FAQ')?></a></li>
-                    <li><a title="Customer reviews" href="<?= Yii::app()->createUrl('/reviews'); ?>"><?=Yii::t('main','Customer reviews')?></a></li>
-                    <li><a title="Contacts" href="<?= Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t('main','Contacts')?></a></li>
-                </ul>
-            </li>
-        </ul>
+	</div>
+	<div class="footer-col" style="width:230px;">
+	<div class="foot-title-big">SUPPORT</div>
+					<a title="payment" href="<?= Yii::app()->createUrl('/page/payment.html'); ?>"><?=Yii::t('main','Payment')?></a><br>
+                    <a title="about delivery" href="<?= Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main','About Delivery')?></a><br>
+                    <a title="terms and conditions" href="<?= Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main','Terms&Conditions')?></a><br>
+					<a title="frequently asked questions" href="<?= Yii::app()->createUrl('/page/faq.html'); ?>"><?=Yii::t('main','FAQ')?></a><br>
+                    <a title="Customer reviews" href="<?= Yii::app()->createUrl('/reviews'); ?>"><?=Yii::t('main','Customer reviews')?></a><br>
+                   <a title="Contacts" href="<?= Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t('main','Contacts')?></a><br>
+                
+	</div>
+	<div class="footer-col" style="width:230px;">
+	<div class="foot-title-big">CONTACTS</div>
+	            <div class="oocab-column">
+                <div class="oocab-column-item">
+                    <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $this->layout_params['firm']['firm_name']; ?></div>
+                    <div class="ocabci-row"><?= Yii::t('main','Address'); ?>: <?= $this->layout_params['firm']['firm_address']; ?></div>
+					<div class="ocabci-row"><?= $this->layout_params['firm']['firm_city']; ?>, <?= Yii::t('main','Ukraine'); ?></div>
+                    <div class="ocabci-row"><?= Yii::t('main','Phone'); ?>: <?= $this->layout_params['firm']['firm_phone']; ?></div>
+                </div>
+            </div>
+	</div>
+
         <!-- menu-bottom (end) -->
     </div>
 </div>
