@@ -384,14 +384,14 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 
 </style>
 	<div class="footer-col" style="width:170px;">
-        <div class="foot-title-big">COPYRIGHT</div>
+        <div class="foot-title-big"><?=Yii::t('main','Copyright')?></div>
 			<div class="copyright">
             <p>&copy; 7Roses 2014 - <?= date('Y')?></p>
             <p><?=Yii::t('main','All rights reserved')?></p>
         </div>       
     </div>
 	<div class="footer-col" style="width:230px;">
-	<div class="foot-title-big">FLOWER DELIVERY</div>
+	<div class="foot-title-big"><?=Yii::t('main','Flower Delivery')?></div>
 	            <ul>
                     <li><a title="Flowers" href="<?=Yii::app()->createUrl('/flowers'); ?>"><?=Yii::t('main','Flowers')?></a></li>
                     <li><a title="Flower arrangements" href="<?=Yii::app()->createUrl('/arrangements'); ?>"><?=Yii::t('main','Arrangements')?></a></li>
@@ -402,7 +402,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 </ul>
 	</div>
 	<div class="footer-col" style="width:230px;">
-	<div class="foot-title-big">SUPPORT</div>
+	<div class="foot-title-big"><?=Yii::t('main','Support')?></div>
 					<a title="payment" href="<?= Yii::app()->createUrl('/page/payment.html'); ?>"><?=Yii::t('main','Payment')?></a><br>
                     <a title="about delivery" href="<?= Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main','About Delivery')?></a><br>
                     <a title="terms and conditions" href="<?= Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main','Terms&Conditions')?></a><br>
@@ -412,7 +412,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 
 	</div>
 	<div class="footer-col" style="width:230px;">
-	<div class="foot-title-big">CONTACTS</div>
+	<div class="foot-title-big"><?=Yii::t('main','Contacts')?></div>
 	            <div class="oocab-column">
                 <div class="oocab-column-item">
                     <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $this->layout_params['firm']['firm_name']; ?></div>

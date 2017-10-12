@@ -6,6 +6,8 @@
         'About Delivery'=>'О доставке',
         'Terms&Conditions'=>'Гарантія якості',
         'Contacts' =>'Контакти',
+		'Support'=> 'Техпідтримка',
+		'Flower Delivery'=> 'Доставка квітів',
 		'Home page'=>'Головна',
 		'Flowers'=>'Квіти',
         'Arrangements'=>'Композиції',

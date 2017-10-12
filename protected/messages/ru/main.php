@@ -7,6 +7,8 @@
         'About Delivery'=>'О доставке',
         'Terms&Conditions'=>'Гарантия качества',
 		'Contacts' =>'Контакты',
+		'Support'=> 'Техподдержка',
+		'Flower Delivery'=> 'Доставка цветов',
         'Flowers'=>'Цветы',
         'Arrangements'=>'Композиции',
 		'Gifts'=>'Подарки',
