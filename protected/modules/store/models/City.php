@@ -54,7 +54,7 @@ class City extends CActiveRecord
 		return array(
 			array('name', 'required'),
 			array('alias, firm_comment', 'safe'),
-			array('delivery,show_in_popup,region_id, firm_show, firm_postcode', 'numerical'),
+			array('delivery,show_in_popup,region_id, firm_show', 'numerical'),
 			array('name', 'length', 'max'=>50),
             array('firm_name, firm_phone, firm_address, firm_postcode, h1_header', 'length', 'max'=>255),
 			// The following rule is used by search().
