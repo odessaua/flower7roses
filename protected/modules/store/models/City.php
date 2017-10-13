@@ -11,6 +11,7 @@
  * @property double $delivery
  * @property string $firm_name
  * @property string $firm_address
+ * @property integer $firm_postcode
  * @property string $firm_phone
  * @property integer $firm_show
  * @property string $h1_header
@@ -32,6 +33,7 @@ class City extends CActiveRecord
      */
     public $firm_name;
     public $firm_address;
+	public $firm_postcode;
     public $firm_phone;
     public $firm_show;
     public $h1_header;
@@ -52,9 +54,9 @@ class City extends CActiveRecord
 		return array(
 			array('name', 'required'),
 			array('alias, firm_comment', 'safe'),
-			array('delivery,show_in_popup,region_id, firm_show', 'numerical'),
+			array('delivery,show_in_popup,region_id, firm_show, firm_postcode', 'numerical'),
 			array('name', 'length', 'max'=>50),
-            array('firm_name, firm_phone, firm_address, h1_header', 'length', 'max'=>255),
+            array('firm_name, firm_phone, firm_address, firm_postcode, h1_header', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, phone_code, delivery', 'safe', 'on'=>'search'),
@@ -88,6 +90,7 @@ class City extends CActiveRecord
             'show_in_popup' => 'Показать во всплывающем окне',
             'firm_name' => 'Название компании-представителя',
             'firm_address' => 'Адрес компании-представителя',
+			'firm_postcode' => 'Почтовый индекс',
             'firm_phone' => 'Телефоны компании-представителя',
             'firm_show' => 'Показывать контакты компании-представителя на сайте',
             'h1_header' => 'Заголовок h1',
@@ -108,6 +111,7 @@ class City extends CActiveRecord
 					'name',
                     'firm_name',
                     'firm_address',
+					'firm_postcode',
                     'firm_phone',
                     'firm_show',
                     'h1_header',
@@ -143,6 +147,7 @@ class City extends CActiveRecord
 //		$criteria->compare('region_id',$this->region_id);
 		$criteria->compare('translate.name',$this->name,true);
 		$criteria->compare('phone_code',$this->phone_code,true);
+		$criteria->compare('firm_postcode',$this->firm_postcode,true);
 		$criteria->compare('delivery',$this->delivery);
         $criteria->compare('translate.firm_name',$this->firm_name,true);
         $criteria->compare('translate.firm_address',$this->firm_address,true);

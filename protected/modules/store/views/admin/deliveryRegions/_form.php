@@ -35,6 +35,9 @@ return array(
                 'firm_address'=>array(
                     'type'=>'text',
                 ),
+                'firm_postcode'=>array(
+                    'type'=>'text',
+                ),
                 'firm_phone'=>array(
                     'type'=>'text',
                 ),

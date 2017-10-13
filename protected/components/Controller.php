@@ -138,15 +138,16 @@ class Controller extends RController
                 'firm_city' => $cityInfo->name,
                 'firm_name' => $cityInfo->firm_name,
                 'firm_address' => $cityInfo->firm_address,
+				'firm_postcode' => $cityInfo->firm_postcode,
                 'firm_phone' => $cityInfo->firm_phone,
             );
         }
         else{
             $this->layout_params['firm'] = array(
-                'firm_city' => Yii::t('main','Odessa'),
                 'firm_name' => '7Roses',
-                'firm_address' => Yii::t('main','Deribasovskaya 12'),
-                'firm_phone' => '+38 048 716 54 65',
+                'firm_address' => Yii::t('main','12 Deribasovskaya street'),
+				'firm_city' => Yii::t('main','Odessa'),
+                'firm_phone' => '+38 048 716-54-65',
             );
         }
     }
@@ -220,8 +221,8 @@ class Controller extends RController
 	{
 		$title = Yii::app()->settings->get('core', 'siteName');
 		if(!empty($this->_pageTitle)){
-		    if(mb_strpos($this->_pageTitle, ' / ' . $title) === false){
-			    $title=$this->_pageTitle .= ' / ' . $title;
+		    if(mb_strpos($this->_pageTitle, ' |	' . $title) === false){
+			    $title=$this->_pageTitle .= ' | ' . $title;
             }
             else{
 		        $title = $this->_pageTitle;

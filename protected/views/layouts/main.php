@@ -417,7 +417,8 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <div class="oocab-column-item">
                     <div class="ocabci-row"><?= Yii::t('main','Title'); ?>: <?= $this->layout_params['firm']['firm_name']; ?></div>
                     <div class="ocabci-row"><?= Yii::t('main','Address'); ?>: <?= $this->layout_params['firm']['firm_address']; ?></div>
-					<div class="ocabci-row"><?= $this->layout_params['firm']['firm_city']; ?>, <?= Yii::t('main','Ukraine'); ?></div>
+					<div class="ocabci-row"><?= $this->layout_params['firm']['firm_city']; ?>, <?= $this->layout_params['firm']['firm_postcode']; ?></div>
+					<div class="ocabci-row"><?= Yii::t('main','Ukraine'); ?></div>
                     <div class="ocabci-row"><?= Yii::t('main','Phone'); ?>: <?= $this->layout_params['firm']['firm_phone']; ?></div>
                 </div>
             </div>
