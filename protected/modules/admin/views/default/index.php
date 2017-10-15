@@ -12,6 +12,7 @@ $this->sidebarContent = $this->renderPartial('_sidebar', array(
 	'ordersTotalPrice'=>$this->getOrdersTotalPrice()
 ), true);
 
+
 // Orders list
 $this->widget('ext.sgridview.SGridView', array(
 	'dataProvider'=>$ordersDataProvider,
@@ -23,20 +24,20 @@ $this->widget('ext.sgridview.SGridView', array(
 			'class'=>'SGridIdColumn',
 			'name'=>'id'
 		),
+		array ('name'=>'receiver_city',
+				'type'=>'raw',
+				'value'=>'CHtml::link(CHtml::encode($data->receiver_city), array("/orders/admin/orders/update", "id"=>$data->id))',
+			),
+			'datetime_del',
 		array(
 			'name'=>'user_name',
 			'type'=>'raw',
 			//'value'=>'CHtml::link(CHtml::encode($data->user_name), array("/orders/admin/orders/update", "id"=>$data->id))',
 		),
 		'user_email',
-		'user_phone',
 		array(
 			'name'=>'status_id',
 			'value'=>'$data->status_name'
-		),
-		array(
-			'name'=>'delivery_id',
-			'value'=>'$data->delivery_name'
 		),
 		array(
 			'class'=>'SProductsPreviewColumn'

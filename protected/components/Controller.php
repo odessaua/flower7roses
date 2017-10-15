@@ -147,7 +147,8 @@ class Controller extends RController
                 'firm_name' => '7Roses',
                 'firm_address' => Yii::t('main','12 Deribasovskaya street'),
 				'firm_city' => Yii::t('main','Odessa'),
-                'firm_phone' => '+38 048 716-54-65',
+                'firm_phone' => '+38 (048) 716 5465',
+				'firm_postcode' => '65026',
             );
         }
     }
@@ -315,6 +316,25 @@ class Controller extends RController
     public function getDefaultCityInfo($translate = false, $lang = '')
     {
         return $this->getCityInfo(908, $translate, $lang); // Киев, ID = 908
+    }
+	
+	/*
+	Информация о текущей области
+	
+	*/
+	
+	    public function getRegionInfo($translate = false, $lang = '')
+    {
+       $language = (empty($lang))
+            ? $this->language_info // текущий язык
+            : SSystemLanguage::model()->findByAttributes(array('code'=>$lang)); // язык по коду из аргумента
+        if(!empty($translate)){
+            $region  = City::model()->language($language->id)->findByPk($region_id); // с переводом
+        }
+        else{
+            $city = City::model()->language(0)->findByPk($city_id); // без перевода
+        }
+        return $city;
     }
 
 }

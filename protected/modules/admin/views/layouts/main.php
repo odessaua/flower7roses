@@ -34,6 +34,7 @@
 <!doctype html>
 <html>
 <head>
+<link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
 	<meta charset="utf-8">
 	<title>7Roses - Admin</title>
 

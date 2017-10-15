@@ -29,7 +29,7 @@ class DefaultController extends SAdminController
 		$cr = new CDbCriteria;
 
 		$orders = Order::model()->search();
-		$orders->setPagination(array('pageSize'=>10));
+		$orders->setPagination(array('pageSize'=>20));
 		$orders->setCriteria($cr);
 
 		return $orders;

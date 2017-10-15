@@ -64,11 +64,11 @@ $this->widget('ext.sgridview.SGridView', array(
 			'name'=>'id'
 		),
 		array(
-			'name'=>'user_name',
+			'name'=>'receiver_city',
 			'type'=>'raw',
-			'value'=>'CHtml::link(CHtml::encode($data->user_name), array("/orders/admin/orders/update", "id"=>$data->id))',
+			'value'=>'CHtml::link(CHtml::encode($data->receiver_city), array("/orders/admin/orders/update", "id"=>$data->id))',
 		),
-		'receiver_city',
+		'user_name',
 		'datetime_del',
 		'user_email',
         array(
