@@ -34,6 +34,7 @@ $this->widget('ext.sgridview.SGridView', array(
 			'type'=>'raw',
 			//'value'=>'CHtml::link(CHtml::encode($data->user_name), array("/orders/admin/orders/update", "id"=>$data->id))',
 		),
+		'country',
 		'user_email',
 		array(
 			'name'=>'status_id',
