@@ -23,7 +23,7 @@
         'Product Compare'=>'Порівняння продуктів',
         'Not indicated'=>'Не вказано',
         'No results'=>'Немає результатів',
-        'Flower delivery photos from recent flower deliveries'=>'Останнє фото доставок цього букета',
+        'The last photo of the bouquet deliveries'=>'Останнє фото доставок цього букета',
         'All photos'=>"Усі фото",
         'Product code:'=>'Артикул:',
         'Show prices in'=>'Показувати ціни в',
