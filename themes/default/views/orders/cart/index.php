@@ -371,7 +371,7 @@ echo '<ul class="breadcrumbs">
                             ?>
                         </div>
                         <?php
-                        echo CHtml::form(array('/orders/cart/add'));
+                        echo CHtml::form(array('/orders/cart/add/'));
                         echo CHtml::hiddenField('product_id', $data->id);
                         echo CHtml::hiddenField('product_price', $data->price);
                         echo CHtml::hiddenField('use_configurations', $data->use_configurations);
