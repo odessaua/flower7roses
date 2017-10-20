@@ -13,7 +13,7 @@ $this->pageDescription = Yii::t('UsersModule.core','Log in to your personal acco
 <div class="login_box rc5">
 	<div class="data-form">
 		<?php
-			echo CHtml::form($this->createUrl('/users/login'),'post', array('id'=>'user-login-form'));
+			echo CHtml::form($this->createUrl(Yii::app()->getBaseUrl(true) .'/users/login/'),'post', array('id'=>'user-login-form'));
 			echo CHtml::errorSummary($model);
 		?>
 	<table cellpadding="4" cellspacing="0" border="0"><tr><td>
