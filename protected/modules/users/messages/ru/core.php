@@ -23,6 +23,7 @@ return array(
 	'Remind'			   =>'Отправить',
 	'Have an account?'	   =>'Войти в кабинет',
 	'Log in to your personal account'   =>'Вход в личный кабинет',
+	'Log in to your account to get all orders history and tracking information'=>'Войдите в свой личный кабинет для получения информации о ваших заказах',
 	'Personal Account | Ukraine Flower delivery'=>'Личный кабинет | Служба доставки цветов',
     'My account'		   =>'Личный кабинет',
     'Submit'			   =>'Изменить',
