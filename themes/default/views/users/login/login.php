@@ -6,7 +6,7 @@
  */
 
 $this->pageTitle = Yii::t('UsersModule.core','Personal Account | Ukraine Flower delivery');
-$this->pageDescription = Yii::t('UsersModule.core','Log in to your personal account');
+$this->pageDescription = Yii::t('UsersModule.core','Log in to your account to get all orders history and tracking information');
 ?>
 
 <h1 class="has_background"><?php echo Yii::t('UsersModule.core','Log in to your personal account'); ?></h1>

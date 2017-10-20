@@ -1,4 +1,4 @@
-<h1 id="comments_title"><?=Yii::t('CommentsModule.core','Customer Reviews')?></h1>
+<? if (isset($this->pageShortdescription)) echo $this->pageShortdescription;?>
 <div class="comments_form">
 
                 <!-- col31 (begin) -->

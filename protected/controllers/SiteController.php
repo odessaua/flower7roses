@@ -195,6 +195,7 @@ class SiteController extends Controller
             $this->pageTitle = $page->meta_title;
             $this->pageKeywords = $page->meta_keywords;
             $this->pageDescription = $page->meta_description;
+			$this->pageShortdescription = $page->short_description;
         }
         $this->render('comments.views.comment.create', array(
             'comment' => $comment,

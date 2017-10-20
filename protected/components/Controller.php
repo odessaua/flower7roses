@@ -39,6 +39,11 @@ class Controller extends RController
     /*
      * @var array all info about current language
      */
+	public $pageShortdescription;
+
+	/**
+	 * @var string
+	 */
     public $language_info;
 
     /**

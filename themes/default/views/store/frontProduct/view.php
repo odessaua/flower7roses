@@ -269,9 +269,13 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	    <!-- b-last-photos (end) -->
 <!-- 	</div> -->
 	<!-- products (end) -->
+	
+	<!-- comments (start) -->
+	<h2 id="comments_title"><?=Yii::t('CommentsModule.core','Customer Reviews');?></h2>
 <?php $this->renderPartial('comments.views.comment.create', array(
        	 'model'=>$model, // Commentable model instance
     	));?>
+	<!-- comments (end) -->
 </div>
 
 
