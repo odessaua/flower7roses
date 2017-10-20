@@ -32,14 +32,18 @@ return array(
     'Access error'		   =>'Ошибка доступа',
 	'Your E-mail'		   =>'Ваш E-mail',
 	'Order status'         => 'Статус заказа',
+	'Personal Account Registration| Ukraine Flower delivery'=>'Регистрация личного кабинета',
+	'After registration you will be able to get an access to the order history and ordert status information.'=> 'После регистрации в нашем интернет магазине вы получите доступ к истории ваших заказов, а также сможете оперативно отслеживать статус вашего заказа.',
 	'{attr} already exists'=>'Такой {attr} уже существует',
     'Changes successfully saved'=>'Изменения успешно сохранены.',
     'Password successfully saved.'=>'Пароль успешно изменен.',
     'In your mail sent to activate the new password instructions.'=>'На вашу почту отправлены инструкции по активации нового пароля.',
+	'Personal Account - Password Remind'=>'Личный кабинет - Восстановление пароля',
+	'If you have lost your account password please specify your email address to receive link for resetting it.'=>'Если вы забыли ваш пароль или логин, то для его восстановления вам потребуется ввести ваш электронный адрес.',
     'Your new password has been activated successfully.'=>'Ваш новый пароль успешно активирован.',
     'Error activation password.'=>'Ошибка активации пароля.',
     'Thank you for registering on our site.'=>'Спасибо за регистрацию на нашем сайте.',
-	'<p>Enter your e-mail address to receive your password</p>' => 'Введите ваш электронный адрес, который вы указывали при регистрации',
+	'<p>Please enter your e-mail address to retrieve your password</p>' => 'Пожалуйста введите ваш электронный адрес, который вы указывали при регистрации',
 	'<p><strong>Benefits of an account:</strong></p><br>			
 			<ul class="yes"><li>Check the statuses of your order and payment</li>
 			<li>Keep track of all orders</li>

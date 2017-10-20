@@ -6,7 +6,8 @@
  * @var Controller $this
  */
 
-$this->pageTitle = Yii::t('UsersModule.core','Registration');
+$this->pageTitle = Yii::t('UsersModule.core','Personal Account Registration| Ukraine Flower delivery');
+$this->pageDescription = Yii::t('UsersModule.core','After registration you will be able to get an access to the order history and ordert status information.');
 ?>
 
 <h1 class="has_background"><?php echo Yii::t('UsersModule.core','Registration'); ?></h1>
