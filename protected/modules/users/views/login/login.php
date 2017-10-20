@@ -13,7 +13,7 @@ $this->pageTitle = Yii::t('UsersModule.core','Авторизация');
 <div class="login_box rc5">
 	<div class="form wide">
 		<?php
-			echo CHtml::form($this->createUrl('/users/login'),'post', array('id'=>'user-login-form'));
+			echo CHtml::form($this->createUrl(Yii::app()->getBaseUrl(true) . '/users/login'),'post', array('id'=>'user-login-form'));
 			echo CHtml::errorSummary($model);
 		?>
 

@@ -380,7 +380,7 @@ echo '<ul class="breadcrumbs">
                         echo CHtml::hiddenField('quantity', 1);
                 
                         
-                        echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core',Yii::t('main','Add')), array('/orders/cart/add/'), array(
+                        echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core',Yii::t('main','Add')), array(Yii::app()->getBaseUrl(true) . '/cart/add/'), array(
                             'id'=>'addProduct'.$data->id,
                             'dataType'=>'json',
                             'success'=>'js:function(data, textStatus, jqXHR){processCartResponseFromCart(data, textStatus, jqXHR, "'.Yii::app()->createAbsoluteUrl('/store/frontProduct/view', array('url'=>$data->url)).'")}',
