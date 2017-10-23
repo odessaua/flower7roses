@@ -16,6 +16,7 @@
         'Sort by price'=>'Сортировать по цене',
 		'The composition and size'=>'Состав и размер',
 		'The last photo of the bouquet deliveries'=>'Фото доставок этого товара',
+		'Photos of the real flower deliveries in Ukraine. All photos was made by our couriers.'=>'Реальные фото доставок наших букетов в Украине. Все фото были сделаны нашими курьерами.',
         'under'=>'до',
         'over'=>'от',
         'Per page:'=>'На странице по:',
@@ -43,7 +44,7 @@
         'Phone'=>'Телефон',
         'Show comments'=>'Показать комментарии',
         'Hide comments'=>'Скрыть комментарии',
-		'Flower delivery photos from recent flower deliveries'=>'Последние фото доставок этого букета',
+		'Photos of the recent flower delivery orders'=>'Последние фото доставок этого букета',
         "<div class = 'title'> Payment methods </div>
         <div class = 'content-text'>
             <p>

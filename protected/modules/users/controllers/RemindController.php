@@ -31,7 +31,7 @@ class RemindController extends Controller
 			if($model->validate())
 			{
 				$model->sendRecoveryMessage();
-				$this->addFlashMessage(Yii::t('UsersModule.core','In your mail sent to activate the new password instructions.'));
+				$this->addFlashMessage(Yii::t('UsersModule.core','The new password instructions are sent to your email.'));
 				$this->refresh();
 			}
 		}

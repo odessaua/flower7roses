@@ -36,7 +36,7 @@ return array(
 	'After registration you will be able to get an access to the order history and ordert status information.'=> 'Після реєстрації в нашому інтернет магазині ви отримаєте доступ до історії ваших замовлень, а також зможете оперативно відслідковувати статус вашого замовлення.',
     'Changes successfully saved'=>'Зміни успішно збережені',
     'Password successfully saved'=>'Пароль успішно збережений',
-    'In your mail sent to activate the new password instructions.'=>'На вашу пошту відправлені інструкції по активації нового пароля.',
+    'The new password instructions are sent to your email.'=>'На вашу пошту відправлені інструкції по активації нового пароля.',
     'Your new password has been activated successfully.'=>'Ваш новий пароль успішно активований.',
     'Error activation password.'=>'Помилка активації пароля.',
     'Thank you for registering on our site.'=>'Дякуємо за реєстрацію на нашому сайті.',

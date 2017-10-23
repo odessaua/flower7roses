@@ -49,8 +49,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 	        </div>
 	       
 	    <div class="b-last-photos">
-	        <h3 class="title"><?=Yii::t('StoreModule.core','Flower delivery photos from recent flower deliveries')?></h3>
-	        <!-- <a href="#" title="">Все фото доставок</a> -->
+	        <h1 class="title"><?=Yii::t('StoreModule.core','Photos of the recent flower delivery orders')?></h1>
 	        <div class="g-clearfix">
 	        	<?php if(isset($allPhotos)){?>
 		        	<?php foreach ($allPhotos as $key => $value) { ?>
@@ -60,7 +59,6 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 		                        <a href="<?php echo '/uploads/'.$value->photo;?>"><img src="<?php echo '/uploads/'.$value->photo;?>" alt=""/></a>
 		                    </div>
 		                </div>
-		                <!-- <div class="title">г. Одесса</div> -->
 		            </div>
 		            <?php } ?>
 	             <?php } ?>

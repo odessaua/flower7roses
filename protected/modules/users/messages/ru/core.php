@@ -38,7 +38,7 @@ return array(
 	'{attr} already exists'=>'Такой {attr} уже существует',
     'Changes successfully saved'=>'Изменения успешно сохранены.',
     'Password successfully saved.'=>'Пароль успешно изменен.',
-    'In your mail sent to activate the new password instructions.'=>'На вашу почту отправлены инструкции по активации нового пароля.',
+    'The new password instructions are sent to your email.'=>'На вашу почту отправлены инструкции для активации нового пароля.',
 	'Personal Account - Password Remind'=>'Личный кабинет - Восстановление пароля',
 	'If you have lost your account password please specify your email address to receive link for resetting it.'=>'Если вы забыли ваш пароль или логин, то для его восстановления вам потребуется ввести ваш электронный адрес.',
     'Your new password has been activated successfully.'=>'Ваш новый пароль успешно активирован.',
