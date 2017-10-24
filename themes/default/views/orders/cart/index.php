@@ -371,7 +371,7 @@ echo '<ul class="breadcrumbs">
                             ?>
                         </div>
                         <?php
-                        echo CHtml::form(array('/orders/cart/add/'));
+                        echo CHtml::form(array('/cart/add/'));
                         echo CHtml::hiddenField('product_id', $data->id);
                         echo CHtml::hiddenField('product_price', $data->price);
                         echo CHtml::hiddenField('use_configurations', $data->use_configurations);
@@ -380,7 +380,7 @@ echo '<ul class="breadcrumbs">
                         echo CHtml::hiddenField('quantity', 1);
                 
                         
-                        echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core',Yii::t('main','Add')), array(Yii::app()->getBaseUrl(true) . '/cart/add/'), array(
+                        echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core',Yii::t('main','Add')), array('/cart/add/'), array(
                             'id'=>'addProduct'.$data->id,
                             'dataType'=>'json',
                             'success'=>'js:function(data, textStatus, jqXHR){processCartResponseFromCart(data, textStatus, jqXHR, "'.Yii::app()->createAbsoluteUrl('/store/frontProduct/view', array('url'=>$data->url)).'")}',
