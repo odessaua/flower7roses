@@ -33,7 +33,7 @@ class DeliveryRegionsController extends SAdminController {
 		{
 			$model = City::model()->language($_GET)->findByPk($_GET['id']);
 		}
-		
+
 		if (!$model)
 			throw new CHttpException(404, Yii::t('StoreModule.admin', 'Регион доставки не найден.'));
 
@@ -94,6 +94,11 @@ class DeliveryRegionsController extends SAdminController {
 			if($model->validate())
 			{
 				$model->save();
+				// флаги «Показывать контакты компании-представителя на сайте»
+                // для всех языковых версий одновременно
+				$firm_show = (!empty($_POST['City']['firm_show'])) ? 1 : 0;
+				CityTranslate::model()->updateAll(array('firm_show' => $firm_show),'object_id = ' . (int)$model->id);
+
 				if (isset($_POST['REDIRECT']))
 					$this->smartRedirect($model);
 				else

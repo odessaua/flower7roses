@@ -65,6 +65,11 @@ $this->widget('ext.sgridview.SGridView', array(
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{update}{delete}',
+			'buttons' => array(
+				'delete' => array(
+                	'url'=>'Yii::app()->createUrl("/admin/store/deliveryRegions/delete/?id=$data->id")',
+				),
+			),
 		),
 	),
 ));

@@ -156,8 +156,17 @@ class City extends CActiveRecord
         $criteria->compare('translate.firm_comment',$this->firm_show,true);
         $criteria->compare('translate.h1_header',$this->firm_show,true);
 
+        $sort = new CSort;
+        $sort->attributes=array(
+            'name' => array(
+                'asc'   => 'translate.name',
+                'desc'  => 'translate.name DESC',
+            ),
+        );
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+            'sort' => $sort,
 		));
 	}
 
