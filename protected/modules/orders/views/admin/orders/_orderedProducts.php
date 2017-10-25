@@ -60,11 +60,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		            <?php } ?>
 	             <?php } ?>
 <?php
-		// убрал блок загрузки картинок, т.к. непонятно загружать картинки к заказу
+		//  блок загрузки фото заказа
 		
-	/*	foreach ($model->getOrderedProducts()->getData() as $key => $value) {
+		foreach ($model->getOrderedProducts()->getData() as $key => $value) {
 			# code...
-			echo $value->name;
+			echo "Добавить фото доставки товара: ".$value->name."(ID=".$value->product_id.")";
 			$csrfTokenName = Yii::app()->request->csrfTokenName;
 			$csrfToken = Yii::app()->request->csrfToken;
 			 $this->widget('CMultiFileUpload', array(
@@ -94,7 +94,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	            ));
 			
 			echo "<br>";
-		} */
+		} 
 ?>
 
 <script type="text/javascript">

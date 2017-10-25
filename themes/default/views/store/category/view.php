@@ -69,8 +69,8 @@ $this->breadcrumbs[] = $this->model->name;
 				<ul class="sort-dropdown inpage">
                     
                         <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/created'); ?>" title="Last added"><?echo Yii::t('StoreModule.core', 'Last added')?></a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price'); ?>" title="Cheap first"><?echo Yii::t('StoreModule.core', 'Cheap first')?></a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price.desc'); ?>" title="Highest first"><?echo Yii::t('StoreModule.core', 'Highest first')?></a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price'); ?>" title="Cheap first"><?echo Yii::t('StoreModule.core', 'Price: Low to High')?></a></li>
+                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price.desc'); ?>" title="Highest first"><?echo Yii::t('StoreModule.core', 'Price: High to Low')?></a></li>
                 </ul>
                 </div>
             </div>

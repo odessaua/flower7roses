@@ -17,6 +17,7 @@
 		'The composition and size'=>'Состав и размер',
 		'The last photo of the bouquet deliveries'=>'Фото доставок этого товара',
 		'Photos of the real flower deliveries in Ukraine. All photos was made by our couriers.'=>'Реальные фото доставок наших букетов в Украине. Все фото были сделаны нашими курьерами.',
+		'Photos of the recent flower delivery orders'=>'Фотографии выполненных заказов этого букета',
         'under'=>'до',
         'over'=>'от',
         'Per page:'=>'На странице по:',

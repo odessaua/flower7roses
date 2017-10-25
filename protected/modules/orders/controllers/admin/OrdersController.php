@@ -402,6 +402,19 @@ class OrdersController extends SAdminController {
 
 		$order->deleteProduct(Yii::app()->request->getPost('id'));
 	}
+	
+		/**
+	 * Delete product from order
+	 */
+	public function actionDeletePhoto()
+	{
+		$photo = OrderPhoto::model()->findByPk(Yii::app()->request->getPost('id'));
+
+		if(!$photo)
+			$this->error404();
+
+		$photo->deletePhoto(Yii::app()->request->getPost('id'));
+	}
 
 	/**
 	 * Render order history tab
