@@ -139,37 +139,14 @@ $this->widget('ext.sgridview.SGridView', array(
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>"{update}{delete}",
-			// 'buttons' => array(
-			// 				// "Yii::t('StoreModule.admin', 'Активен')"=>array(
-			// 				// 	'label'=>Yii::t('StoreModule.admin', 'Активен'),
-			// 				// 	'url'=>'#',
-			// 				// 	// 'linkOptions'=>array(
-			// 				// 		'click'=>'return  setProductsStatus(1, this);',
-			// 				// 	// ),
-			// 				// ),
-			// 				"Деактевировать"=>array(
-			// 					'label'=>'Деактевировать',
-			// 					'url'=>'#',
-
-			// 					// 'linkOptions'=>array(
-			// 						'click'=>"js:function(){alert('$data->name');}",
-			// 					// ),
-			// 				),
-			// 					// "Yii::t('StoreModule.admin', 'Назначить категории')"=>array(
-			// 					// 	'label'=>Yii::t('StoreModule.admin', 'Назначить категории'),
-			// 					// 	'url'=>'#',
-			// 					// 	'linkOptions'=>array(
-			// 					// 		'onClick'=>'return showCategoryAssignWindow(this);',
-			// 					// 	),
-			// 					// ),
-			// 					// "Yii::t('StoreModule.admin', 'Копировать')"=>array(
-			// 					// 	'label'=>Yii::t('StoreModule.admin', 'Копировать'),
-			// 					// 	'url'=>'#',
-			// 					// 	'linkOptions'=>array(
-			// 					// 		'onClick'=>'return showDuplicateProductsWindow(this);',
-			// 					// 	),
-			// 					// 					)
-			// 			 ),
+            'buttons' => array(
+                'delete' => array(
+                    'url'=>'Yii::app()->createUrl("/admin/store/products/delete/?id=$data->id")',
+                ),
+                'update' => array(
+                    'url'=>'Yii::app()->createUrl("/admin/store/products/update/?id=$data->id")',
+                ),
+            ),
 		),
 
 	),
