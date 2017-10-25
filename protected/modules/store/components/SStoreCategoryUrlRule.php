@@ -44,9 +44,13 @@ class SStoreCategoryUrlRule extends CBaseUrlRule
                 && (strpos($pathInfo, 'page/') === false)
                 && (strpos($pathInfo, '.html') !== false)
             ){
-                $ex_path = explode('/', $pathInfo);
-                $_GET['url'] = str_replace('.html', '', end($ex_path));
-                return 'store/frontProduct/view';//http://flowers3.loc/product/bouquet-the-trembling-heart.html
+                if($this->checkProductUrl($pathInfo)) {
+                    $ex_path = explode('/', $pathInfo);
+                    $_GET['url'] = str_replace('.html', '', end($ex_path));
+                    return 'store/frontProduct/view';//http://flowers3.loc/product/bouquet-the-trembling-heart.html
+                }
+                else
+                    return false;
             }
 
             // is category
@@ -84,6 +88,39 @@ class SStoreCategoryUrlRule extends CBaseUrlRule
 		}
 
 		return $allPaths;
+	}
+
+    /**
+     * проверка URL товара на соответствие критерию:
+     * url_главной_категории_товара/url_товара
+     * @param $path
+     * @return bool
+     */
+    public function checkProductUrl($path)
+    {
+        $ex_path = explode('/', $path);
+        // параметров в URL не больше 2-х: roses/bouquet-yellow-roses-long-stem.html
+        if(count($ex_path) > 2){
+            return false;
+        }
+
+        $product_url = str_replace('.html', '', end($ex_path));
+        // запрашиваем товар
+        $product = StoreProduct::model()->find('url = :url', array(':url' => $product_url));
+        if(!empty($product)){
+            // проверяем главную категорию товара
+            $main_category = Yii::app()->db->createCommand()
+                ->select('sc.url')
+                ->from('StoreCategory sc')
+                ->join('StoreProductCategoryRef spcr', 'spcr.category = sc.id')
+                ->where('spcr.product = :product AND spcr.is_main = 1', array(':product' => $product->id))
+                ->queryScalar();
+            // сравниваем полученный URL категории с первым параметром URL
+            if(!empty($main_category) && ($main_category == $ex_path[0])){
+                return true;
+            }
+        }
+        return false;
 	}
 
 }
