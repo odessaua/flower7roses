@@ -76,14 +76,16 @@ function processCartResponseFromCart(data, textStatus, jqXHR, redirect)
                 }
             }
         });
-    	//$.jGrowl(data.errors);
-        /*window.location = redirect*/
-    }else{
-        reloadSmallCart();
-        reloadPopupCart();
+    }
+    else{
         $.jGrowl("Товар успешно добавлен в корзину. <a href='/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
-        location.reload();
-        
+        if(redirect.length > 0){
+            location.reload();
+        }
+        else{
+            reloadSmallCart();
+            reloadPopupCart();
+        }
     }
 }
 function applyInPage(el){
