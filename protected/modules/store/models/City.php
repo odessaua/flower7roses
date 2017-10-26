@@ -143,7 +143,7 @@ class City extends CActiveRecord
 			// 'type',
 		);
 		
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 //		$criteria->compare('region_id',$this->region_id);
 		$criteria->compare('translate.name',$this->name,true);
 		$criteria->compare('phone_code',$this->phone_code,true);

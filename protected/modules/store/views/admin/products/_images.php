@@ -104,7 +104,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 echo CHtml::label(Yii::t('StoreModule.admin', 'Выберите дополнительные изображения'), 'files', array('style' => 'width: 100%; font-size: 14px; font-weight: bold; margin: 20px 0;'));
 echo '<p>Оптимально: не более 4-х дополнительных изображений</p>';
 $this->widget( 'xupload.XUpload', array(
-        'url' => Yii::app( )->createUrl( "/admin/store/products/upload/"),
+        'url' => Yii::app( )->createUrl( "/admin/store/products/upload") . '/',
         //our XUploadForm
         'model' => $photos,
         //We set this for the widget to be able to target our own form

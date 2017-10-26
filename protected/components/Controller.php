@@ -145,6 +145,7 @@ class Controller extends RController
                 'firm_address' => $cityInfo->firm_address,
 				'firm_postcode' => $cityInfo->firm_postcode,
                 'firm_phone' => $cityInfo->firm_phone,
+                'firm_region' => (!empty($cityInfo->regions->name)) ? $cityInfo->regions->name : '',
             );
         }
         else{
@@ -154,6 +155,7 @@ class Controller extends RController
 				'firm_city' => Yii::t('main','Odessa'),
                 'firm_phone' => '+38 (048) 716 5465',
 				'firm_postcode' => '65026',
+                'firm_region' => Yii::t('main','Odessa Region'),
             );
         }
     }
@@ -279,7 +281,7 @@ class Controller extends RController
     }
 
     /**
-     * информация о городе по ID
+     * информация о городе по ID + область
      * @param int $city_id
      * @param bool $translate - с переводом названия или без
      * @param string $lang - язык перевода названия (если не указан – то берём текущий)
@@ -290,12 +292,13 @@ class Controller extends RController
         $language = (empty($lang))
             ? $this->language_info // текущий язык
             : SSystemLanguage::model()->findByAttributes(array('code'=>$lang)); // язык по коду из аргумента
-        if(!empty($translate)){
-            $city = City::model()->language($language->id)->findByPk($city_id); // с переводом
-        }
-        else{
-            $city = City::model()->language(0)->findByPk($city_id); // без перевода
-        }
+
+        $lng = (!empty($translate)) ? $language->id : 0; // с переводом или без
+        $city = City::model()->language($lng)->findByPk($city_id); // с переводом
+        $region = (!empty($city->region_id))
+            ? Region::model()->language($lng)->findByPk($city->region_id)
+            : null;
+        $city->regions = (!empty($region)) ? $region : null;
         return $city;
     }
 
@@ -321,25 +324,6 @@ class Controller extends RController
     public function getDefaultCityInfo($translate = false, $lang = '')
     {
         return $this->getCityInfo(908, $translate, $lang); // Киев, ID = 908
-    }
-	
-	/*
-	Информация о текущей области
-	
-	*/
-	
-	    public function getRegionInfo($translate = false, $lang = '')
-    {
-       $language = (empty($lang))
-            ? $this->language_info // текущий язык
-            : SSystemLanguage::model()->findByAttributes(array('code'=>$lang)); // язык по коду из аргумента
-        if(!empty($translate)){
-            $region  = City::model()->language($language->id)->findByPk($region_id); // с переводом
-        }
-        else{
-            $city = City::model()->language(0)->findByPk($city_id); // без перевода
-        }
-        return $city;
     }
 
 }

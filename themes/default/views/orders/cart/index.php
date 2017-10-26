@@ -248,6 +248,7 @@ echo '<ul class="breadcrumbs">
                             else if(Yii::app()->language=='ua')
                                 $lang="uk";
 
+                    date_default_timezone_set('Europe/Kiev');
                     Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
                         $this->widget('CJuiDateTimePicker',array(
                             'model'=>$this->form, 
@@ -256,6 +257,7 @@ echo '<ul class="breadcrumbs">
                             'language' => $lang, 
                             'options'=>array(
                                     'minDate' => ((int)date('G') < 14) ? '0' : '1',
+                                'dateFormat' => 'dd/mm/yy',
                             ),
                             'htmlOptions' => array(
                                 'class' => 'datepicker'
@@ -342,61 +344,7 @@ echo '<ul class="breadcrumbs">
 <?php echo CHtml::endForm() ?>
 
 <!-- related-products (begin) -->
-<div class="related-products">
-    <h3 class="title"><?=Yii::t('main','Add a little something extra:')?></h3>
-    <div class="bg-pr-slider">
-        <div class="pr-slider" id="product-slider">
-            <ul>
-                
-                <?php
-                $products = StoreProduct::model()
-                ->applyCategories(270)
-                ->active()
-                ->findAll();
-                
-                foreach($products as $data): ?>
-                <li>
-                    <div class="b-rel-prod">
-                        <div class="visual">
-                            <?php
-                            if($data->mainImage)
-                                $imgSource = $data->mainImage->getUrl('85x85');
-                            else
-                                $imgSource = 'http://placehold.it/85x85';
-                            echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('/store/frontProduct/view', 'url'=>$data->url), array('rel'=>'nofollow'));
-                            echo '<div class="price">';
-                            echo StoreProduct::formatPrice(Yii::app()->currency->convert($data->price));
-                            echo Yii::app()->currency->active->symbol; 
-                            echo '</div>';
-                            ?>
-                        </div>
-                        <?php
-                        echo CHtml::form(array('/cart/add/'));
-                        echo CHtml::hiddenField('product_id', $data->id);
-                        echo CHtml::hiddenField('product_price', $data->price);
-                        echo CHtml::hiddenField('use_configurations', $data->use_configurations);
-                        echo CHtml::hiddenField('currency_rate', Yii::app()->currency->active->rate);
-                        echo CHtml::hiddenField('configurable_id', 0);
-                        echo CHtml::hiddenField('quantity', 1);
-                
-                        
-                        echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core',Yii::t('main','Add')), Yii::app()->getBaseUrl(true) . '/cart/add/', array(
-                            'id'=>'addProduct'.$data->id,
-                            'dataType'=>'json',
-                            'success'=>'js:function(data, textStatus, jqXHR){processCartResponseFromCart(data, textStatus, jqXHR, "'.Yii::app()->createAbsoluteUrl('/store/frontProduct/view', array('url'=>$data->url)).'")}',
-                        ), array('class'=>'btn-purple btn-add'));
-                        
-                        ?>
-                        <?php echo CHtml::endForm() ?>
-                        
-                    </div>
-                </li>
-                <?php endforeach;?>
-
-            </ul>
-        </div>
-    </div>
-</div>
+<?php $this->renderPartial('_extras'); ?>
 <!-- related-products (end) -->
 
 

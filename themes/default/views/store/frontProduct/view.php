@@ -245,6 +245,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	        <!-- b-page-text (end) -->
 	    </div>
 	    <!-- h-pp (end) -->
+
+        <!-- related-products (begin) -->
+        <?php $this->renderPartial('webroot.themes.default.views.orders.cart._extras', array('noreload' => true)); ?>
+        <!-- related-products (end) -->
 	
 	    <!-- b-last-photos (begin) -->
 	    <div class="b-last-photos">
