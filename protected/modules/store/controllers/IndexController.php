@@ -23,6 +23,7 @@ class IndexController extends Controller
         $comments = Yii::app()->db->createCommand()
 		    ->select('name, text,created')
 		    ->from('Comments')
+            ->where('`status` = 1')
 		    ->limit(3)
 		    ->order('created DESC')
 		    ->queryAll();
