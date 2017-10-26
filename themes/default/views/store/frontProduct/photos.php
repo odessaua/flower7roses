@@ -29,6 +29,7 @@ Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/product.
 // Fancybox ext
 $this->widget('application.extensions.fancybox.EFancyBox', array(
 	'target'=>'a.thumbnail',
+    'config' => array('cyclic' => true),
 ));
 
 ?>
@@ -56,7 +57,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 		            <div class="b-photo">
 		                <div class="visual">
 		                    <div class="img">
-		                        <a href="<?php echo '/uploads/'.$value->photo;?>"><img src="<?php echo '/uploads/'.$value->photo;?>" alt=""/></a>
+		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt=""/></a>
 		                    </div>
 		                </div>
 		            </div>

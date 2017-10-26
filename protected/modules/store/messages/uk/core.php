@@ -25,7 +25,7 @@
         'No results'=>'Немає результатів',
         'The last photo of the bouquet deliveries'=>'Останні фото доставок цього букета',
 		'Photos of the recent flower delivery orders'=>'Останні фото доставок цього букета',
-		'Photos of the real flower deliveries. All photos was made by our couriers.'=>'Реальні фото доставок наших букетів в Україні. Всі фото були зроблені нашими кур\'єрами.',
+		'Photos of the real flower deliveries in Ukraine. All photos was made by our couriers.'=>'Реальні фото доставок наших букетів в Україні. Всі фото були зроблені нашими кур\'єрами.',
         'All photos'=>"Усі фото",
         'Product code:'=>'Артикул:',
         'Show prices in'=>'Показувати ціни в',
