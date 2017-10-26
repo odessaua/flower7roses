@@ -248,6 +248,7 @@ echo '<ul class="breadcrumbs">
                             else if(Yii::app()->language=='ua')
                                 $lang="uk";
 
+                    date_default_timezone_set('Europe/Kiev');
                     Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
                         $this->widget('CJuiDateTimePicker',array(
                             'model'=>$this->form, 
@@ -256,6 +257,7 @@ echo '<ul class="breadcrumbs">
                             'language' => $lang, 
                             'options'=>array(
                                     'minDate' => ((int)date('G') < 14) ? '0' : '1',
+                                'dateFormat' => 'dd/mm/yy',
                             ),
                             'htmlOptions' => array(
                                 'class' => 'datepicker'
