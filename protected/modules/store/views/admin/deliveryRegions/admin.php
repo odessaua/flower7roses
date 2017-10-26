@@ -47,7 +47,13 @@ $this->widget('ext.sgridview.SGridView', array(
             'filter' => '',
         ),
 		'delivery',
-		'show_in_popup',
+        array(
+            'name'=>'show_in_popup',
+            'header' => 'Во всплывающем окне',
+            'type'=>'text',
+            'value'=>'($data->show_in_popup > 0) ? "Да" : "Нет"',
+            'filter' => array(0 => 'Нет', 1 => 'Да'),
+        ),
         array(
             'name'=>'firm_show',
             'header' => 'Компания-представитель',
@@ -60,6 +66,12 @@ $this->widget('ext.sgridview.SGridView', array(
             'type'=>'text',
             'value'=>'City::model()->checkH1($data->id)',
             'filter' => '',
+        ),
+        array(
+            'name'=>'main_in_region',
+            'type'=>'text',
+            'value'=>'($data->main_in_region > 0) ? "Да" : "Нет"',
+            'filter' => array(0 => 'Нет', 1 => 'Да'),
         ),
 		// Buttons
 		array(

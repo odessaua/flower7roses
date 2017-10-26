@@ -47,6 +47,9 @@ return array(
                 'firm_show'=>array(
                     'type'=>'checkbox',
                 ),
+                'main_in_region'=>array(
+                    'type'=>'checkbox',
+                ),
 			),
 		),
 		

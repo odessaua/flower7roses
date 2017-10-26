@@ -16,6 +16,7 @@
  * @property integer $firm_show
  * @property string $h1_header
  * @property integer $firm_show
+ * @property integer $main_in_region
  */
 Yii::import('application.modules.store.models.*');
 class City extends CActiveRecord
@@ -54,12 +55,12 @@ class City extends CActiveRecord
 		return array(
 			array('name', 'required'),
 			array('alias, firm_comment', 'safe'),
-			array('delivery,show_in_popup,region_id, firm_show', 'numerical'),
+			array('delivery,show_in_popup,region_id, firm_show, main_in_region', 'numerical'),
 			array('name', 'length', 'max'=>50),
             array('firm_name, firm_phone, firm_address, firm_postcode, h1_header', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, phone_code, delivery', 'safe', 'on'=>'search'),
+			array('id, name, phone_code, delivery, main_in_region, show_in_popup', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,6 +96,7 @@ class City extends CActiveRecord
             'firm_show' => 'Показывать контакты компании-представителя на сайте',
             'h1_header' => 'Заголовок h1',
             'firm_comment' => 'Комментарий',
+            'main_in_region' => 'Областной центр'
 		);
 	}
 	public function behaviors()
@@ -155,6 +157,8 @@ class City extends CActiveRecord
         $criteria->compare('translate.firm_show',$this->firm_show,true);
         $criteria->compare('translate.firm_comment',$this->firm_show,true);
         $criteria->compare('translate.h1_header',$this->firm_show,true);
+        $criteria->compare('main_in_region',$this->main_in_region);
+        $criteria->compare('show_in_popup',$this->show_in_popup);
 
         $sort = new CSort;
         $sort->attributes=array(

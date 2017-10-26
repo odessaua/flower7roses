@@ -31,7 +31,7 @@ if(!$popup)
 	         	var city = ui.item.value;	
 				$.ajax({
 					type: "GET",
-					url: "/site/changeCity",
+					url: "/site/changeCity/",
 					data: {city : city, lang : "' . Yii::app()->language .'"},
 					dataType: "text",
 					success: function(data){
@@ -56,8 +56,19 @@ if(!$popup)
 		),
 	));
 	?>
-    
+
     <div class="h-regions">
+        <div class="regions" style="width: 100%;">
+            <h2 class="title"><?=Yii::t('main','Ukraine')?></h2>
+            <div class="hrr-content" id="hrr_content"></div>
+        </div>
+        <div class="h-regions-cities">
+            <h2 class="title" id="backToRegions"><?=Yii::t('main','Change Region')?></h2>
+            <div class="hrc-content" id="hrc_content"></div>
+        </div>
+    </div>
+    
+    <div class="h-regions" style="display: none;">
         <div class="regions" style="width: 100%;">
             <h2 class="title">
                 <?=Yii::t('main','Ukraine')?>
@@ -128,5 +139,34 @@ if(!$popup)
                 });
             });
         });
+        
+        function getRegionsList(){
+            $.post(
+                '/site/regions/',
+                function(data){
+                    if(data.length > 0){
+                        $('#hrr_content').html(data);
+                    }
+                },
+                'html'
+            );
+        }
+        
+        function getCitiesList(region_id) {
+            $.post(
+                '/site/cities/',
+                {
+                    region_id: region_id
+                },
+                function (data) {
+                    if(data.length > 0){
+                        $('#hrc_content').html(data);
+                    }
+                    else{
+                        $('#hrc_content').html('<h5><?= Yii::t('main', 'No data'); ?></h5>');
+                    }
+                }
+            );
+        }
     </script>
 <?php endif; ?>

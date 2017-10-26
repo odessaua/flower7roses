@@ -284,4 +284,11 @@ class SiteController extends Controller
             }
         }
     }
+
+    public function actionRegions()
+    {
+        Yii::import('application.modules.store.models.Region');
+        $regions = Region::model()->with('translate')->findAll(array('order' => 'translate.name ASC'));
+        // TODO: сделать отдельные view под Регионы и Города в поп-ап
+    }
 }
