@@ -97,4 +97,5 @@
          'Not Defined' => 'Не определен',
          'Page' => 'Страница',
          'Customer reviews' => 'Отзывы клиентов',
+         'Odessa region' => 'Одесская область',
      );
