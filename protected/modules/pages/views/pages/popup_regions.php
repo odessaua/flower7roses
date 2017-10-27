@@ -1,6 +1,10 @@
 <?php
 if(!$popup)
 	$popup = "city-simple";
+
+Yii::import('application.modules.store.models.Region');
+$regions = Region::model()->language($this->language_info->id)->findAll(array('order' => 'translate.name ASC'));
+$js_params = ', ' . (int)$no_redirect . ', ' . $this->language_info->id . ', \'' . $this->language_info->code . '\'';
 ?>
 
 <?=Yii::t('main','Recipient City')?>: 
@@ -14,7 +18,7 @@ if(!$popup)
     <h2 class="title"><?=Yii::t('main','Send flowers to any city')?></h2>
     <p><?=Yii::t('main','Start typing the name of the city, and we will help')?></p>
     
-    <?php 
+    <?php
 	$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 		'name'=>$popup,
 		'source'=>Yii::app()->createUrl('/site/autocompleteCity'),
@@ -58,115 +62,37 @@ if(!$popup)
 	?>
 
     <div class="h-regions">
-        <div class="regions" style="width: 100%;">
+        <div class="regions pr-regions">
             <h2 class="title"><?=Yii::t('main','Ukraine')?></h2>
-            <div class="hrr-content" id="hrr_content"></div>
-        </div>
-        <div class="h-regions-cities">
-            <h2 class="title" id="backToRegions"><?=Yii::t('main','Change Region')?></h2>
-            <div class="hrc-content" id="hrc_content"></div>
-        </div>
-    </div>
-    
-    <div class="h-regions" style="display: none;">
-        <div class="regions" style="width: 100%;">
-            <h2 class="title">
-                <?=Yii::t('main','Ukraine')?>
-			</h2>
-            	<?php
-            	$count=0;
-            	$cities = Yii::app()->db->createCommand()
-				    ->select('c.name as ename,ct.name,ct.object_id,c.id,ct.language_id,ctt.name as eng_name')
-				    ->from('city c')
-				    ->join('cityTranslate ct', 'c.id=ct.object_id')
-				    ->join('cityTranslate ctt', 'c.id=ctt.object_id')
-				    ->where('ct.language_id=:id', array(':id'=>$this->language_info->id))
-				    ->andWhere('c.show_in_popup=1')
-				    ->andWhere('ctt.language_id=:eid', array(':eid'=>9))
-					->order('ct.name, id desc')
-				    ->queryAll();
-                if(!empty($cities)){
-                    $city_link_class = (!empty($no_redirect)) ? 'no-redirect-link' : '';
-                    $parts = 3;
-                    if(sizeof($cities) >= $parts){
-                        $part_size = ceil((sizeof($cities) / $parts));
-                        $cities_chunked = array_chunk($cities, $part_size);
-                    }
-                    else{
-                        $cities_chunked[0] = $cities;
-                    }
-                    foreach ($cities_chunked as $city_chunk) {
-                        ?>
-                        <div style="width: <?=(100 / $parts);?>%; float: left;">
-                            <ul>
-                            <?php
-                            foreach ($city_chunk as $city) {
-                            ?>
-                            <li>
-                                <?php // замена пробелов на _ в названиях городов (krivoy rog --> krivoy_rog) ?>
-                                <?= CHtml::link($city['name'], Yii::app()->createUrl('/' . strtolower(str_replace(' ', '_', $city['eng_name']))), array('class' => $city_link_class)); ?>
-                            </li>
-                            <?php
-                            }
-                            ?>
-                            </ul>
-                        </div>
+            <div class="hrr-content">
+                <div class="pr-list-block">
                     <?php
+                    if(!empty($regions)){
+                        $part_size = ceil((count($regions) / 2));
+                        $splitted = array_chunk($regions, $part_size);
+                        foreach ($splitted as $chunk) {
+                            ?>
+                            <ul class="pr-regions-list">
+                                <?php foreach ($chunk as $region): ?>
+                                    <li>
+                                        <span onclick="getCitiesList(<?= $region->id . $js_params; ?>);"><?= $region->name; ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <?php
+                        }
                     }
-                }
-				?>
+                    else
+                        echo '<h5 style="text-align: center;">' . Yii::t('main', 'No data'). '</h5>';
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="regions pr-cities" style="display: none;">
+            <h2 class="title" onclick="showRegions();"><span class="prc-header-arr">&lt;</span> <span class="prc-header"><?=Yii::t('main','Change Region')?></span></h2>
+            <div class="hrc-content"></div>
         </div>
     </div>
-	<br>
+
 	<?= CHtml::link(Yii::t('main','Didn\'t find city? Click here!'), Yii::app()->createUrl('/all-cities'), array('class' => 'all-cities')); ?>
 </div>
-<?php if(!empty($no_redirect)): ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.no-redirect-link').click(function (e) {
-                e.preventDefault();
-                var city = $(this).html();
-                $.ajax({
-                    type: "GET",
-                    url: "/site/changeCity",
-                    data: {city : city, lang : "<?= Yii::app()->language; ?>"},
-                    dataType: "text",
-                    success: function(data){
-                        var city = data.split("_");
-                        $(".cityName").text(city[0]);
-                        $(".sort-popup").addClass("hidden");
-                    }
-                });
-            });
-        });
-        
-        function getRegionsList(){
-            $.post(
-                '/site/regions/',
-                function(data){
-                    if(data.length > 0){
-                        $('#hrr_content').html(data);
-                    }
-                },
-                'html'
-            );
-        }
-        
-        function getCitiesList(region_id) {
-            $.post(
-                '/site/cities/',
-                {
-                    region_id: region_id
-                },
-                function (data) {
-                    if(data.length > 0){
-                        $('#hrc_content').html(data);
-                    }
-                    else{
-                        $('#hrc_content').html('<h5><?= Yii::t('main', 'No data'); ?></h5>');
-                    }
-                }
-            );
-        }
-    </script>
-<?php endif; ?>

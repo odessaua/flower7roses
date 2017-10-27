@@ -285,10 +285,26 @@ class SiteController extends Controller
         }
     }
 
-    public function actionRegions()
+    public function actionCities()
     {
-        Yii::import('application.modules.store.models.Region');
-        $regions = Region::model()->with('translate')->findAll(array('order' => 'translate.name ASC'));
-        // TODO: сделать отдельные view под Регионы и Города в поп-ап
+        $region_id = Yii::app()->request->getPost('region_id', 0);
+        $language_id = Yii::app()->request->getPost('language_id', 9);
+        $language_code = Yii::app()->request->getPost('language_code', '');
+        $data['language_code'] = (!empty($language_code) && ($language_code != 'en'))
+            ? '/' . $language_code
+            : '';
+        $data['no_redirect'] = Yii::app()->request->getPost('no_redirect');
+        $data['cities'] = Yii::app()->db->createCommand()
+            ->select('c.name as ename,ct.name,ct.object_id,c.id,ct.language_id,ctt.name as eng_name')
+            ->from('city c')
+            ->join('cityTranslate ct', 'c.id=ct.object_id')
+            ->join('cityTranslate ctt', 'c.id=ctt.object_id')
+            ->where('ct.language_id=:id', array(':id'=>$language_id))
+            ->andWhere('c.region_id=:region_id', array(':region_id' => $region_id))
+            ->andWhere('ctt.language_id=:eid', array(':eid'=>9))
+            ->order('ct.name, id desc')
+            ->queryAll();
+        $html = $this->renderPartial('pages.views.pages._cities', $data, true);
+        echo $html;
     }
 }
