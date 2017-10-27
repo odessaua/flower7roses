@@ -3230,3 +3230,6 @@ span.required{
     .prc-header-arr {
       color: #7a1c4a;
     }
+    .bold-city {
+      font-weight: bold !important;
+    }

@@ -16,13 +16,18 @@ if(!empty($cities)){
 ?>
 <ul class="pr-cities-list">
    <?php foreach ($chunk as $city): ?>
+       <?php
+       $city_class = (!empty($city['main_in_region']))
+           ? ' bold-city'
+           : '';
+       ?>
        <li>
            <?= CHtml::link(
                    $city['name'],
                    $language_code . Yii::app()->createUrl(
                        '/' . strtolower(str_replace(' ', '_', $city['eng_name']))
                    ),
-                   array('class' => $city_link_class)
+                   array('class' => $city_link_class . $city_class)
            );
            ?>
        </li>
