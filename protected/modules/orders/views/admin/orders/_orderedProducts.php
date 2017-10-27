@@ -53,6 +53,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		                <div class="visual">
 		                    <div class="img">
 		                        <img src="<?php echo $value;?>" width="250"alt=""/>
+								<a href="/order/deletephoto?id=">Удалить</a>
 		                    </div>
 		                </div>
 		                <!-- <div class="title">г. Одесса</div> -->
