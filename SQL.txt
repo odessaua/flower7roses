@@ -1,4 +1,8 @@
-﻿-- 2017-10-25 (индекс для поиска товаров по полю url - ускорит выполнение таких запросов):
+﻿-- 2017-10-26 (областной центр):
+ALTER TABLE `city` ADD `main_in_region` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `show_in_popup`;
+-- ========
+
+-- 2017-10-25 (индекс для поиска товаров по полю url - ускорит выполнение таких запросов):
 ALTER TABLE `StoreProduct` ADD INDEX (`url`);
 -- ========
 

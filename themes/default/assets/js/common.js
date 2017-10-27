@@ -97,3 +97,28 @@ function applyCategorySorter(el)
 {
     window.location = $(el).val();
 }
+
+function getCitiesList(region_id, no_redirect, lang_id, lang_code) {
+    $.post(
+        '/site/cities/',
+        {
+            region_id: region_id,
+            no_redirect: no_redirect,
+            language_id: lang_id,
+            language_code: lang_code
+        },
+        function (data) {
+            $('.pr-regions').css('display', 'none');
+            $('.pr-cities').css('display', 'block');
+            if(data.length > 0){
+                $('.hrc-content').html(data);
+            }
+        }
+    );
+}
+
+function showRegions() {
+    $('.hrc-content').html('');
+    $('.pr-cities').css('display', 'none');
+    $('.pr-regions').css('display', 'block');
+}

@@ -197,7 +197,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	                    <div class="pp-reg">
 	                        <div class="sort sort-reg">
 	                            
-	                            <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php'); ?>
+	                            <?php $this->renderFile(Yii::getPathOfAlias('pages.views.pages.popup_regions').'.php', array('no_redirect' => true)); ?>
 	                            
 	                        </div>
 	                        <p><?=Yii::t('StoreModule.core','Assortment depends on the city')?></p>

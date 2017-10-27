@@ -14,7 +14,7 @@ LIMIT 1";
 $mainCat = Yii::app()->db->createCommand($mc_sql)->queryRow();
 // product url
 $product_url = (!empty($mainCat['url']))
-    ? '/' . $mainCat['url'] . '/' . $data->url . '.html'
+    ? Yii::app()->createUrl('/' . $mainCat['url'] . '/' . $data->url . '.html')
     : array('frontProduct/view', 'url'=>$data->url);
 // product name
 $trans=Yii::app()->db->createCommand()

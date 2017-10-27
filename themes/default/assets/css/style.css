@@ -3018,15 +3018,14 @@ div.flash_messages button.close:hover {
     text-align: center;
 }
 .all-cities {
-	color:#fe0208; 
+	color:#7a1c4a;
 	font-weight:bold;
     font-size: 18px;
-    margin-top: 40px;
     text-transform: none;
 }
 .all-cities:hover{
     text-decoration: none;
-	color:#fe0208;
+	color:#7a1c4a;
 }
 /*---------При наведении--------------*/
 span.support-hover::before { 
@@ -3188,3 +3187,49 @@ span.required{
     height: 100px;
     display: inherit;
 }
+
+    /* new popup_regions styles */
+    .pr-list-block {
+      width: 100%;
+      height: auto;
+      clear: both;
+      float: left;
+      margin-bottom: 10px;
+    }
+    .pr-regions,
+    .pr-cities {
+      width: 100%;
+    }
+    .pr-regions-list,
+    .pr-cities-list {
+      list-style: none;
+      float: left;
+    }
+    .pr-regions-list {
+      width: 50%;
+    }
+    .pr-cities-list{
+      width: 33%;
+    }
+    .pr-regions-list li,
+    .pr-cities-list li {
+      padding-bottom: 5px;
+    }
+    .pr-regions-list li span,
+    .pr-cities-list li span,
+    .prc-header {
+      text-decoration: underline !important;
+      color: #7a1c4a;
+      cursor: pointer;
+    }
+    .pr-regions-list li span:hover,
+    .pr-cities-list li span:hover,
+    .prc-header:hover {
+      text-decoration: none;
+    }
+    .prc-header-arr {
+      color: #7a1c4a;
+    }
+    .bold-city {
+      font-weight: bold !important;
+    }

@@ -98,4 +98,6 @@
          'Page' => 'Страница',
          'Customer reviews' => 'Отзывы клиентов',
          'Odessa region' => 'Одесская область',
+         'Change Region' => 'Изменить регион',
+         'No data' => 'Нет данных',
      );

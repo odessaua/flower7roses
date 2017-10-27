@@ -9,6 +9,8 @@
  * @property string $name
  * @property string $phone_code
  * @property double $delivery
+ * @property double $show_in_popup
+ * @property double $main_in_region
  */
 class City extends CActiveRecord
 {
@@ -29,7 +31,7 @@ class City extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('region_id', 'required'),
-			array('region_id', 'numerical', 'integerOnly'=>true),
+			array('region_id, show_in_popup, main_in_region', 'numerical', 'integerOnly'=>true),
 			array('delivery', 'numerical'),
 			array('name', 'length', 'max'=>50),
 			array('phone_code', 'length', 'max'=>7),
