@@ -21,7 +21,7 @@ $js_params = ', ' . (int)$no_redirect . ', ' . $this->language_info->id . ', \''
     <?php
 	$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 		'name'=>$popup,
-		'source'=>Yii::app()->createUrl('/site/autocompleteCity'),
+		'source'=>Yii::app()->createUrl('/site/autocompleteCity') . '/',
 		// additional javascript options for the autocomplete plugin
 		'options'=>array(
 			'minLength' => '2',
