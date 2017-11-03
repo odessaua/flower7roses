@@ -73,24 +73,25 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	                'accept' => 'jpeg|jpg|gif|png', // useful for verifying files
 	                'duplicate' => 'Duplicate file!', // useful, i think
 	                'denied' => 'Invalid file type', // useful, i think
-	         //        'options'=>array(
-				      //   //'onFileSelect'=>'function(e, v, m){ alert("onFileSelect - "+v) }',
-				      //   'afterFileSelect'=>"function(e, v, m){ 
-					     //            	var id = '$value->product_id';
+	                // 'options'=>array(
+				        // 'onFileSelect'=>'function(e, v, m){ alert("onFileSelect - "+v) }',
+				        // 'afterFileSelect'=>"function(e, v, m){ 
+					                	// var id = '$value->product_id';
 										// var json={id:id,photo:v}
 										// $.ajax({
-										// 	type:'POST',
-										// 	url:'/admin/orders/orders/update?id='+'$model->id',
-										// 	dataType:'json',
-										// 	data:{data:json,'$csrfTokenName':'$csrfToken'},
-										// 	success:function(msg){console.log('$model->id');},
-										// 	error:function(msg){console.log(msg);}
+											// type:'POST',
+											// url:'/admin/orders/orders/update?id='+'$model->id',
+											// dataType:'json',
+											// data:{data:json,'$csrfTokenName':'$csrfToken'},
+											// success:function(msg){console.log('$model->id');},
+											// error:function(msg){console.log(msg);}
 										// })
-				      //   					 }",
-				        //'onFileAppend'=>'function(e, v, m){ alert("onFileAppend - "+v) }',
+				        					 // }",
+				        // 'onFileAppend'=>'function(e, v, m){ alert("onFileAppend - "+v) }',
 				        // 'afterFileAppend'=>'function(e, v, m){ alert("afterFileAppend - "+v) }',
 				        // 'onFileRemove'=>'function(e, v, m){ alert("onFileRemove - "+v) }',
 				        // 'afterFileRemove'=>'function(e, v, m){ alert("afterFileRemove - "+v) }',
+						// ),
 	     			
 	            ));
 			
