@@ -104,7 +104,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
        
         <div class="data-form data-form-big">
             <table cellpadding="5px" border=0><tr><td valign=top colspan=3>
-            <p class="title"><?=yii::t('OrdersModule.core','Select Payment Method:')?></p>
+            <p class="title"><? echo Yii::t('OrdersModule.core','Select Payment Method');?>:</p>
 			<tr><td valign=top>
 <ul class="payment-list">
 
@@ -171,6 +171,26 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 						</li>
 <hr width=100%>
 <?php endif; ?>
+<?php if(!empty($payments['PrivatBankTransfer'])): ?>
+					<li>
+					<input type="radio" name="payment" id="payment6" value="<?= (!empty($payments['PrivatBankTransfer']->id)) ? $payments['PrivatBankTransfer']->id : 0; ?>" /><label for="payment6">
+<div class="button"><img src="\uploads\privat_75-150.png"></div></label>
+                       <div class="help-tip">
+                        <?php if(!empty($payments['PrivatBankTransfer'])): ?>
+                            <p>
+                                <?= strip_tags($payments['PrivatBankTransfer']->description); ?>
+                            </p>
+                        <?php else: ?>
+                            <p>
+                                <strong><?$payments['PrivatBankTransfer']->name; ?></strong
+                                
+                            </p>
+                        <?php endif; ?>
+                        </div>
+						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						</li>
+<hr width=100%>
+<?php endif; ?>
 <?php if(!empty($payments['Paypal'])): ?>
 					<li>
 					<input type="radio" name="payment" id="payment2" value="<?= (!empty($payments['Paypal']->id)) ? $payments['Paypal']->id : 0; ?>" /><label for="payment2">
@@ -199,13 +219,13 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                        <div class="help-tip">
                         <?php if(!empty($payments['WesternUnion'])): ?>
                             <p>
-                                <strong>Western Union</strong>: <?= strip_tags($payments['TransferWise']->description); ?>
-                                <br><a href="https://westernunion.com/" target=_blank>https://transferwise.com</a>
+                                <strong>Western Union</strong>: <?= strip_tags($payments['WesternUnion']->description); ?>
+                                <br><a href="https://westernunion.com/" target=_blank>https://westernunion.com</a>
                             </p>
                         <?php else: ?>
                             <p>
-                                <strong>Western Union</strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our bank account. <br>TransferWise fee 2% of the amount that's converted but not less then $1.7 USD
-                                <br><a href="https://transferwise.com" target=_blank>https://transferwise.com</a>
+                                <strong>Western Union</strong>: is an online money transfer service, which allows you to transfer money from your credit card directly to our country. 
+                                <br><a href="https://westernunion.com" target=_blank>https://westernunion.com</a>
                             </p>
                         <?php endif; ?>
                         </div>
@@ -392,7 +412,7 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
 </dl>
     </div>
 	<hr style="width:500px; float: left;"><br>
-<h2>Subtotal: <span class="price"><?echo "&#36;".StoreProduct::formatPrice($model->full_price)."</span>" ;?></h2><br>
+<h2><?php echo Yii::t('OrdersModule.core','Order Total');?>: <span class="price"><?echo "&#36;".StoreProduct::formatPrice($model->full_price)."</span>" ;?></h2><br>
 <p>After submiting this information, you will be directed to a page to send the
 funds to a TransferWise account first and then they send the payment to Varetskaya Natalia. 
 
@@ -400,6 +420,24 @@ funds to a TransferWise account first and then they send the payment to Varetska
                 <a class="link-prev" href="#" onclick="window.location.reload(true);" title=""><?=yii::t('OrdersModule.core','BACK')?></a>
             
                 <a class="link-next" href="https://transferwise.com/" target=_blank title=""><?=yii::t('OrdersModule.core','TransferWise')?></a>
+            </div>
+</div>
+
+<div class="privat" style="display: none;">
+    <h2 class="title"><?=Yii::t('OrdersModule.core','PrivatBank Money Transfer')?></h2>
+
+    <div class="g-clearfix">
+
+<dl class="table-display">
+  <?=$payments['PrivatBankTransfer']->description?>
+</dl>
+    </div>
+	<hr style="width:500px; float: left;"><br>
+<h2><?php echo Yii::t('OrdersModule.core','Order Total');?>: <span class="price"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?></h2><br>
+
+
+<div class="links">
+                <a class="link-prev" href="#" onclick="window.location.reload(true);" title=""><?=yii::t('OrdersModule.core','BACK')?></a>
             </div>
 </div>
  
@@ -570,6 +608,11 @@ $(document).ready(function(){
             $('.portmone').submit(); // Portmone
         else if($($('.selected').children()[0]).attr('id')=="payment2")
             $('.paypal').submit(); // Paypal
+		else if($($('.selected').children()[0]).attr('id')=="payment6"){
+			 $('.cart3').css('display','none');
+			 $('.cart4').css('display','block');
+            $('.privat').css('display','block'); // Privat
+		}
         else if($($('.selected').children()[0]).attr('id')=="payment3"){
             $('.cart3').css('display','none'); // TransferWise
             $('.cart4').css('display','block');

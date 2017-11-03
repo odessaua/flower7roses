@@ -2725,7 +2725,7 @@ body:after {
   border: 3px solid #29a943;
   border-radius: 4px;
 }
-.cart5 {
+.cart5, .privat {
 	width:70%;
 	margin: 35px 0 0;
   padding: 45px 40px 40px;
@@ -2733,13 +2733,13 @@ body:after {
   border-radius: 4px;
 }
 
-.cart4 .title , .cart5 .title {
+.cart4 .title , .cart5 .title , .privat .title {
   color: #29a943;
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 20px;
 }
-.cart4 .cart-col, .cart5 .cart-col {
+.cart4 .cart-col, .cart5 .cart-col, .privat .cart-col {
   width: 370px;
   float: left;
   margin-left: 120px;
@@ -2747,13 +2747,13 @@ body:after {
 .cart4 .cart-col:first-child {
   margin-left: 0;
 }
-.cart4 .sub-title, .cart5 .sub-title {
+.cart4 .sub-title, .cart5 .sub-title, .privat .sub-title  {
   color: #7a1c4a;
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 15px;
 }
-.cart4 .cart-details, .cart5 .cart-details {
+.cart4 .cart-details, .cart5 .cart-details, .privat .cart-details{
   border-bottom: 1px dotted #b5b5b5;
 }
 .cart4 .cart-details li {
