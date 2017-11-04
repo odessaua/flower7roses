@@ -47,6 +47,61 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	),
 ));
 ?>
+
+
+<script type="text/javascript">
+	$('[name^=images_product]').map(function() {
+                 return $(this).val();
+    }).get();
+	var orderTotalPrice = '<?php echo $model->total_price ?>';
+	</script>
+
+<div align="right">
+	<table id="orderSummaryTable">
+		<thead>
+			<tr>
+				<td ></td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr align="right">
+				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость открытки') ?>:</b></td>
+				<td><span id="orderCardPrice"><?php echo StoreProduct::formatPrice($model->card_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
+			</tr>
+			<tr align="right">
+				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость фото') ?>:</b></td>
+				<td><span id="orderPhotoPrice"><?php echo StoreProduct::formatPrice($model->photo_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
+			</tr>
+			<!--<tr align="right" style="font-size: 14px;">
+				<td><b><?php  //echo Yii::t('OrdersModule.admin','Сумма товаров без учета доставки') ?>:</b></td>
+				<td><span id="orderTotalPrice"><?php //echo StoreProduct::formatPrice($model->total_price) ?></span><?php //echo Yii::app()->currency->main->symbol ?></td>
+			</tr>
+			
+			<tr align="right">
+				<td><b><?php//echo Yii::t('OrdersModule.admin','Сумма скидки') ?>:</b></td>
+				<td><span id="orderTotalPrice"><?php// echo StoreProduct::formatPrice($model->discount_price) ?></span><?php// echo Yii::app()->currency->main->symbol ?></td>
+			</tr>
+			<tr align="right">
+				<td><b><?php// echo Yii::t('OrdersModule.admin','Сумма заказа с учетом скидки') ?>:</b></td>
+				<td><span id="orderTotalPrice"><?php// echo StoreProduct::formatPrice($model->total_price - $model->discount_price) ?></span><?php// echo Yii::app()->currency->main->symbol ?></td>
+			</tr>-->
+			<tr align="right">
+				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость доставки') ?>:</b></td>
+				<td><span id="orderDeliveryPrice"><?php echo StoreProduct::formatPrice($model->delivery_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
+			</tr>
+			<tr align="right"><td colspan=2><hr style="border: 1px solid #000;"></td></tr>
+			<tr align="right" style="font-size: 16px;">
+				<td><b><?php echo Yii::t('OrdersModule.admin','Итого') ?>:</b></td>
+				<td><span id="orderSummary"><?php echo StoreProduct::formatPrice($model->full_price) ?></span><?php echo Yii::app()->currency->main->symbol ?></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<p style="padding-top:50px;">
+<hr>
+<h4>Добавить Фото Доставки</h4>
+
 <?php if(isset($photos)){?>
 		        	<?php foreach ($photos as $key => $value) { ?>
 		            <div class="b-photo">
@@ -98,53 +153,3 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			echo "<br>";
 		} 
 ?>
-
-<script type="text/javascript">
-	$('[name^=images_product]').map(function() {
-                 return $(this).val();
-    }).get();
-	var orderTotalPrice = '<?php echo $model->total_price ?>';
-	</script>
-
-<div align="right">
-	<table id="orderSummaryTable">
-		<thead>
-			<tr>
-				<td ></td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr align="right">
-				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость открытки') ?>:</b></td>
-				<td><span id="orderCardPrice"><?php echo StoreProduct::formatPrice($model->card_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
-			</tr>
-			<tr align="right">
-				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость фото') ?>:</b></td>
-				<td><span id="orderPhotoPrice"><?php echo StoreProduct::formatPrice($model->photo_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
-			</tr>
-			<!--<tr align="right" style="font-size: 14px;">
-				<td><b><?php  //echo Yii::t('OrdersModule.admin','Сумма товаров без учета доставки') ?>:</b></td>
-				<td><span id="orderTotalPrice"><?php //echo StoreProduct::formatPrice($model->total_price) ?></span><?php //echo Yii::app()->currency->main->symbol ?></td>
-			</tr>
-			
-			<tr align="right">
-				<td><b><?php//echo Yii::t('OrdersModule.admin','Сумма скидки') ?>:</b></td>
-				<td><span id="orderTotalPrice"><?php// echo StoreProduct::formatPrice($model->discount_price) ?></span><?php// echo Yii::app()->currency->main->symbol ?></td>
-			</tr>
-			<tr align="right">
-				<td><b><?php// echo Yii::t('OrdersModule.admin','Сумма заказа с учетом скидки') ?>:</b></td>
-				<td><span id="orderTotalPrice"><?php// echo StoreProduct::formatPrice($model->total_price - $model->discount_price) ?></span><?php// echo Yii::app()->currency->main->symbol ?></td>
-			</tr>-->
-			<tr align="right">
-				<td><b><?php echo Yii::t('OrdersModule.admin','Стоимость доставки') ?>:</b></td>
-				<td><span id="orderDeliveryPrice"><?php echo StoreProduct::formatPrice($model->delivery_price); ?></span><?php echo Yii::app()->currency->main->symbol; ?></td>
-			</tr>
-			<tr align="right"><td colspan=2><hr style="border: 1px solid #000;"></td></tr>
-			<tr align="right" style="font-size: 16px;">
-				<td><b><?php echo Yii::t('OrdersModule.admin','Итого') ?>:</b></td>
-				<td><span id="orderSummary"><?php echo StoreProduct::formatPrice($model->full_price) ?></span><?php echo Yii::app()->currency->main->symbol ?></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
