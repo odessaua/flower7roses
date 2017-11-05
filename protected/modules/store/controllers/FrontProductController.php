@@ -37,7 +37,8 @@ class FrontProductController extends Controller
 		$model= StoreProduct::model()->findByPk($id);
 		
 		$allphotos=OrderPhoto::model()->findAllByAttributes(
-			array('product_id'=>$id)
+			array('product_id'=>$id),
+			array('order'=>'date DESC')
 			);
 		
 		$this->render('photos', array(
@@ -66,8 +67,8 @@ class FrontProductController extends Controller
 		$photos=OrderPhoto::model()->findAllByAttributes(
 			array('product_id'=>$this->model->id),
 			array(
-					'order'=>'date',
-					'limit' => 3
+					'order'=>'date DESC',
+					'limit' => 10
 				)
 			);
 		// дополнительные изображения товара

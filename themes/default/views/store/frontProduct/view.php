@@ -253,15 +253,14 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	    <!-- b-last-photos (begin) -->
 	    <div class="b-last-photos">
 	    	<?php if(isset($photos) && !empty($photos)){ ?>
-	        <h3 class="title"><?=Yii::t('StoreModule.core','The last photo of the bouquet deliveries')?></h3>
-	        <a href="/product/photos/id/<?=$model->id?>" title=""><?=Yii::t('StoreModule.core','All photos')?></a>
+	        <h3 class="title"><?=Yii::t('StoreModule.core','Our Delivery Photos')?>:</h3>
 	        <div class="g-clearfix">
 	        	
 		        	<?php foreach ($photos as $key => $value) { ?>
 		            <div class="b-photo">
 		                <div class="visual">
 		                    <div class="img">
-		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt="<?=Yii::t('StoreModule.core','Delivery Photos')?>"/></a>
+		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt="<?=Yii::t('StoreModule.core','Photo of the Delivery')?>"/></a>
 		                    </div>
 		                </div>
 		                <!-- <div class="title">г. Одесса</div> -->
@@ -269,6 +268,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 		            <?php } ?>
 	             <?php } ?>
 	        </div>
+			<div style="text-align:right"><a href="/product/photos/id/<?=$model->id?>" title=""><?=Yii::t('StoreModule.core','View all delivery photos')?></a></div>
 	    </div>
 	    <!-- b-last-photos (end) -->
 <!-- 	</div> -->
