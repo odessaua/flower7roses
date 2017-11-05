@@ -23,20 +23,21 @@
 </style>
 
 <div class="form wide padding-all">
-	<?php if($model->isNewRecord)
-		$action='create';
-	else
-		$action='update';
-	echo CHtml::form($this->createUrl($action, array('id'=>$model->id)), 'post', array('id'=>'orderUpdateForm','enctype'=>'multipart/form-data'));
+<?php
+if($model->isNewRecord)
+    $action='create';
+else
+    $action='update';
 
-	if($model->hasErrors())
-		echo CHtml::errorSummary($model);
+$form_url = $this->createUrl($action) . ((!$model->isNewRecord) ? '/?id=' . $model->id : '/');
+echo CHtml::form($form_url, 'post', array('id'=>'orderUpdateForm','enctype'=>'multipart/form-data'));
+
+if($model->hasErrors())
+    echo CHtml::errorSummary($model);
 	
 if (isset($_REQUEST['id']))
 echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import','id'=>$_REQUEST['id']));
-
-	?>
-<?php echo CHtml::form('','post',array('enctype'=>'multipart/form-data')); ?>
+?>
 
 	<table width="100%">
 		<tr valign="top">
