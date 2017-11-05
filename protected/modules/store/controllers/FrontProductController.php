@@ -31,18 +31,18 @@ class FrontProductController extends Controller
 	 */
 	public function actionPhotos()
 	{
-		$this->pageTitle =  Yii::t('StoreModule.core', 'Flower delivery photos from recent flower deliveries');
-		$this->pageDescription =  Yii::t('StoreModule.core', 'Photos of the real flower deliveries in Ukraine. All photos was made by our couriers.');
 		$id=$_GET['id'];
 		$model= StoreProduct::model()->findByPk($id);
-		
+		$this->pageTitle =  Yii::t('StoreModule.core', 'Delivery photos of '.$model->name);
+		$this->pageDescription =  Yii::t('StoreModule.core', 'Photos of the real flower and gifts deliveries in Ukraine. All photos was made by our couriers.');
 		$allphotos=OrderPhoto::model()->findAllByAttributes(
 			array('product_id'=>$id),
-			array('order'=>'date DESC')
+			array('order'=>'order_id DESC')
 			);
 		
 		$this->render('photos', array(
 			'model' => $this->model,
+			'name'=>$model->name,
 			'allPhotos'=>$allphotos,
 			
 		));
@@ -67,7 +67,7 @@ class FrontProductController extends Controller
 		$photos=OrderPhoto::model()->findAllByAttributes(
 			array('product_id'=>$this->model->id),
 			array(
-					'order'=>'date DESC',
+					'order'=>'order_id DESC',
 					'limit' => 10
 				)
 			);
