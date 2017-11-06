@@ -74,7 +74,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
     <!-- steps (end) -->
 
     <h1 class="page-title"><?php echo Yii::t('OrdersModule.core','Your order')?></h1>
-<?php if($model->status_id != 6): ?>
+<?php if($model->status_id == 1): ?>
     <?php
     $payments = StorePaymentMethod::model()->active()->findAll();
     $payments = (!empty($payments)) ? CArray::toolIndexArrayBy($payments, 'name') : array();
@@ -388,8 +388,80 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
         </div>
     </div>
 </div>
-<?php endif; ?>   
 
+<?php elseif($model->status_id == 5): ?>
+<div class="cart4">
+    <h2 class="title"><?=Yii::t('OrdersModule.core','The Order &#8470;'.$model->id.' is delivered.')?></h2>
+
+    <div class="g-clearfix">
+        <div class="cart-col">
+            <div class="sub-title"><?=Yii::t('OrdersModule.core','Recipient details:')?></div>
+            <ul class="cart-details">
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Recipient name:')?> <b><?=$model->receiver_name ?></b></p>
+                </li>
+               
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','City:')?> <b><?=$model->receiver_city ?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Recipient adress:')?> <b><?=$model->user_address ?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Phone &#8470;1:')?> <b><?=$model->phone1 ?></b></p>
+                    <p><?=Yii::t('OrdersModule.core','Phone &#8470;2:')?> <b><?=$model->phone2?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Delivery Date:')?> <b><?=$model->datetime_del?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Additional Information:')?><b><?=$model->user_comment ?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Photo of the recipient:')?> <b><?php if($model->doPhoto) echo Yii::t('OrdersModule.core','Yes'); else echo Yii::t('OrdersModule.core','No'); ?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Greeting card:')?> <b><?php if($model->do_card) echo Yii::t('OrdersModule.core','Yes'); else echo Yii::t('OrdersModule.core','No'); ?></b></p>
+                </li>
+                <li>
+                    <p><?=Yii::t('OrdersModule.core','Greeting card text:')?><b><?=$model->card_text?></b></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cart-col">
+            <div class="sub-title"><?=Yii::t('OrdersModule.core','Order details')?>:</div>
+        <ul class="cart-products">
+            <?php foreach($model->getOrderedProducts()->getData() as $product): ?>
+                <li>
+                    <div class="visual">
+                        <?php
+                        $pro_model = StoreProduct::model()->findByPk($product->product_id);
+                        if($pro_model->mainImage) {
+                            $imgSource = $pro_model->mainImage->getUrl('85x85', 'resize');
+                            if(!file_exists('./' . $imgSource)) $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
+                        }
+                        else
+                            $imgSource = 'http://placehold.it/85x85/ffffff?text=7Roses';
+                        ?>
+                        <a href="<?=Yii::app()->createUrl('/product/' . $pro_model->url . '.html'); ?>" title="">
+                            <img src="<?= $imgSource; ?>"/>
+                        </a>
+                    </div>
+                    <div class="text">
+                        <div class="name"><?php echo $product->getRenderFullName(false); ?></div>
+                    </div>
+                </li>
+            <?php endforeach ?>
+        </ul>
+            <div class="thanks">
+                <?=Yii::t('OrdersModule.core','Thank you for usinig our service!<br>
+			7Roses Team')?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>   
 
 
 <div class="cart5" style="display: none;">
@@ -580,9 +652,9 @@ $(document).ready(function(){
 
     // управление отображением элементов страницы
     $('.portmone').css('display','none');
-    <?php if($model->status_id != 6): ?>
+    <?php if($model->status_id == 1): ?>
         $('.cart4').css('display','none');
-    <?php elseif($model->status_id == 6): ?>
+    <?php elseif($model->status_id >= 1): ?>
         $('.cart3').css('display','none');
         $('.cart4').css('display','block');
     <?php endif; ?>

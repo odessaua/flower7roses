@@ -64,7 +64,8 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 							echo "<br>";
 							echo !empty($model['user_id'])?"Пользователь зарегистрирован":"Пользователь не зарегистрирован";
 							echo "<br>";
-							echo "Order information: <a href='https://7roses.com/cart/view/".$model->secret_key."' target=_blank>https://7roses.com/cart/view/".$model->secret_key."</a>";
+							echo "Order information: ";
+							echo CHtml::link('https://7roses.com/cart/view/'.$model->secret_key ,array('/cart/view/'.$model->secret_key));
 							 ?></h4>
 					<?php endif;?>
 					<div class="row">

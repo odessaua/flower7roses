@@ -17,7 +17,7 @@
         'Action'=>'Действие',
         'Quantity'=>'Количество',
         'Title'=>'Название',
-		'Order Total'=>'Сумма заказа',
+		'Order Total'=>'Общая стоимость',
 		'PrivatBank Money Transfer'=>'Пополнение карты ПриватБанка',
         'Total'=>'Итого',
         'Recalculate'=>'Пересчитать',
