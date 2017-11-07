@@ -266,10 +266,9 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 		                <!-- <div class="title">г. Одесса</div> -->
 		            </div>
 		            <?php } ?>
-					<div style="text-align:right"><a href="/product/photos/id/<?=$model->id?>" title=""><?=Yii::t('StoreModule.core','View all delivery photos')?></a></div>
-	             <?php } ?>
 	        </div>
-			
+			<div style="text-align:right"><a href="/product/photos/id/<?=$model->id?>" title=""><?=Yii::t('StoreModule.core','View all delivery photos')?></a></div>
+		 <?php } ?>
 	    </div>
 	    <!-- b-last-photos (end) -->
 <!-- 	</div> -->
