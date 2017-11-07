@@ -32,10 +32,15 @@ class OrderPhoto extends CActiveRecord
 		return array(
 			array('product_id, photo', 'required'),
 			array('product_id', 'numerical', 'integerOnly'=>true),
-			 array('photo', 'file', 'allowEmpty' => true, 'safe' => true, 'types' => 'jpg, jpeg, gif, png'),
+			 array('photo', 'file', 'allowEmpty' => true, 
+					'safe' => true, 
+					'types' => 'jpg, jpeg, gif, png'),
+					'maxSize'=>512 * 512 * 1, // 250 kb
+					'tooLarge'=>'Файл весит больше 250 kb. Пожалуйста, загрузите файл меньшего размера.',
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, product_id, photo', 'safe', 'on'=>'search'),
+			
 		);
 	}
 
