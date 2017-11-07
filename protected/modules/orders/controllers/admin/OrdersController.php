@@ -139,7 +139,7 @@ class OrdersController extends SAdminController {
 		$photos=array();
 		if(isset($getPhotos)){
 			foreach ($getPhotos as $key=>$value) {
-				$photos[$key]="/uploads/".$value['photo'];
+				$photos[$key]="/uploads/delivery/".$value['photo'];
 			}
 		}
 
@@ -177,7 +177,7 @@ class OrdersController extends SAdminController {
                 		continue;
                 	}
                 	else{
-	                    if ($images[$i][0]->saveAs(Yii::getPathOfAlias('webroot').'/uploads/'.$rand.$images[$i][0]->name)) {
+	                    if ($images[$i][0]->saveAs(Yii::getPathOfAlias('webroot').'/uploads/delivery/'.$rand.$images[$i][0]->name)) {
 	                       	
 	                       	$check=OrderPhoto::model()->findByAttributes(array('order_id'=>$model->id,'product_id'=>$names[$i]));
 	                       

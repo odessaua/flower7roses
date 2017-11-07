@@ -50,14 +50,13 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 	       
 	    <div class="b-last-photos">
 	        <h3 class="title"><?=Yii::t('StoreModule.core','The last photo of the bouquet deliveries')?></h3>
-	        <!-- <a href="#" title="">Все фото доставок</a> -->
 	        <div class="g-clearfix">
 	        	<?php if(isset($allPhotos)){?>
 		        	<?php foreach ($allPhotos as $key => $value) { ?>
 		            <div class="b-photo">
 		                <div class="visual">
 		                    <div class="img">
-		                        <a href="<?php echo '/uploads/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/'.$value->photo;?>" alt=""/></a>
+		                        <a href="<?php echo '/uploads/delivery/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/delivery/'.$value->photo;?>" alt="Delivery photo"/></a>
 		                    </div>
 		                </div>
 		                <!-- <div class="title">г. Одесса</div> -->
