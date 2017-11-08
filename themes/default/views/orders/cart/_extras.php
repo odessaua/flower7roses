@@ -19,10 +19,10 @@
                                     $imgSource = $data->mainImage->getUrl('85x85');
                                 else
                                     $imgSource = 'http://placehold.it/85x85';
-                                echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('/store/frontProduct/view', 'url'=>$data->url), array('rel'=>'nofollow'));
+                                echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('/store/frontProduct/view', 'url'=>$data->url), array('rel'=>'nofollow', 'style' => 'line-height:85px'));
                                 echo '<div class="price">';
+								echo Yii::app()->currency->active->symbol;
                                 echo StoreProduct::formatPrice(Yii::app()->currency->convert($data->price));
-                                echo Yii::app()->currency->active->symbol;
                                 echo '</div>';
                                 ?>
                             </div>

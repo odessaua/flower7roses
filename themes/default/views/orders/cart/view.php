@@ -113,18 +113,13 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                         <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" checked /><label for="payment4">
 <div class="button"><img src="\uploads\visa_wayforpay75-150.png"></div></label>
                        <div class="help-tip">
-                       <?php if(!empty($payments['WayForPay'])): ?>
-                           <p>
-                               <strong>WayForPay</strong>: <?= strip_tags($payments['WayForPay']->description); ?>
-                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                       <?php else: ?>
-                           <p>
-                               <strong>WayForPay</strong></strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
-                               <br><a href="https://wayforpay.com/<?= $this->language_info['code']; ?>" target=_blank>https://wayforpay.com/</a></p>
-                       <?php endif; ?>
+					    <p><strong><?= strip_tags($payments['WayForPay']->name); ?></strong>: 
+							<?php echo (!empty($payments['WayForPay']->description))? (strip_tags($payments['WayForPay']->description)): "Online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.";
+							?> 
+						</p>
                        </div>
 					   <span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
-					</li>
+					</li>				
 					
 <hr width=100%>
 <?php endif; ?>
@@ -134,15 +129,11 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                         <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" /><label for="payment1">					   
 <div class="button"><img src="\uploads\visa_portmone75-150.png"></div></label>
                         <div class="help-tip">
-                            <?php if(!empty($payments['Portmone'])): ?>
-                            <p>
-                                <strong>Portmone</strong>: <?= strip_tags($payments['Portmone']->description); ?>
-                                <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
-                            <?php else: ?>
-                            <p>
-                                <strong>Portmone</strong>: online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.
-                                <br><a href="https://www.portmone.com.ua/r3/<?= $this->language_info['code']; ?>/" target=_blank>https://www.portmone.com.ua</a></p>
-                            <?php endif; ?>
+						 <p><strong><?= strip_tags($payments['Portmone']->name); ?></strong>: 
+						 
+                            <?php echo (!empty($payments['Portmone']->description))? (strip_tags($payments['Portmone']->description)): "Online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.";
+							?> 
+							</p>
                         </div>
 						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
 					</li>
