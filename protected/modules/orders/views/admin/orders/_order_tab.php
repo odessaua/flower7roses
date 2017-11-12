@@ -230,7 +230,7 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 							'model'=>$model,
 							'photos'=>$photos,
 							'orderPhoto' => $orderPhoto,
-
+                            'photos_errors' => $photos_errors,
 						));
 						?>
 					</div>

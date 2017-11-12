@@ -118,7 +118,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 							?> 
 						</p>
                        </div>
-					   <span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+					   <span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 					</li>				
 					
 <hr width=100%>
@@ -135,7 +135,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 							?> 
 							</p>
                         </div>
-						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						<span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 					</li>
 <hr width=100%>
 <?php endif; ?>
@@ -157,7 +157,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                             </p>
                         <?php endif; ?>
                         </div>
-						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						<span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 						</li>
 <hr width=100%>
 <?php endif; ?>
@@ -177,7 +177,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                             </p>
                         <?php endif; ?>
                         </div>
-						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						<span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 						</li>
 <hr width=100%>
 <?php endif; ?>
@@ -198,7 +198,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                             </p>
                         <?php endif; ?>
                         </div>
-						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						<span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 						</li>
 <hr width=100%>
 <?php endif; ?>
@@ -219,7 +219,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
                             </p>
                         <?php endif; ?>
                         </div>
-						<span class="price sum"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?>
+						<span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
 						</li>
 <?php endif; ?>
 </ul>
@@ -263,7 +263,7 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
                         <div class="name"><?php echo $product->getRenderFullName(false); 
 											if ($product->quantity>1) { echo "<p><strong>(Qty : ".$product->quantity.")</strong></p>";}?></div>
                     </div>
-                </td><td width="30%"><span class="price"><?=$symbol.StoreProduct::formatPrice($product->price*$rate*$product->quantity)?></span></td></tr>
+                </td><td width="30%"><span class="price"><?=StoreProduct::formatPrice($product->price*$rate*$product->quantity, true)?></span></td></tr>
             <?php endforeach ?>
 			           			
             <?php if(!empty($model->do_card)) { ?>
@@ -277,22 +277,22 @@ $wfp_p_names = $wfp_p_qtys = $wfp_p_prices = array(); // инфа для WayForP
 					?>		
 			
 			<td><div class="carttext"><? echo Yii::t('OrdersModule.core','Greeting card')?><? if(isset($translation)) echo $translation;?></div></td>
-			<td width="25%"><span class="price"><?=$symbol.StoreProduct::formatPrice($cardPrice*$rate)."</span></td></tr>"; }?>			
+			<td width="25%"><span class="price"><?=StoreProduct::formatPrice($cardPrice*$rate, true)."</span></td></tr>"; }?>
 			
             <?php if(!empty($model->doPhoto)){ ?>
 			<tr><td width="40px" align="center"><img src="/uploads/mark.png" alt="Photo of delivery" title="Photo of delivery" width=24 height=24 /></td>
 			<td><div class="carttext"><? echo Yii::t('OrdersModule.core','Photo of delivery')?></div></td>
-			<td width="25%"><span class="price"><?=$symbol.StoreProduct::formatPrice($model->photo_price*$rate)."</span></td></tr>"; }?>	
+			<td width="25%"><span class="price"><?=StoreProduct::formatPrice($model->photo_price*$rate, true)."</span></td></tr>"; }?>
 			
             <tr>
 			<tr><td width="40px" align="center"><img src="/uploads/mark.png" alt="Delivery feeDelivery fee" title="Delivery fee" width=24 height=24 /></td>
 			<td><div class="carttext"><?echo Yii::t('OrdersModule.core','Delivery fee');?>	</div></td>		
-			<td width="25%"><span class="price"><?php $delivery=$model->delivery_price; if ($delivery=='0') echo "FREE"; else echo $symbol.StoreProduct::formatPrice($delivery*$rate)."</span></td></tr>";?>
+			<td width="25%"><span class="price"><?php $delivery=$model->delivery_price; if ($delivery=='0') echo "FREE"; else echo StoreProduct::formatPrice($delivery*$rate, true)."</span></td></tr>";?>
 			
 			<tr>
 			<td width="40px" align="center"><img src="/uploads/sum.png" alt="Total sum" title="Total sum" width=24 height=24 /></td>
 			<td><span class="total"><?php echo Yii::t('OrdersModule.core','Order Total');?></span></td>
-			<td width="25%"><div class="sum"><span class="price"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?></div>
+			<td width="25%"><div class="sum"><span class="price"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?></div>
 
 			</td></tr>
 			</table>
@@ -495,7 +495,7 @@ funds to a TransferWise account first and then they send the payment to Varetska
 </dl>
     </div>
 	<hr style="width:500px; float: left;"><br>
-<h2><?php echo Yii::t('OrdersModule.core','Order Total');?>: <span class="price"><?echo $symbol.StoreProduct::formatPrice($model->full_price*$rate)."</span> " ;?></h2><br>
+<h2><?php echo Yii::t('OrdersModule.core','Order Total');?>: <span class="price"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?></h2><br>
 
 
 <div class="links">

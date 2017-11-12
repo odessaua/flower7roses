@@ -101,14 +101,21 @@ $this->widget('zii.widgets.grid.CGridView', array(
 <p style="padding-top:50px;">
 <hr>
 <h4>Добавить Фото Доставки</h4>
-
+<?php if(!empty($photos_errors)): ?>
+<ul style="display: block; margin: 15px 0;">
+    <?php foreach ($photos_errors as $photos_error): ?>
+    <li style="color: red"><?= $photos_error; ?></li>
+    <?php endforeach; ?>
+    <li style="color: red">Эти фото НЕ загружены!</li>
+</ul>
+<?php endif; ?>
 <?php if(isset($photos)){?>
 		        	<?php foreach ($photos as $key => $value) { ?>
-		            <div class="b-photo">
+		            <div class="b-photo" id="photo_<?= $key; ?>">
 		                <div class="visual">
 		                    <div class="img">
 		                        <img src="<?php echo $value;?>" width="250"alt=""/>
-								<a href="/order/deletephoto?id=">Удалить</a>
+								<a href="#" onclick="removeOrderPhoto(<?= $key; ?>, '<?= Yii::app()->request->csrfToken; ?>'); return false;">Удалить</a>
 		                    </div>
 		                </div>
 		                <!-- <div class="title">г. Одесса</div> -->

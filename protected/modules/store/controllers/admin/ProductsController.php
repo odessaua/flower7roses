@@ -87,21 +87,24 @@ class ProductsController extends SAdminController
         Yii::import( "xupload.models.XUploadForm" );
         $photos = new XUploadForm;
 
-		// Set additional tabs
-		$form->additionalTabs = array(
-			Yii::t('StoreModule.admin','Дополнительные категории') => $this->renderPartial('_tree', array('model'=>$model), true),
-			Yii::t('StoreModule.admin','Сопутствующие продукты') => $this->renderPartial('_relatedProducts',array(
-				'exclude'=>$model->id,
-				'product'=>$model,
-			),true),
-			Yii::t('StoreModule.admin','Изображения')    => $this->renderPartial('_images', array('model'=>$model, 'photos'=>$photos), true),
-			//Yii::t('StoreModule.admin','Характеристики') => $this->renderPartial('_attributes', array('model'=>$model), true),
-			Yii::t('StoreModule.admin','Варианты') => $this->renderPartial('_variations', array('model'=>$model), true),
-			Yii::t('StoreModule.admin','Регионы доставки')         => $this->renderPartial('_comments', array('model'=>$model), true),
-		);
+        // Set additional tabs
+        $form->additionalTabs = array(
+            Yii::t('StoreModule.admin','Дополнительные категории') => $this->renderPartial('_tree', array('model'=>$model), true),
+            Yii::t('StoreModule.admin','Сопутствующие продукты') => $this->renderPartial('_relatedProducts',array(
+                'exclude'=>$model->id,
+                'product'=>$model,
+            ),true),
+            Yii::t('StoreModule.admin','Изображения')    => $this->renderPartial('_images', array('model'=>$model, 'photos'=>$photos), true),
+            //Yii::t('StoreModule.admin','Характеристики') => $this->renderPartial('_attributes', array('model'=>$model), true),
+            Yii::t('StoreModule.admin','Варианты') => $this->renderPartial('_variations', array('model'=>$model), true),
+            Yii::t('StoreModule.admin','Регионы доставки')         => $this->renderPartial('_comments', array('model'=>$model), true),
+        );
 
-		if($model->use_configurations)
-			$form->additionalTabs[Yii::t('StoreModule.admin','Конфигурации')] = $this->renderPartial('_configurations', array('product'=>$model), true);
+        if($model->use_configurations)
+            $form->additionalTabs[Yii::t('StoreModule.admin','Конфигурации')] = $this->renderPartial('_configurations', array('product'=>$model), true);
+
+
+        $photo_error = '';
 
 		if (Yii::app()->request->isPostRequest)
 		{
@@ -136,7 +139,7 @@ class ProductsController extends SAdminController
 				$this->processConfigurations($model);
 
 				// Handle images
-				$this->handleUploadedImages($model);
+				$photo_error = $this->handleUploadedImages($model);
 
 				// Set main image
 				$this->updateMainImage($model);
@@ -148,17 +151,20 @@ class ProductsController extends SAdminController
 
 				$this->setFlashMessage(Yii::t('StoreModule.admin', 'Изменения успешно сохранены'));
 
-				if (isset($_POST['REDIRECT']))
-					$this->smartRedirect($model);
-				else
-					$this->redirect(array('index'));
+				if(empty($photo_error)) {
+                    if (isset($_POST['REDIRECT']))
+                        $this->smartRedirect($model);
+                    else
+                        $this->redirect(array('index'));
+                }
 			}
 		}
 
-		$this->render('update', array(
+        $this->render('update', array(
 			'model'=>$model,
 			'form'=>$form,
             'photos'=>$photos,
+            'photo_error' => $photo_error,
 		));
 	}
 
@@ -713,9 +719,17 @@ class ProductsController extends SAdminController
 
 	/**
 	 * @param StoreProduct $model
+     * @return string
 	 */
 	public function handleUploadedImages(StoreProduct $model)
 	{
+	    $error = '';
+	    if($_FILES['StoreProductImages']['size'][0] > (250 * 1024)){
+	        $error = 'Файл ' . $_FILES['StoreProductImages']['name'][0]
+                . ' весит больше 250 kb. Пожалуйста, загрузите файл меньшего размера!';
+	        return $error;
+        }
+
 		$images = CUploadedFile::getInstancesByName('StoreProductImages');
 
 		if($images && sizeof($images) > 0)
@@ -729,5 +743,6 @@ class ProductsController extends SAdminController
 					$this->setFlashMessage(Yii::t('StoreModule.admin', 'Ошибка загрузки изображения {name}', array('{name}'=>$image->getName())));
 			}
 		}
+		return $error;
 	}
 }

@@ -22,7 +22,7 @@ function processCartResponse(data, textStatus, jqXHR)
         productErrors.hide();
         reloadSmallCart();
         reloadPopupCart();
-        $.jGrowl("Товар успешно добавлен в корзину. <a href='/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
+        $.jGrowl("Товар успешно добавлен в корзину. <a href='/"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
         
         
         $('#cart-modal').arcticmodal({

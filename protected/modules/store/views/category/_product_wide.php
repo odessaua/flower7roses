@@ -24,7 +24,7 @@
 		if($data->appliedDiscount)
 			echo '<span style="color:red; "><s>'.$data->toCurrentCurrency('originalPrice').'</s></span>';
 		?>
-		<?php echo $data->priceRange() ?>
+		<?php echo $data->priceRange(true) ?>
 	</div>
 	<div class="desc">
 		<?php echo $data->short_description ?>

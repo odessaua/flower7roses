@@ -211,4 +211,22 @@ class SCurrencyManager extends CComponent
         $this->setActive($this->detectActive()->id); // default
         return true;
     }
+
+    /**
+     * форматирование цены по шаблону – или в формат {знак_валюты}{сумма}
+     * @param $sum
+     * @return mixed|string
+     */
+    public function format($sum)
+    {
+        if(
+            !empty($this->_active->price_format) &&
+            (strpos($this->_active->price_format, '{sum}') !== false)
+        ) {
+            return str_replace('{sum}', $sum, $this->_active->price_format);
+        }
+        else {
+            return $this->_active->symbol . $sum;
+        }
+    }
 }

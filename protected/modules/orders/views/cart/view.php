@@ -30,16 +30,14 @@ $this->pageTitle = $title;
 				<?php echo CHtml::closeTag('h3') ?>
 
 				<?php echo CHtml::openTag('span', array('class'=>'price')) ?>
-				<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($product->price)) ?>
-				<?php echo Yii::app()->currency->active->symbol; ?>
+				<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($product->price), true) ?>
 				<?php echo CHtml::closeTag('span') ?>
 			</td>
 			<td>
 				<?php echo $product->quantity ?>
 			</td>
 			<td>
-				<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($product->price * $product->quantity)); ?>
-				<?php echo Yii::app()->currency->active->symbol; ?>
+				<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($product->price * $product->quantity), true); ?>
 			</td>
 		</tr>
 		<?php endforeach ?>
@@ -57,8 +55,7 @@ $this->pageTitle = $title;
 				</div>
 				<div class="row">
 					<?php echo Yii::t('OrdersModule.core', 'Стоимость') ?>:
-					<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($model->delivery_price)) ?>
-					<?php echo Yii::app()->currency->active->symbol ?>
+					<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($model->delivery_price), true) ?>
 				</div>
 				<div class="row">
 					<?php echo CHtml::encode($model->user_name); ?>
@@ -95,8 +92,7 @@ $this->pageTitle = $title;
 		<span class="total">Всего к оплате:</span>
 		<span id="total">
 			<?php $total_pric = $model->full_price+$delivery_price; ?>
-			<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($total_pric)) ?>
-			<?php echo Yii::app()->currency->active->symbol ?>
+			<?php echo StoreProduct::formatPrice(Yii::app()->currency->convert($total_pric), true) ?>
 		</span>
 	</div>
 

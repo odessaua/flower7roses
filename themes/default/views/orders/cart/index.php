@@ -89,7 +89,7 @@ echo '<ul class="breadcrumbs">
                 <tr>
                     <td colspan="6">
                         <div class="total"><?php echo Yii::t('OrdersModule.core','Total')?> 
-                            <span class="price" id="total"><?php echo Yii::app()->currency->active->symbol ?><?php echo StoreProduct::formatPrice($totalPrice) ?> </span>
+                            <span class="price" id="total"><?php echo StoreProduct::formatPrice($totalPrice, true) ?> </span>
                         </div>
                         <button class="btn-green btn-to-buy recount" name="recount" type="submit" value="1"><?php echo Yii::t('OrdersModule.core','Recalculate')?></button>
                         <input class="btn-green btn-to-buy btntostep2" type="submit" id="goStep2" value="<?php echo Yii::t('OrdersModule.core','Order')?>"/>
@@ -127,9 +127,7 @@ echo '<ul class="breadcrumbs">
                         ?>
                         <div class="price">
                             <?php $price = StoreProduct::calculatePrices($product['model'], $product['variant_models'], $product['configurable_id']);
-							echo Yii::app()->currency->active->symbol;
-                            echo StoreProduct::formatPrice(Yii::app()->currency->convert($price));
-                            
+                            echo StoreProduct::formatPrice(Yii::app()->currency->convert($price), true);
                             ?>
                         </div>
                     </td>
@@ -142,9 +140,7 @@ echo '<ul class="breadcrumbs">
                     <td>
                         <div class="price">
                         <?php
-						echo Yii::app()->currency->active->symbol;
-                        echo StoreProduct::formatPrice(Yii::app()->currency->convert($price * $product['quantity']));
-                        
+                        echo StoreProduct::formatPrice(Yii::app()->currency->convert($price * $product['quantity']), true);
                         ?>
                         </div>
                     </td>
@@ -268,11 +264,11 @@ echo '<ul class="breadcrumbs">
                 </div>
 				<div class="s2">
                     <?php echo CHtml::activeCheckBox($this->form,'doPhoto'); ?>
-                    <label for="photo"><?=Yii::t('OrdersModule.core','Photo of the recipient:')." <span class='price'>".$symbol.StoreProduct::formatPrice($photoPrice*$rate)?></span></label>
+                    <label for="photo"><?=Yii::t('OrdersModule.core','Photo of the recipient:')." <span class='price'>".StoreProduct::formatPrice($photoPrice*$rate, true)?></span></label>
                 </div>
                  <div class="s2">
                     <?php echo CHtml::activeCheckBox($this->form,'do_card'); ?>
-                    <label for="photo"><?=Yii::t('OrdersModule.core','Greeting card:')." <span class='price'>".$symbol.StoreProduct::formatPrice($cardPrice*$rate)?></span></label>
+                    <label for="photo"><?=Yii::t('OrdersModule.core','Greeting card:')." <span class='price'>".StoreProduct::formatPrice($cardPrice*$rate, true)?></span></label>
                 </div>
 				  <div class="s2">
                     <span class="input-title"><?=Yii::t('OrdersModule.core','Greeting card text:')?></span>
@@ -284,7 +280,7 @@ echo '<ul class="breadcrumbs">
                 </div>
 				<div class="s2">
                     <?php echo CHtml::activeCheckBox($this->form,'card_transl'); ?>
-                    <label for="note"><?=Yii::t('OrdersModule.core','Please translate this message from English to Russian:')." <span class='price'>".$symbol.StoreProduct::formatPrice($translPrice*$rate)?></span></label>
+                    <label for="note"><?=Yii::t('OrdersModule.core','Please translate this message from English to Russian:')." <span class='price'>".StoreProduct::formatPrice($translPrice*$rate, true)?></span></label>
                 </div>
 
                 <div class="s2">

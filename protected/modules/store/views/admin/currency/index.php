@@ -53,6 +53,11 @@ $this->widget('ext.sgridview.SGridView', array(
 			'filter'=>array(1=>Yii::t('StoreModule.admin', 'Да'), 0=>Yii::t('StoreModule.admin', 'Нет')),
 			'value'=>'$data->default ? Yii::t("StoreModule.admin", "Да") : Yii::t("StoreModule.admin", "Нет")'
 		),
+        array(
+            'name'=>'price_format',
+            'filter'=>false,
+            'value'=>'(!empty($data->price_format)) ? str_replace("{sum}", "5.00", $data->price_format) : "–"',
+        ),
 		// Buttons
 		array(
 			'class'=>'CButtonColumn',

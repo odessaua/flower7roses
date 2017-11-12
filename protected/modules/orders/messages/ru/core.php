@@ -1,8 +1,8 @@
 <?php
      return array(
-        'items:'=>'товаров:',
+        'items:'=>'товаров: ',
         'Shopping cart'=>'В вашей корзине',
-        'items:'=>'позиций',
+        'items'=>'позиций',
         'for the amount: '=>'на сумму',
         'Your order'=>'Ваш заказ',
         'Your shopping cart is currently empty.'=>'Ваша корзина пуста',

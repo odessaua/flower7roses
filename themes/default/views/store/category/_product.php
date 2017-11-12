@@ -61,11 +61,10 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $data->name;
     <div class="price">
         <?php if(!empty($data->old_price)): ?>
         <span class="product-grid-old-price">
-            <?= Yii::app()->currency->active->symbol
-            . StoreProduct::formatPrice($data->toCurrentCurrency('old_price')); ?>
+            <?= StoreProduct::formatPrice($data->toCurrentCurrency('old_price'), true); ?>
         </span>
         <?php endif; ?>
-        <?php echo $data->priceRange() ?>
+        <?php echo $data->priceRange(true) ?>
     </div>
     
     <div class="form">

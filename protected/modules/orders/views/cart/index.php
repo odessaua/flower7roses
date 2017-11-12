@@ -60,8 +60,7 @@ if(empty($items))
 
 					// Price
 					echo CHtml::openTag('span', array('class'=>'price'));
-					echo StoreProduct::formatPrice(Yii::app()->currency->convert($price));
-					echo ' '.Yii::app()->currency->active->symbol;
+					echo StoreProduct::formatPrice(Yii::app()->currency->convert($price), true);
 					echo CHtml::closeTag('span');
 
 					// Display variant options
@@ -95,8 +94,7 @@ if(empty($items))
 			<td>
 				<?php
 				echo CHtml::openTag('span', array('class'=>'price'));
-				echo StoreProduct::formatPrice(Yii::app()->currency->convert($price * $product['quantity']));
-				echo ' '.Yii::app()->currency->active->symbol;
+				echo StoreProduct::formatPrice(Yii::app()->currency->convert($price * $product['quantity']), true);
 				echo CHtml::closeTag('span');
 				?>
 			</td>
@@ -111,8 +109,7 @@ if(empty($items))
 		</div>
 		<span class="total">Всего:</span>
 		<span id="total">
-			<?php echo StoreProduct::formatPrice($totalPrice) ?>
-			<?php echo Yii::app()->currency->active->symbol ?>
+			<?php echo StoreProduct::formatPrice($totalPrice, true) ?>
 		</span>
 	</div>
 
@@ -183,9 +180,8 @@ if(empty($items))
 
 <div class="has_background confirm_order">
 	<h1>Всего к оплате:</h1>
-	<span id="orderTotalPrice" class="total"><?php echo StoreProduct::formatPrice($totalPrice) ?></span>
+	<span id="orderTotalPrice" class="total"><?php echo StoreProduct::formatPrice($totalPrice, true) ?></span>
 	<span class="current_currency">
-		<?php echo Yii::app()->currency->active->symbol; ?>
 	</span>
 	<button class="blue_button" type="submit" name="create" value="1">Оформить</button>
 </div>

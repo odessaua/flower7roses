@@ -1,4 +1,8 @@
-﻿-- 2017-10-26 (областной центр):
+﻿-- 2017-11-12 (формат отображения цены для валюты):
+ALTER TABLE `StoreCurrency` ADD `price_format` VARCHAR(100)  NULL  DEFAULT NULL  AFTER `default`;
+-- ========
+
+-- 2017-10-26 (областной центр):
 ALTER TABLE `city` ADD `main_in_region` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `show_in_popup`;
 -- ========
 

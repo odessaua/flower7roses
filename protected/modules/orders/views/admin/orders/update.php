@@ -54,6 +54,7 @@ $tabs = array(
 		'geoinfo'	      => $geoinfo,
 		'citys'           => $citys,
         'wfp_order'       => $wfp_order,
+        'photos_errors'   => $photos_errors,
 	), true),
 );
 

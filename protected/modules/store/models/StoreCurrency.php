@@ -11,6 +11,7 @@
  * @property float $rate
  * @property integer $main
  * @property integer $default
+ * @property integer $price_format
  */
 class StoreCurrency extends BaseModel
 {
@@ -42,6 +43,7 @@ class StoreCurrency extends BaseModel
 			array('main, default', 'numerical', 'integerOnly'=>true),
 			array('rate', 'numerical'),
 			array('name', 'length', 'max'=>255),
+			array('price_format', 'length', 'max'=>20),
 			array('iso, symbol', 'length', 'max'=>10),
 
 			array('id, name, iso, symbol, rate, main, default', 'safe', 'on'=>'search'),
@@ -74,6 +76,7 @@ class StoreCurrency extends BaseModel
 			'rate'    => Yii::t('StoreModule', 'Курс'),
 			'main'    => Yii::t('StoreModule', 'Главная'),
 			'default' => Yii::t('StoreModule', 'По умолчанию'),
+			'price_format' => Yii::t('StoreModule', 'Формат цены'),
 		);
 	}
 

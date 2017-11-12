@@ -56,6 +56,11 @@ class CurrencyController extends SAdminController {
 
 		if (Yii::app()->request->isPostRequest)
 		{
+		    // обработка шаблона формата цены - фрагмент {sum} является обязательным!
+            $_POST['StoreCurrency']['price_format'] =
+                (strpos($_POST['StoreCurrency']['price_format'], '{sum}') !== false)
+                    ? $_POST['StoreCurrency']['price_format']
+                    : '';
 			$model->attributes = $_POST['StoreCurrency'];
 
 			if ($model->validate())

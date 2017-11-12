@@ -32,12 +32,7 @@ class OrderPhoto extends CActiveRecord
 		return array(
 			array('product_id, photo', 'required'),
 			array('product_id', 'numerical', 'integerOnly'=>true),
-			array('photo', 'file', 
-					'allowEmpty' => true, 
-					'safe' => true, 
-					'types' => 'jpg, jpeg, gif, png'),
-					//'maxSize'=>512 * 512 * 1, // 250 kb
-					//'tooLarge'=>'Файл весит больше 250 kb. Пожалуйста, загрузите файл меньшего размера.',
+            array('photo', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, product_id, photo', 'safe', 'on'=>'search'),
@@ -98,11 +93,11 @@ class OrderPhoto extends CActiveRecord
 	public function getPhotos($id)
 	{
 		$photos = Yii::app()->db->createCommand()
-		    ->select('photo')
+		    ->select('id, photo')
 		    ->from('OrderPhoto')
 		    ->where('order_id=:order_id', array(':order_id'=>$id))
 		    ->queryAll();
-		    return  $photos;
+		    return (!empty($photos)) ? CArray::toolIndexArrayBy($photos, 'id') : array();
 		
 	}
 	/**

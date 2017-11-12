@@ -776,30 +776,32 @@ class StoreProduct extends BaseModel
 	/**
 	 * Apply price format
 	 * @static
-	 * @param $price
+	 * @param $price             - цена
+	 * @param $with_currency     - с форматированием по шаблону и указанием валюты
 	 * @return string formatted price
 	 */
-	public static function formatPrice($price)
+	public static function formatPrice($price, $with_currency = false)
 	{
-		return number_format($price, 2, '.', '');
+	    $price = number_format($price, 2, '.', '');
+		return (!empty($with_currency)) ? Yii::app()->currency->format($price) : $price;
 	}
 
 	/**
 	 * Convert to active currency and format price.
 	 * Display min and max price for configurable products.
 	 * Used in product listing.
+     * @param $with_currency     - с форматированием по шаблону и указанием валюты
 	 * @return string
 	 */
-	public function priceRange()
+	public function priceRange($with_currency = false)
 	{
 		$price     = Yii::app()->currency->convert($this->price);
 		$max_price = Yii::app()->currency->convert($this->max_price);
-		$symbol    = Yii::app()->currency->active->symbol;
 
 		if($this->use_configurations && $max_price > 0)
-			return $symbol.self::formatPrice($price).' - '.$symbol.self::formatPrice($max_price);
+			return self::formatPrice($price, $with_currency).' - '.self::formatPrice($max_price, $with_currency);
 
-		return $symbol.self::formatPrice($price);
+		return self::formatPrice($price, $with_currency);
 	}
 
 	/**

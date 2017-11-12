@@ -17,7 +17,7 @@ class OrdersController extends SAdminController {
 	public function actionIndex()
 	{
 	    // обновляем статусы платежей по заказам
-        $this->checkPaymentStatuses();
+//        $this->checkPaymentStatuses();
 
 		$model = new Order('search');
 
@@ -144,6 +144,7 @@ class OrdersController extends SAdminController {
 		}
 
 		$from_status = $model->payment_status;
+		$photos_errors = array();
 
 		if(Yii::app()->request->isPostRequest)
 		{
@@ -163,8 +164,16 @@ class OrdersController extends SAdminController {
 			// $model->total_price=$total;
 			for($i=0;$i<count($model->getOrderedProducts()->getData());$i++) {
 				$images[$i]=CUploadedFile::getInstancesByName('images_product'.$i);
-				if(!empty($images[$i]))
-					$names[$i]=$model->getOrderedProducts()->getData()[$i]->product_id;
+				if(!empty($images[$i])){
+				    if($_FILES['images_product'.$i]['size'][0] <= (250 * 1024)){
+					    $names[$i]=$model->getOrderedProducts()->getData()[$i]->product_id;
+                    }
+                    else{
+                        $photos_errors[$i] = 'Файл ' . $_FILES['images_product'.$i]['name'][0]
+                            . ' весит больше 250 kb. Пожалуйста, загрузите файл меньшего размера!';
+                        unset($images[$i]);
+                    }
+                }
 			}
 
 			$rand=rand(0,9999);
@@ -182,6 +191,7 @@ class OrdersController extends SAdminController {
 	                       	$check=OrderPhoto::model()->findByAttributes(array('order_id'=>$model->id,'product_id'=>$names[$i]));
 	                       
 	                       	if($check){
+                                @unlink(Yii::getPathOfAlias('webroot') . '/uploads/delivery/' . $check->photo);
 	                       		$img_add=OrderPhoto::model()->findByPk($check->id);
 	                       		$img_add->photo = $rand.$images[$i][0]->name; //it might be $img_add->name for you, filename is just what I chose to call it in my model
 		                        $img_add->product_id = $names[$i]; // this links your picture model to the main model (like your user, or profile model)
@@ -219,16 +229,22 @@ class OrdersController extends SAdminController {
                     $this->sendPaymentEmail($model->user_email, $model->id, $from_status, $model->payment_status);
                 }
 
-				if(isset($_POST['REDIRECT']))
-					$this->smartRedirect($model);
-				else
-					$this->redirect(array('index'));
+                if(empty($photos_errors)) {
+                    if (isset($_POST['REDIRECT']))
+                        $this->smartRedirect($model);
+                    else
+                        $this->redirect(array('index'));
+                }
 			}
 		}
 
         $this->wfpStatus($model->id); // обновляем статус заказа в системе WayForPay
-        $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => (int)$model->id)); // данные о заказе в системе WayForPay
-		
+        // данные о заказе в системе WayForPay
+        $wfp_order = WfpOrder::model()->find(array(
+            'condition' => '`order_id` = ' . (int)$model->id,
+            'order' => '`id` DESC'
+        ));
+
 		$this->render('update', array(
 			'deliveryMethods' => StoreDeliveryMethod::model()->applyTranslateCriteria()->orderByName()->findAll(),
 			'statuses'        => OrderStatus::model()->orderByPosition()->findAll(),
@@ -238,6 +254,7 @@ class OrdersController extends SAdminController {
 			'geoinfo'	      => $geo,
 			'citys'=>$citys,
             'wfp_order' => (!empty($wfp_order)) ? $wfp_order : null,
+            'photos_errors' => $photos_errors,
 		));
 	}
 
@@ -248,7 +265,10 @@ class OrdersController extends SAdminController {
      */
     public function wfpStatus($order_id)
     {
-        $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => $order_id));
+        $wfp_order = WfpOrder::model()->find(array(
+            'condition' => '`order_id` = ' . (int)$order_id,
+            'order' => '`id` DESC'
+        ));
         if(empty($wfp_order)) return false; // такого заказа нет в таблице
 
         $string = Yii::app()->params['merchantAccount'] . ";" . $wfp_order->orderReference;
@@ -728,5 +748,17 @@ class OrdersController extends SAdminController {
             $order->save();
         }
         echo Yii::t('StoreModule.admin', 'Изменения успешно сохранены.');
+    }
+
+    public function actionRemoveDeliveryPhoto()
+    {
+        $id = Yii::app()->request->getPost('id');
+        $photo = OrderPhoto::model()->findByPk($id);
+        if(!empty($photo)){
+            @unlink(Yii::getPathOfAlias('webroot') . '/uploads/delivery/' . $photo->photo);
+            $photo->delete();
+            echo 1; return;
+        }
+        echo 0;
     }
 }

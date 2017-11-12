@@ -34,7 +34,17 @@ $this->widget('application.modules.admin.widgets.schosen.SChosen', array(
 ?>
 
 <div class="form wide padding-all">
+
 <?php
+if(!empty($photo_error)):
+?>
+<ul style="display: block; margin: 15px 0;">
+    <li style="color: red"><?= $photo_error; ?></li>
+    <li style="color: red">Это фото НЕ загружено!</li>
+</ul>
+<?php
+endif;
+
 
 	// If selected `configurable` product without attributes display error
 	if($model->isNewRecord && $model->use_configurations == true && empty($model->configurable_attributes))

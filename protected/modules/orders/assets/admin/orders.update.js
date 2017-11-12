@@ -148,3 +148,21 @@ function setOrderStatus(status, token)
         'text'
     );
 }
+
+function removeOrderPhoto(id, token) {
+    if(confirm('Вы действительно хотите удалить это фото?')) {
+        $.post(
+            '/admin/orders/orders/removeDeliveryPhoto/',
+            {
+                YII_CSRF_TOKEN: token,
+                id: id
+            },
+            function (data) {
+                if (data * 1 > 0) {
+                    $('#photo_' + id).remove();
+                }
+            },
+            'text'
+        );
+    }
+}

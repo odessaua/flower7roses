@@ -39,6 +39,10 @@ return array(
 					'type'=>'text',
 					'hint'=>Yii::t('StoreModule.admin', 'Курс по отношению к главной валюте сайта.')
 				),
+                'price_format'=>array(
+                    'type'=>'text',
+                    'hint'=>Yii::t('StoreModule.admin', 'Шаблон отображения цены в этой валюте, вида: ${sum}, €{sum}, {sum} грн. Часть {sum} является обязательной в шаблоне!')
+                ),
 			),
 		),
 	),

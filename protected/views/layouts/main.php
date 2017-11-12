@@ -31,6 +31,14 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <![endif]-->
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
+    <?php
+    $js_lang = (!empty(Yii::app()->request->cookies['language']))
+        ? Yii::app()->request->cookies['language']->value
+        : 'en';
+    ?>
+    <script type="text/javascript">
+        var urlLang = '<?= $js_lang; ?>';
+    </script>
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
 	<?= $this->canonical; // rel="canonical" ?>

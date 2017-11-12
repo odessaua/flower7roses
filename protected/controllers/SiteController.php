@@ -274,8 +274,8 @@ class SiteController extends Controller
             if(!empty($orderReference)){
                 $order_ex = explode('_', $orderReference);
                 $order_id = end($order_ex);
-                $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => $order_id));
-                if(!empty($wfp_order)) return; // сохраняем первую запись о заказе, с оригинальным order_reference
+//                $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => $order_id));
+//                if(!empty($wfp_order)) return; // сохраняем первую запись о заказе, с оригинальным order_reference
                 //WfpOrder::model()->deleteAllByAttributes(array('order_id' => $order_id));
                 $model = new WfpOrder();
                 $model->order_id = $order_id;

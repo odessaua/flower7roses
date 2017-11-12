@@ -216,7 +216,11 @@ class OrdersController extends SAdminController {
 		}
 
         $this->wfpStatus($model->id); // обновляем статус заказа в системе WayForPay
-        $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => (int)$model->id)); // данные о заказе в системе WayForPay
+        // данные о заказе в системе WayForPay
+        $wfp_order = WfpOrder::model()->find(array(
+            'condition' => '`order_id` = ' . (int)$model->id,
+            'order' => '`id` DESC'
+        ));
 		
 		$this->render('update', array(
 			'deliveryMethods' => StoreDeliveryMethod::model()->applyTranslateCriteria()->orderByName()->findAll(),
@@ -237,7 +241,10 @@ class OrdersController extends SAdminController {
      */
     public function wfpStatus($order_id)
     {
-        $wfp_order = WfpOrder::model()->findByAttributes(array('order_id' => $order_id));
+        $wfp_order = WfpOrder::model()->find(array(
+            'condition' => '`order_id` = ' . (int)$order_id,
+            'order' => '`id` DESC'
+        ));
         if(empty($wfp_order)) return false; // такого заказа нет в таблице
 
         $string = Yii::app()->params['merchantAccount'] . ";" . $wfp_order->orderReference;

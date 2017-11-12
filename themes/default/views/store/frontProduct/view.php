@@ -160,12 +160,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 	                        </div>
 	                        
 	                        <div class="price">
-                                <?php echo Yii::app()->currency->active->symbol; ?>
-								<span id="productPrice"><?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?></span>
+								<span id="productPrice"><?php echo StoreProduct::formatPrice($model->toCurrentCurrency(), true); ?></span>
                                 <?php if(!empty($model->old_price)): ?>
 								<span class="product-old-price">
-                                    <?= Yii::app()->currency->active->symbol
-                                    . StoreProduct::formatPrice($model->toCurrentCurrency('old_price')); ?>
+                                    <?= StoreProduct::formatPrice($model->toCurrentCurrency('old_price'), true); ?>
                                 </span>
                                 <?php endif; ?>
 							</div>
