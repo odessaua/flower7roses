@@ -169,7 +169,7 @@ class SCurrencyManager extends CComponent
      */
     public function setCurrencyByIP()
     {
-        Yii::app()->session['currency'] = ''; // uncomment for testing
+//        Yii::app()->session['currency'] = ''; // uncomment for testing
         // проверяем валюту в сессии
         $sessCurrency = Yii::app()->session['currency'];
         if(!empty($sessCurrency)){
