@@ -181,7 +181,7 @@ class SCurrencyManager extends CComponent
         }
 
         $ip_info = $this->geoIpInfo();
-        $currencies = $this->getCurrencies();  var_dump($ip_info['countryCode'], $currencies); 
+        $currencies = $this->getCurrencies();  
         if(!empty($ip_info['countryCode']) && !empty($currencies)){
             $euro_countries = array(
                 'AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT',
