@@ -152,7 +152,7 @@ class SCurrencyManager extends CComponent
 //        $ipAddress = '188.163.97.7'; // test Ukraine
 //        $ipAddress = '72.229.28.185'; // test United States
         $ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
-        $query = "http://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
+        $query = "https://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
         $json = file_get_contents($query);
         $data = json_decode($json, true);var_dump($data, $query, $json, $ipAddress);
         if (json_last_error() !== JSON_ERROR_NONE) {
