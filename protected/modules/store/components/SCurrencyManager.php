@@ -154,7 +154,7 @@ class SCurrencyManager extends CComponent
         $ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
         $query = "https://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
         $json = file_get_contents($query);
-        $data = json_decode($json, true);var_dump($data, $query, $json, $ipAddress);
+        $data = json_decode($json, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             $data = array();
         }
@@ -181,7 +181,7 @@ class SCurrencyManager extends CComponent
         }
 
         $ip_info = $this->geoIpInfo();
-        $currencies = $this->getCurrencies();var_dump($ip_info['countryCode'], $currencies);
+        $currencies = $this->getCurrencies();
         if(!empty($ip_info['countryCode']) && !empty($currencies)){
             $euro_countries = array(
                 'AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT',
