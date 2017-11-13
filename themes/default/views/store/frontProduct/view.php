@@ -265,7 +265,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
 		            </div>
 		            <?php } ?>
 	        </div>
-			<div style="text-align:right"><a href="/product/photos/id/<?=$model->id?>" title=""><?=Yii::t('StoreModule.core','View all delivery photos')?></a></div>
+			<div style="text-align:right"><a href="<?=Yii::app()->createUrl('/product/photos/id/'.$model->id)?>" title=""><?=Yii::t('StoreModule.core','View all delivery photos')?></a></div>
 		 <?php } ?>
 	    </div>
 	    <!-- b-last-photos (end) -->

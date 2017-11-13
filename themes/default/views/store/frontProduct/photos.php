@@ -57,7 +57,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 		            <div class="b-photo">
 		                <div class="visual">
 		                    <div class="img">
-		                        <a href="<?php echo '/uploads/delivery/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/delivery/'.$value->photo;?>" alt="<?=Yii::t('StoreModule.core','Delivery photo')?>"/></a>
+		                        <a href="<?php echo '/uploads/delivery/'.$value->photo;?>" class="thumbnail" rel="pthumbs"><img src="<?php echo '/uploads/delivery/'.$value->photo;?>" alt="<?=Yii::t('StoreModule.core','Delivery Photo')?>"/></a>
 		                    </div>
 		                </div>
 		            </div>
