@@ -142,23 +142,24 @@ class SCurrencyManager extends CComponent
 	}
 
     /**
-     * geo-информация о пользователе
-     * @return array|mixed
+     * определяем страну пользователя по IP
+     * свежая база IP-адресов (только страны) здесь:
+     * http://lite.ip2location.com/database/ip-country
+     * @return string
      */
-    public function geoIpInfo()
+    public function getCountryCodeByIp()
     {
-        $ipAddress = Yii::app()->request->userHostAddress; // real user IP
-//        $ipAddress = '192.196.142.22'; // test France
-//        $ipAddress = '188.163.97.7'; // test Ukraine
-//        $ipAddress = '72.229.28.185'; // test United States
-        $ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
-        $query = "https://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
-        $json = file_get_contents($query);
-        $data = json_decode($json, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            $data = array();
-        }
-        return $data;
+        $ip = CHttpRequest::getUserHostAddress();
+//        $ip = '192.196.142.22'; // test France
+//        $ip = '188.163.97.7'; // test Ukraine
+//        $ip = '72.229.28.185'; // test United States
+        $ip_long = ip2long($ip);
+        $country_code = Yii::app()->db->createCommand()
+            ->select('country_code')
+            ->from('ip2location')
+            ->where(':ip_long between `ip_from` and `ip_to`', array(':ip_long'=>$ip_long))
+            ->queryScalar();
+        return (!empty($country_code)) ? $country_code : '';
     }
 
     /**
@@ -180,20 +181,20 @@ class SCurrencyManager extends CComponent
             return true;
         }
 
-        $ip_info = $this->geoIpInfo();
+        $country_code = $this->getCountryCodeByIp();
         $currencies = $this->getCurrencies();
-        if(!empty($ip_info['countryCode']) && !empty($currencies)){
+        if(!empty($country_code) && !empty($currencies)){
             $euro_countries = array(
                 'AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT',
                 'LV', 'LT', 'LU', 'MT', 'NL', 'PT', 'SK', 'SI', 'ES',
             );
             $ua = 'UA';
             $set_iso = '';
-            if(in_array($ip_info['countryCode'], $euro_countries)){
+            if(in_array($country_code, $euro_countries)){
                 // EUR
                 $set_iso = 'EUR';
             }
-            elseif($ip_info['countryCode'] == $ua){
+            elseif($country_code == $ua){
                 // UAH
                 $set_iso = 'UAH';
             }
