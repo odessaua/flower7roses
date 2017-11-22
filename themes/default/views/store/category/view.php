@@ -140,7 +140,7 @@ $this->breadcrumbs[] = $this->model->name;
         <!-- sorts (begin) -->
         <div class="sort sort-page">
             <?=Yii::t('StoreModule.core','Per page:')?>
-            <a href="#" title="" class="drop-link">24</a>
+            <a href="#" title="" class="drop-link">25</a>
             <div class="sort-popup hidden">
                 <ul class="sort-dropdown inpage">
                     
