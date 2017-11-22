@@ -71,10 +71,11 @@ class FeedbackForm extends CFormModel
 	 */
 	public function sendMessage()
 	{
+		$name = CHtml::encode($this->name);
 		$mailer           = Yii::app()->mail;
 		$mailer->From     = $this->email;
-		$mailer->FromName = Yii::t('FeedbackModule.core', 'Форма обратной связи');
-		$mailer->Subject  = Yii::t('FeedbackModule.core', 'Сообщение от {name}', array('{name}'=>CHtml::encode($this->name)));
+		$mailer->FromName = Yii::t('FeedbackModule.core', '7Roses FeedbackForm');
+		$mailer->Subject  = Yii::t('FeedbackModule.core', 'Message from '). $name;
 		$mailer->Body     = CHtml::encode($this->message);
 		$mailer->AddAddress(Yii::app()->settings->get('feedback', 'admin_email'));
 		$mailer->AddReplyTo($this->email);

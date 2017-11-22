@@ -2,7 +2,7 @@
 /*if($_SERVER['REMOTE_ADDR'] == '80.78.51.210'){*/
 
 define('VERSION', '1.5');
-error_reporting(1);
+error_reporting(0);
 
 $yii=dirname(__FILE__).'/framework/yii.php';
 $db_error_file = dirname(__FILE__).'/db_error.php';
