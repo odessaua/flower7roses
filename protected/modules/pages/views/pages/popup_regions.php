@@ -2,9 +2,10 @@
 if(!$popup)
 	$popup = "city-simple";
 
+$no_redirect = (!empty($no_redirect)) ? 1 : 0;
 Yii::import('application.modules.store.models.Region');
 $regions = Region::model()->language($this->language_info->id)->findAll(array('order' => 'translate.name ASC'));
-$js_params = ', ' . (int)$no_redirect . ', ' . $this->language_info->id . ', \'' . $this->language_info->code . '\'';
+$js_params = ', ' . $no_redirect . ', ' . $this->language_info->id . ', \'' . $this->language_info->code . '\'';
 ?>
 
 <?=Yii::t('main','Recipient City')?>: 
