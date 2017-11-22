@@ -506,7 +506,7 @@ padding:20px 20px 0 0;
 }
 .header .contact {
   color: #7a1c4a;
-  padding: 12px 20px 10px 60px;
+  padding: 12px 20px 10px 30px;
   background-position: 25px 15px;
   background-repeat: no-repeat;
 }
@@ -517,7 +517,7 @@ padding:20px 20px 0 0;
   font-size: 18px;
   font-weight: bold;
   background-position: 15px 20px;
-  background-image: url(../img/bg-phone.png);
+  /* background-image: url(../img/bg-phone.png);*/
 }
 .header .contact.address {
   padding-top: 14px;

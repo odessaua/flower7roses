@@ -51,7 +51,7 @@
 </div>
 
 <div class="contacts">
-    <?=Yii::t('FeedbackModule.core','<h3>Our Postal Address:</h3><br>Ukraine, Odessa, <br><br>12, Deribasovskaya str office 25<br>')?>
+    <?=Yii::t('FeedbackModule.core','<h3>Our Postal Address:</h3><br>Ukraine, Odessa, <br><br>12, Deribasovskaya str, off 25<br><br>tel: +38(048)716 54 65')?>
     <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
     <div id="SkypeButton_Call_sevenrosesodessa_1">
      <script type="text/javascript">

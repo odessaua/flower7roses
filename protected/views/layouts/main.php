@@ -137,8 +137,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                     </a>
                 </li>
                 <li class="contact phones">
-                    <div>+38 067 480 6525</div>
-                    <div>+38 048 716 5465</div>
+                    <div style="display:inline;">+38 050 562 0799<br>
+					<?echo CHtml::image('/uploads/viber.png','viber', array('style'=>' display:inline;padding-right:5px;')); echo CHtml::image('/uploads/whatsapp.png','whats app', array('style'=>' display:inline; padding-right:5px;'));echo CHtml::image('/uploads/telegram.png','telegram', array('style'=>' display:inline;padding-right:5px;'));?></div>
+                    
                 </li>
                 <li class="contact currency">
                     <div class="b-currency">
