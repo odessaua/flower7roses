@@ -312,18 +312,18 @@ class Controller extends RController
     {
         return (!empty(Yii::app()->session['_city']))
             ? $this->getCityInfo(Yii::app()->session['_city'], $translate, $lang) // город из сессии
-            : $this->getDefaultCityInfo($translate, $lang); // город по умолчанию (Киев)
+            : $this->getDefaultCityInfo($translate, $lang); // город по умолчанию (Одесса)
     }
 
     /**
-     * город по умолчанию – Киев, ID = 908
+     * город по умолчанию – Одесса, ID = 1551
      * @param bool $translate - с переводом названия или без
      * @param string $lang - язык перевода названия (если не указан – то берём текущий)
      * @return object CActiveRecord
      */
     public function getDefaultCityInfo($translate = false, $lang = '')
     {
-        return $this->getCityInfo(908, $translate, $lang); // Киев, ID = 908
+        return $this->getCityInfo(1551, $translate, $lang); // Одесса, ID = 1551
     }
 
 }

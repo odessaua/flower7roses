@@ -34,7 +34,7 @@ class FrontProductController extends Controller
 		$id=$_GET['id'];
 		$model= StoreProduct::model()->findByPk($id);
 		$this->pageTitle =  Yii::t('StoreModule.core', 'Delivery photos of').' '.$model->name;
-		$this->pageDescription =  Yii::t('StoreModule.core', 'Photos of the real flower and gifts deliveries in Ukraine. All photos was made by our couriers.');
+		$this->pageDescription =  Yii::t('StoreModule.core', 'Photos of the real flower and gifts deliveries in Ukraine. All photos was made by our couriers.').' '.$model->name;
 		$allphotos=OrderPhoto::model()->findAllByAttributes(
 			array('product_id'=>$id),
 			array('order'=>'order_id DESC')
