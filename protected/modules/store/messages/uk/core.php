@@ -14,7 +14,7 @@
         'Sort by:'=>'Сортувати за:',
         'Last added'=>'Останні додані',
         'Cost compositions'=>'Вартість композицій',
-		'The composition and size'=>'Состав та розмір',
+		'Details'=>'Склад та розмір',
         'to'=>'до',
         'of'=>'від',
         'Per page:'=>'На сторінці по:',
