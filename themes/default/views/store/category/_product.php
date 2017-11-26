@@ -67,40 +67,4 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $data->name;
         <?php echo $data->priceRange(true) ?>
     </div>
     
-    <div class="form">
-    	<?php /*
-		echo CHtml::form(array('/orders/cart/add'));
-		echo CHtml::hiddenField('product_id', $data->id);
-		echo CHtml::hiddenField('product_price', $data->price);
-		echo CHtml::hiddenField('use_configurations', $data->use_configurations);
-		echo CHtml::hiddenField('currency_rate', Yii::app()->currency->active->rate);
-		echo CHtml::hiddenField('configurable_id', 0);
-		echo CHtml::hiddenField('quantity', 1);
-
-		if($data->getIsAvailable())
-		{
-			echo CHtml::ajaxSubmitButton(Yii::t('StoreModule.core','Order'), array('/orders/cart/add'), array(
-				'id'=>'addProduct'.$data->id,
-				'dataType'=>'json',
-				'success'=>'js:function(data, textStatus, jqXHR){processCartResponseFromList(data, textStatus, jqXHR, "'.Yii::app()->createAbsoluteUrl('/store/frontProduct/view', array('url'=>$data->url)).'")}',
-			), array('class'=>'btn-purple'));
-		}
-		else
-		{
-			echo CHtml::link(Yii::t('main','Not available'), '#', array(
-				'onclick' => 'showNotifierPopup('.$data->id.'); return false;',
-				'class'   => 'notify_link',
-			));
-		}
-		?>
-		<?php echo CHtml::endForm()*/ ?>
-
-        <?php
-        echo CHtml::button(Yii::t('StoreModule.core','Order'), array(
-            'class'   => 'btn-purple',
-            'submit' => $product_url,
-        ));
-        ?>
-
-    </div>
 </div>

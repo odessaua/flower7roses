@@ -979,7 +979,7 @@ padding:20px 20px 0 0;
 .b-product {
   float: left;
   width: 194px;
-  height: 332px;
+  height: 300px;
   padding: 15px 15px 30px;
   margin: -1px 0 0 -1px;
   border: 1px solid #f0f0f0;
@@ -993,10 +993,11 @@ padding:20px 20px 0 0;
 .b-product:hover   {
 	float: left;
 	width: 194px;
-	height: 332px;
+	height: 300px;
 	padding: 15px 15px 0px;
 	margin: -1px 0 0 -1px;
-	border: 2px solid #f4f3f3;	 
+	border: 2px solid #f4f3f3;
+	border-radius: 2px; 	
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -1014,9 +1015,9 @@ padding:20px 20px 0 0;
   left: -16px;
 }
 .b-product .visual {
-  height: 220px;
+  height: 200px;
   width: 164px;
-  line-height: 200px;
+  line-height: 150px;
   text-align: center;
 }
 .b-product img {
@@ -1026,17 +1027,24 @@ padding:20px 20px 0 0;
   max-height: 100%;
 }
 .b-product .title {
-  height: 36px;
+  height: 32px;
   overflow: hidden;
-  padding-bottom: 3px;
+  padding-bottom: 12px;
   text-align: center;
-  font-style:oblique;
-  font-size:15px;
+  font-style:normal;
+  font-family: 'Open Sans',Arial;
+  font-size:14px;
+  font-weight:400;
+  text-decoration: none;
+}
+.b-product .title a {
+  text-decoration:none;
+  color:#606060;
 }
 
-.b-product .title a {
-  color: #606060;
-  text-decoration: none;
+
+.b-product .title a:hover {
+  color:#7a1c4a;
 }
 .b-product .form {
   float: none;
@@ -1044,8 +1052,8 @@ padding:20px 20px 0 0;
 
 }
 .b-product .price {
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 15px;
+  line-height: 21px;
   text-align:center;
 }
 .pagination {
@@ -3136,8 +3144,8 @@ span.support-hover::before {
 span.required{
   color: red;
 }
-.product-old-price,
-.product-grid-old-price{
+.product-old-price
+	{
     color: #b8b8b8;
     text-decoration: line-through;
     font-weight: 100;
@@ -3147,9 +3155,12 @@ span.required{
     font-size: 26px !important;
 }
 .product-grid-old-price{
-    margin-right: 10px;
+	color: #b8b8b8;
+    text-decoration: line-through;
+    font-weight: 100;
+    margin-right: 0px;
     font-size: 16px !important;
-	font-weight: bold;
+	min-height: 8px;
 }
 
 /* skins */
