@@ -143,7 +143,8 @@ else{
 	        </ul>
 			<div class="all"><a href="<?=Yii::app()->createUrl('/reviews'); ?>">
                     <?=Yii::t('main','read more reviews')?>
-                </a></div>
+                </a>
+			</div>
 			<div>
 	    </div>
 	    <!-- b-comments (end) -->
