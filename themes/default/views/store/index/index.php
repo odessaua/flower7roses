@@ -129,7 +129,11 @@ else{
 	                <div class="info">
 	                    <div class="name"><?=$value['name']?></div>
 	                    <p>
-	                        <?=$value['text']?>
+	                        <? 
+								$str = $value['text'];
+								$s1 = substr($str,0,180 - strstr(strrev(substr($str,0,180)),''));
+								echo $s1;
+								echo '...';?>	
 	                    </p>
 	                </div>
 	            
