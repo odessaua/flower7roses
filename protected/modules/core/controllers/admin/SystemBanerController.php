@@ -51,7 +51,7 @@ class SystemBanerController extends SAdminController
 			if ($model->validate())
 			{
 			    if($model->photo){
-				    $model->photo->saveAs(Yii::getPathOfAlias('webroot').'/uploads/baners/'.$rand.$model->photo);
+				    $model->photo->saveAs(Yii::getPathOfAlias('webroot').'/uploads/pic/'.$rand.$model->photo);
 					$model->photo=$rand.$model->photo;
 				}
 				else $model->photo = $photo;

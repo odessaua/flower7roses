@@ -46,7 +46,7 @@
 			array(
 				'name'=>'photo',
 				'type'=>'raw',
-				'value'=>'CHtml::image("/uploads/baners/".$data->photo,"", array("width"=>"75px" ,"height"=>"100px"))',
+				'value'=>'CHtml::image("/uploads/pic/".$data->photo,"", array("width"=>"75px" ,"height"=>"100px"))',
 			),
             array(
                 'name'=>'position',

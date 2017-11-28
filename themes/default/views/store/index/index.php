@@ -107,7 +107,7 @@ else{
         ?>
 	    <div class="action">
 	        <a href="<?= Yii::app()->createUrl($banner->url); ?>" title="<?= $banner->name; ?>">
-	            <img width="218" heigth="282" src="<?= '/uploads/baners/'.$banner->photo; ?>" alt="<?= $banner->url; ?> Banner" />
+	            <img width="218" heigth="282" src="<?= '/uploads/pic/'.$banner->photo; ?>" alt="<?= $banner->name; ?>" />
 	        </a>
 	    </div>
         <?php endif; ?>
@@ -133,13 +133,18 @@ else{
 								$str = $value['text'];
 								$s1 = substr($str,0,180 - strstr(strrev(substr($str,0,180)),''));
 								echo $s1;
-								echo '...';?>	
+								echo '...';?>
+								
 	                    </p>
 	                </div>
 	            
 	            </li>
 	            <?php endforeach;?>
 	        </ul>
+			<div class="all"><a href="<?=Yii::app()->createUrl('/reviews'); ?>">
+                    <?=Yii::t('main','read more reviews')?>
+                </a>
+			<div>
 	    </div>
 	    <!-- b-comments (end) -->
 	

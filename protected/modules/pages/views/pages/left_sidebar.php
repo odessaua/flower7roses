@@ -43,7 +43,7 @@
     <div class="banner">
         <i class="i-new"></i>
         <a href="<?=$banners[0]['url']?>" title="">
-            <img width="218" heigth="282" src="<?php echo isset($banners[0])?'/uploads/baners/'.$banners[0]['photo']:""?>" alt="" />
+            <img width="218" heigth="282" src="<?php echo isset($banners[0])?'/uploads/pic/'.$banners[0]['photo']:""?>" alt="" />
         </a>
     </div>
     <!-- banner (end) -->
@@ -53,7 +53,7 @@
     <div class="banner">
         <i class="i-special"></i>
         <a href="<?=$banners[0]['url']?>" title="">
-            <img  width="218" heigth="282"  src="<?php echo isset($banners[1])?'/uploads/baners/'.$banners[1]['photo']:""?>" alt="" />
+            <img  width="218" heigth="282"  src="<?php echo isset($banners[1])?'/uploads/pic/'.$banners[1]['photo']:""?>" alt="" />
         </a>
     </div>
     <!-- banner (end) -->
