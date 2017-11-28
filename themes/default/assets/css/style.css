@@ -231,7 +231,7 @@ padding:20px 20px 0 0;
   border-bottom: 1px dashed #7a1c4a;
 }
 .sort .drop-link:hover {
-  border-bottom: none;
+  text-decoration: none;
 }
 .sort .drop-link:after {
   content: '';
@@ -373,11 +373,16 @@ padding:20px 20px 0 0;
   position: relative;
 }
 .header-top .del-reg a {
-  text-decoration: underline;
-  color: #7a1c4a;
+  border-bottom: 1px solid #7a1c4a;
+  border-bottom-style: dotted !important;
+  color: #5d183a;
 }
 .header-top .del-reg a:hover {
-  text-decoration: none;
+	text-decoration: none;
+	text-decoration: none;
+	text-shadow: -1px -1px 1px #e6dbe1,
+                 1px -1px 1px #e6dbe1;
+	color: #591135;  
 }
 .header-top .del-reg .drop-link {
   font-weight: normal;
@@ -638,8 +643,10 @@ padding:20px 20px 0 0;
   max-width: 100%;
 }
 .h-regions .regions .title {
-  font-size: 14px;
-  font-weight: bold;
+	color: #a0066b;
+  font-size: 26px;
+  font-weight: 400;
+  text-transform: uppercase;
   margin-bottom: 10px;
 }
 .h-regions .regions > ul > li {
@@ -852,6 +859,7 @@ padding:20px 20px 0 0;
 .content-text {
   font-size: 15px;
   line-height: 20px;
+  width:90%;
 }
 .content-text p {
   margin: 20px 0;
@@ -3033,14 +3041,14 @@ div.flash_messages button.close:hover {
     text-align: center;
 }
 .all-cities {
-	color:#7a1c4a;
-	font-weight:bold;
+	color:#a0066b;
+	font-weight:400;
     font-size: 18px;
     text-transform: none;
 }
 .all-cities:hover{
     text-decoration: none;
-	color:#7a1c4a;
+	color:#a0066b;
 }
 /*---------При наведении--------------*/
 span.support-hover::before { 
@@ -3236,14 +3244,19 @@ span.required{
     .pr-regions-list li span,
     .pr-cities-list li span,
     .prc-header {
-      text-decoration: underline !important;
-      color: #7a1c4a;
+      border-bottom: 1px solid #7a1c4a;
+	  border-bottom-style: dotted !important;
+      color: #a0066b;
       cursor: pointer;
     }
     .pr-regions-list li span:hover,
     .pr-cities-list li span:hover,
     .prc-header:hover {
       text-decoration: none;
+	  text-shadow: -1px -1px 1px #e6dbe1,
+                 1px -1px 1px #e6dbe1;
+    color: #a0066b;
+    }
     }
     .prc-header-arr {
       color: #7a1c4a;
