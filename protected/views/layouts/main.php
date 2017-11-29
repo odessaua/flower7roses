@@ -125,7 +125,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <!-- header (begin) -->
     <div class="header ">
         <div class="wrap">
-            <a href="<?=Yii::app()->createUrl('/cart'); ?>" title="" class="b-cart" id="cart">
+            <a href="<?=Yii::app()->createUrl('/cart'); ?>" title="" class="b-cart" id="cart"><i><b></b></i>
             	<?php $this->renderFile(Yii::getPathOfAlias('orders.views.cart._small_cart').'.php'); ?> 
             </a>
             <span class="btn-search"><span><?=Yii::t('main','Search')?></span></span>

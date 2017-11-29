@@ -97,4 +97,5 @@
         'No'=>'Нет',
         'Order details' => 'Информация о заказе',
         'The recipient will be awarded:' => 'Состав вашего заказа:',
+		 'The product successfully added to your order.'=>"Продукт успешно добавлен к заказу."
      );
