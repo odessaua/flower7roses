@@ -71,12 +71,5 @@ $img_title = (!empty($data->img_title)) ? $data->img_title : $trans['name'];
         <?php endif; ?>
         <?php echo $data->priceRange(true) ?>
     </div>
-    <div class="form">
-        <?php
-        echo CHtml::button(Yii::t('StoreModule.core','Order'), array(
-            'class'   => 'btn-purple',
-            'submit' => $product_url,
-        ));
-        ?>
-    </div>
+
 </div>
