@@ -97,6 +97,7 @@
          'Not Defined' => 'Не определен',
          'Page' => 'Страница',
          'Customer reviews' => 'Отзывы клиентов',
+		 'read more reviews'=>'Читать все отзывы',
          'Odessa region' => 'Одесская область',
          'Change Region' => 'Изменить регион',
          'No data' => 'Нет данных',

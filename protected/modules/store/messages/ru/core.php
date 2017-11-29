@@ -14,7 +14,7 @@
         'Sort by:'=>'Сортировать по:',
         'Last added'=>'Последние добавленные',
         'Sort by price'=>'Сортировать по цене',
-		'Details'=>'Состав и размер',
+		'Product Details'=>'Состав и размер',
 		'The last photo of the bouquet deliveries'=>'Фото доставок этого товара',
 		'Photos of the real flower and gifts deliveries in Ukraine. All photos was made by our couriers.'=>'Реальные фото доставок наших букетов в Украине. Все фото были сделаны нашими курьерами.',
 		'Photos of the recent flower delivery orders'=>'Фотографии выполненных заказов этого букета',

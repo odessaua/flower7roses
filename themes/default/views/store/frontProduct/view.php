@@ -136,7 +136,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
                     <?php if($model->short_description): ?>
                     <div class="number g-clearfix">
                         <div class="sort sort-size" style="float: left; margin-left: 80px;">
-                            <a class="drop-link" href="#" title=""><?=Yii::t('StoreModule.core','Details')?></a>
+                            <a class="drop-link" href="#" title=""><?=Yii::t('StoreModule.core','Product Details')?></a>
                             <div class="sort-popup hidden">
                                 <?=$model->short_description?>
                             </div>

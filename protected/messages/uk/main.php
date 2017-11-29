@@ -102,6 +102,7 @@
          'Not Defined' => 'Не визначений',
          'Page' => 'Сторінка',
          'Customer reviews' => 'Відгуки клієнтів',
+		 'read more reviews'=>'усі відгуки',
          'Odessa Region' => 'Одеська область',
          'Ukraine' => 'Україна',
          'Change Region' => 'Змінити регіон',

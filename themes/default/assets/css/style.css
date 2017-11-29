@@ -375,7 +375,7 @@ padding:20px 20px 0 0;
 .header-top .del-reg a {
   border-bottom: 1px solid #7a1c4a;
   border-bottom-style: dotted !important;
-  color: #5d183a;
+  color: #7a1c4a;
 }
 .header-top .del-reg a:hover {
 	text-decoration: none;
@@ -1044,8 +1044,7 @@ padding:20px 20px 0 0;
   padding-bottom: 12px;
   text-align: center;
   font-style:normal;
-  font-family: 'Open Sans',Arial;
-  font-size:14px;
+  font-size:16px;
   font-weight:400;
   text-decoration: none;
 }
@@ -3246,7 +3245,7 @@ span.required{
     .prc-header {
       border-bottom: 1px solid #7a1c4a;
 	  border-bottom-style: dotted !important;
-      color: #a0066b;
+      color: #7a1c4a;
       cursor: pointer;
     }
     .pr-regions-list li span:hover,
@@ -3262,5 +3261,5 @@ span.required{
       color: #7a1c4a;
     }
     .bold-city {
-      font-weight: bold !important;
+	  font-size:130%;
     }
