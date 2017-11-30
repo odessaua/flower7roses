@@ -487,9 +487,13 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.arcticmodal-0.3.min.js"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/main.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.hoverIntent.minified.js"></script> 
+<script type="text/javascript">
+$( "#accordion" ).accordion({
+	active: false,
+  collapsible: true
+});
 
-
-
+</script>
 <?php /*script type="text/javascript">
 $(document).ready(function(){
 	$(".regions ul li a").click(function(e){

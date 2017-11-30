@@ -348,7 +348,7 @@ padding:20px 20px 0 0;
 }
 .header-top .lang {
   padding-left: 0;
-  width:101px;
+  width:106px;
 }
 .header-top .lang a {
   line-height: 22px;
@@ -3254,7 +3254,7 @@ span.required{
       text-decoration: none;
 	  text-shadow: -1px -1px 1px #e6dbe1,
                  1px -1px 1px #e6dbe1;
-    color: #a0066b;
+		color: #a0066b;
     }
     }
     .prc-header-arr {
