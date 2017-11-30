@@ -490,7 +490,8 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 <script type="text/javascript">
 $( "#accordion" ).accordion({
 	active: false,
-  collapsible: true
+  collapsible: true,
+   autoHeight: false
 });
 
 </script>
