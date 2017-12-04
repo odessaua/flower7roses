@@ -49,13 +49,13 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 							echo "<br>";
 							echo "<br>";
 							echo "<br>";
-							echo "IP Address: " . $geoinfo['ipAddress'];
+							echo "IP Address: " . $geoinfo['ip'];
 							echo "<br>";
-							echo "Country: " . $geoinfo['countryName'];
+							echo "Country: " . $geoinfo['country_name'];
 							echo "<br>";
-							echo "Region: " . $geoinfo['regionName'];
+							echo "Region: " . $geoinfo['region_name'];
 							echo "<br>";
-							echo "City: " . $geoinfo['cityName'];
+							echo "City: " . $geoinfo['city'];
 							echo "<br>";
 							echo "Latitude: " . $geoinfo['latitude'];
 							echo "<br>";
