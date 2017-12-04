@@ -38,7 +38,6 @@ if($model->hasErrors())
 if (isset($_REQUEST['id']))
 echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import','id'=>$_REQUEST['id']));
 ?>
-
 	<table width="100%">
 		<tr valign="top">
 			<td width="50%">
