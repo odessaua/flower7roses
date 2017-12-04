@@ -95,10 +95,11 @@ class OrdersController extends SAdminController {
        public function getGeoIpInfo($ipAddress)
        {
        	
-		    $ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
-		    // var_dump($ipAddress);
-		    $query = "http://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
-
+		    //$ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
+		    // var_dump($ipAddress);		
+			//  $query = "http://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
+			$query = "http://freegeoip.net" . $ipAddress;
+			
 		    $json = file_get_contents($query);
 
 		    $data = json_decode($json, true);
@@ -128,7 +129,7 @@ class OrdersController extends SAdminController {
 		else
 			$model = $this->_loadModel($_GET['id']);
 		
-		 var_dump($model->ip_address);
+		// var_dump($model->ip_address);
 		$geo=$this->getGeoIpInfo($model->ip_address);
 		$names=array();
 		$getPhotos=OrderPhoto::getPhotos($model->id);
