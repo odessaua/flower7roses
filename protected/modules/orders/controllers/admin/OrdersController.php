@@ -95,13 +95,15 @@ class OrdersController extends SAdminController {
        public function getGeoIpInfo($ipAddress)
        {
        	
-		    $ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
-		    // var_dump($ipAddress);
-		    $query = "http://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
-
+		    //$ip_key = "9a531e5be48d22f2df5d421eafbb87c2b376206e7314174e7e7c131104e44dae";
+		    // var_dump($ipAddress);		
+			//  $query = "http://api.ipinfodb.com/v3/ip-city/?key=" . $ip_key . "&ip=" . $ipAddress . "&format=json";
+			$query = "http://freegeoip.net/json/" . $ipAddress;
+			
 		    $json = file_get_contents($query);
-
+			
 		    $data = json_decode($json, true);
+			//var_dump($data);
 		    // if ($data['statusCode'] == "OK") {
 		    // 	array_push($data['ip'],array('ip'=>$ipAddress));
 		    //     return $data;
