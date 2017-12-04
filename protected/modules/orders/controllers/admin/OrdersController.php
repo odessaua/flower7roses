@@ -128,7 +128,7 @@ class OrdersController extends SAdminController {
 		else
 			$model = $this->_loadModel($_GET['id']);
 		
-		// var_dump($model->ip_address);
+		 var_dump($model->ip_address);
 		$geo=$this->getGeoIpInfo($model->ip_address);
 		$names=array();
 		$getPhotos=OrderPhoto::getPhotos($model->id);
