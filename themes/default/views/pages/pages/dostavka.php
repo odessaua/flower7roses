@@ -16,10 +16,6 @@
         </div>
         <div class="content-text delivery-content-text">
             <?php echo $model->full_description; ?>
-       
-            <h2><?=Yii::t('main','Payment')?></h2>
-            <p><strong><?=Yii::t('main','Payment')?>:</strong></p>
-            
         </div>
     </div>
 </div>
