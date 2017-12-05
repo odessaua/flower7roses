@@ -49,7 +49,7 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 							echo "<br>";
 							echo "<br>";
 							echo "<br>";
-							echo "IP Address: " . $geoinfo['ip'];
+							echo "IP Address: " . $model->ip_address;
 							echo "<br>";
 							echo "Country: " . $geoinfo['country_name'];
 							echo "<br>";
