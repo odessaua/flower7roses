@@ -21,7 +21,7 @@ $this->breadcrumbs[] = Yii::t('StoreModule.core', 'Search');
 			));
 		?>
 
-		<h1><?php
+		<h1 class="page-title"><?php
 			echo Yii::t('StoreModule.core', 'Search results');
 			if(($q=Yii::app()->request->getParam('q')))
 				echo ' "'.CHtml::encode($q).'"';

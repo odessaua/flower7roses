@@ -11,7 +11,7 @@
         <li><?=Yii::t('FeedbackModule.core','Feedback')?></li>
     </ul>
 <div class="" style="float: left; width: 100%;">
-<h1 class="has_background"><?php echo Yii::t('FeedbackModule.core', 'Feedback') ?></h1>
+<h1 class="page-title"><?php echo Yii::t('FeedbackModule.core', 'Feedback') ?></h1>
 <?=Yii::t('FeedbackModule.core','<h3>Ukrainian Flowers and Gifts delivery service - '. $_SERVER['HTTP_HOST'].'</h3>');?>
 <div class="data-form">
 

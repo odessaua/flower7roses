@@ -17,7 +17,7 @@
         color: #7a1c4a;
     }
 </style>
-<h1 style="margin-bottom: 20px;"><?=Yii::t('main','We Deliver Across 350+ Cities in Ukraine');?></h1>
+<h1 class="page-title" style="margin-bottom: 20px;"><?=Yii::t('main','We Deliver Across 350+ Cities in Ukraine');?></h1>
 <?php
 $parts = 5;
 if(!empty($regions)){

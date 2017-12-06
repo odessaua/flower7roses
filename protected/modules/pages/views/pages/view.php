@@ -11,7 +11,7 @@ $this->pageKeywords    = $model->meta_keywords;
 $this->pageDescription = $model->meta_description;
 ?>
 
-<h1 class="has_background"><?php echo $model->title; ?></h1>
+<h1 class="page-title"><?php echo $model->title; ?></h1>
 <p>
 	<?php echo $model->short_description; ?>
 </p>
