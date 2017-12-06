@@ -12,7 +12,7 @@
 
     <div class="g-clearfix">
         <div class="content-img">
-            <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/delivery.jpg" alt="7Roses delivery"/>
+            <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/delivery.jpg" width="304px" height="566px" alt="7Roses delivery"/>
         </div>
         <div class="content-text delivery-content-text">
             <?php echo $model->full_description; ?>
