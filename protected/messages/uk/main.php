@@ -52,7 +52,7 @@
          'Start typing the name of the city, and we will help'=>'Почніть вводити назву міста, а ми підкажемо',
          'Enter the city of delivery'=>'Введіть місто доставки',
 		 'Didn\'t find city? Click here!'=>'Повний список міст доставки!',
-		 'We Deliver Across 170+ Cities in Ukraine' =>'Ми доставляємо квіти у більш ніж 170 міст України',
+		 'We Deliver Across 350+ Cities in Ukraine' =>'Ми доставляємо квіти у більш ніж 350 міст України',
 		'No results found.'=>'Нічого не знайдено.',
 		"Payment"=>'Оплата',
 		'Payment methods'=>'Способи оплати',

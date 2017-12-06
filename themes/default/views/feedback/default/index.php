@@ -51,7 +51,7 @@
 </div>
 
 <div class="contacts">
-    <?=Yii::t('FeedbackModule.core','<h3>Our Postal Address:</h3><br>Ukraine, Odessa, <br><br>12, Deribasovskaya str, off 25<br><br>tel: +38(048)716 54 65')?>
+    <?=Yii::t('FeedbackModule.core','<h3>Our Postal Address:</h3><p>Ukraine, Odessa</p><p>12, Deribasovskaya str, off 25</p><br><h3>Phone number:</h3><p>office:  +38048 716 5465</p><p>mobile: +38050 562 0799</p><br><h3>Skype</h3>sevenrosesodessa')?>
     <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
     <div id="SkypeButton_Call_sevenrosesodessa_1">
      <script type="text/javascript">
@@ -65,8 +65,8 @@
     </div>
 </div>
 <div class="contacts" style="float: right;">
-    <h3><?=Yii::t('FeedbackModule.core','Office opening hours')?>:</h3><br><table cellpadding=5><tr><td><?=Yii::t('FeedbackModule.core','<strong>Mon</strong> - <strong>Sat</strong>')?></td><td> 08:00-18:00 (UTC+2)</td></tr>
-    <tr><td><?=Yii::t('FeedbackModule.core','<strongstrong>Sunday</strong>')?></td><td> 09:00-17:00 (UTC+2)</td></tr></table>
+    <h3><?=Yii::t('FeedbackModule.core','Office opening hours')?>:</h3><table cellpadding=5><tr><td><?=Yii::t('FeedbackModule.core','<strong>Mon</strong> - <strong>Sat</strong>')?></td><td> 09:00-20:00 (UTC+2)</td></tr>
+    <tr><td><?=Yii::t('FeedbackModule.core','<strong>Sunday</strong>')?></td><td> 09:00-18:00 (UTC+2)</td></tr></table>
     <script type="text/javascript">
 
     //var currenttime = '<!--#config timefmt="%B %d, %Y %H:%M:%S"--><!--#echo var="DATE_LOCAL" -->' //SSI method of getting server date

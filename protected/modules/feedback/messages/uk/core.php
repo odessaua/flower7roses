@@ -14,7 +14,7 @@
 		'Local Time in Ukraine'=>'Зараз в Україні',
 		'<br><p>If you wish to make an enquiry please email us using our Feedback form below</p><br>' => '<p>Якщо у вас є будь-які запитання до нашої компанії, вы можете зв\'язаться з нами, заповнив цю форму</p><br> ',
 		'<h3>Ukrainian Flowers and Gifts delivery service - '. $_SERVER['HTTP_HOST'].'</h3>' => '<h3>Служба доставки квітів та подарунків - '. $_SERVER['HTTP_HOST'].'</h3> ',
-		'<h3>Our Postal Address:</h3><br>Ukraine, Odessa, <br><br>12, Deribasovskaya str, off 25<br><br>tel: +38(048)716 54 65' => '<h3>Наша почтова адреса:</h3><br>Одеса, Україна<br><br>вул. Дерибасівська 12 оф 25<br><br>тел. +38(048)716 54 65',
+		'<h3>Our Postal Address:</h3><p>Ukraine, Odessa</p><p>12, Deribasovskaya str, off 25</p><br><h3>Phone number:</h3><p>office:  +38048 716 5465</p><p>mobile: +38050 562 0799</p><br><h3>Skype</h3>sevenrosesodessa' => '<h3>Наша почтова адреса:</h3><p>Одеса, Україна</p><p>вул. Дерибасівська 12 оф 25</p><br><h3>Номер телефона:</h3><p>офис: +38(048)716 54 65</p><p>мобильний: +38050 562 0799</p><br><h3>Skype</h3>sevenrosesodessa',
         'Thank you. Your message has been sent.'=>'Дякуємо. Ваше повідомлення відправлено.',
          'Ukraine' => 'Україна',
          'Title' => 'Назва',

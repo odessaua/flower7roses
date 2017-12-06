@@ -15,7 +15,7 @@
 		'Enter secret code' => 'Введите проверочный код',
 		'<h3>Ukrainian Flowers and Gifts delivery service - '. $_SERVER['HTTP_HOST'].'</h3>' => '<h3>Служба доставки цветов и подарков - '. $_SERVER['HTTP_HOST'].'</h3> ',
 		'<br><p>If you wish to make an enquiry please email us using our Feedback form below</p><br>' => '<p>Если у вас есть любые вопросы к нашей компании, вы можете связаться с нами, заполнив эту простую форму</p><br> ',
-		'<h3>Our Postal Address:</h3><br>Ukraine, Odessa, <br><br>12, Deribasovskaya str, off 25<br><br>tel: +38(048)716 54 65' => '<h3>Наш почтовый адрес:</h3><br>Одесса, Украина<br><br>ул. Дерибасовская 12 оф 25<br><br>тел. +38(048)716 54 65',
+		'<h3>Our Postal Address:</h3><p>Ukraine, Odessa</p><p>12, Deribasovskaya str, off 25</p><br><h3>Phone number:</h3><p>office:  +38048 716 5465</p><p>mobile: +38050 562 0799</p><br><h3>Skype</h3>sevenrosesodessa' => '<h3>Наш почтовый адрес:</h3><p>Одесса, Украина</p><p>ул. Дерибасовская 12 оф 25</p><br><h3>Номера телефонов</h3><p>офис: +38(048)716 54 65</p><p>мобильный: +38050 562 0799</p><br><h3>Skype</h3>sevenrosesodessa',
 		'Thank you! Your message has been sent.'=>'Спасибо $YourName! Ваше сообщение отправлено.',
 		'Ukraine' => 'Украина',
          'Title' => 'Название',

@@ -85,7 +85,7 @@
          'Full price' => 'Стоимость',
          'Products in order' => 'Товары в заказе',
          'View all delivery cities' => 'Открыть полный список городов',
-		 'We Deliver Across 170+ Cities in Ukraine' => 'Мы доставляем цветы в 170+ городов Украины ',
+		 'We Deliver Across 350+ Cities in Ukraine' => 'Мы доставляем цветы в 350+ городов Украины ',
          'Odessa' => 'Одесса',
          'Title' => 'Название',
          'Address' => 'Адрес',
