@@ -119,6 +119,8 @@ return array(
 				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
                 'site/wfpstatus/<order_ref:\w+>' => 'site/wfpstatus',
                 'reviews' => 'site/reviews',
+                'site/wfpresponse' => 'site/wfpresponse',
+                'site/wfpresponse/' => 'site/wfpresponse',
             ),
 		),
 		 'db'=>array(
