@@ -1,4 +1,24 @@
-﻿-- 2017-11-14 (загрузка таблицы IP-адресов):
+﻿-- 2017-12-07 (логи запросов от WFP по статусам платежа):
+CREATE TABLE `wfp_response` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `response_ts` datetime DEFAULT NULL,
+  `response_body` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `wfp_response_detail` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `response_ts` datetime DEFAULT NULL,
+  `response_body` text,
+  `orderReference` varchar(255) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `response_data` text,
+  PRIMARY KEY (`id`),
+  KEY `orderReference` (`orderReference`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ========
+
+-- 2017-11-14 (загрузка таблицы IP-адресов):
 -- в корне проекта лежит файл UA_ip2location_2017-11-14_21-34.sql.gz
 -- вот его нужно импортировать в БД проекта
 -- в PhpMyAdmin выбрать БД проекта -> Импорт -> указать этот файл

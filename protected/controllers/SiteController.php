@@ -233,6 +233,7 @@ class SiteController extends Controller
     public function actionWfpResponse()
     {
         $json = file_get_contents('php://input');
+        $ts = date('Y-m-d H:i:s');
         if(!empty($json)){
             $obj = json_decode($json, TRUE);
             // проверка статуса платежа, корректировка статуса платежа в таблице заказов и в логах
@@ -262,8 +263,49 @@ class SiteController extends Controller
                         serialize($obj)
                     );
                 }
+                // сохраняем детальный запрос wfp
+                $this->saveDetailWfpResponse(
+                    (string)$json,
+                    $ts,
+                    $obj['orderReference'],
+                    $orderReference_ex[1],
+                    serialize($obj));
             }
+            // сохраняем чистый запрос wfp
+            $this->saveOriginWfpResponse((string)$json, $ts);
         }
+    }
+
+    /**
+     * сохраняем чистый запрос wfp
+     * @param $response
+     * @param $ts
+     */
+    public function saveOriginWfpResponse($response, $ts)
+    {
+        $model = new WfpResponse();
+        $model->response_ts = $ts;
+        $model->response_body = $response;
+        $model->save();
+    }
+
+    /**
+     * сохраняем детальный запрос wfp
+     * @param $response
+     * @param $ts
+     * @param $orderReference
+     * @param $order_id
+     * @param $data
+     */
+    public function saveDetailWfpResponse($response, $ts, $orderReference, $order_id, $data)
+    {
+        $model = new WfpResponseDetail();
+        $model->response_ts = $ts;
+        $model->response_body = $response;
+        $model->orderReference = $orderReference;
+        $model->order_id = $order_id;
+        $model->response_data = $data;
+        $model->save();
     }
 
     /**

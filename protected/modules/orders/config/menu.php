@@ -39,6 +39,16 @@ return array(
                 'url'      => array('/orders/admin/orderPaymentStatusLog'),
                 'position' => 5
             ),
+            array(
+                'label'    => Yii::t('OrdersModule.admin', 'Логи запросов WFP'),
+                'url'      => array('/orders/admin/wfpResponse'),
+                'position' => 6
+            ),
+            array(
+                'label'    => Yii::t('OrdersModule.admin', 'Логи запросов WFP детальные'),
+                'url'      => array('/orders/admin/wfpResponseDetail'),
+                'position' => 7
+            ),
 		),
 	),
 );
