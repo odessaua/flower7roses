@@ -30,7 +30,7 @@
         'Not indicated'=>'Не указано',
         'No results'=>'Нет результатов',
         'Our Delivery Photos'=>"Фото наших доставок",
-		'Recent Flowers and Gifts Recipients'=>'Фото наших получатели цветов и подарков',
+		'Flowers and Gifts Delivery Photos'=>'Фото наших получатели цветов и подарков',
         'Product code:'=>'Артикул:',
         'Show prices in'=>'Показывать цены в',
         'Assortment depends on the city'=>'Ассортимент зависит от города',

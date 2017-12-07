@@ -50,7 +50,7 @@ $this->widget('application.extensions.fancybox.EFancyBox', array(
 	        </div>
 	       
 	    <div class="b-last-photos">
-	        <h1 class="title"><?=Yii::t('StoreModule.core','Recent Flowers and Gifts Recipients').' - '.$name?></h1>
+	        <h1 class="page-title" style="font-size: 1.5em;"><?=Yii::t('StoreModule.core','Flowers and Gifts Delivery Photos').' - '.$name?></h1>
 	        <div class="g-clearfix">
 	        	<?php if(isset($allPhotos)){?>
 		        	<?php foreach ($allPhotos as $key => $value) { ?>

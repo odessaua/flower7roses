@@ -30,7 +30,7 @@
 		'Delivery photos of'=> 'Фото доставок товару',
 		'Delivery Photo'=>'Фото доставки',
 		'View all delivery photos'=>'Показати більше >>',
-		'Recent Flowers and Gifts Recipients'=>'Фото наших одержувачів квітів і подарунків',
+		'Flowers and Gifts Delivery Photos'=>'Фото наших одержувачів квітів і подарунків',
         'Product code:'=>'Артикул:',
         'Show prices in'=>'Показувати ціни в',
         'Assortment depends on the city'=>'Асортимент залежить від міста',
