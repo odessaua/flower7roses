@@ -351,6 +351,7 @@ class SiteController extends Controller
             curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+			//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             $out = curl_exec($curl);//var_dump($out);
             curl_close($curl);
             if(CJsn::isJson($out)){
