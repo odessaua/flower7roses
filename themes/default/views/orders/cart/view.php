@@ -625,7 +625,7 @@ $merchantSignature = hash_hmac("md5", $string, Yii::app()->params['merchantSecre
         <input type="hidden" name="clientPhone" value="<?=(!empty($model->user_phone)) ? $model->user_phone : '380631234567';?>">
         <input type="hidden" name="clientEmail" value="<?=$model->user_email;?>">
         <input type="hidden" name="returnUrl" value="<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/">
-        <input type="hidden" name="serviceUrl" value="<?= $formUrl; ?>/site/wfpresponse">
+        <input type="hidden" name="serviceUrl" value="https://www.7roses.com/site/wfpresponse">
         <input type="hidden" name="language" value="<?=strtoupper(Yii::app()->language);?>">
         <button type="submit" style="visibility: hidden;" class="btn btn-special btn-color">Оплатить</button>
     </form>
