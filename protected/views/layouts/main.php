@@ -40,6 +40,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
         var urlLang = '<?= $js_lang; ?>';
     </script>
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
+	<meta name="google-site-verification" content="4qXFsnDdApJ5tFBJH_zEc-p-11hOjk0GwEPAScAqIL0" />
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
 	<?= $this->canonical; // rel="canonical" ?>
 	<?= $this->hreflang; // rel="alternate" ... hreflang= ?>
