@@ -110,9 +110,25 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 
 
 
-<?php if(!empty($payments['Portmone'])): ?>
+<?php if(!empty($payments['WayForPay'])): ?>
                    <li class="selected">
-                        <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" checked /><label for="payment1">					   
+                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>" checked /><label for="payment4">
+<div class="button"><img src="\uploads\visa_wayforpay75-150.png"></div></label>
+                       <div class="help-tip">
+					    <p><strong><?= strip_tags($payments['WayForPay']->name); ?></strong>: 
+							<?php echo (!empty($payments['WayForPay']->description))? (strip_tags($payments['WayForPay']->description)): "Online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.";
+							?> 
+						</p>
+                       </div>
+					   <span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
+					</li>				
+					
+<hr width=100%>
+<?php endif; ?>
+
+<?php if(!empty($payments['Portmone'])): ?>
+                   <li>
+                        <input type="radio" name="payment" id="payment1" value="<?= (!empty($payments['Portmone']->id)) ? $payments['Portmone']->id : 0; ?>" /><label for="payment1">					   
 <div class="button"><img src="\uploads\visa_portmone75-150.png"></div></label>
                         <div class="help-tip">
 						 <p><strong><?= strip_tags($payments['Portmone']->name); ?></strong>: 
@@ -126,21 +142,6 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 <hr width=100%>
 <?php endif; ?>
 
-<?php if(!empty($payments['WayForPay'])): ?>
-                   <li>
-                        <input type="radio" name="payment" id="payment4" value="<?= (!empty($payments['WayForPay']->id)) ? $payments['WayForPay']->id : 0; ?>"  /><label for="payment4">
-<div class="button"><img src="\uploads\visa_wayforpay75-150.png"></div></label>
-                       <div class="help-tip">
-					    <p><strong><?= strip_tags($payments['WayForPay']->name); ?></strong>: 
-							<?php echo (!empty($payments['WayForPay']->description))? (strip_tags($payments['WayForPay']->description)): "Online credit card processing. All credit card transactions are encrypted. Accept Visa and MasterCard.";
-							?> 
-						</p>
-                       </div>
-					   <span class="price sum"><?echo StoreProduct::formatPrice($model->full_price*$rate, true)."</span> " ;?>
-					</li>				
-					
-<hr width=100%>
-<?php endif; ?>
 
 <?php if(!empty($payments['TransferWise'])): ?>
 					<li>
