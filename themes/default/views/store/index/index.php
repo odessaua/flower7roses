@@ -59,7 +59,7 @@ else{
             });
         </script>
         <?php else: ?>
-        <h1 style="margin: 20px 0 30px;"><?= $data['h1_header']; ?></h1>
+        <h1 class="page-title" style="margin: 20px 0 30px;"><?= $data['h1_header']; ?></h1>
         <?php endif; ?>
 	
 	    <?php //$this->renderFile(Yii::getPathOfAlias('pages.views.pages.left_sidebar').'.php'); ?>

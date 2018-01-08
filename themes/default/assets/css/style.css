@@ -843,11 +843,11 @@ padding:20px 20px 0 0;
   color: #7a1c4a;
 }
 .page-title {
-  color: #a0066b;
-  font-size: 26px;
-  font-weight: 400;
-  margin: -5px 0 20px;
-  text-transform: uppercase;
+	color: #a0066b;
+	font-size: 24px;
+	font-weight: 400;
+	margin: -5px 0 20px;
+	text-transform: uppercase;
 }
 .catalog-page .page-title {
   margin: -5px 0 10px;
