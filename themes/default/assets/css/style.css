@@ -1891,6 +1891,8 @@ margin-top: 10px;
 }
 .h-pp .b-page-text {
   margin-top: 60px;
+  line-height: 22px;
+  width: 90%;
 }
 .pp-left {
   width: 35%;
