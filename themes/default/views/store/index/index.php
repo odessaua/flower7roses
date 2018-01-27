@@ -79,6 +79,7 @@ else{
 						$this->renderPartial('_product', array('data'=>$p, 'langArray' => $langArray));
 				?>
 	        </div>
+			<div class="text-center btn-purple"><a href="/all-flowers">All Our Flowers</a></div>
 	        <!-- products (end) -->
 	
 	        <!-- b-page-text (begin) -->
@@ -154,6 +155,7 @@ else{
 	        <h3 class="title"><?=Yii::t('main','We are in social networks')?></h3>
 	        <div>
 			<a class="go" href="https://plus.google.com/u/1/109628640430677109024" title="Google+"></a>
+			<a class="fb" href="https://www.facebook.com/7Roses.Ukraine/" title="Facebook"></a>
 	             <!--<a class="fb" href="#" title="Facebook"></a>	            
 	            <a class="ok" href="#" title="Одноклассники"></a>-->
 	        </div>

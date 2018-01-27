@@ -195,12 +195,12 @@ padding:20px 20px 0 0;
   color: #fff;
   font: bold 12px/20px "Verdana", serif;
   width: 120px;
-  height: 26px;
+ /* height: 26px;  */
   background-color: #af3583;
   border-radius: 5px;
   cursor: pointer;
 }
-.btn-purplebtn-purple:hover {
+.btn-purple:hover {
   background-color: #de2670;
 }
 .btn-green {
@@ -3266,3 +3266,17 @@ span.required{
     .bold-city {
 	  font-size:130%;
     }
+	.col-1 .btn-purple {
+		text-align: center;
+		color: #fff;
+		font-size: 18px;
+		line-height: 40px;
+		width: 250px;
+		background-color: #af3583;
+		border-radius: 5px;
+		cursor: pointer;
+		margin:auto;
+	}
+	.col-1 .btn-purple:hover {
+		background-color: #c40b81;
+	}
