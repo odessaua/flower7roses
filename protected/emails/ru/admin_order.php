@@ -25,6 +25,8 @@ echo "<html><body>";
 	 
       $pro_model = StoreProduct::model()->findByPk($product->product_id);
 		echo "<p>$i. ".$product->getRenderFullName(false);   echo " - ".$product->price." USD</p>";
+		if ($product->quantity>1)
+		echo "<p>Quantity:".$product->quantity."</p>";
 		$i++;
      endforeach;
 	 

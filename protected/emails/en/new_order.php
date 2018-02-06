@@ -14,8 +14,11 @@
 
   <p>
     <ul>
-    <?php foreach ($order->products as $product)
+    <?php foreach ($order->products as $product) {
         echo '<li>'.$product->getRenderFullName()."</li>";
+		if ($product->quantity>1)
+		echo "<p>Quantity:".$product->quantity."</p>"; 
+		}
     ?>
     </ul>
     
@@ -26,8 +29,9 @@
 
     <p>
       <b>Best Regards,<br/>
-    7Roses, Odessa<br/>
-    Ukraine
+    7Roses<br/>
+    Ukraine<br/>
+	+38(050)56 20 799
     </p>
 
   </p>
