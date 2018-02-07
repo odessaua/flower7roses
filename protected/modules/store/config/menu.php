@@ -20,40 +20,39 @@ return array(
 				'position'=>2
 			),
 			array(
+				'label'=>Yii::t('StoreModule.admin', 'Варианты товара'),
+				'url'=>Yii::app()->createUrl('store/admin/attribute'),
+				'position'=>3
+			),
+			array(
 				'label'=>Yii::t('StoreModule.admin', 'Категории'),
 				'url'=>Yii::app()->createUrl('store/admin/category/create'),
-				'position'=>3
+				'position'=>4
 			),
             array(
                 'label'=>Yii::t('StoreModule.admin', 'Сортировка товаров'),
                 'url'=>Yii::app()->createUrl('store/admin/productSorting'),
-                'position'=>4
+                'position'=>5
             ),
+ 
 			array(
-				'label'=>Yii::t('StoreModule.admin', 'Варианты товара'),
-				'url'=>Yii::app()->createUrl('store/admin/attribute'),
-				'position'=>5
-			),
-			array(
-				'label'=>Yii::t('StoreModule.admin', 'Регионы доставки'),
+				'label'=>Yii::t('StoreModule.admin', 'Города Доставки'),
 				'url'=>Yii::app()->createUrl('store/admin/deliveryRegions'),
 				'position'=>6
 			),
 
             array(
-                'label'=>Yii::t('StoreModule.admin', 'Области Украины'),
-                'url'=>Yii::app()->createUrl('store/admin/region'),
+                'label'=>Yii::t('StoreModule.admin', 'Города - Meta Tags'),
+                'url'=>Yii::app()->createUrl('store/admin/citySeo'),
                 'position'=>7
             ),
-
-            array(
-                'label'=>Yii::t('StoreModule.admin', 'SEO для городов'),
-                'url'=>Yii::app()->createUrl('store/admin/citySeo'),
+           array(
+                'label'=>Yii::t('StoreModule.admin', 'Области Украины'),
+                'url'=>Yii::app()->createUrl('store/admin/region'),
                 'position'=>8
             ),
-		
 			array(
-				'label'=>Yii::t('StoreModule.admin', 'Стоимость доставки'),
+				'label'=>Yii::t('StoreModule.admin', 'Открытка и Фото'),
 				'url'=>Yii::app()->createUrl('store/admin/delivery'),
 				'position'=>9
 			),
@@ -68,11 +67,11 @@ return array(
 				'url'=>Yii::app()->createUrl('store/admin/currency'),
 				'position'=>11
 			),
-			array(
-				'label'=>Yii::t('StoreModule.admin', 'Производители'),
-				'url'=>Yii::app()->createUrl('store/admin/manufacturer'),
-				'position'=>12
-			),
+			// array(
+				// 'label'=>Yii::t('StoreModule.admin', 'Производители'),
+				// 'url'=>Yii::app()->createUrl('store/admin/manufacturer'),
+				// 'position'=>12
+			// ),
 		),
 	),
 );

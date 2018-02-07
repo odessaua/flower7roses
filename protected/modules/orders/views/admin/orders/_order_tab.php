@@ -35,38 +35,41 @@ echo CHtml::form($form_url, 'post', array('id'=>'orderUpdateForm','enctype'=>'mu
 if($model->hasErrors())
     echo CHtml::errorSummary($model);
 	
-if (isset($_REQUEST['id']))
-echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import','id'=>$_REQUEST['id']));
 ?>
 	<table width="100%">
 		<tr valign="top">
 			<td width="50%">
 				<!-- User data -->
 				<div class="userData">
+				<table class="table table-bordered table-striped table-hover">
+					<thead class="thead-dark">
+						<tr><th><?php echo "<h2>Order #".$model->id.": ".$model->receiver_city." - ".$model->datetime_del."</h2>";?></th>
+						</tr>
+					</thead>
+					<tbody><tr>
 					<?php if(!$model->isNewRecord): ?>
-						<h4><?php
-							echo Yii::t('OrdersModule.admin', 'Данные пользователя');
-							echo "<br>";
-							echo "<br>";
-							echo "<br>";
-							echo "IP Address: " . $model->ip_address;
-							echo "<br>";
-							echo "Country: " . $geoinfo['country_name'];
-							echo "<br>";
-							echo "Region: " . $geoinfo['region_name'];
-							echo "<br>";
-							echo "City: " . $geoinfo['city'];
-							echo "<br>";
-							echo "Latitude: " . $geoinfo['latitude'];
-							echo "<br>";
-							echo "Longitude: " . $geoinfo['longitude'];
-							echo "<br>";
+					
+						<?php
+							//echo Yii::t('OrdersModule.admin', 'Данные пользователя');
+							echo "<td>IP Address: " . $model->ip_address. "</td></tr><tr>";
+
+							echo "<td>Country: " . $geoinfo['country_name']. ", ". $geoinfo['region_name']."</td></tr><tr>";
+
+							echo "<td>City: " . $geoinfo['city']."</td></tr><tr>";
+
+							echo "<td>Latitude: " . $geoinfo['latitude'].";";
+							echo " Longitude: " . $geoinfo['longitude'].";</td></tr><tr>";
+							echo "<td>";
 							echo !empty($model['user_id'])?"Пользователь зарегистрирован":"Пользователь не зарегистрирован";
-							echo "<br>";
-							echo "Order information: ";
+							echo "</td></tr><tr><td>";
 							echo CHtml::link('https://7roses.com/cart/view/'.$model->secret_key ,array('/cart/view/'.$model->secret_key));
-							 ?></h4>
+							echo "</td></tr><tr><td><div id='widget1' class='ui-widget'>";
+							if (isset($_REQUEST['id']))
+							echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import','id'=>$_REQUEST['id']),  array('class'=>'ui-button ui-widget ui-corner-all'));
+							 ?>
 					<?php endif;?>
+					</div></td></tr >
+					</tbody></table>
 					<div class="row">
 						<?php echo CHtml::activeLabel($model,'status_id', array('required'=>true)); ?>
 						<?php echo CHtml::activeDropDownList($model, 'status_id', CHtml::listData($statuses, 'id', 'name')); ?>
@@ -115,11 +118,6 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
                         <?php echo CHtml::activeDropDownList($model, 'payment_status', $model->payment_statuses); ?>
                     </div>
 
-                    <div class="row">
-                        <?php echo CHtml::activeLabel($model,'paid'); ?>
-                        <?php echo CHtml::activeCheckBox($model, 'paid'); ?>
-                    </div>
-
 					<div class="row">
 						<?php echo CHtml::activeLabel($model,'user_phone'); ?>
 						<?php echo CHtml::activeTextField($model,'user_phone'); ?>
@@ -136,22 +134,20 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 						
 							<?php echo CHtml::activeLabel($model,'receiver_city'); ?>
 							<?php echo CHtml::dropDownList("receiver_city",Yii::app()->db->createCommand()
-								     ->select("*")
-								     ->from("city")
-								     ->queryAll(), 
+									->select('object_id, name')
+									->from('cityTranslate')
+									->where('language_id = 1')
+									->order('name ASC')
+									->queryAll(), 
 								              CHtml::listData(Yii::app()->db->createCommand()
-								      ->select("*")
-								     ->from("city")
-								     ->queryAll(), 
+								      ->select('object_id, name')
+									->from('cityTranslate')
+									->where('language_id = 1')
+									->order('name ASC')
+									->queryAll(),
 								              "name","name"
 								         )); 
-							?>
-						
-						<?php } else {?>
-					
-						<?php echo CHtml::activeLabel($model,'receiver_city'); ?>
-						<?php echo CHtml::activeTextField($model,'receiver_city'); ?>	
-					<?php } ?>
+								}  ?>
 					</div>
 					<div class="row">
 						<?php echo CHtml::activeLabel($model,'user_address'); ?>
@@ -325,4 +321,3 @@ echo CHtml::link('Импорт Заказа',array('/orders/admin/orders/import'
 		</tr>
 	</table>
 	<?php echo CHtml::endForm(); ?>
-</div>

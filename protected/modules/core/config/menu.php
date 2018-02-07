@@ -40,11 +40,7 @@ return array(
 				'url'=>Yii::app()->createUrl('core/admin/systemMenu'),
 				'position'=>0
 			),
-			array(
-				'label'=>Yii::t('CoreModule.core', 'Витрина'),
-				'url'=>Yii::app()->createUrl('core/admin/systemVitrina'),
-				'position'=>1
-				),
+			
 		),
 	),
 );

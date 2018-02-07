@@ -29,7 +29,8 @@ class SAdminTopButtons extends CWidget {
 	 * Default links templates.
 	 * @var array
 	 */
-	public $template = array('history_back','save','dropDown','delete');
+	//public $template = array('history_back','save','create','dropDown','delete');
+	public $template = array('history_back','save','create','delete');
 
 	/**
 	 * Default links
@@ -181,7 +182,8 @@ class SAdminTopButtons extends CWidget {
 			),
 			'save'=>array(
 //				'link'=>$this->listAction,
-				'link'=>$this->listActionBack,
+				'link'=>$this->updateAction,
+//				'url'=>$this->updateAction,
 				'title'=>Yii::t('AdminModule.admin', 'Сохранить'),
 				'classes'=>array(),
 				'htmlOptions'=>array(
@@ -211,6 +213,17 @@ class SAdminTopButtons extends CWidget {
 				),
 				'options'=>array(
 					'icons'=>array('primary'=>'ui-icon-trash')
+				)
+			),
+			'create'=>array(
+				'link'=>$this->createAction,
+				'title'=>Yii::t('AdminModule.admin', 'Создать'),
+				'classes'=>array(),
+				'htmlOptions'=>array(
+					'onClick'=>$this->renderSubmitFormJs(),
+				),
+				'options'=>array(
+					'icons'=>array('primary'=>'ui-icon-circle-check')
 				)
 			),
 			'dropDown'=>array(
@@ -342,7 +355,7 @@ class SAdminTopButtons extends CWidget {
 
 		// Register stuff dropDown button scripts
 		if (in_array('dropDown', $this->template))
-		{
+		{	
 			$this->registerFgMenu();
 			Yii::app()->clientScript->registerScript('dropDownButtonMenu', "
 				$('#dropDown_topLink').menu({
@@ -353,19 +366,20 @@ class SAdminTopButtons extends CWidget {
 
 			$dropDownItems = array(
 				array(
-					'label'=>Yii::t('AdminModule.admin', 'Сохранить и создать'),
-					'url'=>$this->createAction,
-					'linkOptions'=>array(
-						'onClick'=>$this->renderSubmitFormJs()
-					),
-				),
-				array(
 					'label'=>Yii::t('AdminModule.admin', 'Сохранить и редактировать'),
 					'url'=>$this->updateAction,
 					'linkOptions'=>array(
 						'onClick'=>$this->renderSubmitFormJs()
 					),
 				),
+				array(
+					'label'=>Yii::t('AdminModule.admin', 'Сохранить и создать'),
+					'url'=>$this->createAction,
+					'linkOptions'=>array(
+						'onClick'=>$this->renderSubmitFormJs()
+					),
+				),
+
 			);
 
 			if(!empty($this->dropDownMenu))

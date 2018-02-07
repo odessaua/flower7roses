@@ -52,7 +52,7 @@ function productsHideSidebar()
 function setProductsStatus(status_id, el)
 {
     // console.log($(el).attr('id'));
-    $.ajax('/admin/store/products/updateIsActive', {
+    $.ajax('/admin/store/products/updateIsActive/', {
         type:"post",
         data:{
             YII_CSRF_TOKEN: $(el).attr('data-token'),
@@ -94,7 +94,7 @@ function setProductsStatus(status_id, el)
 function setProductsMainPage(status_id, el)
 {
     // console.log($(el).attr('id'));
-    $.ajax('/admin/store/products/updateMainPage', {
+    $.ajax('/admin/store/products/updateMainPage/', {
         type:"post",
         data:{
             YII_CSRF_TOKEN: $(el).attr('data-token'),
@@ -147,7 +147,7 @@ function showCategoryAssignWindow(el_clicked)
     $('body').scrollTop(30);
 
     var dialog = $("#set_categories_dialog");
-    dialog.load('/admin/store/products/renderCategoryAssignWindow');
+    dialog.load('/admin/store/products/renderCategoryAssignWindow/');
 
     dialog.dialog({
         position:'top',
@@ -168,7 +168,7 @@ function showCategoryAssignWindow(el_clicked)
                     return;
                 }
 
-                $.ajax('/admin/store/products/assignCategories', {
+                $.ajax('/admin/store/products/assignCategories/', {
                     type:"post",
                     data:{
                         YII_CSRF_TOKEN: $(el_clicked).attr('data-token'),
