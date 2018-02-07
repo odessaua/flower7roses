@@ -52,7 +52,7 @@ function productsHideSidebar()
 function setProductsStatus(status_id, el)
 {
     // console.log($(el).attr('id'));
-    $.ajax('/admin/store/products/updateIsActive/', {
+    $.ajax('https://www.7roses.com/admin/store/products/updateIsActive/', {
         type:"post",
         data:{
             YII_CSRF_TOKEN: $(el).attr('data-token'),
@@ -94,7 +94,7 @@ function setProductsStatus(status_id, el)
 function setProductsMainPage(status_id, el)
 {
     // console.log($(el).attr('id'));
-    $.ajax('/admin/store/products/updateMainPage/', {
+    $.ajax('https://www.7roses.com/admin/store/products/updateMainPage/', {
         type:"post",
         data:{
             YII_CSRF_TOKEN: $(el).attr('data-token'),

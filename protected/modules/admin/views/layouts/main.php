@@ -37,7 +37,6 @@
 <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.ico" type="image/ico" />
 	<meta charset="utf-8">
 	<title>7Roses - Admin</title>
-	
 	<style type="text/css">
 		/*** Fix for tabs. ***/
 		.ui-tabs {
