@@ -30,7 +30,7 @@ class SAdminTopButtons extends CWidget {
 	 * @var array
 	 */
 	//public $template = array('history_back','save','create','dropDown','delete');
-	public $template = array('history_back','save','create','delete');
+	public $template = array('history_back','save','dropDown','delete');
 
 	/**
 	 * Default links
@@ -215,16 +215,16 @@ class SAdminTopButtons extends CWidget {
 					'icons'=>array('primary'=>'ui-icon-trash')
 				)
 			),
-			'create'=>array(
-				'link'=>$this->createAction,
-				'title'=>Yii::t('AdminModule.admin', 'Создать'),
-				'classes'=>array(),
-				'htmlOptions'=>array(
-					'onClick'=>$this->renderSubmitFormJs(),
-				),
-				'options'=>array(
-					'icons'=>array('primary'=>'ui-icon-circle-check')
-				)
+			// 'create'=>array(
+				// 'link'=>$this->createAction,
+				// 'title'=>Yii::t('AdminModule.admin', 'Создать'),
+				// 'classes'=>array(),
+				// 'htmlOptions'=>array(
+					// 'onClick'=>$this->renderSubmitFormJs(),
+				// ),
+				// 'options'=>array(
+					// 'icons'=>array('primary'=>'ui-icon-circle-check')
+				// )
 			),
 			'dropDown'=>array(
 				'link'=>'#',
