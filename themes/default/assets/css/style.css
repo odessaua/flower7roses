@@ -3280,3 +3280,4 @@ span.required{
 	.col-1 .btn-purple:hover {
 		background-color: #c40b81;
 	}
+	.col-1 .btn-purple a {color: white; text-decoration: none;}
