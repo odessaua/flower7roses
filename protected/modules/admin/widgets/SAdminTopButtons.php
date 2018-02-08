@@ -225,7 +225,7 @@ class SAdminTopButtons extends CWidget {
 				// 'options'=>array(
 					// 'icons'=>array('primary'=>'ui-icon-circle-check')
 				// )
-			),
+			//),
 			'dropDown'=>array(
 				'link'=>'#',
 				'title'=>Yii::t('AdminModule.admin', 'Ещё'),
