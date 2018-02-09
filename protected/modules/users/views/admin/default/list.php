@@ -2,7 +2,7 @@
 	// Display list of users
 
 	$this->pageHeader = Yii::t('UsersModule.core', 'Список пользователей');
-	$orders = sizeof($model->orders);
+	//$orders = sizeof($model->orders);
 	$this->breadcrumbs = array(
 		'Home'=>$this->createUrl('/admin'),
 		Yii::t('UsersModule.core', 'Пользователи'),
@@ -36,7 +36,6 @@
 				'value'=>'CHtml::link(CHtml::encode($data->username),array("update","id"=>$data->id))',
 			),
 			'email',
-			'orders',
 			'discount',
 			array(
 				'name'=>'created_at',
