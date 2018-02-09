@@ -17,6 +17,7 @@
 		'Gourmet'=>'Продукты',
         'Whom'=>'Кому',
         'Products'=>'Продукти',
+		'All Our Flowers'=> 'Всі наші Букети',
         'Currency selection'=>'Вибір валюти',
         'Search'=>'Пошук',
         'Site search'=>'Пошук на сайті',

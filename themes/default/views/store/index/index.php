@@ -79,7 +79,7 @@ else{
 						$this->renderPartial('_product', array('data'=>$p, 'langArray' => $langArray));
 				?>
 	        </div>
-			<div class="text-center btn-purple"><a href="/arrangements/bouquets/">All Our Flowers</a></div>
+			<div class="text-center btn-purple"><a href="<?=Yii::app()->createUrl('/flowers/');?>"><?=Yii::t('main','All Our Flowers')?></a></div><br>
 	        <!-- products (end) -->
 	
 	        <!-- b-page-text (begin) -->
