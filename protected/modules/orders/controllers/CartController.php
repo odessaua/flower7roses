@@ -105,9 +105,9 @@ class CartController extends Controller
     protected function getMainPage($limit = 0)
     {
         return StoreProduct::model()
-            ->active()
             ->mainPage()
             ->findAll(array('limit'=>$limit));
+//            ->active()
     }
 
 	/**
@@ -319,7 +319,7 @@ class CartController extends Controller
 	 */
 	public function actionRenderSmallCart()
 	{
-		$this->renderPartial('_small_cart');
+		$this->renderPartial('_small_cart', array('lng' => Yii::app()->language));
 	}
 	
 	/**
@@ -327,7 +327,7 @@ class CartController extends Controller
 	 */
 	public function actionRenderPopupCart()
 	{
-		$this->renderPartial('_popup_cart');
+		$this->renderPartial('_popup_cart', array('lng' => Yii::app()->language));
 	}
 
 	/**
@@ -442,8 +442,10 @@ class CartController extends Controller
 
 		// Send email to user.
 		$this->sendEmail($order);
-		$this->sendEmailAdmin($order,Yii::app()->params['adminEmail']);
-		$this->sendEmailAdmin($order,'7roses.office@gmail.com');
+		if(empty(Yii::app()->params['is_local'])) {
+            $this->sendEmailAdmin($order, Yii::app()->params['adminEmail']);
+            $this->sendEmailAdmin($order, '7roses.office@gmail.com');
+        }
 		return $order;
 	}
 

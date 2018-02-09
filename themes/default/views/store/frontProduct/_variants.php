@@ -101,8 +101,13 @@ if(!empty($variants)):
         jQuery(document).ready(function ($) {
             $('.product-radio').on('click', function () {
                 var dprice = $('#'+this.id).data('price');
-                $('#productPrice').html(dprice);
                 $('#product_price').val(dprice);
+                // форматирование отображения цены товара по шаблонам
+                var priceTmpl = $('#productPriceFormat').html();
+                if(priceTmpl !== undefined && priceTmpl !== ''){
+                    dprice = priceTmpl.replace('{sum}', dprice);
+                }
+                $('#productPrice').html(dprice);
             });
         });
     </script>
@@ -157,8 +162,13 @@ if(!empty($variants)):
             $('.product-select').on('change', function () {
                 var sel = $('#'+this.id).val();
                 var dprice = productVariants[sel];
-                $('#productPrice').html(dprice);
                 $('#product_price').val(dprice);
+                // форматирование отображения цены товара по шаблонам
+                var priceTmpl = $('#productPriceFormat').html();
+                if(priceTmpl !== undefined && priceTmpl !== ''){
+                    dprice = priceTmpl.replace('{sum}', dprice);
+                }
+                $('#productPrice').html(dprice);
             });
         });
     </script>

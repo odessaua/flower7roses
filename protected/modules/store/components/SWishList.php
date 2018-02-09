@@ -48,7 +48,7 @@ class SWishList extends CComponent
 	 */
 	public function add($id)
 	{
-		if($this->count() <= self::MAX_PRODUCTS && StoreProduct::model()->active()->countByAttributes(array('id'=>$id))>0)
+		if($this->count() <= self::MAX_PRODUCTS && StoreProduct::model()->countByAttributes(array('id'=>$id))>0) // ->active()
 		{
 			$current=$this->getIds();
 			$current[(int)$id]=(int)$id;

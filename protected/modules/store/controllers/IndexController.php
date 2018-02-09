@@ -70,9 +70,9 @@ class IndexController extends Controller
 	protected function getPopular($limit)
 	{
 		return StoreProduct::model()
-			->active()
 			->byViews()
 			->findAll(array('limit'=>$limit));
+//			->active()
 	}
     /**
      * @param $limit
@@ -81,9 +81,9 @@ class IndexController extends Controller
     protected function getMainPage($limit = 0)
     {
         return StoreProduct::model()
-            ->active()
             ->mainPage()
             ->findAll(array('limit'=>$limit));
+//            ->active()
     }
 	/**
 	 * @param $limit
@@ -92,9 +92,9 @@ class IndexController extends Controller
 	protected function getByAddedToCart($limit)
 	{
 		return StoreProduct::model()
-			->active()
 			->byAddedToCart()
 			->findAll(array('limit'=>$limit));
+//			->active()
 	}
 	/**
 	 * @param $limit
@@ -103,9 +103,9 @@ class IndexController extends Controller
 	protected function getNewest($limit)
 	{
 		return StoreProduct::model()
-			->active()
 			->newest()
 			->findAll(array('limit'=>$limit));
+//			->active()
 	}
     public function actionAllcities()
     {

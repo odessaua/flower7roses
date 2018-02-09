@@ -523,7 +523,7 @@ funds to a TransferWise account first and then they send the payment to Varetska
     <input type="hidden" name="shop_order_number" value="<?=$model->id?>">
     <input type="hidden" name="bill_amount" value="<?= $uah_full_price; ?>">
     <input type="hidden" name="description" value="ATTENTION! Amount above is given in Ukraine currency calculated automatically according to the current rate of the Ukraine National Bank">
-    <input type="hidden" name="success_url" value="<?= $formUrl; ?>/view/<?=$model->secret_key?>/status/">
+    <input type="hidden" name="success_url" value="<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/">
     <input type="hidden" name="failure_url" value="<?= $formUrl; ?>/cart/view/<?=$model->secret_key?>/status/">
     <INPUT TYPE="hidden" NAME="lang" VALUE="<?=Yii::app()->language?>">
     <input type="hidden" name="encoding" value="UTF-8" /> 

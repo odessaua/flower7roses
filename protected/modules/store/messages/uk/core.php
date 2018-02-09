@@ -97,6 +97,7 @@
             <p>
                 Рortmone.com перша компанія в Україні, яка успішно пройшла міжнародний аудит безпеки на відповідність вимогам стандарту Payment Card Industry Data Security Standard (PCI DSS) та отримала сертифікат №499938160100203, виданий німецькою компанією SRC (Security Research and Consulting GmbH). SRC - незалежна аудиторська компанія, яка проводить сертифікацію на відповідність усім вимогам безпеки (MasterCard Site Data Protection і VISA Account Information Security), встановленим основними платіжними системами VISA і MasterCard.
             </p>
-        </div>"
+        </div>",
+         'This product is unavailable temporary' => 'Цей товар тимчасово недоступний',
         
      );
