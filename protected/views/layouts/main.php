@@ -487,9 +487,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 
   gtag('config', 'UA-92420651-1');
 </script>
-<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
-<script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.arcticmodal-0.3.min.js"></script>
-<script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/main.js"></script>
+<script type="text/javascript" type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.arcticmodal-0.3.min.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/main.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/jquery.hoverIntent.minified.js"></script> 
 <script type="text/javascript">
 $( "#accordion" ).accordion({
@@ -518,6 +518,6 @@ $(document).ready(function(){
 	})
 });
 </script*/?>
-
+</div>
 </body>
 </html>
