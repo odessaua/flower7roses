@@ -124,7 +124,14 @@ function recalculateProductPrice(el_clicked)
     // Apply current currency
     result = result * parseFloat($('#currency_rate').val());
 
-    $('#productPrice').html(result.toFixed(2));
+    // форматирование отображения цены товара по шаблонам
+    var price = result.toFixed(2);
+    var priceTmpl = $('#productPriceFormat').html();
+    if(priceTmpl !== undefined && priceTmpl !== ''){
+        price = priceTmpl.replace('{sum}', price);
+    }
+
+    $('#productPrice').html(price);
 }
 
 /**

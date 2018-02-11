@@ -132,8 +132,8 @@ class CategoryController extends Controller
 		$this->query = new StoreProduct(null);
 //                $this->query=limit()
 		$this->query->attachBehaviors($this->query->behaviors());
-		$this->query->applyAttributes($this->activeAttributes)
-			->active();
+		$this->query->applyAttributes($this->activeAttributes);
+//			->active();
 		$sort_prefix = '`categorization`.`order` ASC, ';
 		if($data instanceof StoreCategory)
 			$this->query->applyCategories($this->model);
@@ -274,8 +274,8 @@ class CategoryController extends Controller
 		$model = new StoreProduct(null);
 		$criteria = $model
 			->applyCategories($this->model)
-			->active()
 			->getDbCriteria();
+//			->active()
 
 		unset($model);
 

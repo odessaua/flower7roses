@@ -16,12 +16,12 @@ $(document).ready(function() {
  */
 function reloadSmallCart()
 {
-    $("#cart").load('/'+urlLang+'/cart/renderSmallCart');
+    $("#cart").load(urlLang+'/cart/renderSmallCart');
 }
 
 function reloadPopupCart()
 {
-    $("#popup-cart").load('/'+urlLang+'/cart/renderPopupCart');
+    $("#popup-cart").load(urlLang+'/cart/renderPopupCart');
 }
 
 /**
@@ -48,8 +48,8 @@ function processCartResponseFromList(data, textStatus, jqXHR, redirect)
         /*window.location = redirect*/
     }else{
         reloadSmallCart();
-        reloadPopupCart();console.log(urlLang+' processCartResponseFromList');
-        $.jGrowl("Товар успешно добавлен в корзину. <a href='/"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
+        reloadPopupCart();
+        $.jGrowl("Товар успешно добавлен в корзину. <a href='"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
         
         $('#cart-modal').arcticmodal({
             overlay: {
@@ -77,8 +77,8 @@ function processCartResponseFromCart(data, textStatus, jqXHR, redirect)
             }
         });
     }
-    else{console.log(urlLang+' processCartResponseFromCart');
-        $.jGrowl("Товар успешно добавлен в корзину. <a href='/"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
+    else{
+        $.jGrowl("Товар успешно добавлен в корзину. <a href='"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
         if(redirect.length > 0){
             location.reload();
         }

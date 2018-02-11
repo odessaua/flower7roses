@@ -105,9 +105,9 @@ class FrontProductController extends Controller
 	protected function _loadModel($url)
 	{
 		$this->model = StoreProduct::model()
-			->active()
 			->withUrl($url)
 			->find();
+//			->active()
 
 		if (!$this->model)
 			throw new CHttpException(404, Yii::t('StoreModule.core', 'Product not found'));

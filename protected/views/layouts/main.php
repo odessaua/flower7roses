@@ -32,9 +32,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <![endif]-->
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
     <?php
-    $js_lang = (!empty(Yii::app()->request->cookies['language']))
-        ? Yii::app()->request->cookies['language']->value
-        : 'en';
+    $js_lang = (!empty(Yii::app()->language) && (Yii::app()->language != 'en'))
+        ? '/' . Yii::app()->language
+        : '';
     ?>
     <script type="text/javascript">
         var urlLang = '<?= $js_lang; ?>';
@@ -446,7 +446,10 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 	<div id="cart-modal" class="box-modal cart-modal">
 		
 		<div class="added" id="popup-cart">
-	   		<?php $this->renderFile(Yii::getPathOfAlias('orders.views.cart._popup_cart').'.php'); ?>
+	   		<?php $this->renderFile(
+	   		        Yii::getPathOfAlias('orders.views.cart._popup_cart').'.php',
+                    array('lng' => Yii::app()->language)
+            ); ?>
 	   	</div>
 	    
 	    <div class="reg">
