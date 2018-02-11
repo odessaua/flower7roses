@@ -108,7 +108,7 @@ else{
         ?>
 	    <div class="action">
 	        <a href="<?= Yii::app()->createUrl($banner->url); ?>" title="<?= $banner->name; ?>">
-	            <img width="218" height="282" src="<?= '/uploads/pic/'.$banner->photo; ?>" alt="<?= $banner->name; ?>" />
+	            <img width="218" heigth="282" src="<?= '/uploads/pic/'.$banner->photo; ?>" alt="<?= $banner->name; ?>" />
 	        </a>
 	    </div>
         <?php endif; ?>
