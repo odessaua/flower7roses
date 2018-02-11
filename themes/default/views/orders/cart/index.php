@@ -24,6 +24,10 @@ echo '<ul class="breadcrumbs">
     if(!empty($popular)){
         shuffle($popular);
 ?>
+	 <!-- col-1 (begin)  -->
+	  <div class="col-1">
+	
+	 <!-- products (begin) -->
 <div class="products g-clearfix" style="margin: 20px auto;">
     <?php
     $lang= Yii::app()->language;
@@ -34,6 +38,11 @@ echo '<ul class="breadcrumbs">
         $this->renderPartial('_product', array('data'=>$p, 'langArray' => $langArray));
     ?>
 </div>
+	<div class="text-center btn-purple"><a href="<?=Yii::app()->createUrl('/flowers/');?>"><?=Yii::t('main','All Our Flowers')?></a></div><br>
+	  <!-- products (end) -->
+	  	        
+	    </div>
+	    <!-- col-1 (end) -->
 <?php
     }
     return;
