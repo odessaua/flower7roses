@@ -1,2 +1,2 @@
 <?php
-var_dump($model, $products);
+// var_dump($model, $products);
