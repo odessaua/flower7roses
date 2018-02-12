@@ -112,4 +112,39 @@ class CFunc {
         self::dump($var, $label, $echo);
         exit;
     }
+
+    /**
+     * Generate a random string.
+     * get_random_string() will return a random string with length 6-8 of lowercase letters only.
+     *
+     * @param  integer  $chars_min the minimum length of string (optional, default 6)
+     * @param  integer  $chars_max the maximum length of string (optional, default 8)
+     * @param  boolean  $use_upper_case boolean use upper case for letters, means stronger string (optional, default false)
+     * @param  boolean  $include_numbers boolean include numbers, means stronger string (optional, default false)
+     * @param  boolean  $include_special_chars include special characters, means stronger string (optional, default false)
+     * @return string   random string
+     */
+    public static function get_random_string($chars_min=6, $chars_max=8, $use_upper_case=false, $include_numbers=false, $include_special_chars=false)
+    {
+        $length = rand($chars_min, $chars_max);
+        $selection = 'aeuoyibcdfghjklmnpqrstvwxz';
+        if($include_numbers) {
+            $selection .= "1234567890";
+        }
+        if($include_special_chars) {
+            $selection .= "!@\"#$%&[]{}?|";
+        }
+        $string = "";
+        for($i=0; $i<$length; $i++) {
+            $current_letter = $use_upper_case
+                ? (
+                    rand(0,1)
+                    ? strtoupper($selection[(rand() % strlen($selection))])
+                    : $selection[(rand() % strlen($selection))]
+                    )
+                : $selection[(rand() % strlen($selection))];
+            $string .=  $current_letter;
+        }
+        return $string;
+    }
 } 

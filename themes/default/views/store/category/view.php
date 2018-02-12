@@ -61,65 +61,19 @@ $this->breadcrumbs[] = $this->model->name;
         <!-- region-popup (end) -->
         <h1 class="page-title"><?php echo CHtml::encode($this->model->name); ?></h1>
         <!-- sorts (begin) -->
-        <div class="sorts g-clearfix">
-            <div class="sort sort-type">
-                <?=Yii::t('StoreModule.core','Sort by:')?>
-                <a href="#" title="" class="drop-link"><?=Yii::t('StoreModule.core', 'Last added')?></a>
-                <div class="sort-popup hidden">
-				<ul class="sort-dropdown inpage">
-                    
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/created'); ?>" title="Last added"><?echo Yii::t('StoreModule.core', 'Last added')?></a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price'); ?>" title="Cheap first"><?echo Yii::t('StoreModule.core', 'Price: Low to High')?></a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/sort/price.desc'); ?>" title="Highest first"><?echo Yii::t('StoreModule.core', 'Price: High to Low')?></a></li>
-                </ul>
-                </div>
-            </div>
-            <div class="cost">
-                <?=Yii::t('StoreModule.core', 'Sort by price')?>(USD):
-                
-                <?php
-                $filterPrices = array(
-                    0 => array(
-                        'min' => 0,
-                        'max' => 20
-                    ),
-                    1 => array(
-                        'min' => 20,
-                        'max' => 40
-                    ),
-                    2 => array(
-                        'min' => 40,
-                        'max' => 70
-                    ),
-                    3 => array(
-                        'min' => 70,
-                        'max' => 100
-                    ),
-                    4 => array(
-                        'min' => 100,
-                        'max' => 100000
-                    ),
-                );
-                $countFilters = count($filterPrices);
-                
-                foreach($filterPrices as $key => $filter):
-                ?>
-                <a <?=($min_price == $filter['min'] && $max_price == $filter['max']) ? "class='active'" : ""?> title="<?=$filter['min']?>-100 $" href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/min_price/' . $filter['min'] . '/max_price/' . $filter['max']); ?>">
-                    <?php if($key == 0):?>
-                        <?=Yii::t('StoreModule.core', 'under')?> <?=$filter['max'];?>
-                    <?php elseif(($key+1) == $countFilters):?>
-                        <?=Yii::t('StoreModule.core', 'over')?> <?=$filter['min'];?>
-                    <?php else:?>
-                        <?=$filter['min'];?>-<?=$filter['max'];?>
-                    <?php endif;?>
-                </a>
-                <?php endforeach;?>
-            </div>
+        <div class="sorts g-clearfix category-top-sorting">
+            <?php $this->renderPartial('sort',
+                array(
+                    'full_path' => '/' . $this->model->full_path,
+                    'id_prefix' => 'top',
+                    'copy_pager' => true,
+                )
+            ); ?>
         </div>
         <!-- sorts (end) -->
 
         <!-- products (begin) -->
-        <div class="products catalog g-clearfix">
+        <div class="products catalog g-clearfix category-products-list">
             
             <?php
                 $this->widget('zii.widgets.CListView', array(
@@ -131,6 +85,11 @@ $this->breadcrumbs[] = $this->model->name;
                         'name', 'price'
                     ),
                     'viewData' => array('langArray' => $langArray),
+                    'pager' => array(
+                        'header' => false,
+                        'prevPageLabel' => '&lt;',
+                        'nextPageLabel' => '&gt;',
+                    ),
                 ));
             ?>
             
@@ -138,18 +97,13 @@ $this->breadcrumbs[] = $this->model->name;
         <!-- products (end) -->
 
         <!-- sorts (begin) -->
-        <div class="sort sort-page">
-            <?=Yii::t('StoreModule.core','Per page:')?>
-            <a href="#" title="" class="drop-link">25</a>
-            <div class="sort-popup hidden">
-                <ul class="sort-dropdown inpage">
-                    
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/25'); ?>" title="">25</a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/50'); ?>" title="">50</a></li>
-                        <li><a href="<?=Yii::app()->createUrl('/' . $this->model->full_path . '/per_page/100'); ?>" title="">100</a></li>
-                </ul>
-            </div>
-        </div>
+        <?php $this->renderPartial('sort',
+            array(
+                'full_path' => '/' . $this->model->full_path,
+                'id_prefix' => 'bottom',
+                'base_container_id' => 'cat_bottom_sort',
+            )
+        ); ?>
         <!-- sorts (end) -->
         
         <!-- b-page-text (begin) -->
@@ -169,3 +123,7 @@ $this->breadcrumbs[] = $this->model->name;
     </div>
     <!-- products (end) -->
 </div>
+
+<script type="text/javascript">
+    copyPager('top'); // 'top' должно соответствовать параметру 'id_prefix' при вызове сортировок
+</script>

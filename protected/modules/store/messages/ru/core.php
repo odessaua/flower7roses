@@ -100,5 +100,10 @@
             </p>
         </div>',
          'This product is unavailable temporary' => 'Этот товар временно недоступен',
-        
+         'Show' => 'Показать',
+         'Show all' => 'Показать все',
+         'Default sorting' => 'По умолчанию',
+         'Price: Low to High' => 'Цена: от низкой к высокой',
+         'Price: High to Low' => 'Цена: от высокой к низкой',
+
      );

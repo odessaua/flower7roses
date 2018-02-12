@@ -3281,3 +3281,38 @@ span.required{
 		background-color: #c40b81;
 	}
 	.col-1 .btn-purple a {color: white; text-decoration: none;}
+
+    /* новая сортировка и постраничная навигация */
+    .cat-sort-perpage {
+      float: left;
+      margin-bottom: 20px;
+    }
+    .cat-sort-perpage select {
+      display: inline;
+    }
+    select.cat-per-page {
+      width: 130px;
+    }
+    .category-products-list ul.yiiPager a:link,
+    .category-top-sorting ul.yiiPager a:link,
+    .category-products-list ul.yiiPager a:visited,
+    .category-top-sorting ul.yiiPager a:visited {
+      padding: 6px 9px;
+      border: solid 1px #dcb2c7;
+      color: #454545;
+    }
+    .category-products-list ul.yiiPager .selected a,
+    .category-top-sorting ul.yiiPager .selected a {
+      color: #fff;
+      background-color: #a0066b;
+    }
+    #cat_bottom_sort {
+      position: relative;
+      top: -55px;
+    }
+    #top_fake_ul {
+      position: relative;
+      top: 15px;
+      float: right;
+      margin-right: 22px;
+    }

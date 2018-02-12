@@ -122,3 +122,31 @@ function showRegions() {
     $('.pr-cities').css('display', 'none');
     $('.pr-regions').css('display', 'block');
 }
+
+// сортировка товаров по умолчанию|цене в категории
+function sortCategorybyType(prefix) {
+    var selected = $('#'+prefix+'_type_list :selected').val();
+    if(typeParams[selected]['url'] !== undefined){
+        window.location.href = typeParams[selected]['url'];
+    }
+}
+
+// количество товаров на странице в категории
+function setPerPage(prefix) {
+    var selected = $('#'+prefix+'_per_page :selected').val();
+    if(perPageParams[selected]['url'] !== undefined){
+        window.location.href = perPageParams[selected]['url'];
+    }
+}
+
+// копируем постраничную навигацию в начало списка товаров в категории
+function copyPager(prefix) {
+    var pager = $('ul.yiiPager').html();
+    var output = '<ul class="yiiPager" id="'+prefix+'_fake_ul">';
+    if(pager !== undefined && pager.length > 0){
+        $('#'+prefix+'_fake_pager').html(output+pager+'</ul>');
+    }
+    else {
+        $('.cat-sort-perpage').css('top', '-10px');
+    }
+}

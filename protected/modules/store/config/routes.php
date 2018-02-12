@@ -11,6 +11,9 @@ return array(
 	'store/ajax/rateProduct/<id>'             => array('store/ajax/rateProduct'),
 	'store/index/renderProductsBlock/<scope>' => array('store/index/renderProductsBlock'),
 	'store/category/search' => array('store/category/search'),
+	'store/category/search/sort/<sort>' => array('store/category/search'),
+	'store/category/search/per_page/<per_page>' => array('store/category/search'),
+	'store/category/search/sort/<sort>/per_page/<per_page>' => array('store/category/search'),
 	array(
 		'class' => 'application.modules.store.components.SStoreCategoryUrlRule'
 	),

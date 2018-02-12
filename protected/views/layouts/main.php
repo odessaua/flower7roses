@@ -30,7 +30,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <![endif]-->
-    <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
+    <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css<?= (!empty(Yii::app()->params['is_local'])) ? '?v=' . time() : ''; ?>"/>
     <?php
     // определение языка и переводы сообщений для JS
     $js_lang = (!empty(Yii::app()->language) && (Yii::app()->language != 'en'))
@@ -44,7 +44,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
         var urlLang = '<?= $js_lang; ?>';
         var jgrowlCheckout = '<?= $js_jgrowl_checkout; ?>'
     </script>
-    <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js<?= (!empty(Yii::app()->params['is_local'])) ? '?v=' . time() : ''; ?>"></script>
 	<meta name="google-site-verification" content="4qXFsnDdApJ5tFBJH_zEc-p-11hOjk0GwEPAScAqIL0" />
     <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/favicon.png" type="image/x-icon" />
 	<?= $this->canonical; // rel="canonical" ?>

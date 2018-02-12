@@ -165,8 +165,12 @@ class CategoryController extends Controller
 
 		$per_page = $this->allowedPageLimit[0];
                 // && in_array((int)$_GET['per_page'], $this->allowedPageLimit)
-		if(isset($_GET['per_page']))
-			$per_page = (int) $_GET['per_page'];
+		if(isset($_GET['per_page'])){
+		    if(is_numeric($_GET['per_page']))
+			    $per_page = (int) $_GET['per_page'];
+		    elseif ($_GET['per_page'] === 'all')
+                $per_page = 10000;
+        }
 		$this->provider = new CActiveDataProvider($this->query, array(
 			// Set id to false to not display model name in
 			// sort and page params

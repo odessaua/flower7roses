@@ -99,5 +99,10 @@
             </p>
         </div>",
          'This product is unavailable temporary' => 'Цей товар тимчасово недоступний',
+         'Show' => 'Показати',
+         'Show all' => 'Показати усі',
+         'Default sorting' => 'За замовчуванням',
+         'Price: Low to High' => 'Ціна: від низької до високої',
+         'Price: High to Low' => 'Ціна: від високої до низької',
         
      );
