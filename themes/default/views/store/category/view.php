@@ -104,6 +104,7 @@ $this->breadcrumbs[] = $this->model->name;
                 'base_container_id' => 'cat_bottom_sort',
             )
         ); ?>
+		<div style="clear: left"></div>
         <!-- sorts (end) -->
         
         <!-- b-page-text (begin) -->
