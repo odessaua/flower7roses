@@ -71,8 +71,8 @@ class IndexController extends Controller
 	{
 		return StoreProduct::model()
 			->byViews()
+			->active()
 			->findAll(array('limit'=>$limit));
-//			->active()
 	}
     /**
      * @param $limit
@@ -82,8 +82,8 @@ class IndexController extends Controller
     {
         return StoreProduct::model()
             ->mainPage()
+            ->active()
             ->findAll(array('limit'=>$limit));
-//            ->active()
     }
 	/**
 	 * @param $limit
@@ -93,8 +93,8 @@ class IndexController extends Controller
 	{
 		return StoreProduct::model()
 			->byAddedToCart()
+			->active()
 			->findAll(array('limit'=>$limit));
-//			->active()
 	}
 	/**
 	 * @param $limit
@@ -104,8 +104,8 @@ class IndexController extends Controller
 	{
 		return StoreProduct::model()
 			->newest()
+			->active()
 			->findAll(array('limit'=>$limit));
-//			->active()
 	}
     public function actionAllcities()
     {

@@ -51,7 +51,7 @@ class SCompareProducts extends CComponent
 	 */
 	public function add($id)
 	{
-		if($this->count() <= self::MAX_PRODUCTS && StoreProduct::model()->countByAttributes(array('id'=>$id))>0) // ->active()
+		if($this->count() <= self::MAX_PRODUCTS && StoreProduct::model()->active()->countByAttributes(array('id'=>$id))>0)
 		{
 			$current=$this->getIds();
 			$current[(int)$id]=(int)$id;

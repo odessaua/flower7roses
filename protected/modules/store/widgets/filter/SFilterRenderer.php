@@ -163,8 +163,9 @@ class SFilterRenderer extends CWidget
 	public function countAttributeProducts($attribute, $option)
 	{
 		$model = new StoreProduct(null);
-		$model->attachBehaviors($model->behaviors());// ->active()
-		$model->applyCategories($this->model)
+		$model->attachBehaviors($model->behaviors());
+		$model->active()
+            ->applyCategories($this->model)
 			->applyMinPrice($this->convertCurrency(Yii::app()->request->getQuery('min_price')))
 			->applyMaxPrice($this->convertCurrency(Yii::app()->request->getQuery('max_price')));
 
@@ -204,6 +205,7 @@ class SFilterRenderer extends CWidget
 
 		//@todo: Fix manufacturer translation
 		$manufacturers = StoreProduct::model()
+			->active()
 			->applyCategories($this->model, null)
 			->with(array(
 				'manufacturer'=>array(
@@ -219,7 +221,6 @@ class SFilterRenderer extends CWidget
 					),
 				)))
 			->findAll($cr);
-//			->active()
 
 		$data = array(
 			'title'      => Yii::t('StoreModule.core', 'Производитель'),
@@ -235,8 +236,9 @@ class SFilterRenderer extends CWidget
 				if($m)
 				{
 					$model = new StoreProduct(null);
-					$model->attachBehaviors($model->behaviors()); // ->active()
-					$model->applyCategories($this->model)
+					$model->attachBehaviors($model->behaviors());
+					$model->active()
+                        ->applyCategories($this->model)
 						->applyMinPrice($this->convertCurrency(Yii::app()->request->getQuery('min_price')))
 						->applyMaxPrice($this->convertCurrency(Yii::app()->request->getQuery('max_price')))
 						->applyAttributes($this->getOwner()->activeAttributes)

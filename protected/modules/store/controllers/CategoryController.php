@@ -273,9 +273,9 @@ class CategoryController extends Controller
 		// Find category types
 		$model = new StoreProduct(null);
 		$criteria = $model
+			->active()
 			->applyCategories($this->model)
 			->getDbCriteria();
-//			->active()
 
 		unset($model);
 

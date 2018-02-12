@@ -32,12 +32,17 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <![endif]-->
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css"/>
     <?php
+    // определение языка и переводы сообщений для JS
     $js_lang = (!empty(Yii::app()->language) && (Yii::app()->language != 'en'))
         ? '/' . Yii::app()->language
         : '';
+    $js_jgrowl_checkout = Yii::t('main',
+        'Item successfully added to the cart. <a href="{cart_url}">Checkout</a>',
+        array('{cart_url}' => $js_lang . '/cart'));
     ?>
     <script type="text/javascript">
         var urlLang = '<?= $js_lang; ?>';
+        var jgrowlCheckout = '<?= $js_jgrowl_checkout; ?>'
     </script>
     <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
 	<meta name="google-site-verification" content="4qXFsnDdApJ5tFBJH_zEc-p-11hOjk0GwEPAScAqIL0" />

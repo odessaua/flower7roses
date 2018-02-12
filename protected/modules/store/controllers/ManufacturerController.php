@@ -39,7 +39,7 @@ class ManufacturerController extends Controller
 
 		$query = new StoreProduct(null);
 		$query->attachBehaviors($query->behaviors());
-//		$query->active();
+		$query->active();
 		$query->applyManufacturers($this->model->id);
 
 		$provider = new CActiveDataProvider($query, array(

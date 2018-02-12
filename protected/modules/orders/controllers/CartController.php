@@ -106,8 +106,8 @@ class CartController extends Controller
     {
         return StoreProduct::model()
             ->mainPage()
+            ->active()
             ->findAll(array('limit'=>$limit));
-//            ->active()
     }
 
 	/**
@@ -633,7 +633,12 @@ class CartController extends Controller
             {
                 $this->portmoneProceed($model);
             }
-            Yii::app()->request->redirect($this->createUrl('view', array('secret_key'=>$model->secret_key)));
+            // если после обработки статус платежа pending – показываем отдельную страницу
+            if($model->payment_status == 'pending'){
+                Yii::app()->request->redirect($this->createUrl('pending', array('secret_key'=>$model->secret_key)));
+            }
+            else
+                Yii::app()->request->redirect($this->createUrl('view', array('secret_key'=>$model->secret_key)));
         }
         else{
             // если способ оплаты НЕ указан – перенаправляем на просмотр заказа
@@ -965,5 +970,23 @@ class CartController extends Controller
         $log->response_used = $used;
         $log->response_date = date('Y-m-d H:i:s');
         $log->save();
+    }
+
+    /**
+     * страница для заказов со статусом платежа pending
+     */
+    public function actionPending()
+    {
+        $secret_key = Yii::app()->request->getParam('secret_key');
+        // текущий заказ
+        $model = Order::model()->find('secret_key=:secret_key', array(':secret_key'=>$secret_key));
+        // товары в заказе
+        $products = OrderProduct::model()->getOrderProducts($model->id);
+        $this->render('pending',
+            array(
+                'model' => $model,
+                'products' => $products,
+            )
+        );
     }
 }

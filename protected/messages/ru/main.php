@@ -102,4 +102,5 @@
          'Odessa region' => 'Одесская область',
          'Change Region' => 'Изменить регион',
          'No data' => 'Нет данных',
+         'Item successfully added to the cart. <a href="{cart_url}">Checkout</a>' => 'Товар успешно добавлен в корзину. <a href="{cart_url}">Перейти к оформлению</a>',
      );

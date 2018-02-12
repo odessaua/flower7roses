@@ -108,4 +108,5 @@
          'Ukraine' => 'Україна',
          'Change Region' => 'Змінити регіон',
          'No data' => 'Немає даних',
+         'Item successfully added to the cart. <a href="{cart_url}">Checkout</a>' => 'Товар успішно доданий до кошика. <a href="{cart_url}">Перейти до оформлення</a>',
      );

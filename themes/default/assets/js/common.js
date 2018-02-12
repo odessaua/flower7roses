@@ -49,7 +49,7 @@ function processCartResponseFromList(data, textStatus, jqXHR, redirect)
     }else{
         reloadSmallCart();
         reloadPopupCart();
-        $.jGrowl("Товар успешно добавлен в корзину. <a href='"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
+        $.jGrowl(jgrowlCheckout, {position:"bottom-right"});
         
         $('#cart-modal').arcticmodal({
             overlay: {
@@ -78,7 +78,7 @@ function processCartResponseFromCart(data, textStatus, jqXHR, redirect)
         });
     }
     else{
-        $.jGrowl("Товар успешно добавлен в корзину. <a href='"+urlLang+"/cart'>Перейти к оформлению</a>.", {position:"bottom-right"});
+        $.jGrowl(jgrowlCheckout, {position:"bottom-right"});
         if(redirect.length > 0){
             location.reload();
         }
