@@ -74,6 +74,7 @@ $this->breadcrumbs[] = Yii::t('StoreModule.core', 'Search');
                 'search' => CHtml::encode($q),
             )
         ); ?>
+		<div style="clear: left"></div>
         <!-- sorts (end) -->
 		
 	</div>

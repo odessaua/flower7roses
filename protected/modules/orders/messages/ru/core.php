@@ -17,11 +17,11 @@
         'Action'=>'Действие',
         'Quantity'=>'Количество',
         'Title'=>'Название',
+		'Dear'=>'Уважаемый',
 		'Order Total'=>'Общая стоимость',
 		'PrivatBank Money Transfer'=>'Пополнение карты ПриватБанка',
         'Total'=>'Итого',
         'Recalculate'=>'Пересчитать',
-        'Order'=>'Оформить',
 		'<br><br><p>Please add items to your cart before checking out.</p>'=>'<br><br><p>Пожалуйста, сначала добавьте товары в корзину</p>',
         'Recipient details:'=>'Информация о получателе:',
         'Delivery to address:'=>'Адрес доставки:',
@@ -39,6 +39,7 @@
         'Phone'=>'Телефон',
         'BACK'=>'Назад',
         'Order'=>'Оформить',
+		'Order &#8470;'=>'Заказ &#8470;',
         'Add a little something extra:'=>'Не забудьте добавить к заказу:',
         'Add'=>'Добавить',
         'Pay'=>'Оплатить',
@@ -72,9 +73,10 @@
         'My orders'=>'Мои заказы',
         'Your order set:'=>'Состав заказа:',
         'Thank you for usinig our service!<br>
-			7Roses Team'=>'Благодарим Вас за использование нашего сервиса!
+			7Roses Team'=>'Благодарим Вас за использование нашего сервиса!<br>
          Ваши, 7Roses!',
          'Thank you. Your order is issued. Select a Payment Method.'=>'Спасибо. Ваш заказ оформлен. Выберите способ оплаты.',
+		 'The status of your payment is'=>'Статус вашего платежа ',
         'Error. Order not found'=>'Ошибка. Заказ не найден.',
         'Error. Product not found'=>'Ошибка. Продукт не наден',
         'Product not available for your region'=>'Товар не доступен для региона',
@@ -89,7 +91,9 @@
 		' UAH'=>' ГРН',
 		' USD'=>' USD',
         'Select Payment Method'=>'Выберите способ оплаты',
-		
+		'The transaction is currently under review on the payment gateway and it may up to 15 min to check it.'=>'В данный момент транзакция находится в обработке процессинговым центром. Это может занять до 15 мин.',
+		'As soon as the transaction is cleared you will be informed by email.'=>'Как только платеж будет обработан, вы получите уведомление по электронной почте, указанной вами в заказе.',
+		'You can check the status of your order at this page'=>'Также вы сможете проверить состояние вашего заказа на этой странице',
         'Greeting card'=>'Поздравительная открытка',
         'Photo of delivery'=>'Фото доставки',
          "Your order number is: 	&#8470;"=>'Ваш заказ: &#8470;',

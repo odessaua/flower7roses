@@ -275,6 +275,7 @@ echo '<ul class="breadcrumbs">
                     <?php echo CHtml::activeCheckBox($this->form,'doPhoto'); ?>
                     <label for="photo"><?=Yii::t('OrdersModule.core','Photo of the recipient:')." <span class='price'>".StoreProduct::formatPrice($photoPrice*$rate, true)?></span></label>
                 </div>
+				<br>
                  <div class="s2">
                     <?php echo CHtml::activeCheckBox($this->form,'do_card'); ?>
                     <label for="photo"><?=Yii::t('OrdersModule.core','Greeting card:')." <span class='price'>".StoreProduct::formatPrice($cardPrice*$rate, true)?></span></label>
