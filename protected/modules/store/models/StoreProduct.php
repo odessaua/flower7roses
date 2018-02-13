@@ -145,7 +145,7 @@ class StoreProduct extends BaseModel
 			array('is_active', 'boolean'),
 			array('use_configurations', 'boolean', 'on'=>'insert'),
 			array('quantity, availability, manufacturer_id, long_delivery,sort, main_page', 'numerical', 'integerOnly'=>true),
-			array('name, price', 'required'),
+			array('name, price, main_category_id', 'required'),
 			array('url', 'LocalUrlValidator'),
 			array('name, url, meta_title, meta_keywords, meta_description, layout, view, sku, auto_decrease_quantity, img_alt, img_title', 'length', 'max'=>255),
 			array('short_description, full_description, discount', 'type', 'type'=>'string'),
