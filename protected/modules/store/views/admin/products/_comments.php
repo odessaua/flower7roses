@@ -5,7 +5,7 @@ $this->widget(
 );?>
 
 	
-<label>Выберите регион доставки</label>
+<div style="margin-bottom: 15px;">Выберите регион доставки</div>
 <?php 
 $allcities = City::model()->findAll();
 $cities = CHtml::listData($allcities, 'id', 'name');
