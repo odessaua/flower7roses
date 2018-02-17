@@ -211,10 +211,10 @@ class CartController extends Controller
         $cityName = $cityInfo->name;
 
         // временно отключили проверку товара по регионам доставки
-		Yii::import('application.modules.store.models.StoreProductCityRef');
-		$productInCity = StoreProductCityRef::model()->find(array('condition'=>'product_id='.$model->id.' AND city_id='.$city));
-		if(!$productInCity)
-			$this->_addError(Yii::t('OrdersModule.core', 'Product not available for your region'.$cityName), true);
+		//Yii::import('application.modules.store.models.StoreProductCityRef');
+		//$productInCity = StoreProductCityRef::model()->find(array('condition'=>'product_id='.$model->id.' AND city_id='.$city));
+		//if(!$productInCity)
+		//	$this->_addError(Yii::t('OrdersModule.core', 'Product not available for your region'.$cityName), true);
 		
 		// Update counter
 		$model->added_to_cart_count += 1;
