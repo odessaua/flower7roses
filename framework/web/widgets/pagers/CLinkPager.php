@@ -108,7 +108,7 @@ class CLinkPager extends CBasePager
 		if($this->nextPageLabel===null)
 			$this->nextPageLabel=Yii::t('yii','Next &gt;');
 		if($this->prevPageLabel===null)
-			$this->prevPageLabel=Yii::t('yii','&lt; Previous');
+			$this->prevPageLabel=('&rarr;');
 		if($this->firstPageLabel===null)
 			$this->firstPageLabel=Yii::t('yii','&lt;&lt; First');
 		if($this->lastPageLabel===null)
@@ -133,7 +133,7 @@ class CLinkPager extends CBasePager
 		if(empty($buttons))
 			return;
 		echo $this->header;
-		echo CHtml::tag('ul',$this->htmlOptions,implode("\n",$buttons));
+		echo CHtml::tag('ul',$this->htmlOptions,implode("",$buttons));
 		echo $this->footer;
 	}
 
@@ -149,7 +149,7 @@ class CLinkPager extends CBasePager
 		list($beginPage,$endPage)=$this->getPageRange();
 		$currentPage=$this->getCurrentPage(false); // currentPage is calculated in getPageRange()
 		$buttons=array();
-
+		
 		// first page
 		$buttons[]=$this->createPageButton($this->firstPageLabel,0,$this->firstPageCssClass,$currentPage<=0,false);
 
@@ -185,6 +185,7 @@ class CLinkPager extends CBasePager
 	 */
 	protected function createPageButton($label,$page,$class,$hidden,$selected)
 	{
+
 		if($hidden || $selected)
 			$class.=' '.($hidden ? $this->hiddenPageCssClass : $this->selectedPageCssClass);
 		return '<li class="'.$class.'">'.CHtml::link($label,$this->createPageUrl($page)).'</li>';

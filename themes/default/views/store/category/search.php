@@ -53,8 +53,8 @@ $this->breadcrumbs[] = Yii::t('StoreModule.core', 'Search');
 					),
                     'pager' => array(
                         'header' => false,
-                        'prevPageLabel' => '&lt;',
-                        'nextPageLabel' => '&gt;',
+                        'prevPageLabel' => '&larr;',
+                        'nextPageLabel' => '&rarr;',
                     ),
 				));
 			}

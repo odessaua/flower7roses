@@ -82,9 +82,7 @@ if(!empty($search)){
             ?>
         <option value="<?= $type_key; ?>" <?= $selected_type; ?>><?= $type_param['text']; ?></option>
         <?php endforeach; ?>
-    </select>
-
-    <select name="per_page"
+    </select><select name="per_page"
             class="cat-per-page"
             id="<?= $id_prefix; ?>_per_page"
             onchange="setPerPage('<?= $id_prefix; ?>');">

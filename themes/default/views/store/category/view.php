@@ -87,8 +87,8 @@ $this->breadcrumbs[] = $this->model->name;
                     'viewData' => array('langArray' => $langArray),
                     'pager' => array(
                         'header' => false,
-                        'prevPageLabel' => '&lt;',
-                        'nextPageLabel' => '&gt;',
+                        'prevPageLabel' => '&larr;',
+                        'nextPageLabel' => '&rarr;',
                     ),
                 ));
             ?>
