@@ -374,28 +374,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 <div class="footer">
     <div class="wrap">
 	 <!-- menu-bottom (begin) -->
-	  <style>
-                .oocab-column{
-                    width: 300px;
-                    height: auto;
-                    float: left;
-                    margin-left: 0px;
-                }
-                .oocab-column-item{
-                    width: 100%;
-                    height: auto;
-                    padding: 0 0 15px;
-				}
 
-				.footer-col {
-					float: left;
-					font: 12px Arial,Helvetica,sans-serif;
-					color: #333;
-					margin: 5px;
-					text-align: left;
-					line-height: 20px;
-					height: 250px;
-</style>
 	<div class="footer-col" style="width:170px;">
         <div class="foot-title-big"><?=Yii::t('main','Copyright')?></div>
 			<div class="copyright">

@@ -506,6 +506,23 @@ funds to a TransferWise account first and then they send the payment to Varetska
             </div>
 </div>
  
+ <div class="wu" style="display: none;">
+    <h2 class="title"><?=Yii::t('OrdersModule.core','Western Union money transfer')?></h2>
+
+    <div class="g-clearfix">
+        
+<?=$payments['WesternUnion']->description?>
+    </div>
+	<hr style="width:500px; float: left;"><br>
+<h2><?php echo Yii::t('OrdersModule.core','Order Total');?>: <span class="price"><?echo "&#36;".StoreProduct::formatPrice($model->full_price)."</span>" ;?></h2><br>
+<p>After submiting this information, you will be directed to a page to send the money through Western Union. 
+
+<div class="links">
+                <a class="link-prev" href="#" onclick="window.location.reload(true);" title=""><?=yii::t('OrdersModule.core','BACK')?></a>
+            
+                <a class="link-next" href="https://www.westernunion.com/" target=_blank title=""><?=yii::t('OrdersModule.core','WesternUnion')?></a>
+            </div>
+</div>
 
 
 </div>
@@ -682,6 +699,11 @@ $(document).ready(function(){
             $('.cart3').css('display','none'); // TransferWise
             $('.cart4').css('display','block');
             $('.cart5').css('display','block');
+        }
+		else if($($('.selected').children()[0]).attr('id')=="payment5"){
+            $('.cart3').css('display','none'); // WesternUnion
+            $('.cart4').css('display','block');
+            $('.wu').css('display','block');
         }
         else if($($('.selected').children()[0]).attr('id')=="payment4") {
             // WayForPay
