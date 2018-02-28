@@ -47,7 +47,7 @@ $csrfTokenName = Yii::app()->request->csrfTokenName;
 $this->widget('ext.sgridview.SGridView', array(
 	'dataProvider'  => $dataProvider,
 	'id'            => 'productsListGrid',
-	'ajaxUpdate'    => true,
+	'ajaxUpdate'    => false,
 	'filter'        => $model,
 	'customActions' => array(
 		array(
