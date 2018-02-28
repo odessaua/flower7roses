@@ -28,8 +28,8 @@ ul.yiiPager a:visited
 {
 	border:solid 1px #9aafe5;
 	font-weight:bold;
-	color:#0e509e;
-	padding:1px 6px;
+/*  color:#0e509e;
+	padding:1px 6px; */
 	text-decoration:none;
 }
 
@@ -40,7 +40,11 @@ ul.yiiPager .page a
 
 ul.yiiPager a:hover
 {
+	color:white;
 	border:solid 1px #0e509e;
+	background:#c50f87;
+	font-weight:bold;	
+	transition:all 0.5s ease;
 }
 
 ul.yiiPager .selected a
@@ -53,7 +57,6 @@ ul.yiiPager .selected a
 ul.yiiPager .hidden a
 {
 	border:solid 1px #DEDEDE;
-	color:#888888;
 }
 
 /**
@@ -63,7 +66,4 @@ ul.yiiPager .first,
 ul.yiiPager .last
 {
 	display:none;
-}
-li.next {
-	border-right: solid 1px #e5e5e5;
 }

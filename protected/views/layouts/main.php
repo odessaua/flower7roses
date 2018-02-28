@@ -24,7 +24,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
 	<meta name="viewport" content="width=device-width">
     <?=$this->rels['prev']; // rel="prev" ?>
     <?=$this->rels['next']; // rel="next" ?>
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <!--[if lte IE 8]>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>

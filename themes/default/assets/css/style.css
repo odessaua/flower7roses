@@ -818,9 +818,11 @@ padding:20px 20px 0 0;
 }
 .nav > li a:hover .title {
   background: #93476c;
+
 }
 .nav > li:hover ul{
-  display:block;
+	display:block;
+	margin-top:4px;
 }
   .nav > li > ul{
     display: none;
@@ -3330,9 +3332,6 @@ span.required{
     .category-top-sorting ul.yiiPager a:visited {
       padding: 6px 11px;
       border: solid 1px #e5e5e5;
-      color: #454545;
-	  border-right: 0px;
-    
     }
     .category-products-list ul.yiiPager .selected a,
     .category-top-sorting ul.yiiPager .selected a {

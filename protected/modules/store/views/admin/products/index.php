@@ -115,7 +115,7 @@ $this->widget('ext.sgridview.SGridView', array(
 		array(
 			'header'   => 'Изображение',
 			'type'   => 'html',
-			'value'=>'($data->mainImage) ? CHtml::link(CHtml::image($data->mainImage->getUrl("50x50","resize")),array("/store/admin/products/update", "id"=>$data->id)) : "no image"',
+			'value'=>'($data->mainImage) ? CHtml::link(CHtml::image($data->mainImage->getUrl("69x69","resize")),array("/store/admin/products/update", "id"=>$data->id)) : "no image"',
 		),
 		array(
 			'name'=>'type_id',
