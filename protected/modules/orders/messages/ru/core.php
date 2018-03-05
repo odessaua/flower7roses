@@ -75,6 +75,7 @@
         'Products'=>'Товары',
         'My orders'=>'Мои заказы',
         'Your order set:'=>'Состав заказа:',
+		'Please translate this message from English to Russian:'=>'Переклад листівки:',
         'Thank you for usinig our service!<br>
 			7Roses Team'=>'Благодарим Вас за использование нашего сервиса!<br>
          Ваши, 7Roses!',

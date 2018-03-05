@@ -288,11 +288,12 @@ echo '<ul class="breadcrumbs">
                         <div class="tip-info"><?=Yii::t('OrdersModule.core','Please enter the message for you greeting card')?></div>
                     </div>
                 </div>
+				<?php if ($lang=='') { ?>
 				<div class="s2">
                     <?php echo CHtml::activeCheckBox($this->form,'card_transl'); ?>
                     <label for="note"><?=Yii::t('OrdersModule.core','Please translate this message from English to Russian:')." <span class='price'>".StoreProduct::formatPrice($translPrice*$rate, true)?></span></label>
                 </div>
-
+			<?	} ?>
                 <div class="s2">
                     <span class="input-title"><?=Yii::t('OrdersModule.core','Additional Information:')?></span>
                     <?php echo CHtml::activeTextArea($this->form,'comment'); ?>
