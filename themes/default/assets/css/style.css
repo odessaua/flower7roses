@@ -1994,11 +1994,14 @@ margin-top: 10px;
   display: none;
 }
 .sort-size .sort-popup {
-  width: 250px;
+  width: 300px;
   left: -97px;
 }
+.sort-popup ol {
+	list-style: decimal; !important;
+}
 .sort-size li {
-  line-height: 30px;
+  line-height: 20px;
   overflow: hidden;
 }
 .sort-size li input {
