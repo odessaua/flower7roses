@@ -91,6 +91,7 @@
         'Order sum'=>'Итого',
         'Order detail'=>'Детали заказа',
         'Congratulations! Your order is accepted for processing.'=>'Поздравляем! Ваш заказ принят в обработку.',
+		'Congratulations! Your order is successfully placed and paid.'=>'Поздравляем! Ваш заказ принят в обработку.',
         'In cash'=>'Наличными',
 		' UAH'=>' ГРН',
 		' USD'=>' USD',

@@ -75,10 +75,10 @@ return array(
         'Products'=>'Товари',
         'My orders'=>'Мої замовлення',
         'The recipient will be awarded:'=>'Одержувачу вручать:',
-        'Thank you for usinig our service!'=>
-         'Ми зробимо все для того, щоб одержувачу сподобався
-          Ваш подарунок і Ви залишилися задоволені нашим сервісом!
-          Дякую за довіру!',
+        'Thank you for usinig our service!<br>
+			7Roses Team'=>
+         'Дякуємо Вам за використання нашого сервісу!<br>
+Ваші, 7Roses!',
         'Thank you. Your order is issued. Select a Payment Method.'=>'Дякуємо. Ваше замовлення оформлено. Оберіть спосіб оплати.',
         'Error. Order not found'=>'Помилка. Замовлення не знайдено',
         'Error. Product not found'=>'Помилка. Продукт не знайдено',
@@ -92,6 +92,7 @@ return array(
 		'Order Total'=>'Сумма замовлення',
         'Order detail'=>'Деталі замовлення',
         'Congratulations! Your order is accepted for processing.'=>'Вітаємо! Ваше замовлення прийняте в обробку.',
+		'Congratulations! Your order is successfully placed and paid.'=>'Вітаємо! Ваше замовлення прийняте в обробку.',
         'In cash'=>'Готівкою',
         'Select Payment Method'=>'Виберіть спосіб оплати',
          'Greeting card'=>'Вартість листівки',

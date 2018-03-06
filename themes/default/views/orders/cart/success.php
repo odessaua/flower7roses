@@ -27,8 +27,10 @@
         </div>
     </div>
     <!-- steps (end) -->
+	<h1 class="page-title"><?php echo Yii::t('OrdersModule.core','Your order')?></h1>
+	<div class="cart3 g-clearfix"></div>
 <div class="cart4">
-    <h2 class="title"><?=Yii::t('OrdersModule.core','Congratulations! Your order is accepted for processing.')?></h2>
+    <h2 class="title"><?=Yii::t('OrdersModule.core','Congratulations! Your order is successfully placed and paid.')?></h2>
 
     <div class="g-clearfix">
         <div class="cart-col">
