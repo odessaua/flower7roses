@@ -235,7 +235,7 @@ class Comment extends BaseModel
 	{
 		return Comment::model()
 			->approved()
-			->orderByCreatedAsc()
+			->orderByCreatedDesc()
 			->findAllByAttributes(array(
 				'class_name'=>$model->getClassName(),
 				'object_pk'=>$model->id
