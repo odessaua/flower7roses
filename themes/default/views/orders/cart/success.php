@@ -89,9 +89,8 @@
             <?php endforeach ?>
         </ul>
             <div class="thanks">
-                <?=Yii::t('OrdersModule.core','We will do everything to ensure that the recipient liked
-         your gifts and you satisfied with our service!<br><br>
-         Thank you for your trust!<br> 7Roses Team')?>
+                <?=Yii::t('OrdersModule.core','Thank you for usinig our service!<br>
+			7Roses Team')?>
             </div>
         </div>
     </div>
