@@ -121,7 +121,6 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <li><a title="About Delivery" href="<?=Yii::app()->createUrl('/page/about-delivery.html'); ?>"><?=Yii::t('main',"About Delivery")?></a></li>
                 <li><a title="Terms and Conditions" href="<?=Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main',"Terms&Conditions")?></a></li>
                 <li><a title="Contacts" href="<?=Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t("main", "Contacts")?></a></li>
-				<li><a title="Old website version" href="http://old.7roses.com"><span style="color:#e72574; font-weight:bold;"><?=Yii::t("main", "Old version")?></span></a></li>
             </ul>
             
         </div>
