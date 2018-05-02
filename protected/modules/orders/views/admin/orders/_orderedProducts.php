@@ -95,6 +95,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				<td><b><?php echo Yii::t('OrdersModule.admin','Итого') ?>:</b></td>
 				<td><span id="orderSummary"><?php echo StoreProduct::formatPrice($model->full_price) ?></span><?php echo Yii::app()->currency->main->symbol ?></td>
 			</tr>
+			<td></td>
+			<td><span id="orderSummary"><?php echo $uah_full_price = Yii::app()->currency->convert(StoreProduct::formatPrice($model->full_price), 2); ?></span> грн</td>
 		</tbody>
 	</table>
 </div>
