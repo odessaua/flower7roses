@@ -122,7 +122,7 @@ $meta_page_title = CHtml::encode($this->pageTitle);
                 <li><a title="Terms and Conditions" href="<?=Yii::app()->createUrl('/page/terms-conditions.html'); ?>"><?=Yii::t('main',"Terms&Conditions")?></a></li>
                 <li><a title="Contacts" href="<?=Yii::app()->createUrl('/feedback'); ?>"><?=Yii::t("main", "Contacts")?></a></li>
             </ul>
-            
+
         </div>
     </div>
     <!-- header-top (end) -->
@@ -159,6 +159,8 @@ $meta_page_title = CHtml::encode($this->pageTitle);
             ?>
              </div>
                 </li>
+				<li><a title="Visa-MasterCard" href="<?=Yii::app()->createUrl('/page/payment.html'); ?>"><img src="/uploads/visa_mastercard_100.png"></a>
+				</li>
             </ul>
         </div>
 
