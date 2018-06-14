@@ -501,6 +501,18 @@ padding:20px 20px 0 0;
   vertical-align: top;
   border-right: 1px solid #eaeae7;
 }
+.header ul li:last-of-type {
+line-height: normal;
+  letter-spacing: normal;
+  display: inline-block;
+  height: 68px;
+   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding-left:10px;
+border-right: 1px solid #ffffff;	
+}
 .header .logo {
   display: block;
   margin-right: 30px;
@@ -1162,7 +1174,7 @@ padding:20px 20px 0 0;
 li.contact.currency { 
 
 padding-left: 25px; 
-width: 15%;
+width: 13%;
 }
 .b-currency .title {
   font-size: 14px;
