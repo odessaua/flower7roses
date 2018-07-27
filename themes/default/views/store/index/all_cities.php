@@ -31,7 +31,7 @@ if(!empty($regions)){
         <?php
         foreach($cities[$r_id] as $city){
             // замена пробелов на _ в названиях городов (krivoy rog --> krivoy_rog)
-            echo CHtml::link($city['name'], strtolower(str_replace(' ', '_', '/'.$city['eng_name'])), array('class' => 'ncity-link'));
+            echo CHtml::link($city['name'], strtolower(str_replace(' ', '_', '/'.$city['eng_name'].'/')), array('class' => 'ncity-link'));
         }
         ?>
         </div>
