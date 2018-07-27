@@ -54,6 +54,7 @@ class City extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
+			array('name', 'filter', 'filter'=>'trim'),
 			array('alias, firm_comment', 'safe'),
 			array('delivery,show_in_popup,region_id, firm_show, main_in_region', 'numerical'),
 			array('name', 'length', 'max'=>50),
