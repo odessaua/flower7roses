@@ -340,7 +340,4 @@ $('#submit_button').click(function(){
 
 });
 //
-</script><?
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";?>
+</script>

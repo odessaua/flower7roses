@@ -1,6 +1,6 @@
 <html>
 <body>
-<p>From:  <?=$name?></p>
+<p>From:  <?=$username?></p>
 <p>Email: <?=$email?></p>
 <p>Phone Number:  <?=$phone?></p>
 <p>Product ID: <?=$id?></p>

@@ -573,12 +573,12 @@ class CartController extends Controller
 		if(!file_exists($emailBodyFile))
 			$emailBodyFile=Yii::getPathOfAlias("application.emails.ru").DIRECTORY_SEPARATOR.'new_order_admin.php';
 		$body = $this->renderFile($emailBodyFile, array(
-			'username'=>$_POST['username'],'phone'=>$_POST['phone'],'email'=>$_POST['email'],
+			'username'=>$_POST['name'],'phone'=>$_POST['phone'],'email'=>$_POST['email'],
 			'id'=>$_POST['id'],'quantity'=>$_POST['quantity']
 			), true);
 		$mailer           = Yii::app()->mail;
 		$mailer->From     = $_POST['email'];
-		$mailer->FromName = $_POST['username'];
+		$mailer->FromName = $_POST['name'];
 		$mailer->Subject  = $theme;
 		$mailer->Body     = $body;
 		$mailer->AddAddress(Yii::app()->params['adminEmail']);
