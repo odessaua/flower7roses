@@ -294,10 +294,10 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
     <!-- modal (begin) -->
     <div id="call-back-modal" class="box-modal call-back-modal">
         <div class="title"><?=Yii::t('StoreModule.core','Order by phone')?></div>
-       <form id="phone-order-form" enctype = "multipart/form-data" action="<?=$currentUrl?>#phone-order-form" method="POST">
-            <input class="orderName" name= "username" type="text" placeholder="<?=Yii::t('StoreModule.core','Name')?>" required="required" />
-            <input class="orderEmail" name="email" type="email" placeholder="E-mail" required="required" />
-            <input class="orderPhone" name="phone" type="text" placeholder="<?=Yii::t('StoreModule.core','Phone')?>" required="required" />
+       <form id="phone-order-form" enctype = "multipart/form-data" action="<?=$currentUrl?>" method="POST">
+            <input class="orderName" name= "orderName" type="text" placeholder="<?=Yii::t('StoreModule.core','Name')?>" required="required" />
+            <input class="orderEmail" name="orderEmail" type="email" placeholder="E-mail" required="required" />
+            <input class="orderPhone" name="orderPhone" type="text" placeholder="<?=Yii::t('StoreModule.core','Phone')?>" required="required" />
             <input id="submit_button" class="btn-purple" type="submit" value="<?=Yii::t('StoreModule.core','Submit')?>" />
 		</form>
         </div>
@@ -308,31 +308,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
         <?php
         $this->renderPartial('_payments')// var_dump($this->language_info['id']);
         ?>
-        <?php /*=Yii::t('StoreModule.core',"<div class = 'title'> Payment methods </div>
-        <div class = 'content-text'>
-            <p>
-                <strong> cash </strong>
-            </p>
-            <p>
-                Cash payment is made in advance before the fact of delivery of cash to the courier.
-            </p>
-            <p>
-                The cost of courier services Departure is 20 UAH. <br/>
-                Western Union is very convenient way to transfer money for those who do not live in Ukraine. If you, for example, you live in America and your relatives or friends in Ukraine and you want to order our services, this is the fastest and most convenient way. Send money by Western Union is possible from 170 000 places all over the world.
-            </p>
-            <p>
-                After the transfer inform us of the fact of payment. To speed up the execution of the order, send a scanned paid receipt by e-mail or fax. Otherwise, your order will be sent for execution only upon receipt of money (2-3 banking days)
-            </p>
-
-            <p> <strong> Payment card Visa / MasterCard </strong> </p>
-            <p>
-                In our shop you can pay by means of payment (plastic) card. <br/>
-                For safety Portmone.com fulfills international standard Payment Card Industry Data Security Standard (PCI DSS).
-            </p>
-            <p>
-                Rortmone.com the first company in Ukraine, which has successfully passed an international safety audit for compliance with the standard Payment Card Industry Data Security Standard (PCI DSS), and has received the certificate №499938160100203, issued by the German company SRC (Security Research and Consulting GmbH). SRC - an independent auditing company conducting the certification for compliance with all safety requirements (MasterCard Site Data Protection and VISA Account Information Security), established by the major payment systems VISA and MasterCard.
-            </p>
-        </div>")*/?>
+        
     </div>
     <!-- modal (end) -->
     
