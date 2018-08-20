@@ -26,6 +26,8 @@ if($lang == 'ua')
 $langArray = SSystemLanguage::model()->findByAttributes(array('code'=>$lang));
  $categoryTrans=StoreCategoryTranslate::model()->findAllByAttributes(array('language_id'=>$langArray->id));
 // Create breadcrumbs
+$currentUrl = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
 $ancestors = $this->model->mainCategory()->excludeRoot()->ancestors()->findAll();
 
 foreach($ancestors as $c){
@@ -292,7 +294,7 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
     <!-- modal (begin) -->
     <div id="call-back-modal" class="box-modal call-back-modal">
         <div class="title"><?=Yii::t('StoreModule.core','Order by phone')?></div>
-       <form enctype = "multipart/form-data" action="" method="POST">
+       <form id="phone-order-form" enctype = "multipart/form-data" action="<?=$currentUrl?>#phone-order-form" method="POST">
             <input class="orderName" name= "username" type="text" placeholder="<?=Yii::t('StoreModule.core','Name')?>" required="required" />
             <input class="orderEmail" name="email" type="email" placeholder="E-mail" required="required" />
             <input class="orderPhone" name="phone" type="text" placeholder="<?=Yii::t('StoreModule.core','Phone')?>" required="required" />
