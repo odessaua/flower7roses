@@ -293,9 +293,9 @@ $img_title = (!empty($model->img_title)) ? $model->img_title : $model->name;
     <div id="call-back-modal" class="box-modal call-back-modal">
         <div class="title"><?=Yii::t('StoreModule.core','Order by phone')?></div>
        <form enctype = "multipart/form-data" action="" method="POST">
-            <input class="orderName" type="text" placeholder="<?=Yii::t('StoreModule.core','Name')?>" required="required" />
-            <input class="orderEmail" type="email" placeholder="E-mail" required="required" />
-            <input class="orderPhone" type="text" placeholder="<?=Yii::t('StoreModule.core','Phone')?>" required="required" />
+            <input class="orderName" name= "username" type="text" placeholder="<?=Yii::t('StoreModule.core','Name')?>" required="required" />
+            <input class="orderEmail" name="email" type="email" placeholder="E-mail" required="required" />
+            <input class="orderPhone" name="phone" type="text" placeholder="<?=Yii::t('StoreModule.core','Phone')?>" required="required" />
             <input id="submit_button" class="btn-purple" type="submit" value="<?=Yii::t('StoreModule.core','Submit')?>" />
 		</form>
         </div>
