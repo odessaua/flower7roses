@@ -333,7 +333,7 @@ $('#submit_button').click(function(){
 		type:'post',
 		dataType:'json',
 		data:{'YII_CSRF_TOKEN':csrf ,'email':$('.orderEmail').val(),'name':$('.orderName').val(),'phone':$('.orderPhone').val(),'id':id,'quantity':quantity},
-		url:'/orders/cart/phone',
+		url:'/orders/cart/phone/',
 		success:function(ev){console.log(ev);},
 		error:function(er){console.log(er);}
 	});
