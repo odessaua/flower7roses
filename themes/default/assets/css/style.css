@@ -510,7 +510,7 @@ line-height: normal;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   vertical-align: top;
-  padding-left:10px;
+  padding-left:10-1`px;
 border-right: 1px solid #ffffff;	
 }
 .header .logo {
@@ -905,7 +905,13 @@ border-right: 1px solid #ffffff;
   font-variant:small-caps;
   color: #29a943;
 }
-.content-text h3,
+.b-page-text h3 {
+  font-size: 16px;
+  color:purple;
+  line-height: normal;
+  font-weight: bold;
+  margin: 10px 0 10px;
+}
 .content-text h4,
 .content-text h5,
 .content-text h6 {
@@ -1154,6 +1160,9 @@ border-right: 1px solid #ffffff;
   line-height: normal;
   font-weight: bold;
   margin: 10px 0 20px;
+}
+.b-page-text ul {
+list-style-type: disc;
 }
 /* forms (begin) */
 /* forms (end) */

@@ -30,6 +30,9 @@ $meta_page_title = CHtml::encode($this->pageTitle);
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <![endif]-->
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/style.css<?= (!empty(Yii::app()->params['is_local'])) ? '?v=' . time() : ''; ?>"/>
     <?php
     // определение языка и переводы сообщений для JS
