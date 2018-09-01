@@ -262,7 +262,7 @@ echo '<ul class="breadcrumbs">
                             'language' => $lang, 
                             'options'=>array(
                                     'minDate' => ((int)date('G') < 14) ? '0' : '1',
-                                'dateFormat' => 'dd/mm/yy',
+									'dateFormat' => 'dd/mm/yy',
                             ),
                             'htmlOptions' => array(
                                 'class' => 'datepicker'
