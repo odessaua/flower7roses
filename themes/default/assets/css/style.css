@@ -133,7 +133,7 @@ dd {
   line-height: 20px;
   font-size:14px;
   font-family: "PT Sans", sans-serif;
-  text-indent: 0.6em; /* Отступ первой строки */
+  /* text-indent: 0.6em;  Отступ первой строки */
   text-align: justify; /* Выравнивание по ширине */
 }
 .currLang {
@@ -905,13 +905,7 @@ border-right: 1px solid #ffffff;
   font-variant:small-caps;
   color: #29a943;
 }
-.b-page-text h3 {
-  font-size: 16px;
-  color:purple;
-  line-height: normal;
-  font-weight: bold;
-  margin: 10px 0 10px;
-}
+
 .content-text h4,
 .content-text h5,
 .content-text h6 {
@@ -1154,6 +1148,10 @@ border-right: 1px solid #ffffff;
 .pagination li.arrows a:hover {
   color: #29a943;
 }
+.b-page-text p {
+	margin-bottom:1em;
+	margin-top:1em;
+}
 .b-page-text h2 {
   font-size: 20px;
   color:purple;
@@ -1161,8 +1159,23 @@ border-right: 1px solid #ffffff;
   font-weight: bold;
   margin: 10px 0 20px;
 }
+
+.b-page-text h3 {
+  font-size: 16px;
+  color:purple;
+  line-height: normal;
+  font-weight: bold;
+  margin: 10px 20px 10px;
+}
 .b-page-text ul {
 list-style-type: disc;
+padding-left:20px;
+margin:5px;
+}
+.b-page-text ol {
+list-style-type: decimal;
+padding-left:20px;
+margin:5px;
 }
 /* forms (begin) */
 /* forms (end) */

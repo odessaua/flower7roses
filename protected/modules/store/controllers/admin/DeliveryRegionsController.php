@@ -26,7 +26,7 @@ class DeliveryRegionsController extends SAdminController {
 	{
 		if ($new === true)
 		{
-			$model=new City;
+			$model= new City;
 			//$model->unsetAttributes();
 		}
 		else

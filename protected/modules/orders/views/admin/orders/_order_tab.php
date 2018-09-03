@@ -48,8 +48,7 @@ if($model->hasErrors())
 					</thead>
 					<tbody><tr>
 					<?php if(!$model->isNewRecord): ?>
-					
-						<?php
+						<?php 
 							//echo Yii::t('OrdersModule.admin', 'Данные пользователя');
 							echo "<td>IP Address: " . $model->ip_address. "</td></tr><tr>";
 
