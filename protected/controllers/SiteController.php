@@ -1,4 +1,5 @@
 <?php
+
 Yii::import('application.modules.comments.models.Comment');
 Yii::import('application.modules.orders.models.*');
 Yii::import('application.modules.store.models.*');
@@ -29,7 +30,7 @@ class SiteController extends Controller
     {
         return array(
             'captcha'=>array(
-                'class'=>'CCaptchaAction',
+               'class'=>'CCaptchaAction',
             ),
         );
     }
