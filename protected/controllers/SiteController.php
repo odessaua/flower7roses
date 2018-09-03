@@ -1,28 +1,9 @@
 <?php
 
 Yii::import('application.modules.comments.models.Comment');
-Yii::import('application.modules.orders.models.*');
-Yii::import('application.modules.store.models.*');
 
 class SiteController extends Controller
 {
-    public $wfp_statuses = array(
-        'InProcessing' => array(
-            'status' => 'pending',
-        ),
-        'Approved' => array(
-            'status' => 'paid',
-        ),
-        'Pending' => array(
-            'status' => 'pending',
-        ),
-        'Expired' => array(
-            'status' => 'rejected',
-        ),
-        'Declined' => array(
-            'status' => 'rejected',
-        ),
-    );
     /**
      * @return array
      */
@@ -227,108 +208,23 @@ class SiteController extends Controller
 		
 	}
 
-    /**
-     * получение от WFP запросов при изменении статуса платежа
-     * TODO: отправка ответа серверу при получении статуса платежа = paid
-     */
+   
     public function actionWfpResponse()
     {
         $json = file_get_contents('php://input');
-        $ts = date('Y-m-d H:i:s');
         if(!empty($json)){
-            $obj = json_decode($json, TRUE);
-            // проверка статуса платежа, корректировка статуса платежа в таблице заказов и в логах
-            if(!empty($obj['orderReference']) && !empty($obj['transactionStatus'])){
-                $orderReference_ex = explode('_', $obj['orderReference']);
-                $order = Order::model()->findByPk($orderReference_ex[1]);
-                if(
-                    !empty($order) && // найден заказ
-                    ($order->payment_status != 'paid') && // его статус отличен от «paid»
-                    !empty($this->wfp_statuses[$obj['transactionStatus']]['status']) // в запросе от WFP указан статус транзакции
-                ){
-                    // старый статус платежа
-                    $from_status = $order->payment_status;
-                    // новый статус платежа
-                    $order->payment_status = $this->wfp_statuses[$obj['transactionStatus']]['status'];
-                    // статус заказа: оплачен или старый
-                    $order->status_id = ($this->wfp_statuses[$obj['transactionStatus']]['status'] == 'paid')
-                        ? 6
-                        : $order->status_id;
-                    $order->save(); // обновили статус платежа в таблице заказов
-                    // добавляем запись в таблицу логов статусов платежей
-                    $this->savePaymentStatusLog(
-                        $orderReference_ex[1],
-                        'wayforpay',
-                        $this->wfp_statuses[$obj['transactionStatus']]['status'],
-                        (string)$json,
-                        serialize($obj)
-                    );
-                }
-                // сохраняем детальный запрос wfp
-                $this->saveDetailWfpResponse(
-                    (string)$json,
-                    $ts,
-                    $obj['orderReference'],
-                    $orderReference_ex[1],
-                    serialize($obj));
-            }
-            // сохраняем чистый запрос wfp
-            $this->saveOriginWfpResponse((string)$json, $ts);
+//            $obj = json_decode($json, TRUE);
+//            print_r($obj);
+            $sql = "INSERT INTO `test` SET `data` = :json";
+            $command =Yii::app()->db->createCommand($sql);
+            $command->bindValue(":json", $json, PDO::PARAM_STR);
+            $command->query();
+            echo json_encode(array('status' => 'Ok', 'code' => '1100'));
+        }
+        else{
+            echo json_encode(array('status' => 'False', 'code' => '1111'));
         }
     }
-
-    /**
-     * сохраняем чистый запрос wfp
-     * @param $response
-     * @param $ts
-     */
-    public function saveOriginWfpResponse($response, $ts)
-    {
-        $model = new WfpResponse();
-        $model->response_ts = $ts;
-        $model->response_body = $response;
-        $model->save();
-    }
-
-    /**
-     * сохраняем детальный запрос wfp
-     * @param $response
-     * @param $ts
-     * @param $orderReference
-     * @param $order_id
-     * @param $data
-     */
-    public function saveDetailWfpResponse($response, $ts, $orderReference, $order_id, $data)
-    {
-        $model = new WfpResponseDetail();
-        $model->response_ts = $ts;
-        $model->response_body = $response;
-        $model->orderReference = $orderReference;
-        $model->order_id = $order_id;
-        $model->response_data = $data;
-        $model->save();
-    }
-
-    /**
-     * сохраняем логи статусов платежей, полученные от платёжных агрегаторов
-     * @param $order_id
-     * @param $payment_type
-     * @param $status
-     * @param $original
-     * @param $used
-     */
-    public function savePaymentStatusLog($order_id, $payment_type, $status, $original, $used)
-    {
-        $log = new OrderPaymentStatusLog();
-        $log->order_id = $order_id;
-        $log->payment_type = $payment_type;
-        $log->status = $status;
-        $log->response_orig = $original;
-        $log->response_used = $used;
-        $log->response_date = date('Y-m-d H:i:s');
-        $log->save();
-    }
-
     /**
      * Получаем и обновляем статус заказа в системе WayForPay
      * @param $order_ref orderReference заказа в системе WayForPay
@@ -352,7 +248,6 @@ class SiteController extends Controller
             curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-			//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             $out = curl_exec($curl);//var_dump($out);
             curl_close($curl);
             if(CJsn::isJson($out)){
