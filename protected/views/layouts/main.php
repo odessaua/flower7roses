@@ -12,6 +12,11 @@
 	Jgrowl::register();
 
 $meta_page_title = CHtml::encode($this->pageTitle);
+// Fancybox ext
+$this->widget('application.extensions.fancybox.EFancyBox', array(
+	'target'=>'a.thumbnail',
+    'config' => array('cyclic' => true),
+));
 ?>
 <!DOCTYPE html>
 <html>

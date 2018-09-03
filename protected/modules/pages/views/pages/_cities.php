@@ -26,7 +26,7 @@ if(!empty($cities)){
                    $city['name'],
                    $language_code . Yii::app()->createUrl(
                        '/' . strtolower(str_replace(' ', '_', $city['eng_name']))
-                   ),
+                   ).'/',
                    array('class' => $city_link_class . $city_class)
            );
            ?>
