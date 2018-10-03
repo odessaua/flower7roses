@@ -131,10 +131,12 @@ else{
 	                    <div class="name"><?=$value['name']?></div>
 	                    <p>
 	                        <? 
-								$str = $value['text'];
-								$s1 = substr($str,0,180 - strstr(strrev(substr($str,0,180)),''));
-								echo $s1;
-								echo '...';?>
+				$str = $value['text'];								
+				if (strlen($str)>150)
+				{
+				$str = substr ($str, 0,strpos ($str, " ", 120)); echo $str.'...';
+				}
+				else echo $str;
 								
 	                    </p>
 	                </div>
