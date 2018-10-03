@@ -1,5 +1,5 @@
 <?php
-if(!$popup)
+if(!isset($popup))
 	$popup = "city-simple";
 
 $no_redirect = (!empty($no_redirect)) ? 1 : 0;
