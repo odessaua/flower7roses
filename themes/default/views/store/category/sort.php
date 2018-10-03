@@ -74,6 +74,7 @@ if(!empty($search)){
             onchange="sortCategorybyType('<?= $id_prefix; ?>');">
         <?php foreach ($type_params as $type_key => $type_param): ?>
             <?php
+            if (!isset($_GET['sort'])) $_GET['sort']=null;
             $selected_type = (!empty($_GET['sort'] && ($_GET['sort'] == $type_key)))
                 ? 'selected="selected"'
                 : (empty($_GET['sort']) && ($type_key == 'default'))
@@ -88,6 +89,7 @@ if(!empty($search)){
             onchange="setPerPage('<?= $id_prefix; ?>');">
         <?php foreach ($per_page_params as $per_page_key => $per_page_param): ?>
             <?php
+            if (!isset($_GET['per_page'])) $_GET['per_page']=null;
             $selected_per_page = (!empty($_GET['per_page'] && ($_GET['per_page'] == $per_page_key)))
                 ? 'selected="selected"'
                 : (empty($_GET['per_page']) && ($per_page_key == '25'))
